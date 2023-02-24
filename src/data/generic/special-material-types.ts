@@ -1,6 +1,5 @@
-import { Armor } from "./armor-types";
-import { Enhancement } from "./enhancement-types";
-import { Weapon } from "./weapon-types";
+import { Armor } from "../armor/armor-types";
+import { Weapon } from "../weapon/weapon-types";
 
 type Item = Weapon | Armor;
 

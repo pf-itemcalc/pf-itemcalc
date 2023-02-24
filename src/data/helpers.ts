@@ -15,7 +15,7 @@ export type ItemType =
   | "Enhancement"
   | "Spell";
 
-type Item =
+export type Item =
   | Armor
   | ArmorQaulity
   | Weapon

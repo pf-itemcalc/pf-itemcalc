@@ -6,6 +6,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 4,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -13,6 +14,7 @@ const weapons: Weapon[] = [
     cost: 2,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -20,35 +22,95 @@ const weapons: Weapon[] = [
     cost: 1,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Cestus", cost: 5, weight: 1, size: "Light", category: "Simple" },
-  { name: "Dagger", cost: 2, weight: 1, size: "Light", category: "Simple" },
-  { name: "Gauntlet", cost: 2, weight: 1, size: "Light", category: "Simple" },
-  { name: "Hanbo", cost: 1, weight: 2, size: "Light", category: "Simple" },
+  {
+    name: "Cestus",
+    cost: 5,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Simple",
+  },
+  {
+    name: "Dagger",
+    cost: 2,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Simple",
+  },
+  {
+    name: "Gauntlet",
+    cost: 2,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Simple",
+  },
+  {
+    name: "Hanbo",
+    cost: 1,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Handwraps",
     cost: 0.1,
     weight: 0,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Hook hand", cost: 10, weight: 1, size: "Light", category: "Simple" },
-  { name: "Kunai", cost: 2, weight: 2, size: "Light", category: "Simple" },
-  { name: "Light mace", cost: 5, weight: 4, size: "Light", category: "Simple" },
+  {
+    name: "Hook hand",
+    cost: 10,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Simple",
+  },
+  {
+    name: "Kunai",
+    cost: 2,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Simple",
+  },
+  {
+    name: "Light mace",
+    cost: 5,
+    weight: 4,
+    size: "Light",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Punching dagger",
     cost: 2,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Sickle", cost: 6, weight: 2, size: "Light", category: "Simple" },
+  {
+    name: "Sickle",
+    cost: 6,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Spider-leg sickle",
     cost: 15,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -56,6 +118,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -63,6 +126,7 @@ const weapons: Weapon[] = [
     cost: 70,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -70,6 +134,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -77,6 +142,7 @@ const weapons: Weapon[] = [
     cost: 0,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -84,14 +150,23 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 2,
     size: "One-Handed",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Club", cost: 0, weight: 3, size: "One-Handed", category: "Simple" },
+  {
+    name: "Club",
+    cost: 0,
+    weight: 3,
+    size: "One-Handed",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Heavy mace",
     cost: 12,
     weight: 8,
     size: "One-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -99,6 +174,7 @@ const weapons: Weapon[] = [
     cost: 2,
     weight: 2,
     size: "One-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -106,6 +182,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -113,6 +190,7 @@ const weapons: Weapon[] = [
     cost: 1,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -120,6 +198,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 1,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -127,6 +206,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -134,6 +214,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 9,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -141,6 +222,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 4,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -148,6 +230,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 4,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -155,6 +238,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 9,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -162,6 +246,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 9,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -169,47 +254,95 @@ const weapons: Weapon[] = [
     cost: 0,
     weight: 4,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Spear", cost: 2, weight: 6, size: "Two-Handed", category: "Simple" },
+  {
+    name: "Spear",
+    cost: 2,
+    weight: 6,
+    size: "Two-Handed",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Weighted spear",
     cost: 10,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Blowgun", cost: 2, weight: 1, size: "Ranged", category: "Simple" },
-  { name: "Dart", cost: 0.5, weight: 0.5, size: "Ranged", category: "Simple" },
+  {
+    name: "Blowgun",
+    cost: 2,
+    weight: 1,
+    size: "Ranged",
+    type: "weapon",
+    category: "Simple",
+  },
+  {
+    name: "Dart",
+    cost: 0.5,
+    weight: 0.5,
+    size: "Ranged",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Heavy crossbow",
     cost: 50,
     weight: 8,
     size: "Ranged",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Javelin", cost: 1, weight: 2, size: "Ranged", category: "Simple" },
+  {
+    name: "Javelin",
+    cost: 1,
+    weight: 2,
+    size: "Ranged",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Light crossbow",
     cost: 35,
     weight: 4,
     size: "Ranged",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Sling", cost: 0, weight: 0, size: "Ranged", category: "Simple" },
+  {
+    name: "Sling",
+    cost: 0,
+    weight: 0,
+    size: "Ranged",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Stingchuck",
     cost: 0,
     weight: 9,
     size: "Ranged",
+    type: "weapon",
     category: "Simple",
   },
-  { name: "Stonebow", cost: 35, weight: 4, size: "Ranged", category: "Simple" },
+  {
+    name: "Stonebow",
+    cost: 35,
+    weight: 4,
+    size: "Ranged",
+    type: "weapon",
+    category: "Simple",
+  },
   {
     name: "Underwater heavy crossbow",
     cost: 100,
     weight: 8,
     size: "Ranged",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -217,6 +350,7 @@ const weapons: Weapon[] = [
     cost: 70,
     weight: 4,
     size: "Ranged",
+    type: "weapon",
     category: "Simple",
   },
   {
@@ -224,6 +358,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -231,6 +366,7 @@ const weapons: Weapon[] = [
     cost: 6,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -238,6 +374,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -245,40 +382,87 @@ const weapons: Weapon[] = [
     cost: 1,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Dogslicer", cost: 8, weight: 1, size: "Light", category: "Martial" },
+  {
+    name: "Dogslicer",
+    cost: 8,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Dueling dagger",
     cost: 12,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Gladius", cost: 15, weight: 3, size: "Light", category: "Martial" },
-  { name: "Handaxe", cost: 6, weight: 3, size: "Light", category: "Martial" },
+  {
+    name: "Gladius",
+    cost: 15,
+    weight: 3,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Handaxe",
+    cost: 6,
+    weight: 3,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Iron brush",
     cost: 2,
     weight: 0,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Jutte", cost: 8, weight: 1, size: "Light", category: "Martial" },
+  {
+    name: "Jutte",
+    cost: 8,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Katar, tri-bladed",
     cost: 6,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Kerambit", cost: 2, weight: 0, size: "Light", category: "Martial" },
-  { name: "Kukri", cost: 8, weight: 2, size: "Light", category: "Martial" },
+  {
+    name: "Kerambit",
+    cost: 2,
+    weight: 0,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Kukri",
+    cost: 8,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Light hammer",
     cost: 1,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -286,6 +470,7 @@ const weapons: Weapon[] = [
     cost: 4,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -293,17 +478,47 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Machete", cost: 10, weight: 2, size: "Light", category: "Martial" },
-  { name: "Sap", cost: 1, weight: 2, size: "Light", category: "Martial" },
-  { name: "Sea-knife", cost: 8, weight: 1, size: "Light", category: "Martial" },
-  { name: "Shang gou", cost: 6, weight: 1, size: "Light", category: "Martial" },
+  {
+    name: "Machete",
+    cost: 10,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Sap",
+    cost: 1,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Sea-knife",
+    cost: 8,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Shang gou",
+    cost: 6,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Short sword",
     cost: 10,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -311,6 +526,7 @@ const weapons: Weapon[] = [
     cost: 24,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -318,6 +534,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -325,6 +542,7 @@ const weapons: Weapon[] = [
     cost: 11,
     weight: 0.5,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -332,15 +550,31 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Tonfa", cost: 1, weight: 1, size: "Light", category: "Martial" },
-  { name: "War razor", cost: 8, weight: 1, size: "Light", category: "Martial" },
+  {
+    name: "Tonfa",
+    cost: 1,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "War razor",
+    cost: 8,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Wushu dart",
     cost: 0.2,
     weight: 0,
     size: "Light",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -348,6 +582,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -355,6 +590,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -362,6 +598,7 @@ const weapons: Weapon[] = [
     cost: 1,
     weight: 1,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -369,6 +606,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 1,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -376,6 +614,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -383,6 +622,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -390,6 +630,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -397,6 +638,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -404,6 +646,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -411,6 +654,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -418,6 +662,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -425,6 +670,7 @@ const weapons: Weapon[] = [
     cost: 17,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -432,6 +678,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -439,6 +686,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 2,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -446,6 +694,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -453,6 +702,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -460,6 +710,7 @@ const weapons: Weapon[] = [
     cost: 2,
     weight: 2,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -467,6 +718,7 @@ const weapons: Weapon[] = [
     cost: 45,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -474,6 +726,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 2,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -481,6 +734,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -488,6 +742,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -495,6 +750,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -502,6 +758,7 @@ const weapons: Weapon[] = [
     cost: 13,
     weight: 14,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -509,6 +766,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -516,6 +774,7 @@ const weapons: Weapon[] = [
     cost: 11,
     weight: 11,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -523,6 +782,7 @@ const weapons: Weapon[] = [
     cost: 40,
     weight: 14,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -530,6 +790,7 @@ const weapons: Weapon[] = [
     cost: 75,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -537,6 +798,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -544,6 +806,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -551,6 +814,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -558,6 +822,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -565,6 +830,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -572,6 +838,7 @@ const weapons: Weapon[] = [
     cost: 9,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -579,6 +846,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -586,6 +854,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -593,6 +862,7 @@ const weapons: Weapon[] = [
     cost: 3,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -600,6 +870,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -607,6 +878,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -614,6 +886,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -621,6 +894,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -628,6 +902,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -635,6 +910,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -642,6 +918,7 @@ const weapons: Weapon[] = [
     cost: 35,
     weight: 9,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -649,6 +926,7 @@ const weapons: Weapon[] = [
     cost: 60,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -656,6 +934,7 @@ const weapons: Weapon[] = [
     cost: 24,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -663,6 +942,7 @@ const weapons: Weapon[] = [
     cost: 14,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -670,6 +950,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -677,6 +958,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -684,6 +966,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -691,6 +974,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 3,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -698,6 +982,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -705,6 +990,7 @@ const weapons: Weapon[] = [
     cost: 18,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -712,6 +998,7 @@ const weapons: Weapon[] = [
     cost: 100,
     weight: 6,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -719,6 +1006,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -726,6 +1014,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -733,16 +1022,39 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 14,
     size: "Two-Handed",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Amentum", cost: 0, weight: 1, size: "Ranged", category: "Martial" },
-  { name: "Atlatl", cost: 2, weight: 2, size: "Ranged", category: "Martial" },
-  { name: "Chakram", cost: 1, weight: 1, size: "Ranged", category: "Martial" },
+  {
+    name: "Amentum",
+    cost: 0,
+    weight: 1,
+    size: "Ranged",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Atlatl",
+    cost: 2,
+    weight: 2,
+    size: "Ranged",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Chakram",
+    cost: 1,
+    weight: 1,
+    size: "Ranged",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Composite longbow",
     cost: 100,
     weight: 3,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -750,6 +1062,7 @@ const weapons: Weapon[] = [
     cost: 75,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -757,6 +1070,7 @@ const weapons: Weapon[] = [
     cost: 65,
     weight: 12,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -764,24 +1078,55 @@ const weapons: Weapon[] = [
     cost: 4,
     weight: 3,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Hurlbat", cost: 8, weight: 2, size: "Ranged", category: "Martial" },
+  {
+    name: "Hurlbat",
+    cost: 8,
+    weight: 2,
+    size: "Ranged",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Jolting dart",
     cost: 100,
     weight: 0.5,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Longbow", cost: 75, weight: 3, size: "Ranged", category: "Martial" },
-  { name: "Phaleros", cost: 5, weight: 3, size: "Ranged", category: "Martial" },
-  { name: "Pilum", cost: 5, weight: 4, size: "Ranged", category: "Martial" },
+  {
+    name: "Longbow",
+    cost: 75,
+    weight: 3,
+    size: "Ranged",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Phaleros",
+    cost: 5,
+    weight: 3,
+    size: "Ranged",
+    type: "weapon",
+    category: "Martial",
+  },
+  {
+    name: "Pilum",
+    cost: 5,
+    weight: 4,
+    size: "Ranged",
+    type: "weapon",
+    category: "Martial",
+  },
   {
     name: "Poisoned sand tube",
     cost: 1,
     weight: 1,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -789,6 +1134,7 @@ const weapons: Weapon[] = [
     cost: 125,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -796,6 +1142,7 @@ const weapons: Weapon[] = [
     cost: 30,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -803,6 +1150,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -810,6 +1158,7 @@ const weapons: Weapon[] = [
     cost: 0,
     weight: 0,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
   {
@@ -817,14 +1166,23 @@ const weapons: Weapon[] = [
     cost: 3,
     weight: 0.5,
     size: "Ranged",
+    type: "weapon",
     category: "Martial",
   },
-  { name: "Aklys", cost: 5, weight: 2, size: "Light", category: "Exotic" },
+  {
+    name: "Aklys",
+    cost: 5,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Axe-gauntlet, dwarven light",
     cost: 16,
     weight: 5,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -832,23 +1190,47 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 5,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Battle poi", cost: 5, weight: 2, size: "Light", category: "Exotic" },
-  { name: "Bich'hwa", cost: 5, weight: 2, size: "Light", category: "Exotic" },
+  {
+    name: "Battle poi",
+    cost: 5,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
+  {
+    name: "Bich'hwa",
+    cost: 5,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Butterfly knife",
     cost: 5,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Dan bong", cost: 0.1, weight: 0, size: "Light", category: "Exotic" },
+  {
+    name: "Dan bong",
+    cost: 0.1,
+    weight: 0,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Deer horn knife",
     cost: 10,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -856,6 +1238,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 5,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -863,6 +1246,7 @@ const weapons: Weapon[] = [
     cost: 40,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -870,6 +1254,7 @@ const weapons: Weapon[] = [
     cost: 3,
     weight: 0,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -877,6 +1262,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 0,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -884,6 +1270,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 5,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -891,6 +1278,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -898,6 +1286,7 @@ const weapons: Weapon[] = [
     cost: 1,
     weight: 1,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -905,14 +1294,23 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 10,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Kama", cost: 2, weight: 2, size: "Light", category: "Exotic" },
+  {
+    name: "Kama",
+    cost: 2,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Kasatha spinal sword",
     cost: 50,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -920,16 +1318,39 @@ const weapons: Weapon[] = [
     cost: 9,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Nunchaku", cost: 2, weight: 2, size: "Light", category: "Exotic" },
-  { name: "Pata", cost: 14, weight: 3, size: "Light", category: "Exotic" },
-  { name: "Quadrens", cost: 8, weight: 2, size: "Light", category: "Exotic" },
+  {
+    name: "Nunchaku",
+    cost: 2,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
+  {
+    name: "Pata",
+    cost: 14,
+    weight: 3,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
+  {
+    name: "Quadrens",
+    cost: 8,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Razor, drow",
     cost: 25,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -937,48 +1358,103 @@ const weapons: Weapon[] = [
     cost: 0.2,
     weight: 2,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Sai", cost: 1, weight: 1, size: "Light", category: "Exotic" },
-  { name: "Sanpkhang", cost: 60, weight: 1, size: "Light", category: "Exotic" },
+  {
+    name: "Sai",
+    cost: 1,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
+  {
+    name: "Sanpkhang",
+    cost: 60,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Scorpion whip",
     cost: 5,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Siangham", cost: 3, weight: 1, size: "Light", category: "Exotic" },
-  { name: "Sica", cost: 10, weight: 2, size: "Light", category: "Exotic" },
+  {
+    name: "Siangham",
+    cost: 3,
+    weight: 1,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
+  {
+    name: "Sica",
+    cost: 10,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Swordbreaker dagger",
     cost: 10,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Tekko-kagi", cost: 2, weight: 0, size: "Light", category: "Exotic" },
+  {
+    name: "Tekko-kagi",
+    cost: 2,
+    weight: 0,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Thorn bracer",
     cost: 30,
     weight: 3,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Wakizashi", cost: 35, weight: 2, size: "Light", category: "Exotic" },
+  {
+    name: "Wakizashi",
+    cost: 35,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "War-shield, dwarven",
     cost: 50,
     weight: 8,
     size: "Light",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Waveblade", cost: 5, weight: 2, size: "Light", category: "Exotic" },
+  {
+    name: "Waveblade",
+    cost: 5,
+    weight: 2,
+    size: "Light",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Aldori dueling sword",
     cost: 20,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -986,6 +1462,7 @@ const weapons: Weapon[] = [
     cost: 21,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -993,6 +1470,7 @@ const weapons: Weapon[] = [
     cost: 35,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1000,14 +1478,23 @@ const weapons: Weapon[] = [
     cost: 40,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Doru", cost: 4, weight: 6, size: "One-Handed", category: "Exotic" },
+  {
+    name: "Doru",
+    cost: 4,
+    weight: 6,
+    size: "One-Handed",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Dwarven double waraxe",
     cost: 60,
     weight: 12,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1015,6 +1502,7 @@ const weapons: Weapon[] = [
     cost: 30,
     weight: 8,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1022,6 +1510,7 @@ const weapons: Weapon[] = [
     cost: 60,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1029,6 +1518,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1036,6 +1526,7 @@ const weapons: Weapon[] = [
     cost: 18,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1043,6 +1534,7 @@ const weapons: Weapon[] = [
     cost: 9,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1050,6 +1542,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 10,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1057,6 +1550,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1064,6 +1558,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 7,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1071,6 +1566,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1078,6 +1574,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 8,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1085,6 +1582,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1092,6 +1590,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1099,6 +1598,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1106,6 +1606,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1113,6 +1614,7 @@ const weapons: Weapon[] = [
     cost: 35,
     weight: 2,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1120,6 +1622,7 @@ const weapons: Weapon[] = [
     cost: 30,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1127,6 +1630,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1134,6 +1638,7 @@ const weapons: Weapon[] = [
     cost: 80,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1141,6 +1646,7 @@ const weapons: Weapon[] = [
     cost: 200,
     weight: 8,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1148,6 +1654,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 8,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1155,6 +1662,7 @@ const weapons: Weapon[] = [
     cost: 30,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1162,6 +1670,7 @@ const weapons: Weapon[] = [
     cost: 18,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1169,6 +1678,7 @@ const weapons: Weapon[] = [
     cost: 30,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1176,14 +1686,23 @@ const weapons: Weapon[] = [
     cost: 3,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Whip", cost: 1, weight: 2, size: "One-Handed", category: "Exotic" },
+  {
+    name: "Whip",
+    cost: 1,
+    weight: 2,
+    size: "One-Handed",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Barbed spear",
     cost: 15,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1191,6 +1710,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1198,6 +1718,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 2,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1205,6 +1726,7 @@ const weapons: Weapon[] = [
     cost: 1,
     weight: 3,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1212,6 +1734,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1219,6 +1742,7 @@ const weapons: Weapon[] = [
     cost: 65,
     weight: 25,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1226,6 +1750,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 13,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1233,14 +1758,23 @@ const weapons: Weapon[] = [
     cost: 34,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Crook", cost: 1, weight: 5, size: "Two-Handed", category: "Exotic" },
+  {
+    name: "Crook",
+    cost: 1,
+    weight: 5,
+    size: "Two-Handed",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Dire flail",
     cost: 90,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1248,6 +1782,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 15,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1255,6 +1790,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1262,6 +1798,7 @@ const weapons: Weapon[] = [
     cost: 8,
     weight: 4,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1269,6 +1806,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1276,6 +1814,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1283,6 +1822,7 @@ const weapons: Weapon[] = [
     cost: 80,
     weight: 7,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1290,6 +1830,7 @@ const weapons: Weapon[] = [
     cost: 14,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1297,6 +1838,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1304,6 +1846,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 6,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1311,6 +1854,7 @@ const weapons: Weapon[] = [
     cost: 30,
     weight: 9,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1318,6 +1862,7 @@ const weapons: Weapon[] = [
     cost: 40,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1325,6 +1870,7 @@ const weapons: Weapon[] = [
     cost: 3,
     weight: 1,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1332,6 +1878,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1339,6 +1886,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 6,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1346,6 +1894,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 16,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1353,6 +1902,7 @@ const weapons: Weapon[] = [
     cost: 60,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1360,6 +1910,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 6,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1367,6 +1918,7 @@ const weapons: Weapon[] = [
     cost: 12,
     weight: 3,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1374,6 +1926,7 @@ const weapons: Weapon[] = [
     cost: 6,
     weight: 1,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1381,6 +1934,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 14,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1388,6 +1942,7 @@ const weapons: Weapon[] = [
     cost: 70,
     weight: 20,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1395,6 +1950,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1402,6 +1958,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1409,6 +1966,7 @@ const weapons: Weapon[] = [
     cost: 60,
     weight: 15,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1416,6 +1974,7 @@ const weapons: Weapon[] = [
     cost: 15,
     weight: 20,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1423,6 +1982,7 @@ const weapons: Weapon[] = [
     cost: 70,
     weight: 15,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1430,6 +1990,7 @@ const weapons: Weapon[] = [
     cost: 30,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1437,6 +1998,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 7,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1444,6 +2006,7 @@ const weapons: Weapon[] = [
     cost: 45,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1451,6 +2014,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1458,6 +2022,7 @@ const weapons: Weapon[] = [
     cost: 18,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1465,6 +2030,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1472,6 +2038,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 6,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1479,15 +2046,31 @@ const weapons: Weapon[] = [
     cost: 100,
     weight: 10,
     size: "Two-Handed",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Bolas", cost: 5, weight: 2, size: "Ranged", category: "Exotic" },
-  { name: "Boomerang", cost: 3, weight: 3, size: "Ranged", category: "Exotic" },
+  {
+    name: "Bolas",
+    cost: 5,
+    weight: 2,
+    size: "Ranged",
+    type: "weapon",
+    category: "Exotic",
+  },
+  {
+    name: "Boomerang",
+    cost: 3,
+    weight: 3,
+    size: "Ranged",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Crystal chakram",
     cost: 20,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1495,6 +2078,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 4,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1502,6 +2086,7 @@ const weapons: Weapon[] = [
     cost: 300,
     weight: 18,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1509,6 +2094,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 4,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1516,6 +2102,7 @@ const weapons: Weapon[] = [
     cost: 6,
     weight: 14,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1523,6 +2110,7 @@ const weapons: Weapon[] = [
     cost: 10,
     weight: 1,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1530,6 +2118,7 @@ const weapons: Weapon[] = [
     cost: 20,
     weight: 3,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1537,6 +2126,7 @@ const weapons: Weapon[] = [
     cost: 0,
     weight: 1,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1544,6 +2134,7 @@ const weapons: Weapon[] = [
     cost: 100,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1551,6 +2142,7 @@ const weapons: Weapon[] = [
     cost: 400,
     weight: 12,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1558,6 +2150,7 @@ const weapons: Weapon[] = [
     cost: 400,
     weight: 12,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1565,6 +2158,7 @@ const weapons: Weapon[] = [
     cost: 250,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1572,6 +2166,7 @@ const weapons: Weapon[] = [
     cost: 130,
     weight: 7,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1579,15 +2174,31 @@ const weapons: Weapon[] = [
     cost: 150,
     weight: 3,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Kestros", cost: 1, weight: 1, size: "Ranged", category: "Exotic" },
-  { name: "Lasso", cost: 0.1, weight: 5, size: "Ranged", category: "Exotic" },
+  {
+    name: "Kestros",
+    cost: 1,
+    weight: 1,
+    size: "Ranged",
+    type: "weapon",
+    category: "Exotic",
+  },
+  {
+    name: "Lasso",
+    cost: 0.1,
+    weight: 5,
+    size: "Ranged",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Launching crossbow",
     cost: 75,
     weight: 8,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1595,6 +2206,7 @@ const weapons: Weapon[] = [
     cost: 250,
     weight: 6,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1602,14 +2214,23 @@ const weapons: Weapon[] = [
     cost: 250,
     weight: 6,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Net", cost: 20, weight: 6, size: "Ranged", category: "Exotic" },
+  {
+    name: "Net",
+    cost: 20,
+    weight: 6,
+    size: "Ranged",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Pelletbow, dwarven heavy",
     cost: 75,
     weight: 8,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1617,6 +2238,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 4,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1624,6 +2246,7 @@ const weapons: Weapon[] = [
     cost: 800,
     weight: 4,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1631,6 +2254,7 @@ const weapons: Weapon[] = [
     cost: 400,
     weight: 12,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1638,14 +2262,23 @@ const weapons: Weapon[] = [
     cost: 250,
     weight: 6,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
-  { name: "Rope dart", cost: 1, weight: 0, size: "Ranged", category: "Exotic" },
+  {
+    name: "Rope dart",
+    cost: 1,
+    weight: 0,
+    size: "Ranged",
+    type: "weapon",
+    category: "Exotic",
+  },
   {
     name: "Shoanti bolas",
     cost: 15,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1653,6 +2286,7 @@ const weapons: Weapon[] = [
     cost: 35,
     weight: 3,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1660,6 +2294,7 @@ const weapons: Weapon[] = [
     cost: 1,
     weight: 0.5,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1667,6 +2302,7 @@ const weapons: Weapon[] = [
     cost: 5,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1674,6 +2310,7 @@ const weapons: Weapon[] = [
     cost: 30,
     weight: 10,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1681,6 +2318,7 @@ const weapons: Weapon[] = [
     cost: 35,
     weight: 3,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1688,6 +2326,7 @@ const weapons: Weapon[] = [
     cost: 50,
     weight: 2,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1695,6 +2334,7 @@ const weapons: Weapon[] = [
     cost: 200,
     weight: 1,
     size: "Ranged",
+    type: "weapon",
     category: "Exotic",
   },
   {
@@ -1702,6 +2342,7 @@ const weapons: Weapon[] = [
     cost: 3000,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1709,6 +2350,7 @@ const weapons: Weapon[] = [
     cost: 750,
     weight: 6,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1716,6 +2358,7 @@ const weapons: Weapon[] = [
     cost: 750,
     weight: 1,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1723,6 +2366,7 @@ const weapons: Weapon[] = [
     cost: 740,
     weight: 1,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1730,6 +2374,7 @@ const weapons: Weapon[] = [
     cost: 1750,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1737,6 +2382,7 @@ const weapons: Weapon[] = [
     cost: 1000,
     weight: 3,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1744,6 +2390,7 @@ const weapons: Weapon[] = [
     cost: 1500,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1751,6 +2398,7 @@ const weapons: Weapon[] = [
     cost: 2500,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1758,6 +2406,7 @@ const weapons: Weapon[] = [
     cost: 3000,
     weight: 5,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1765,6 +2414,7 @@ const weapons: Weapon[] = [
     cost: 1000,
     weight: 4,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1772,6 +2422,7 @@ const weapons: Weapon[] = [
     cost: 775,
     weight: 1,
     size: "One-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1779,6 +2430,7 @@ const weapons: Weapon[] = [
     cost: 600,
     weight: 6,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1786,6 +2438,7 @@ const weapons: Weapon[] = [
     cost: 1600,
     weight: 6,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1793,6 +2446,7 @@ const weapons: Weapon[] = [
     cost: 2000,
     weight: 8,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1800,6 +2454,7 @@ const weapons: Weapon[] = [
     cost: 4000,
     weight: 40,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1807,6 +2462,7 @@ const weapons: Weapon[] = [
     cost: 6000,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1814,6 +2470,7 @@ const weapons: Weapon[] = [
     cost: 4000,
     weight: 18,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1821,6 +2478,7 @@ const weapons: Weapon[] = [
     cost: 2500,
     weight: 11,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1828,6 +2486,7 @@ const weapons: Weapon[] = [
     cost: 2000,
     weight: 12,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1835,6 +2494,7 @@ const weapons: Weapon[] = [
     cost: 25,
     weight: 4,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1842,6 +2502,7 @@ const weapons: Weapon[] = [
     cost: 1500,
     weight: 9,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
   {
@@ -1849,6 +2510,7 @@ const weapons: Weapon[] = [
     cost: 1600,
     weight: 6,
     size: "Two-Handed",
+    type: "weapon",
     category: "Firearm",
   },
 ];

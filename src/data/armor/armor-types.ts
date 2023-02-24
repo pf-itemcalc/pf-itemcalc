@@ -5,6 +5,7 @@ export type Armor = {
   cost: number; // in gp
   weight: number; // in lbs
   category: ArmorCategory;
+  type: "armor";
 };
 
 export const getUrl = (armor: Armor) =>

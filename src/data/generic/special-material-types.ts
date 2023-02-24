@@ -1,4 +1,5 @@
 import { Armor } from "../armor/armor-types";
+import { isWeapon } from "../helpers";
 import { Weapon } from "../weapon/weapon-types";
 
 type Item = Weapon | Armor;
@@ -13,14 +14,18 @@ export type SpecialMaterialOptionals = {
 
 export type SpecialMaterial = {
   name: string;
+  type: "special-material";
 } & SpecialMaterialOptionals;
 
-export const baseSpecialMaterial: SpecialMaterialOptionals = {
+export const baseSpecialMaterial: SpecialMaterialOptionals & {
+  type: "special-material";
+} = {
   isApplicable: () => true,
   alteredWeight: (item) => item.weight,
   addedCost: () => 0,
   alreadyMasterwork: false,
   masterworkCostIncluded: false,
+  type: "special-material",
 };
 
 // Uses the 'scroll to text fragment' feature to locate in page since
@@ -29,9 +34,6 @@ export const getUrl = (specialMaterial: SpecialMaterial) =>
   `https://www.aonprd.com/SpecialMaterials.aspx#:~:text=${encodeURIComponent(
     specialMaterial.name
   )}`;
-
-export const isWeapon = (item: Item): item is Weapon =>
-  (item as Weapon).size !== undefined;
 
 export const valueFromArmorCategory = (
   armor: Armor,

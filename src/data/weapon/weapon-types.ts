@@ -7,6 +7,7 @@ export type Weapon = {
   weight: number; // in lbs
   size: WeaponSize;
   category: WeaponCategory;
+  type: "weapon";
 };
 
 export const getUrl = (weapon: Weapon) =>

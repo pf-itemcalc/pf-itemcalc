@@ -33,6 +33,7 @@ export type Spell = {
   spellLevel: number;
   spellList: string; // Uses lists above in order
   materialCost: number; // in gp
+  type: "spell";
 };
 
 export const getMinimumCasterLevel = (

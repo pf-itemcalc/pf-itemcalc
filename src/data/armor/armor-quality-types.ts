@@ -1,6 +1,7 @@
 type BaseArmorQaulity = {
   name: string;
   casterLevel: number;
+  type: "armor-quality";
 };
 
 export type ArmorQaulityBonus = BaseArmorQaulity & {

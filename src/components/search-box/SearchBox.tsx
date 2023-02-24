@@ -36,6 +36,7 @@ const SearchBox = ({
   }, []);
 
   const error = selectedItemsAreInvalid(selectedItems);
+  const displayError = selectedItems.length > 0 && error;
 
   const [open, setOpen] = useState(false);
 
@@ -68,8 +69,10 @@ const SearchBox = ({
           <TextField
             {...params}
             label="Search"
-            helperText={error ?? hints[hintIndex]}
-            FormHelperTextProps={{ sx: { color: error ? "red" : "inherit" } }}
+            helperText={displayError ? error : hints[hintIndex]}
+            FormHelperTextProps={{
+              sx: { color: displayError ? "red" : "inherit" },
+            }}
             onKeyDown={(event) => {
               if (event.key === "Enter" && !open) {
                 onGo();

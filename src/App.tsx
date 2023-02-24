@@ -31,9 +31,7 @@ const App = () => {
       sx={{
         display: "flex",
         width: "100%",
-        justifyContent: "center",
         alignItems: "center",
-        alignContent: "center",
         flexDirection: "column",
       }}
     >
@@ -48,6 +46,7 @@ const App = () => {
       {workingItems && (
         <WorkingItems
           items={workingItems}
+          setItems={setWorkingItems}
           onBack={moveBackToSearch}
           onReset={reset}
         />

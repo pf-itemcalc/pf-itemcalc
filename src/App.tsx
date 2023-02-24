@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
 import { Item } from "./data/helpers";
+import WorkingItems from "./components/working-items/WorkingItems";
 
 const App = () => {
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
@@ -13,6 +14,16 @@ const App = () => {
   const moveFromSelectionToWorking = () => {
     setWorkingItems(selectedItems);
     setSelectedItems([]);
+  };
+
+  const moveBackToSearch = () => {
+    setSelectedItems(workingItems ?? []);
+    setWorkingItems(undefined);
+  };
+
+  const reset = () => {
+    setSelectedItems([]);
+    setWorkingItems(undefined);
   };
 
   return (
@@ -26,12 +37,21 @@ const App = () => {
         flexDirection: "column",
       }}
     >
-      <Typography variant="h1">PF Item Calc</Typography>
-      <SearchBox
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-        onConfirm={moveFromSelectionToWorking}
-      />
+      <Typography variant={workingItems ? "h3" : "h1"}>PF Item Calc</Typography>
+      {!workingItems && (
+        <SearchBox
+          selectedItems={selectedItems}
+          setSelectedItems={setSelectedItems}
+          onConfirm={moveFromSelectionToWorking}
+        />
+      )}
+      {workingItems && (
+        <WorkingItems
+          items={workingItems}
+          onBack={moveBackToSearch}
+          onReset={reset}
+        />
+      )}
     </Box>
   );
 };

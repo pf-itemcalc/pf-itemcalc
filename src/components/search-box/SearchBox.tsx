@@ -9,7 +9,7 @@ const hints = [
   'Try searching for "+3, Flaming, Cold-Iron, Longsword"',
   'Try searching for "+1, Fortification (light), Adamantine, Breastplate"',
   'Try searching for "Potion of, Cure Light Wounds"',
-  'Try searching for "+1, Bashing, Fire-Forged Steel, Buckler',
+  'Try searching for "+1, Bashing, Living Steel, Buckler',
 ];
 
 type SearchBoxProps = {

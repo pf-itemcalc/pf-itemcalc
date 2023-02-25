@@ -103,7 +103,8 @@ const ItemSummary = ({ items }: ItemSummaryProps) => {
               <b>Value</b>: {value.toLocaleString()}gp
             </li>
             <li>
-              <b>Weight</b>: {weight.toLocaleString()}lbs
+              <b>Weight</b>: {weight.toLocaleString()}lb
+              {weight === 1 ? "" : "s"}
             </li>
           </ul>
         </ItemTitle>

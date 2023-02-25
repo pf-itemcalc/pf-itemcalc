@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
 import { Item, orderItems } from "./data/helpers";
 import WorkingItems from "./components/working-items/WorkingItems";
+import Title from "./components/title/Title";
 
 const App = () => {
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
@@ -35,7 +36,7 @@ const App = () => {
         flexDirection: "column",
       }}
     >
-      <Typography variant={workingItems ? "h3" : "h1"}>PF Item Calc</Typography>
+      <Title small={!!workingItems} />
       {!workingItems && (
         <SearchBox
           selectedItems={orderItems(selectedItems)}

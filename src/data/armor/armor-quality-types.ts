@@ -36,6 +36,6 @@ export const getArmorQaulityCost = (armorQuality: ArmorQaulity) => {
 };
 
 export const getUrl = (armorQuality: ArmorQaulity) =>
-  `https://www.aonprd.com/MagicArmorsDisplay.aspx?ItemName=${encodeURIComponent(
+  `https://www.aonprd.com/MagicArmorDisplay.aspx?ItemName=${encodeURIComponent(
     armorQuality.name
   )}`;

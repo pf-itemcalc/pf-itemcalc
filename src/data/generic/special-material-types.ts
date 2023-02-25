@@ -33,7 +33,7 @@ export const baseSpecialMaterial: SpecialMaterialOptionals & {
 export const getUrl = (specialMaterial: SpecialMaterial) =>
   `https://www.aonprd.com/SpecialMaterials.aspx#:~:text=${encodeURIComponent(
     specialMaterial.name
-  )},-Source`;
+  ).replaceAll("-", "%2D")},-Source`;
 
 export const valueFromArmorCategory = (
   armor: Armor,

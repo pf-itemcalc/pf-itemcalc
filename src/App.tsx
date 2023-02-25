@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
-import { Item } from "./data/helpers";
+import { Item, orderItems } from "./data/helpers";
 import WorkingItems from "./components/working-items/WorkingItems";
 
 const App = () => {
@@ -38,14 +38,14 @@ const App = () => {
       <Typography variant={workingItems ? "h3" : "h1"}>PF Item Calc</Typography>
       {!workingItems && (
         <SearchBox
-          selectedItems={selectedItems}
+          selectedItems={orderItems(selectedItems)}
           setSelectedItems={setSelectedItems}
           onConfirm={moveFromSelectionToWorking}
         />
       )}
       {workingItems && (
         <WorkingItems
-          items={workingItems}
+          items={orderItems(workingItems)}
           setItems={setWorkingItems}
           onBack={moveBackToSearch}
           onReset={reset}

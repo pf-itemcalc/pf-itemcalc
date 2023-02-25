@@ -85,7 +85,12 @@ const SearchBox = ({
         onChange={(e, values) => setSelectedItems(values)}
       />
       <Button
-        sx={{ marginBottom: 3, marginLeft: 1 }}
+        sx={{
+          marginBottom: 3,
+          marginLeft: 1,
+          paddingTop: 1.9,
+          paddingBottom: 1.9,
+        }}
         variant="outlined"
         disabled={!!error}
         onClick={onGo}

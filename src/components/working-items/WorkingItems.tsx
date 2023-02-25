@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { Item } from "../../data/helpers";
 import ItemHeader from "./ItemHeader";
+import ItemSummary from "./ItemSummary";
 
 type WorkingItemsProps = {
   items: Item[];
@@ -16,22 +17,15 @@ const WorkingItems = ({
   onReset,
 }: WorkingItemsProps) => {
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <>
       <ItemHeader
         items={items}
         setItems={setItems}
         onBack={onBack}
         onReset={onReset}
       />
-    </Box>
+      <ItemSummary items={items} />
+    </>
   );
 };
 

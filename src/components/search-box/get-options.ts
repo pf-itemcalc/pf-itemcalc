@@ -38,27 +38,27 @@ const isNotSpecialMaterialThatDoesNotApply = (
   return material.isApplicable(applicableTo);
 };
 
-const masterworkFilter = (items: Item[]): Item[] => {
+const masterworkFilter = (selected: Item[], items: Item[]): Item[] => {
   // If the enhancment is masterwork then no qualities can be selected
-  if (items.some((s) => s === Masterwork)) {
+  if (selected.some((s) => s === Masterwork)) {
     return items.filter((i) => !isArmorQuality(i) && !isWeaponQuality(i));
   }
 
   return items;
 };
 
-const enchancementFilter = (items: Item[]): Item[] => {
+const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {
   // Only one enhancement can be selected
-  if (items.some((s) => isEnhancement(s))) {
+  if (selected.some((s) => isEnhancement(s))) {
     return items.filter((i) => !isEnhancement(i));
   }
 
   return items;
 };
 
-const specialMaterialFilter = (items: Item[]): Item[] => {
+const specialMaterialFilter = (selected: Item[], items: Item[]): Item[] => {
   //  the right qualities can then be chosen
-  const specialMaterial = items.find(isSpecialMaterial);
+  const specialMaterial = selected.find(isSpecialMaterial);
   if (!specialMaterial) {
     return items;
   }
@@ -86,8 +86,8 @@ const specialMaterialFilter = (items: Item[]): Item[] => {
   return items;
 };
 
-const weaponFilter = (items: Item[]): Item[] => {
-  const weapon = items.find(isWeapon);
+const weaponFilter = (selected: Item[], items: Item[]): Item[] => {
+  const weapon = selected.find(isWeapon);
   if (!weapon) {
     return items;
   }
@@ -103,9 +103,9 @@ const weaponFilter = (items: Item[]): Item[] => {
   );
 };
 
-const weaponQuailityFilter = (items: Item[]): Item[] => {
+const weaponQuailityFilter = (selected: Item[], items: Item[]): Item[] => {
   // If a weapon quality is selected, you can't choose masterwork, an armor or armor quality
-  if (items.some((s) => isWeaponQuality(s))) {
+  if (selected.some(isWeaponQuality)) {
     return items.filter(
       (i) => !isArmor(i) && !isArmorQuality(i) && i !== Masterwork
     );
@@ -114,10 +114,10 @@ const weaponQuailityFilter = (items: Item[]): Item[] => {
   return items;
 };
 
-const armorFilter = (items: Item[]): Item[] => {
+const armorFilter = (selected: Item[], items: Item[]): Item[] => {
   // Only one armor can be selected
   //  and if so, you can't choose a weapon, weapon quality or special material that doesn't apply
-  const armor = items.find(isArmor);
+  const armor = selected.find(isArmor);
   if (!armor) {
     return items;
   }
@@ -130,9 +130,9 @@ const armorFilter = (items: Item[]): Item[] => {
   );
 };
 
-const armorQualityFilter = (items: Item[]): Item[] => {
+const armorQualityFilter = (selected: Item[], items: Item[]): Item[] => {
   // If a weapon quality is selected, you can't choose masterwork, an armor or armor quality
-  if (items.find((s) => isArmorQuality(s))) {
+  if (selected.find(isArmorQuality)) {
     return items.filter(
       (i) => !isWeapon(i) && !isWeaponQuality(i) && i !== Masterwork
     );
@@ -144,13 +144,13 @@ const armorQualityFilter = (items: Item[]): Item[] => {
 // TODO: add scrolls, potions and wands
 // TODO: Test this nightmare
 export const getOptions = (selectedItems: Item[]) => {
-  let items = masterworkFilter(allItems);
-  items = enchancementFilter(items);
-  items = specialMaterialFilter(items);
-  items = weaponFilter(items);
-  items = weaponQuailityFilter(items);
-  items = armorFilter(items);
-  return armorQualityFilter(items);
+  let items = masterworkFilter(selectedItems, allItems);
+  items = enchancementFilter(selectedItems, items);
+  items = specialMaterialFilter(selectedItems, items);
+  items = weaponFilter(selectedItems, items);
+  items = weaponQuailityFilter(selectedItems, items);
+  items = armorFilter(selectedItems, items);
+  return armorQualityFilter(selectedItems, items);
 };
 
 const getEnhancementModifier = (item: Item): number => {

@@ -12,6 +12,7 @@ import {
   SpecialMaterial,
 } from "./generic/special-material-types";
 import { getUrl, Spell } from "./spell/spell-types";
+import { SpellVessel } from "./spell/spell-vessel-types";
 import {
   getUrl as getWeaponQualityUrl,
   getWeaponQaulityCost,
@@ -27,6 +28,7 @@ export type ItemType =
   | "Weapon Quality"
   | "Special Material"
   | "Enhancement"
+  | "Spell Vessel"
   | "Spell";
 
 export type Item =
@@ -36,6 +38,7 @@ export type Item =
   | WeaponQaulity
   | SpecialMaterial
   | Enhancement
+  | SpellVessel
   | Spell;
 
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
@@ -49,6 +52,8 @@ export const isSpecialMaterial = (item: Item): item is SpecialMaterial =>
   item.type === "special-material";
 export const isEnhancement = (item: Item): item is Enhancement =>
   item.type === "enhancement";
+export const isSpellVessel = (item: Item): item is SpellVessel =>
+  item.type === "spell-vessel";
 export const isSpell = (item: Item): item is Spell => item.type === "spell";
 
 export const getItemType = (item: Item): ItemType => {
@@ -76,6 +81,10 @@ export const getItemType = (item: Item): ItemType => {
     return "Enhancement";
   }
 
+  if (isSpellVessel(item)) {
+    return "Spell Vessel";
+  }
+
   return "Spell";
 };
 
@@ -86,6 +95,7 @@ const itemTypeOrdering: ItemType[] = [
   "Special Material",
   "Weapon",
   "Armor",
+  "Spell Vessel",
   "Spell",
 ];
 
@@ -136,6 +146,7 @@ export const isMagic = (items: Item[]): boolean =>
       (isEnhancement(i) && i !== Masterwork) ||
       isArmorQuality(i) ||
       isWeaponQuality(i) ||
+      isSpellVessel(i) ||
       isSpell(i)
   );
 

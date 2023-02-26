@@ -1,7 +1,7 @@
 import { Enhancement } from "./enhancement-types";
 
 export const Masterwork: Enhancement = {
-  name: "masterwork",
+  name: "Masterwork",
   modifier: 0,
   type: "enhancement",
 };

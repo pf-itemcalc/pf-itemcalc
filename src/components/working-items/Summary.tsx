@@ -14,6 +14,7 @@ import {
   isSpecificSpellVessel,
   getSpellLevel,
   getSpellList,
+  isComposite,
 } from "../../data/helpers";
 import { range } from "lodash";
 
@@ -34,18 +35,32 @@ const Ntl = ({ url, children }: NtlProps) => {
   );
 };
 
-const ItemDisplay = ({ item }: { item: Item }) => {
+type ItemProps = {
+  item: Item;
+  compositeRating?: number;
+};
+
+const ItemDisplay = ({ item, compositeRating }: ItemProps) => {
   const url = getItemUrl(item);
 
-  return url ? <Ntl url={url}>{item.name}</Ntl> : <>{item.name}</>;
+  const name =
+    isComposite(item) && compositeRating !== undefined
+      ? item.name.replace("Composite", `Composite (${compositeRating})`)
+      : item.name;
+
+  return url ? <Ntl url={url}>{name}</Ntl> : <>{name}</>;
 };
 
 type SummaryProps = {
   items: Item[];
-  children?: React.ReactNode;
 };
 
-const ItemTitle = ({ items, children }: SummaryProps) => {
+type TitleProps = SummaryProps & {
+  children?: React.ReactNode;
+  compositeRating?: number;
+};
+
+const ItemTitle = ({ items, children, compositeRating }: TitleProps) => {
   const magical = isMagic(items);
 
   const Wrapper = ({ children }: { children: React.ReactNode }) =>
@@ -56,7 +71,7 @@ const ItemTitle = ({ items, children }: SummaryProps) => {
       <Wrapper>
         {items.map((i) => (
           <React.Fragment key={i.name}>
-            <ItemDisplay item={i} />{" "}
+            <ItemDisplay item={i} compositeRating={compositeRating} />{" "}
           </React.Fragment>
         ))}
       </Wrapper>
@@ -85,39 +100,60 @@ const casterLevelDisplay = (casterLevel: number) => {
 const ItemSummary = ({ items }: SummaryProps) => {
   const casterLevel = getItemCasterLevel(items);
   const identifyMethod = getIdentifyMethod(casterLevel, items);
-  const value = getItemValue(items);
+
+  const isCompositeBow = items.some(isComposite);
+  const [rating, setRating] = useState(0);
+  const compositeRating = isCompositeBow ? rating : undefined;
+
+  const value = getItemValue(items, compositeRating);
   const weight = getItemWeight(items);
 
   return (
-    <Typography
-      sx={{ width: "50%", border: "1px solid black", margin: 1, padding: 1 }}
-      fontFamily="Calibri"
-      fontSize={15}
-    >
-      <ul>
-        <ItemTitle items={items}>
-          <ul>
-            {casterLevel && (
-              <>
+    <>
+      <TextField
+        sx={{ width: "50%", margin: 1 }}
+        label="Composite Rating"
+        type="number"
+        inputMode="numeric"
+        inputProps={{ min: 0 }}
+        value={rating}
+        onChange={(e) => setRating(Number(e.target.value) ?? 0)}
+      />
+      <Typography
+        sx={{ width: "50%", border: "1px solid black", margin: 1, padding: 1 }}
+        fontFamily="Calibri"
+        fontSize={15}
+      >
+        <ul>
+          <ItemTitle items={items} compositeRating={compositeRating}>
+            <ul>
+              {casterLevel && (
+                <>
+                  <li>
+                    <b>CL</b>: {casterLevelDisplay(casterLevel)}
+                  </li>
+                  <li>
+                    <b>Identify Method</b>: {identifyMethod}
+                  </li>
+                </>
+              )}
+              {compositeRating !== undefined && (
                 <li>
-                  <b>CL</b>: {casterLevelDisplay(casterLevel)}
+                  <b>Composite Rating</b>: {compositeRating.toLocaleString()}
                 </li>
-                <li>
-                  <b>Identify Method</b>: {identifyMethod}
-                </li>
-              </>
-            )}
-            <li>
-              <b>Value</b>: {value.toLocaleString()}gp
-            </li>
-            <li>
-              <b>Weight</b>: {weight.toLocaleString()}lb
-              {weight === 1 ? "" : "s"}
-            </li>
-          </ul>
-        </ItemTitle>
-      </ul>
-    </Typography>
+              )}
+              <li>
+                <b>Value</b>: {value.toLocaleString()}gp
+              </li>
+              <li>
+                <b>Weight</b>: {weight.toLocaleString()}lb
+                {weight === 1 ? "" : "s"}
+              </li>
+            </ul>
+          </ItemTitle>
+        </ul>
+      </Typography>
+    </>
   );
 };
 

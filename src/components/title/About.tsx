@@ -37,7 +37,7 @@ const About = () => {
       <Typography>
         <b>This tool currently cannot:</b>
         <ul>
-          <li>Calculate extra composite bow costs (TODO)</li>
+          <li>Customise spell list and caster level (TODO)</li>
           <li>Calculate ammunition</li>
           <li>Calculate double-headed weapons (treated only single headed)</li>
           <li>List all wonderous items (just go search for them!)</li>

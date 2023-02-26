@@ -46,6 +46,8 @@ export const isArmorQuality = (item: Item): item is ArmorQaulity =>
   item.type === "armor-quality";
 
 export const isWeapon = (item: Item): item is Weapon => item.type === "weapon";
+export const isComposite = (item: Item): item is Weapon =>
+  isWeapon(item) && item.name.toLowerCase().includes("composite");
 export const isWeaponQuality = (item: Item): item is WeaponQaulity =>
   item.type === "weapon-quality";
 export const isSpecialMaterial = (item: Item): item is SpecialMaterial =>
@@ -179,12 +181,19 @@ export const getSpellCasterLevel = (items: Item[]): number => {
   return getMinimumCasterLevel(spell.spellLevel, spell.spellList);
 };
 
-export const getItemValue = (items: Item[]): number => {
+export const getItemValue = (
+  items: Item[],
+  compositeRating?: number
+): number => {
   const baseItem = items.find(isWeapon) || items.find(isArmor);
 
   if (!baseItem) {
     return 0;
   }
+
+  const compositeCost = baseItem.name.toLowerCase().includes("longbow")
+    ? 100
+    : 75;
 
   const totalModifier = [
     ...items.filter(isEnhancement).map((i) => i.modifier),
@@ -209,7 +218,13 @@ export const getItemValue = (items: Item[]): number => {
     Math.pow(totalModifier, 2) * 2000 * halfIfArmor + totalAddedCost;
   const materialExtraCost =
     specialMaterial?.addedCost(baseItem, isMagic(items)) ?? 0;
-  return baseItem.cost + mwkCost + magicCost + materialExtraCost;
+  return (
+    baseItem.cost +
+    mwkCost +
+    magicCost +
+    materialExtraCost +
+    (compositeRating !== undefined ? compositeCost * compositeRating : 0)
+  );
 };
 
 export const getSpellValue = (items: Item[]): number => {

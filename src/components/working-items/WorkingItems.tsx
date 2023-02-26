@@ -1,7 +1,6 @@
-import { Box } from "@mui/material";
 import { Item } from "../../data/helpers";
 import ItemHeader from "./ItemHeader";
-import ItemSummary from "./ItemSummary";
+import Summary from "./Summary";
 
 type WorkingItemsProps = {
   items: Item[];
@@ -24,7 +23,7 @@ const WorkingItems = ({
         onBack={onBack}
         onReset={onReset}
       />
-      <ItemSummary items={items} />
+      <Summary items={items} />
     </>
   );
 };

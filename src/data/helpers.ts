@@ -11,8 +11,8 @@ import {
   getUrl as getMaterialUrl,
   SpecialMaterial,
 } from "./generic/special-material-types";
-import { getUrl, Spell } from "./spell/spell-types";
-import { SpellVessel } from "./spell/spell-vessel-types";
+import { getMinimumCasterLevel, getUrl, Spell } from "./spell/spell-types";
+import { SpellVessel, SpellVesselType } from "./spell/spell-vessel-types";
 import {
   getUrl as getWeaponQualityUrl,
   getWeaponQaulityCost,
@@ -55,6 +55,8 @@ export const isEnhancement = (item: Item): item is Enhancement =>
 export const isSpellVessel = (item: Item): item is SpellVessel =>
   item.type === "spell-vessel";
 export const isSpell = (item: Item): item is Spell => item.type === "spell";
+export const isSpecificSpellVessel = (item: Item, type: SpellVesselType) =>
+  isSpellVessel(item) && item.vesselType === type;
 
 export const getItemType = (item: Item): ItemType => {
   if (isArmor(item)) {
@@ -150,7 +152,7 @@ export const isMagic = (items: Item[]): boolean =>
       isSpell(i)
   );
 
-export const getCasterLevel = (items: Item[]): number | undefined => {
+export const getItemCasterLevel = (items: Item[]): number | undefined => {
   const enhancement = items.find(isEnhancement);
   const qualities = [
     ...items.filter(isArmorQuality),
@@ -167,7 +169,17 @@ export const getCasterLevel = (items: Item[]): number | undefined => {
   );
 };
 
-export const getValue = (items: Item[]): number => {
+export const getSpellCasterLevel = (items: Item[]): number => {
+  const spell = items.find(isSpell);
+
+  if (!spell) {
+    return 0;
+  }
+
+  return getMinimumCasterLevel(spell.spellLevel, spell.spellList);
+};
+
+export const getItemValue = (items: Item[]): number => {
   const baseItem = items.find(isWeapon) || items.find(isArmor);
 
   if (!baseItem) {
@@ -200,7 +212,49 @@ export const getValue = (items: Item[]): number => {
   return baseItem.cost + mwkCost + magicCost + materialExtraCost;
 };
 
-export const getWeight = (items: Item[]): number => {
+export const getSpellValue = (items: Item[]): number => {
+  const spell = items.find(isSpell);
+
+  if (!spell) {
+    return 0;
+  }
+
+  const casterLevel = getMinimumCasterLevel(spell.spellLevel, spell.spellList);
+
+  const spellMultiplier = spell.spellLevel * casterLevel;
+
+  if (items.some((i) => isSpecificSpellVessel(i, "Potion"))) {
+    return spellMultiplier * 50 + spell.materialCost;
+  }
+
+  if (items.some((i) => isSpecificSpellVessel(i, "Wand"))) {
+    return spellMultiplier * 750 + spell.materialCost;
+  }
+
+  return spellMultiplier * 25 + spell.materialCost;
+};
+
+export const getSpellLevel = (items: Item[]): number => {
+  const spell = items.find(isSpell);
+
+  if (!spell) {
+    return 0;
+  }
+
+  return spell.spellLevel;
+};
+
+export const getSpellList = (items: Item[]): string => {
+  const spell = items.find(isSpell);
+
+  if (!spell) {
+    return "";
+  }
+
+  return spell.spellList;
+};
+
+export const getItemWeight = (items: Item[]): number => {
   const baseItem = items.find(isWeapon) || items.find(isArmor);
 
   if (!baseItem) {
@@ -220,6 +274,13 @@ export const getIdentifyMethod = (
     return undefined;
   }
 
-  // TODO: scrolls and potions
+  if (items.some((i) => isSpecificSpellVessel(i, "Potion"))) {
+    return `DC ${15 + casterLevel} Perception or Spellcraft Check`;
+  }
+
+  if (items.some((i) => isSpecificSpellVessel(i, "Scroll"))) {
+    return `Read Magic or DC ${15 + casterLevel} Spellcraft Check`;
+  }
+
   return `DC ${15 + casterLevel} Spellcraft Check`;
 };

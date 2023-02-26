@@ -6,6 +6,7 @@ import {
   isArmorQuality,
   isEnhancement,
   isSpell,
+  isSpellVessel,
   isWeapon,
   isWeaponQuality,
   Item,
@@ -21,6 +22,7 @@ type ItemHeaderProps = {
 const isDeletable = (item: Item, items: Item[]) =>
   (!isWeapon(item) &&
     !isArmor(item) &&
+    !isSpellVessel(item) &&
     !isSpell(item) &&
     !isEnhancement(item)) ||
   (isEnhancement(item) &&

@@ -31,7 +31,7 @@ export type Spell = {
   name: string;
   // Picks core classes first, then base, then hybrid, then occult
   spellLevel: number;
-  spellList: string; // Uses lists above in order
+  spellList: SpellList;
   materialCost: number; // in gp
   type: "spell";
 };

@@ -260,6 +260,13 @@ export const selectedItemsAreInvalid = (
   }
 
   if (
+    selectedItems.every((i) => isSpell(i)) &&
+    selectedItems.every((i) => !isSpellVessel(i))
+  ) {
+    return "You must select a potion, wand or scroll (spell vessel)";
+  }
+
+  if (
     selectedItems.some((i) => isWeaponQuality(i) || isArmorQuality(i)) &&
     selectedItems.every((i) => !isEnhancement(i))
   ) {

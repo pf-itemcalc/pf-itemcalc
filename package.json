@@ -1,6 +1,6 @@
 {
-  "name": "pf-item-calc",
-  "homepage": "https://pf-item-calc.github.io/pf-item-calc",
+  "name": "pf-itemcalc",
+  "homepage": "https://pf-itemcalc.github.io/pf-itemcalc",
   "version": "0.2.0",
   "private": true,
   "dependencies": {

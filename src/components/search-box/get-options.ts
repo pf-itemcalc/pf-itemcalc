@@ -1,6 +1,5 @@
 import armorQaulities from "../../data/armor/armor-qualities";
 import { getArmorQaulityModifier } from "../../data/armor/armor-quality-types";
-import { Armor } from "../../data/armor/armor-types";
 import armors from "../../data/armor/armors";
 import enhancements, { Masterwork } from "../../data/generic/enhancements";
 import specialMaterials from "../../data/generic/special-materials";
@@ -19,7 +18,6 @@ import { spellVessels } from "../../data/spell/spell-vessels";
 import spells from "../../data/spell/spells";
 import weaponQaulities from "../../data/weapon/weapon-qualities";
 import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types";
-import { Weapon } from "../../data/weapon/weapon-types";
 import weapons from "../../data/weapon/weapons";
 
 const allItems: Item[] = [
@@ -32,17 +30,6 @@ const allItems: Item[] = [
   ...spellVessels,
   ...spells,
 ];
-
-const isNotSpecialMaterialThatDoesNotApply = (
-  material: Item,
-  applicableTo: Weapon | Armor
-) => {
-  if (!isSpecialMaterial(material) || !material.isApplicable) {
-    return true;
-  }
-
-  return material.isApplicable(applicableTo);
-};
 
 const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {
   const enhancement = selected.find(isEnhancement);

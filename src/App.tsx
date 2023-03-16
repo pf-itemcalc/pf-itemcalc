@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
 import { Item, orderItems } from "./data/helpers";

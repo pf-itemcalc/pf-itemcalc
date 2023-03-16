@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/pf-item-calc/static/js/main.2fd895d0.js",
+    "static/js/787.ca32ae23.chunk.js": "/pf-item-calc/static/js/787.ca32ae23.chunk.js",
+    "index.html": "/pf-item-calc/index.html",
+    "main.2fd895d0.js.map": "/pf-item-calc/static/js/main.2fd895d0.js.map",
+    "787.ca32ae23.chunk.js.map": "/pf-item-calc/static/js/787.ca32ae23.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.2fd895d0.js"
+  ]
+}

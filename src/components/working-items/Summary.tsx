@@ -110,15 +110,17 @@ const ItemSummary = ({ items }: SummaryProps) => {
 
   return (
     <>
-      <TextField
-        sx={{ width: "50%", margin: 1 }}
-        label="Composite Rating"
-        type="number"
-        inputMode="numeric"
-        inputProps={{ min: 0 }}
-        value={rating}
-        onChange={(e) => setRating(Number(e.target.value) ?? 0)}
-      />
+      {isCompositeBow && (
+        <TextField
+          sx={{ width: "50%", margin: 1 }}
+          label="Composite Rating"
+          type="number"
+          inputMode="numeric"
+          inputProps={{ min: 0 }}
+          value={rating}
+          onChange={(e) => setRating(Number(e.target.value) ?? 0)}
+        />
+      )}
       <Typography
         sx={{ width: "50%", border: "1px solid black", margin: 1, padding: 1 }}
         fontFamily="Calibri"

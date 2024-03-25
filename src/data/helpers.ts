@@ -1,3 +1,4 @@
+import { capitalize } from "lodash";
 import {
   ArmorQaulity,
   getArmorQaulityCost,
@@ -11,7 +12,11 @@ import {
   getUrl as getMaterialUrl,
   SpecialMaterial,
 } from "./generic/special-material-types";
-import { getMinimumCasterLevel, getUrl, Spell } from "./spell/spell-types";
+import {
+  getMinimumCasterLevel,
+  getUrl as getSpellUrl,
+  Spell,
+} from "./spell/spell-types";
 import { SpellVessel, SpellVesselType } from "./spell/spell-vessel-types";
 import {
   getUrl as getWeaponQualityUrl,
@@ -20,6 +25,7 @@ import {
   WeaponQaulity,
 } from "./weapon/weapon-quality-types";
 import { getUrl as getWeaponUrl, Weapon } from "./weapon/weapon-types";
+import { Wondrous, getUrl as getWondrousUrl } from "./wondrous/wondrous-types";
 
 export type ItemType =
   | "Armor"
@@ -29,7 +35,8 @@ export type ItemType =
   | "Special Material"
   | "Enhancement"
   | "Spell Vessel"
-  | "Spell";
+  | "Spell"
+  | "Wondrous Item";
 
 export type Item =
   | Armor
@@ -39,7 +46,10 @@ export type Item =
   | SpecialMaterial
   | Enhancement
   | SpellVessel
-  | Spell;
+  | Spell
+  | SpecificItem;
+
+export type SpecificItem = Wondrous;
 
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isArmorQuality = (item: Item): item is ArmorQaulity =>
@@ -59,6 +69,12 @@ export const isSpellVessel = (item: Item): item is SpellVessel =>
 export const isSpell = (item: Item): item is Spell => item.type === "spell";
 export const isSpecificSpellVessel = (item: Item, type: SpellVesselType) =>
   isSpellVessel(item) && item.vesselType === type;
+export const isWondrous = (item: Item): item is Wondrous =>
+  item.type === "wondrous";
+
+export const isSpecificItem = (item: Item): item is SpecificItem => {
+  return isWondrous(item);
+};
 
 export const getItemType = (item: Item): ItemType => {
   if (isArmor(item)) {
@@ -89,7 +105,15 @@ export const getItemType = (item: Item): ItemType => {
     return "Spell Vessel";
   }
 
-  return "Spell";
+  if (isSpell(item)) {
+    return "Spell";
+  }
+
+  if (isWondrous(item)) {
+    return "Wondrous Item";
+  }
+
+  return "Spell"; // Have to default to something
 };
 
 const itemTypeOrdering: ItemType[] = [
@@ -101,6 +125,7 @@ const itemTypeOrdering: ItemType[] = [
   "Armor",
   "Spell Vessel",
   "Spell",
+  "Wondrous Item",
 ];
 
 const itemComparater = (item1: Item, item2: Item) => {
@@ -138,7 +163,11 @@ export const getItemUrl = (item: Item) => {
   }
 
   if (isSpell(item)) {
-    return getUrl(item);
+    return getSpellUrl(item);
+  }
+
+  if (isWondrous(item)) {
+    return getWondrousUrl(item);
   }
 
   return undefined;
@@ -151,10 +180,16 @@ export const isMagic = (items: Item[]): boolean =>
       isArmorQuality(i) ||
       isWeaponQuality(i) ||
       isSpellVessel(i) ||
-      isSpell(i)
+      isSpell(i) ||
+      (isWondrous(i) && i.casterLevel > 0)
   );
 
 export const getItemCasterLevel = (items: Item[]): number | undefined => {
+  const specificItem = items.find(isSpecificItem);
+  if (specificItem) {
+    return specificItem.casterLevel;
+  }
+
   const enhancement = items.find(isEnhancement);
   const qualities = [
     ...items.filter(isArmorQuality),
@@ -185,6 +220,12 @@ export const getItemValue = (
   items: Item[],
   compositeRating?: number
 ): number => {
+  const specificItem = items.find(isSpecificItem);
+
+  if (specificItem) {
+    return specificItem.cost;
+  }
+
   const baseItem = items.find(isWeapon) || items.find(isArmor);
 
   if (!baseItem) {
@@ -270,6 +311,12 @@ export const getSpellList = (items: Item[]): string => {
 };
 
 export const getItemWeight = (items: Item[]): number => {
+  const specificItem = items.find(isSpecificItem);
+
+  if (specificItem) {
+    return specificItem.weight;
+  }
+
   const baseItem = items.find(isWeapon) || items.find(isArmor);
 
   if (!baseItem) {
@@ -298,4 +345,49 @@ export const getIdentifyMethod = (
   }
 
   return `DC ${15 + casterLevel} Spellcraft Check`;
+};
+
+const getItemDisplayNameModifiedSubtitle = (
+  item: SpecificItem
+): string | undefined => {
+  if (!item.subtitle) {
+    return undefined;
+  }
+
+  if (typeof item.subtitle === "number") {
+    return `+${item.subtitle}`;
+  }
+
+  // matches: "1", "1 bonus", "1/2 Will"
+  // does not match: "1st", "2nd", "3rd", "10 HD", "Type I", "3 tricks", "6th-level", "15-ft.-by-30ft."
+  const matchNumberOrNumberBonusOrMultiNumberBonus = /\d+($| bonus|\/\d+.*)/g;
+  if (
+    typeof item.subtitle === "number" ||
+    item.subtitle.match(matchNumberOrNumberBonusOrMultiNumberBonus)
+  ) {
+    return `+${item.subtitle
+      .replace(" bonus", "")
+      .replace(" Will", "")
+      .replace(" Reflex", "")
+      .replace(" Fortitude", "")}`;
+  }
+
+  return capitalize(item.subtitle);
+};
+
+export const getItemDisplayName = (
+  item: Item,
+  compositeRating?: number
+): string => {
+  if (isSpecificItem(item) && item.subtitle) {
+    const formattedSubtitle = getItemDisplayNameModifiedSubtitle(item);
+    const subtitle = formattedSubtitle ? ` (${formattedSubtitle})` : "";
+    return `${item.name}${subtitle}`;
+  }
+
+  if (isComposite(item) && compositeRating !== undefined) {
+    return item.name.replace("Composite", `Composite (${compositeRating})`);
+  }
+
+  return item.name;
 };

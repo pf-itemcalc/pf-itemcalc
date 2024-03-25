@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Autocomplete, Button, TextField } from "@mui/material";
-import { getItemType, Item } from "../../data/helpers";
+import { getItemDisplayName, getItemType, Item } from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
 import { Box } from "@mui/system";
 
@@ -60,7 +60,7 @@ const SearchBox = ({
         multiple
         groupBy={getItemType}
         options={getOptions(selectedItems)}
-        getOptionLabel={(item) => item.name}
+        getOptionLabel={(item) => getItemDisplayName(item)}
         filterSelectedOptions
         open={open}
         onOpen={() => setOpen(true)}

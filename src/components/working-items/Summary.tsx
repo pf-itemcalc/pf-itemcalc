@@ -15,14 +15,16 @@ import {
   getSpellLevel,
   getSpellList,
   isComposite,
+  getItemDisplayName,
+  isSpecificItem,
 } from "../../data/helpers";
 import { range } from "lodash";
 
-type NtlProps = {
+type NewTabLinkProps = {
   url: string;
   children: React.ReactNode;
 };
-const Ntl = ({ url, children }: NtlProps) => {
+const NewTabLink = ({ url, children }: NewTabLinkProps) => {
   return (
     <a
       href={url}
@@ -43,12 +45,9 @@ type ItemProps = {
 const ItemDisplay = ({ item, compositeRating }: ItemProps) => {
   const url = getItemUrl(item);
 
-  const name =
-    isComposite(item) && compositeRating !== undefined
-      ? item.name.replace("Composite", `Composite (${compositeRating})`)
-      : item.name;
+  const name = getItemDisplayName(item, compositeRating);
 
-  return url ? <Ntl url={url}>{name}</Ntl> : <>{name}</>;
+  return url ? <NewTabLink url={url}>{name}</NewTabLink> : <>{name}</>;
 };
 
 type SummaryProps = {
@@ -108,6 +107,9 @@ const ItemSummary = ({ items }: SummaryProps) => {
   const value = getItemValue(items, compositeRating);
   const weight = getItemWeight(items);
 
+  const specificItem = items.find(isSpecificItem);
+  const slot = specificItem ? specificItem.slot : undefined;
+
   return (
     <>
       {isCompositeBow && (
@@ -142,6 +144,11 @@ const ItemSummary = ({ items }: SummaryProps) => {
               {compositeRating !== undefined && (
                 <li>
                   <b>Composite Rating</b>: {compositeRating.toLocaleString()}
+                </li>
+              )}
+              {slot !== undefined && (
+                <li>
+                  <b>Slot</b>: {slot.toLocaleString()}
                 </li>
               )}
               <li>

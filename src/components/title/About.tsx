@@ -40,11 +40,12 @@ const About = () => {
           <li>Customise spell list and caster level (TODO)</li>
           <li>Calculate ammunition</li>
           <li>Calculate double-headed weapons (treated only single headed)</li>
-          <li>List all wonderous items (just go search for them!)</li>
+          <li>List all wondrous items (just go search for them!)</li>
           <li>
             List all specific magical armor and weapons (just go search for
             them!)
           </li>
+          <li>Allow you to apply any metamagic feats to spells</li>
         </ul>
       </Typography>
     </>

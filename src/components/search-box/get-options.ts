@@ -8,6 +8,7 @@ import {
   isArmorQuality,
   isEnhancement,
   isSpecialMaterial,
+  isSpecificItem,
   isSpell,
   isSpellVessel,
   isWeapon,
@@ -19,6 +20,7 @@ import spells from "../../data/spell/spells";
 import weaponQaulities from "../../data/weapon/weapon-qualities";
 import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types";
 import weapons from "../../data/weapon/weapons";
+import { wondrousItems } from "../../data/wondrous/wondrous";
 
 const allItems: Item[] = [
   ...enhancements,
@@ -29,6 +31,7 @@ const allItems: Item[] = [
   ...armors,
   ...spellVessels,
   ...spells,
+  ...wondrousItems,
 ];
 
 const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {
@@ -187,8 +190,20 @@ const spellVesselFilter = (selected: Item[], items: Item[]): Item[] => {
   );
 };
 
+const specificItemFilter = (selected: Item[], items: Item[]): Item[] => {
+  const specificItem = selected.find(isSpecificItem);
+
+  if (!specificItem) {
+    return items;
+  }
+
+  // If a specific item is selected, then you cannot choose any other items
+  return [];
+};
+
 export const getOptions = (selectedItems: Item[]) => {
-  let items = enchancementFilter(selectedItems, allItems);
+  let items = specificItemFilter(selectedItems, allItems);
+  items = enchancementFilter(selectedItems, items);
   items = specialMaterialFilter(selectedItems, items);
   items = weaponFilter(selectedItems, items);
   items = weaponQuailityFilter(selectedItems, items);
@@ -226,7 +241,11 @@ export const selectedItemsAreInvalid = (
     return `The total modfier can be no greater than 10 (currently ${totalModifier})`;
   }
 
-  if (selectedItems.every((i) => !isWeapon(i) && !isArmor(i) && !isSpell(i))) {
+  if (
+    selectedItems.every(
+      (i) => !isSpecificItem(i) && !isWeapon(i) && !isArmor(i) && !isSpell(i)
+    )
+  ) {
     if (selectedItems.some((i) => isWeaponQuality(i))) {
       return "You must select a weapon";
     }
@@ -243,14 +262,14 @@ export const selectedItemsAreInvalid = (
       return "You must select either a weapon or an armor";
     }
 
-    return "You must select either a weapon, armor or spell";
+    return "You must select either a weapon, armor, spell or specific item";
   }
 
   if (
-    selectedItems.every((i) => isSpell(i)) &&
+    selectedItems.some((i) => isSpell(i)) &&
     selectedItems.every((i) => !isSpellVessel(i))
   ) {
-    return "You must select a potion, wand or scroll (spell vessel)";
+    return "You must select a potion, wand or scroll (i.e. a spell vessel)";
   }
 
   if (

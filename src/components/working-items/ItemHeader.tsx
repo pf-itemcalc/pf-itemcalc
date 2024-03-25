@@ -5,6 +5,7 @@ import {
   isArmor,
   isArmorQuality,
   isEnhancement,
+  isSpecificItem,
   isSpell,
   isSpellVessel,
   isWeapon,
@@ -24,7 +25,8 @@ const isDeletable = (item: Item, items: Item[]) =>
     !isArmor(item) &&
     !isSpellVessel(item) &&
     !isSpell(item) &&
-    !isEnhancement(item)) ||
+    !isEnhancement(item) &&
+    !isSpecificItem(item)) ||
   (isEnhancement(item) &&
     items.every((i) => !isArmorQuality(i) && !isWeaponQuality(i)));
 

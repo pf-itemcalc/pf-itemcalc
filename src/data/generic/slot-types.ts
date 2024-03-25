@@ -9,5 +9,11 @@ export type Slot =
   | "Headband"
   | "Neck"
   | "Shoulders"
-  | "Wrists"
-  | "Slotless";
+  | "Wrist"
+  | "Slotless"
+  | "Belt or Head"
+  | "Neck or Slotless"
+  | "Body and Head"
+  | "Shield"
+  | "Armor"
+  | "Weapon";

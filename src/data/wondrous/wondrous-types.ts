@@ -10,14 +10,14 @@ export type Wondrous = {
   weight: number; // in lbs
 };
 
-export const getUrl = (spell: Wondrous): string => {
+export const getUrl = (item: Wondrous): string => {
   const baseUrl = `https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=${encodeURIComponent(
-    spell.name
+    item.name
   )}`;
 
-  if (spell.subtitle === undefined) {
+  if (item.subtitle === undefined) {
     return baseUrl;
   }
 
-  return `${baseUrl}${spell.subtitle}`;
+  return `${baseUrl}${item.subtitle}`;
 };

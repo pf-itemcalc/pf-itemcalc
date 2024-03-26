@@ -5109,14 +5109,6 @@ export const wondrousItems: Wondrous[] = [
   },
   {
     type: "wondrous",
-    name: "Druid's Vestment",
-    casterLevel: 10,
-    slot: "Body",
-    cost: 3750,
-    weight: 0,
-  },
-  {
-    type: "wondrous",
     name: "Drum of Advance and Retreat",
     casterLevel: 1,
     slot: "Slotless",
@@ -6500,14 +6492,6 @@ export const wondrousItems: Wondrous[] = [
   },
   {
     type: "wondrous",
-    name: "Folding Boat",
-    casterLevel: 6,
-    slot: "Slotless",
-    cost: 7200,
-    weight: 4,
-  },
-  {
-    type: "wondrous",
     name: "Force Casket",
     casterLevel: 10,
     slot: "Slotless",
@@ -6644,7 +6628,7 @@ export const wondrousItems: Wondrous[] = [
   },
   {
     type: "wondrous",
-    name: "Gauntlet of Rust",
+    name: "Gauntlet of Rust (Greater)",
     casterLevel: 7,
     slot: "Hands",
     cost: 34500,
@@ -7202,14 +7186,6 @@ export const wondrousItems: Wondrous[] = [
     slot: "Slotless",
     cost: 44000,
     weight: 5,
-  },
-  {
-    type: "wondrous",
-    name: "Golembane Scarab",
-    casterLevel: 8,
-    slot: "Neck",
-    cost: 2500,
-    weight: 0,
   },
   {
     type: "wondrous",
@@ -10575,14 +10551,6 @@ export const wondrousItems: Wondrous[] = [
     slot: "Slotless",
     cost: 8000,
     weight: 2,
-  },
-  {
-    type: "wondrous",
-    name: "Monk's Robe",
-    casterLevel: 10,
-    slot: "Body",
-    cost: 13000,
-    weight: 1,
   },
   {
     type: "wondrous",
@@ -16495,15 +16463,6 @@ export const wondrousItems: Wondrous[] = [
   {
     type: "wondrous",
     name: "Wayfinder",
-    subtitle: "",
-    casterLevel: 5,
-    slot: "Slotless",
-    cost: 500,
-    weight: 1,
-  },
-  {
-    type: "wondrous",
-    name: "Wayfinder",
     casterLevel: 5,
     slot: "Slotless",
     cost: 500,
@@ -16716,14 +16675,6 @@ export const wondrousItems: Wondrous[] = [
     slot: "Slotless",
     cost: 48000,
     weight: 0,
-  },
-  {
-    type: "wondrous",
-    name: "Winged Boots",
-    casterLevel: 8,
-    slot: "Feet",
-    cost: 16000,
-    weight: 1,
   },
   {
     type: "wondrous",

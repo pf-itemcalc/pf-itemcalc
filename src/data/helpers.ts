@@ -26,17 +26,10 @@ import {
 } from "./weapon/weapon-quality-types";
 import { getUrl as getWeaponUrl, Weapon } from "./weapon/weapon-types";
 import { Wondrous, getUrl as getWondrousUrl } from "./wondrous/wondrous-types";
-
-export type ItemType =
-  | "Armor"
-  | "Armor Quality"
-  | "Weapon"
-  | "Weapon Quality"
-  | "Special Material"
-  | "Enhancement"
-  | "Spell Vessel"
-  | "Spell"
-  | "Wondrous Item";
+import {
+  SpecialAmmo,
+  getUrl as getSpecialAmmoUrl,
+} from "./special-ammo/special-ammo-types";
 
 export type Item =
   | Armor
@@ -49,7 +42,7 @@ export type Item =
   | Spell
   | SpecificItem;
 
-export type SpecificItem = Wondrous;
+export type SpecificItem = Wondrous | SpecialAmmo;
 
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isArmorQuality = (item: Item): item is ArmorQaulity =>
@@ -71,118 +64,93 @@ export const isSpecificSpellVessel = (item: Item, type: SpellVesselType) =>
   isSpellVessel(item) && item.vesselType === type;
 export const isWondrous = (item: Item): item is Wondrous =>
   item.type === "wondrous";
+export const isSpecialAmmo = (item: Item): item is Wondrous =>
+  item.type === "special-ammo";
 
 export const isSpecificItem = (item: Item): item is SpecificItem => {
-  return isWondrous(item);
+  return isWondrous(item) || isSpecialAmmo(item);
 };
 
-export const getItemType = (item: Item): ItemType => {
-  if (isArmor(item)) {
-    return "Armor";
-  }
+type ItemType = Item["type"];
 
-  if (isArmorQuality(item)) {
-    return "Armor Quality";
-  }
-
-  if (isWeapon(item)) {
-    return "Weapon";
-  }
-
-  if (isWeaponQuality(item)) {
-    return "Weapon Quality";
-  }
-
-  if (isSpecialMaterial(item)) {
-    return "Special Material";
-  }
-
-  if (isEnhancement(item)) {
-    return "Enhancement";
-  }
-
-  if (isSpellVessel(item)) {
-    return "Spell Vessel";
-  }
-
-  if (isSpell(item)) {
-    return "Spell";
-  }
-
-  if (isWondrous(item)) {
-    return "Wondrous Item";
-  }
-
-  return "Spell"; // Have to default to something
+const itemTypeDisplayNames: { [key in ItemType]: string } = {
+  armor: "Armor",
+  "armor-quality": "Armor Quality",
+  weapon: "Weapon",
+  "weapon-quality": "Weapon Quality",
+  "special-material": "Special Material",
+  enhancement: "Enhancement",
+  "spell-vessel": "Spell Vessel",
+  spell: "Spell",
+  wondrous: "Wondrous Item",
+  "special-ammo": "Special Ammo",
 };
 
-const itemTypeOrdering: ItemType[] = [
-  "Enhancement",
-  "Weapon Quality",
-  "Armor Quality",
-  "Special Material",
-  "Weapon",
-  "Armor",
-  "Spell Vessel",
-  "Spell",
-  "Wondrous Item",
-];
+export const getItemTypeDisplayName = (item: Item): string =>
+  itemTypeDisplayNames[item.type];
+
+const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
+  enhancement: 0,
+  "weapon-quality": 1,
+  "armor-quality": 2,
+  "special-material": 3,
+  weapon: 4,
+  armor: 5,
+  "spell-vessel": 6,
+  spell: 7,
+  wondrous: 8,
+  "special-ammo": 9,
+};
 
 const itemComparater = (item1: Item, item2: Item) => {
-  const type1 = getItemType(item1);
-  const type2 = getItemType(item2);
-
-  if (type1 === type2) {
+  if (item1.type === item2.type) {
     return item1.name.localeCompare(item2.name);
   }
 
-  return itemTypeOrdering.indexOf(type1) - itemTypeOrdering.indexOf(type2);
+  return (
+    itemTypeOrderingDictionary[item1.type] -
+    itemTypeOrderingDictionary[item2.type]
+  );
 };
 
 export const orderItems = (items: Item[]): Item[] => items.sort(itemComparater);
 
-export const getItemUrl = (item: Item) => {
-  if (isArmor(item)) {
-    return getArmorUrl(item);
-  }
-
-  if (isArmorQuality(item)) {
-    return getArmorQualityUrl(item);
-  }
-
-  if (isWeapon(item)) {
-    return getWeaponUrl(item);
-  }
-
-  if (isWeaponQuality(item)) {
-    return getWeaponQualityUrl(item);
-  }
-
-  if (isSpecialMaterial(item)) {
-    return getMaterialUrl(item);
-  }
-
-  if (isSpell(item)) {
-    return getSpellUrl(item);
-  }
-
-  if (isWondrous(item)) {
-    return getWondrousUrl(item);
-  }
-
-  return undefined;
+const itemTypeUrlMap: {
+  [key in ItemType]: (item: Item) => string | undefined;
+} = {
+  enhancement: () => undefined,
+  armor: (item) => getArmorUrl(item as Armor),
+  "armor-quality": (item) => getArmorQualityUrl(item as ArmorQaulity),
+  weapon: (item) => getWeaponUrl(item as Weapon),
+  "weapon-quality": (item) => getWeaponQualityUrl(item as WeaponQaulity),
+  "special-material": (item) => getMaterialUrl(item as SpecialMaterial),
+  spell: (item) => getSpellUrl(item as Spell),
+  "spell-vessel": () => undefined,
+  wondrous: (item) => getWondrousUrl(item as Wondrous),
+  "special-ammo": (item) => getSpecialAmmoUrl(item as SpecialAmmo),
 };
+export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
 
+const notMagic = () => false;
+const magic = () => true;
+const magicIfHasCasterLevel = (item: Item) =>
+  isSpecificItem(item) && item.casterLevel > 0;
+const itemTypeIsMagicMap: {
+  [key in ItemType]: (item: Item) => boolean;
+} = {
+  enhancement: (item) => item !== Masterwork,
+  armor: notMagic,
+  "armor-quality": magic,
+  weapon: notMagic,
+  "weapon-quality": magic,
+  "special-material": notMagic,
+  spell: magic,
+  "spell-vessel": magic,
+  wondrous: magicIfHasCasterLevel,
+  "special-ammo": magicIfHasCasterLevel,
+};
 export const isMagic = (items: Item[]): boolean =>
-  items.some(
-    (i) =>
-      (isEnhancement(i) && i !== Masterwork) ||
-      isArmorQuality(i) ||
-      isWeaponQuality(i) ||
-      isSpellVessel(i) ||
-      isSpell(i) ||
-      (isWondrous(i) && i.casterLevel > 0)
-  );
+  items.some((i) => itemTypeIsMagicMap[i.type](i));
 
 export const getItemCasterLevel = (items: Item[]): number | undefined => {
   const specificItem = items.find(isSpecificItem);

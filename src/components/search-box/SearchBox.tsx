@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { Autocomplete, Button, TextField } from "@mui/material";
-import { getItemDisplayName, getItemType, Item } from "../../data/helpers";
+import {
+  getItemDisplayName,
+  getItemTypeDisplayName,
+  Item,
+} from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
 import { Box } from "@mui/system";
 
@@ -61,7 +65,7 @@ const SearchBox = ({
     >
       <Autocomplete
         multiple
-        groupBy={getItemType}
+        groupBy={getItemTypeDisplayName}
         options={getOptions(selectedItems)}
         getOptionLabel={(item) => getItemDisplayName(item)}
         filterSelectedOptions

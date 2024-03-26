@@ -30,6 +30,7 @@ const NewTabLink = ({ url, children }: NewTabLinkProps) => {
       href={url}
       target="_blank"
       referrerPolicy="no-referrer"
+      rel="noreferrer"
       style={{ color: "blue" }} // Prevents visited links showing differently
     >
       {children}
@@ -154,10 +155,12 @@ const ItemSummary = ({ items }: SummaryProps) => {
               <li>
                 <b>Value</b>: {value.toLocaleString()}gp
               </li>
-              <li>
-                <b>Weight</b>: {weight.toLocaleString()}lb
-                {weight === 1 ? "" : "s"}
-              </li>
+              {weight > 0 && (
+                <li>
+                  <b>Weight</b>: {weight.toLocaleString()}lb
+                  {weight === 1 ? "" : "s"}
+                </li>
+              )}
             </ul>
           </ItemTitle>
         </ul>

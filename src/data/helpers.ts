@@ -43,6 +43,7 @@ import {
   getUrl as getSpecialWeaponUrl,
 } from "./special-weapon/special-weapon-types";
 import { Ring, getUrl as getRingUrl } from "./ring/ring-types";
+import { Rod, getUrl as getRodUrl } from "./rod/rod-types";
 
 export type Item =
   | Armor
@@ -61,7 +62,8 @@ export type SpecificItem =
   | SpecialArmor
   | SpecialShield
   | SpecialWeapon
-  | Ring;
+  | Ring
+  | Rod;
 
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isArmorQuality = (item: Item): item is ArmorQaulity =>
@@ -92,6 +94,7 @@ export const isSpecialShield = (item: Item): item is SpecialShield =>
 export const isSpecialWeapon = (item: Item): item is SpecialWeapon =>
   item.type === "special-weapon";
 export const isRing = (item: Item): item is Ring => item.type === "ring";
+export const isRod = (item: Item): item is Rod => item.type === "rod";
 
 export const isSpecificItem = (item: Item): item is SpecificItem => {
   return (
@@ -100,15 +103,16 @@ export const isSpecificItem = (item: Item): item is SpecificItem => {
     isSpecialArmor(item) ||
     isSpecialShield(item) ||
     isSpecialWeapon(item) ||
-    isRing(item)
+    isRing(item) ||
+    isRod(item)
   );
 };
 
 type ItemType = Item["type"];
 
 const itemTypeDisplayNames: { [key in ItemType]: string } = {
-  armor: "Armor",
-  "armor-quality": "Armor Quality",
+  armor: "Armor / Shield",
+  "armor-quality": "Armor / Shield Quality",
   weapon: "Weapon",
   "weapon-quality": "Weapon Quality",
   "special-material": "Special Material",
@@ -121,6 +125,7 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   "special-shield": "Special Shield",
   "special-weapon": "Special Weapon",
   ring: "Ring",
+  rod: "Rod",
 };
 
 export const getItemTypeDisplayName = (item: Item): string =>
@@ -141,11 +146,12 @@ const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
   "special-weapon": 11,
   "special-ammo": 12,
   ring: 13,
+  rod: 14,
 };
 
 const itemComparater = (item1: Item, item2: Item) => {
   if (item1.type === item2.type) {
-    return item1.name.localeCompare(item2.name);
+    return getItemDisplayName(item1).localeCompare(getItemDisplayName(item2));
   }
 
   return (
@@ -173,6 +179,7 @@ const itemTypeUrlMap: {
   "special-shield": (item) => getSpecialShieldUrl(item as SpecialShield),
   "special-weapon": (item) => getSpecialWeaponUrl(item as SpecialWeapon),
   ring: (item) => getRingUrl(item as Ring),
+  rod: (item) => getRodUrl(item as Rod),
 };
 export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
 
@@ -197,6 +204,7 @@ const itemTypeIsMagicMap: {
   "special-shield": magicIfHasCasterLevel,
   "special-weapon": magicIfHasCasterLevel,
   ring: magicIfHasCasterLevel,
+  rod: magicIfHasCasterLevel,
 };
 export const isMagic = (items: Item[]): boolean =>
   items.some((i) => itemTypeIsMagicMap[i.type](i));

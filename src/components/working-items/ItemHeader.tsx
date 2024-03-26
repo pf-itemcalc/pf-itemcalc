@@ -2,6 +2,7 @@ import Reply from "@mui/icons-material/Reply";
 import Clear from "@mui/icons-material/Clear";
 import { Box, Chip, IconButton } from "@mui/material";
 import {
+  getItemDisplayName,
   isArmor,
   isArmorQuality,
   isEnhancement,
@@ -48,7 +49,7 @@ const ItemHeader = ({ items, setItems, onBack, onReset }: ItemHeaderProps) => {
         {items.map((i) => (
           <Chip
             sx={{ margin: 1, padding: 1 }}
-            label={i.name}
+            label={getItemDisplayName(i)}
             onDelete={isDeletable(i, items) ? deleteItem(i) : undefined}
           />
         ))}

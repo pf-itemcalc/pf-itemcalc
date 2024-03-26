@@ -11,14 +11,6 @@ export const specialArmorItems: SpecialArmor[] = [
   },
   {
     type: "special-armor",
-    name: "Adamantine Breastplate",
-    casterLevel: 0,
-    slot: "Armor",
-    cost: 10200,
-    weight: 30,
-  },
-  {
-    type: "special-armor",
     name: "Advocate's Armor",
     casterLevel: 11,
     slot: "Armor",
@@ -360,14 +352,6 @@ export const specialArmorItems: SpecialArmor[] = [
     slot: "Armor",
     cost: 24120,
     weight: 15,
-  },
-  {
-    type: "special-armor",
-    name: "Dragonhide Plate",
-    casterLevel: 0,
-    slot: "Armor",
-    cost: 3300,
-    weight: 50,
   },
   {
     type: "special-armor",
@@ -904,14 +888,6 @@ export const specialArmorItems: SpecialArmor[] = [
     slot: "Armor",
     cost: 26500,
     weight: 25,
-  },
-  {
-    type: "special-armor",
-    name: "Mithral Shirt",
-    casterLevel: 0,
-    slot: "Armor",
-    cost: 1100,
-    weight: 10,
   },
   {
     type: "special-armor",

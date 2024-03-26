@@ -14,8 +14,10 @@ import {
   isWeapon,
   isWeaponQuality,
   Item,
+  orderItems,
 } from "../../data/helpers";
 import { rings } from "../../data/ring/ring";
+import { rods } from "../../data/rod/rod";
 import { specialAmmoItems } from "../../data/special-ammo/special-ammo";
 import { specialArmorItems } from "../../data/special-armor/special-armor";
 import { specialShieldItems } from "../../data/special-shield/special-shield";
@@ -27,7 +29,7 @@ import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types
 import weapons from "../../data/weapon/weapons";
 import { wondrousItems } from "../../data/wondrous/wondrous";
 
-const allItems: Item[] = [
+const allItems: Item[] = orderItems([
   ...enhancements,
   ...specialMaterials,
   ...weaponQaulities,
@@ -42,7 +44,8 @@ const allItems: Item[] = [
   ...specialShieldItems,
   ...specialWeaponItems,
   ...rings,
-];
+  ...rods,
+]);
 
 const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {
   const enhancement = selected.find(isEnhancement);

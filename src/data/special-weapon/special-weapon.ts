@@ -2171,14 +2171,6 @@ export const specialWeaponItems: SpecialWeapon[] = [
   },
   {
     type: "special-weapon",
-    name: "Rod of Burning Blood",
-    casterLevel: 10,
-    slot: "Slotless",
-    cost: 11050,
-    weight: 4,
-  },
-  {
-    type: "special-weapon",
     name: "Rose Knight's Blade",
     casterLevel: 10,
     slot: "Slotless",

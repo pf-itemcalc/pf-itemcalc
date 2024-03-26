@@ -270,6 +270,14 @@ export const rods: Rod[] = [
   },
   {
     type: "rod",
+    name: "Rod of Burning Blood",
+    casterLevel: 10,
+    slot: "Slotless",
+    cost: 11050,
+    weight: 4,
+  },
+  {
+    type: "rod",
     name: "Rod of Cancellation",
     casterLevel: 17,
     slot: "Slotless",

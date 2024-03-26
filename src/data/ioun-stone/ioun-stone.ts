@@ -228,7 +228,7 @@ export const iounStones: IounStone[] = [
     subtitle: "Flawed",
     casterLevel: 12,
     slot: "Slotless",
-    cost: 600,
+    cost: 6000,
     weight: 0,
   },
   {

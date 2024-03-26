@@ -52,6 +52,15 @@ const SearchBox = ({
     }
   };
 
+  const options = getOptions(selectedItems);
+
+  const hintText =
+    options.length === 0
+      ? "Now press Go! or the Enter key"
+      : `${options.length} option(s) in drop down -- ${
+          displayError ? error : hints[hintIndex]
+        }`;
+
   // TODO ADD VIRTUALIZATON! https://mui.com/material-ui/react-autocomplete/#virtualization
   return (
     <Box
@@ -66,7 +75,7 @@ const SearchBox = ({
       <Autocomplete
         multiple
         groupBy={getItemTypeDisplayName}
-        options={getOptions(selectedItems)}
+        options={options}
         getOptionLabel={(item) => getItemDisplayName(item)}
         filterSelectedOptions
         open={open}
@@ -76,7 +85,7 @@ const SearchBox = ({
           <TextField
             {...params}
             label="Search"
-            helperText={displayError ? error : hints[hintIndex]}
+            helperText={hintText}
             FormHelperTextProps={{
               sx: { color: displayError ? "red" : "inherit" },
             }}

@@ -24,6 +24,7 @@ import { specialShieldItems } from "../../data/special-shield/special-shield";
 import { specialWeaponItems } from "../../data/special-weapon/special-weapon";
 import { spellVessels } from "../../data/spell/spell-vessels";
 import spells from "../../data/spell/spells";
+import { staves } from "../../data/staff/staff";
 import weaponQaulities from "../../data/weapon/weapon-qualities";
 import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types";
 import weapons from "../../data/weapon/weapons";
@@ -45,6 +46,7 @@ const allItems: Item[] = orderItems([
   ...specialWeaponItems,
   ...rings,
   ...rods,
+  ...staves,
 ]);
 
 const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {

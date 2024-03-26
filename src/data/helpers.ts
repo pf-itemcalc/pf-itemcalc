@@ -44,6 +44,7 @@ import {
 } from "./special-weapon/special-weapon-types";
 import { Ring, getUrl as getRingUrl } from "./ring/ring-types";
 import { Rod, getUrl as getRodUrl } from "./rod/rod-types";
+import { Staff, getUrl as getStaffUrl } from "./staff/staff-types";
 
 export type Item =
   | Armor
@@ -63,7 +64,8 @@ export type SpecificItem =
   | SpecialShield
   | SpecialWeapon
   | Ring
-  | Rod;
+  | Rod
+  | Staff;
 
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isArmorQuality = (item: Item): item is ArmorQaulity =>
@@ -95,6 +97,7 @@ export const isSpecialWeapon = (item: Item): item is SpecialWeapon =>
   item.type === "special-weapon";
 export const isRing = (item: Item): item is Ring => item.type === "ring";
 export const isRod = (item: Item): item is Rod => item.type === "rod";
+export const isStaff = (item: Item): item is Staff => item.type === "staff";
 
 export const isSpecificItem = (item: Item): item is SpecificItem => {
   return (
@@ -104,7 +107,8 @@ export const isSpecificItem = (item: Item): item is SpecificItem => {
     isSpecialShield(item) ||
     isSpecialWeapon(item) ||
     isRing(item) ||
-    isRod(item)
+    isRod(item) ||
+    isStaff(item)
   );
 };
 
@@ -126,6 +130,7 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   "special-weapon": "Special Weapon",
   ring: "Ring",
   rod: "Rod",
+  staff: "Staff",
 };
 
 export const getItemTypeDisplayName = (item: Item): string =>
@@ -147,6 +152,7 @@ const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
   "special-ammo": 12,
   ring: 13,
   rod: 14,
+  staff: 15,
 };
 
 const itemComparater = (item1: Item, item2: Item) => {
@@ -180,6 +186,7 @@ const itemTypeUrlMap: {
   "special-weapon": (item) => getSpecialWeaponUrl(item as SpecialWeapon),
   ring: (item) => getRingUrl(item as Ring),
   rod: (item) => getRodUrl(item as Rod),
+  staff: (item) => getStaffUrl(item as Staff),
 };
 export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
 
@@ -205,6 +212,7 @@ const itemTypeIsMagicMap: {
   "special-weapon": magicIfHasCasterLevel,
   ring: magicIfHasCasterLevel,
   rod: magicIfHasCasterLevel,
+  staff: magicIfHasCasterLevel,
 };
 export const isMagic = (items: Item[]): boolean =>
   items.some((i) => itemTypeIsMagicMap[i.type](i));

@@ -7,6 +7,7 @@ import {
 } from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
 import { Box } from "@mui/system";
+import { VirtualizeSearchBox } from "./VirtualisedSearchBox";
 
 const hints = [
   'Try searching for "+1, Distance, Darkwood, Longbow"',
@@ -72,12 +73,10 @@ const SearchBox = ({
         justifyContent: "center",
       }}
     >
-      <Autocomplete
-        multiple
+      <VirtualizeSearchBox
         groupBy={getItemTypeDisplayName}
         options={options}
         getOptionLabel={(item) => getItemDisplayName(item)}
-        filterSelectedOptions
         open={open}
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}

@@ -358,18 +358,22 @@ const getItemDisplayNameModifiedSubtitle = (
     return `+${item.subtitle}`;
   }
 
-  // matches: "1", "1 bonus", "1/2 Will"
-  // does not match: "1st", "2nd", "3rd", "10 HD", "Type I", "3 tricks", "6th-level", "15-ft.-by-30ft."
-  const matchNumberOrNumberBonusOrMultiNumberBonus = /\d+($| bonus|\/\d+.*)/g;
+  // matches: "1", "1 bonus"
+  // does not match: "1/2 Will", "1st", "2nd", "3rd", "10 HD", "Type I", "3 tricks", "6th-level", "15-ft.-by-30ft."
+  const matchNumberOrNumberBonus = /\d+($| bonus)/g;
   if (
     typeof item.subtitle === "number" ||
-    item.subtitle.match(matchNumberOrNumberBonusOrMultiNumberBonus)
+    item.subtitle.match(matchNumberOrNumberBonus)
   ) {
-    return `+${item.subtitle
-      .replace(" bonus", "")
-      .replace(" Will", "")
-      .replace(" Reflex", "")
-      .replace(" Fortitude", "")}`;
+    return `+${item.subtitle.replace(" bonus", "")}`;
+  }
+
+  // matches: "1/2 Will"
+  // does not match: "1", "1 bonus", "1st", "2nd", "3rd", "10 HD", "Type I", "3 tricks", "6th-level", "15-ft.-by-30ft."
+  const matchMultiNumberBonus = /(\d+)\/(\d+).*/;
+  const multiNumberBonusMatch = item.subtitle.match(matchMultiNumberBonus);
+  if (multiNumberBonusMatch) {
+    return `+${multiNumberBonusMatch[1]}/+${multiNumberBonusMatch[2]}`;
   }
 
   return capitalize(item.subtitle);

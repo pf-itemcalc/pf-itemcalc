@@ -10,6 +10,8 @@ const hints = [
   'Try searching for "+1, Fortification (light), Adamantine, Breastplate"',
   'Try searching for "Potion of, Cure Light Wounds"',
   'Try searching for "+1, Bashing, Living Steel, Buckler',
+  'Try searching for "Cloak of quickened reflexes (+3/+4)',
+  'Try searching for "Apparatus of the Crab',
 ];
 
 type SearchBoxProps = {
@@ -46,6 +48,7 @@ const SearchBox = ({
     }
   };
 
+  // TODO ADD VIRTUALIZATON! https://mui.com/material-ui/react-autocomplete/#virtualization
   return (
     <Box
       sx={{

@@ -16,4 +16,5 @@ export type Slot =
   | "Body and Head"
   | "Shield"
   | "Armor"
-  | "Weapon";
+  | "Weapon"
+  | "Ring";

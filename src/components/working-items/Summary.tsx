@@ -132,7 +132,7 @@ const ItemSummary = ({ items }: SummaryProps) => {
         <ul>
           <ItemTitle items={items} compositeRating={compositeRating}>
             <ul>
-              {casterLevel && (
+              {casterLevel !== undefined && (
                 <>
                   <li>
                     <b>CL</b>: {casterLevelDisplay(casterLevel)}

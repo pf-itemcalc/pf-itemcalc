@@ -3,30 +3,6 @@ import { SpecialShield } from "./special-shield-types";
 export const specialShieldItems: SpecialShield[] = [
   {
     type: "special-shield",
-    name: "Darkwood Buckler",
-    casterLevel: 0,
-    slot: "Shield",
-    cost: 205,
-    weight: 2.5,
-  },
-  {
-    type: "special-shield",
-    name: "Darkwood Shield",
-    casterLevel: 0,
-    slot: "Shield",
-    cost: 257,
-    weight: 5,
-  },
-  {
-    type: "special-shield",
-    name: "Mithral Heavy Shield",
-    casterLevel: 0,
-    slot: "Shield",
-    cost: 1020,
-    weight: 5,
-  },
-  {
-    type: "special-shield",
     name: "Mwangi Spirit Shield",
     casterLevel: 15,
     slot: "Shield",

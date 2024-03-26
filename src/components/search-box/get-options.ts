@@ -15,6 +15,7 @@ import {
   isWeaponQuality,
   Item,
 } from "../../data/helpers";
+import { rings } from "../../data/ring/ring";
 import { specialAmmoItems } from "../../data/special-ammo/special-ammo";
 import { specialArmorItems } from "../../data/special-armor/special-armor";
 import { specialShieldItems } from "../../data/special-shield/special-shield";
@@ -40,6 +41,7 @@ const allItems: Item[] = [
   ...specialArmorItems,
   ...specialShieldItems,
   ...specialWeaponItems,
+  ...rings,
 ];
 
 const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {

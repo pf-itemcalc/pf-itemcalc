@@ -45,6 +45,10 @@ import {
 import { Ring, getUrl as getRingUrl } from "./ring/ring-types";
 import { Rod, getUrl as getRodUrl } from "./rod/rod-types";
 import { Staff, getUrl as getStaffUrl } from "./staff/staff-types";
+import {
+  IounStone,
+  getUrl as getIounStoneUrl,
+} from "./ioun-stone/ioun-stone-types";
 
 export type Item =
   | Armor
@@ -65,7 +69,8 @@ export type SpecificItem =
   | SpecialWeapon
   | Ring
   | Rod
-  | Staff;
+  | Staff
+  | IounStone;
 
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isArmorQuality = (item: Item): item is ArmorQaulity =>
@@ -98,6 +103,8 @@ export const isSpecialWeapon = (item: Item): item is SpecialWeapon =>
 export const isRing = (item: Item): item is Ring => item.type === "ring";
 export const isRod = (item: Item): item is Rod => item.type === "rod";
 export const isStaff = (item: Item): item is Staff => item.type === "staff";
+export const isIounStone = (item: Item): item is IounStone =>
+  item.type === "ioun-stone";
 
 export const isSpecificItem = (item: Item): item is SpecificItem => {
   return (
@@ -108,7 +115,8 @@ export const isSpecificItem = (item: Item): item is SpecificItem => {
     isSpecialWeapon(item) ||
     isRing(item) ||
     isRod(item) ||
-    isStaff(item)
+    isStaff(item) ||
+    isIounStone(item)
   );
 };
 
@@ -131,6 +139,7 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   ring: "Ring",
   rod: "Rod",
   staff: "Staff",
+  "ioun-stone": "Ioun Stone",
 };
 
 export const getItemTypeDisplayName = (item: Item): string =>
@@ -153,6 +162,7 @@ const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
   ring: 13,
   rod: 14,
   staff: 15,
+  "ioun-stone": 16,
 };
 
 const itemComparater = (item1: Item, item2: Item) => {
@@ -187,6 +197,7 @@ const itemTypeUrlMap: {
   ring: (item) => getRingUrl(item as Ring),
   rod: (item) => getRodUrl(item as Rod),
   staff: (item) => getStaffUrl(item as Staff),
+  "ioun-stone": (item) => getIounStoneUrl(item as IounStone),
 };
 export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
 
@@ -210,9 +221,10 @@ const itemTypeIsMagicMap: {
   "special-armor": magicIfHasCasterLevel,
   "special-shield": magicIfHasCasterLevel,
   "special-weapon": magicIfHasCasterLevel,
-  ring: magicIfHasCasterLevel,
-  rod: magicIfHasCasterLevel,
-  staff: magicIfHasCasterLevel,
+  ring: magic,
+  rod: magic,
+  staff: magic,
+  "ioun-stone": magic,
 };
 export const isMagic = (items: Item[]): boolean =>
   items.some((i) => itemTypeIsMagicMap[i.type](i));

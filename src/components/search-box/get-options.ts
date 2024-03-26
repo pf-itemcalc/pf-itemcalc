@@ -16,6 +16,7 @@ import {
   Item,
   orderItems,
 } from "../../data/helpers";
+import { iounStones } from "../../data/ioun-stone/ioun-stone";
 import { rings } from "../../data/ring/ring";
 import { rods } from "../../data/rod/rod";
 import { specialAmmoItems } from "../../data/special-ammo/special-ammo";
@@ -47,6 +48,7 @@ const allItems: Item[] = orderItems([
   ...rings,
   ...rods,
   ...staves,
+  ...iounStones,
 ]);
 
 const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {

@@ -11773,7 +11773,7 @@ export const wondrousItems: Wondrous[] = [
   },
   {
     type: "wondrous",
-    name: "Periapt of Proof Against Poison",
+    name: "Periapt of Proof against Poison",
     casterLevel: 5,
     slot: "Neck",
     cost: 27000,
@@ -11781,7 +11781,7 @@ export const wondrousItems: Wondrous[] = [
   },
   {
     type: "wondrous",
-    name: "Periapt of Protection From Curses",
+    name: "Periapt of Protection from Curses",
     casterLevel: 5,
     slot: "Neck",
     cost: 12000,

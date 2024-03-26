@@ -38,6 +38,10 @@ import {
   SpecialShield,
   getUrl as getSpecialShieldUrl,
 } from "./special-shield/special-shield-types";
+import {
+  SpecialWeapon,
+  getUrl as getSpecialWeaponUrl,
+} from "./special-weapon/special-weapon-types";
 
 export type Item =
   | Armor
@@ -54,7 +58,8 @@ export type SpecificItem =
   | Wondrous
   | SpecialAmmo
   | SpecialArmor
-  | SpecialShield;
+  | SpecialShield
+  | SpecialWeapon;
 
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isArmorQuality = (item: Item): item is ArmorQaulity =>
@@ -82,13 +87,16 @@ export const isSpecialArmor = (item: Item): item is SpecialArmor =>
   item.type === "special-armor";
 export const isSpecialShield = (item: Item): item is SpecialShield =>
   item.type === "special-shield";
+export const isSpecialWeapon = (item: Item): item is SpecialWeapon =>
+  item.type === "special-weapon";
 
 export const isSpecificItem = (item: Item): item is SpecificItem => {
   return (
     isWondrous(item) ||
     isSpecialAmmo(item) ||
     isSpecialArmor(item) ||
-    isSpecialShield(item)
+    isSpecialShield(item) ||
+    isSpecialWeapon(item)
   );
 };
 
@@ -107,6 +115,7 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   "special-ammo": "Special Ammo",
   "special-armor": "Special Armor",
   "special-shield": "Special Shield",
+  "special-weapon": "Special Weapon",
 };
 
 export const getItemTypeDisplayName = (item: Item): string =>
@@ -124,7 +133,8 @@ const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
   wondrous: 8,
   "special-armor": 9,
   "special-shield": 10,
-  "special-ammo": 11,
+  "special-weapon": 11,
+  "special-ammo": 12,
 };
 
 const itemComparater = (item1: Item, item2: Item) => {
@@ -155,6 +165,7 @@ const itemTypeUrlMap: {
   "special-ammo": (item) => getSpecialAmmoUrl(item as SpecialAmmo),
   "special-armor": (item) => getSpecialArmorUrl(item as SpecialArmor),
   "special-shield": (item) => getSpecialShieldUrl(item as SpecialShield),
+  "special-weapon": (item) => getSpecialWeaponUrl(item as SpecialWeapon),
 };
 export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
 
@@ -177,6 +188,7 @@ const itemTypeIsMagicMap: {
   "special-ammo": magicIfHasCasterLevel,
   "special-armor": magicIfHasCasterLevel,
   "special-shield": magicIfHasCasterLevel,
+  "special-weapon": magicIfHasCasterLevel,
 };
 export const isMagic = (items: Item[]): boolean =>
   items.some((i) => itemTypeIsMagicMap[i.type](i));

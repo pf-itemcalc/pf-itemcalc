@@ -30,6 +30,10 @@ import {
   SpecialAmmo,
   getUrl as getSpecialAmmoUrl,
 } from "./special-ammo/special-ammo-types";
+import {
+  SpecialArmor,
+  getUrl as getSpecialArmorUrl,
+} from "./special-armor/special-armor-types";
 
 export type Item =
   | Armor
@@ -42,7 +46,7 @@ export type Item =
   | Spell
   | SpecificItem;
 
-export type SpecificItem = Wondrous | SpecialAmmo;
+export type SpecificItem = Wondrous | SpecialAmmo | SpecialArmor;
 
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isArmorQuality = (item: Item): item is ArmorQaulity =>
@@ -66,9 +70,11 @@ export const isWondrous = (item: Item): item is Wondrous =>
   item.type === "wondrous";
 export const isSpecialAmmo = (item: Item): item is Wondrous =>
   item.type === "special-ammo";
+export const isSpecialArmor = (item: Item): item is Wondrous =>
+  item.type === "special-armor";
 
 export const isSpecificItem = (item: Item): item is SpecificItem => {
-  return isWondrous(item) || isSpecialAmmo(item);
+  return isWondrous(item) || isSpecialAmmo(item) || isSpecialArmor(item);
 };
 
 type ItemType = Item["type"];
@@ -84,6 +90,7 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   spell: "Spell",
   wondrous: "Wondrous Item",
   "special-ammo": "Special Ammo",
+  "special-armor": "Special Armor",
 };
 
 export const getItemTypeDisplayName = (item: Item): string =>
@@ -99,7 +106,8 @@ const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
   "spell-vessel": 6,
   spell: 7,
   wondrous: 8,
-  "special-ammo": 9,
+  "special-armor": 9,
+  "special-ammo": 10,
 };
 
 const itemComparater = (item1: Item, item2: Item) => {
@@ -128,6 +136,7 @@ const itemTypeUrlMap: {
   "spell-vessel": () => undefined,
   wondrous: (item) => getWondrousUrl(item as Wondrous),
   "special-ammo": (item) => getSpecialAmmoUrl(item as SpecialAmmo),
+  "special-armor": (item) => getSpecialArmorUrl(item as SpecialArmor),
 };
 export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
 
@@ -148,6 +157,7 @@ const itemTypeIsMagicMap: {
   "spell-vessel": magic,
   wondrous: magicIfHasCasterLevel,
   "special-ammo": magicIfHasCasterLevel,
+  "special-armor": magicIfHasCasterLevel,
 };
 export const isMagic = (items: Item[]): boolean =>
   items.some((i) => itemTypeIsMagicMap[i.type](i));

@@ -1,7 +1,7 @@
 import { Slot } from "../generic/slot-types";
 
-export type SpecialAmmo = {
-  type: "special-ammo";
+export type SpecialArmor = {
+  type: "special-armor";
   name: string;
   subtitle?: string;
   casterLevel: number;
@@ -10,8 +10,8 @@ export type SpecialAmmo = {
   weight: number; // in lbs
 };
 
-export const getUrl = (item: SpecialAmmo): string => {
-  const baseUrl = `https://www.aonprd.com/MagicWeaponsDisplay.aspx?ItemName=${encodeURIComponent(
+export const getUrl = (item: SpecialArmor): string => {
+  const baseUrl = `https://www.aonprd.com/MagicArmorDisplay.aspx?ItemName=${encodeURIComponent(
     item.name
   )}`;
 

@@ -16,6 +16,7 @@ import {
   Item,
 } from "../../data/helpers";
 import { specialAmmoItems } from "../../data/special-ammo/special-ammo";
+import { specialArmorItems } from "../../data/special-armor/special-armor";
 import { spellVessels } from "../../data/spell/spell-vessels";
 import spells from "../../data/spell/spells";
 import weaponQaulities from "../../data/weapon/weapon-qualities";
@@ -34,6 +35,7 @@ const allItems: Item[] = [
   ...spells,
   ...wondrousItems,
   ...specialAmmoItems,
+  ...specialArmorItems,
 ];
 
 const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {

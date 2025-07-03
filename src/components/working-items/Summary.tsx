@@ -97,6 +97,17 @@ const casterLevelDisplay = (casterLevel: number) => {
   }
 };
 
+type ItemValueTextProps = {
+  value: number;
+};
+const ItemValueText = ({ value }: ItemValueTextProps) => {
+  return (
+    <>
+      <b>Value</b>: {value.toLocaleString()}gp
+    </>
+  );
+};
+
 const ItemSummary = ({ items }: SummaryProps) => {
   const casterLevel = getItemCasterLevel(items);
   const identifyMethod = getIdentifyMethod(casterLevel, items);
@@ -153,7 +164,7 @@ const ItemSummary = ({ items }: SummaryProps) => {
                 </li>
               )}
               <li>
-                <b>Value</b>: {value.toLocaleString()}gp
+                <ItemValueText value={value} />
               </li>
               {weight > 0 && (
                 <li>
@@ -165,6 +176,22 @@ const ItemSummary = ({ items }: SummaryProps) => {
           </ItemTitle>
         </ul>
       </Typography>
+    </>
+  );
+};
+
+type WandValueTextProps = {
+  value: number;
+  charges: number;
+};
+const WandValueText = ({ value, charges }: WandValueTextProps) => {
+  const valuePerCharge = value / 50;
+  const valueForAllCharges = valuePerCharge * charges;
+
+  return (
+    <>
+      <b>Value</b>:{" "}
+      {`${valueForAllCharges.toLocaleString()}gp total (${valuePerCharge.toLocaleString()}gp per charge)`}
     </>
   );
 };
@@ -232,12 +259,11 @@ const SpellSummary = ({ items }: SummaryProps) => {
                 </li>
               )}
               <li>
-                <b>Value</b>:{" "}
-                {isWand
-                  ? `${((value * charges) / 50).toLocaleString()}gp total (${(
-                      value / 50
-                    ).toLocaleString()}gp per charge)`
-                  : `${value.toLocaleString()}gp`}
+                {isWand ? (
+                  <WandValueText value={value} charges={charges} />
+                ) : (
+                  <ItemValueText value={value} />
+                )}
               </li>
             </ul>
           </ItemTitle>

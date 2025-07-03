@@ -150,6 +150,7 @@ type VirtualizeSearchBox = {
         details?: AutocompleteChangeDetails<Item> | undefined
       ) => void)
     | undefined;
+  noOptionsText?: string;
 };
 export const VirtualizeSearchBox = ({
   groupBy,
@@ -162,6 +163,7 @@ export const VirtualizeSearchBox = ({
   sx,
   value,
   onChange,
+  noOptionsText,
 }: VirtualizeSearchBox) => {
   return (
     <Autocomplete
@@ -184,6 +186,7 @@ export const VirtualizeSearchBox = ({
       }
       renderGroup={(params) => params as any}
       onChange={onChange}
+      noOptionsText={noOptionsText}
     />
   );
 };

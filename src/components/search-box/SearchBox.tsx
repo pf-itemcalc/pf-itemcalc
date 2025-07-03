@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Autocomplete, Button, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import {
   getItemDisplayName,
   getItemTypeDisplayName,
@@ -62,7 +62,6 @@ const SearchBox = ({
           displayError ? error : hints[hintIndex]
         }`;
 
-  // TODO ADD VIRTUALIZATON! https://mui.com/material-ui/react-autocomplete/#virtualization
   return (
     <Box
       sx={{
@@ -98,6 +97,7 @@ const SearchBox = ({
         sx={{ width: "50%" }}
         value={selectedItems}
         onChange={(e, values) => setSelectedItems(values)}
+        noOptionsText="No more options, press Go! or the Enter key"
       />
       <Button
         sx={{

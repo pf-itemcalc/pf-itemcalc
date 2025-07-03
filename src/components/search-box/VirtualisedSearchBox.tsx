@@ -127,7 +127,7 @@ const StyledPopper = styled(Popper)({
   },
 });
 
-type VirtualizeSearchBox = {
+type VirtualizeSearchBoxProps = {
   groupBy: ((option: Item) => string) | undefined;
   options: Item[];
   getOptionLabel: ((option: Item) => string) | undefined;
@@ -164,7 +164,7 @@ export const VirtualizeSearchBox = ({
   value,
   onChange,
   noOptionsText,
-}: VirtualizeSearchBox) => {
+}: VirtualizeSearchBoxProps) => {
   return (
     <Autocomplete
       sx={sx}

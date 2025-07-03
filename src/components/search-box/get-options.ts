@@ -147,12 +147,13 @@ const weaponQuailityFilter = (selected: Item[], items: Item[]): Item[] => {
   }
 
   // If there is a weapon quality then you can only choose:
-  //  size-modifiers, enhancements, weapons and special materials that are applicable to any remaining weapons
+  //  size-modifiers, enhancements, weapons, other weapon qualities, and special materials that are applicable to any remaining weapons
   const remainingItems = items.filter(
     (i) =>
       isSizeModifier(i) ||
       isEnhancement(i) ||
       isWeapon(i) ||
+      isWeaponQuality(i) ||
       isSpecialMaterial(i)
   );
 

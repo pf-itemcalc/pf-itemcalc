@@ -2,11 +2,13 @@ import armorQaulities from "../../data/armor/armor-qualities";
 import { getArmorQaulityModifier } from "../../data/armor/armor-quality-types";
 import armors from "../../data/armor/armors";
 import enhancements, { Masterwork } from "../../data/generic/enhancements";
+import sizeModifiers from "../../data/generic/size-modifiers";
 import specialMaterials from "../../data/generic/special-materials";
 import {
   isArmor,
   isArmorQuality,
   isEnhancement,
+  isSizeModifier,
   isSpecialMaterial,
   isSpecificItem,
   isSpell,
@@ -33,6 +35,7 @@ import { wondrousItems } from "../../data/wondrous/wondrous";
 
 const allItems: Item[] = orderItems([
   ...enhancements,
+  ...sizeModifiers,
   ...specialMaterials,
   ...weaponQaulities,
   ...weapons,
@@ -60,16 +63,18 @@ const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {
 
   if (enhancement === Masterwork) {
     // If the enhancement is masterwork you can then only choose:
-    //  materials, armor or weapons
+    //  size-modifiers, materials, armor or weapons
     return items.filter(
-      (i) => isSpecialMaterial(i) || isArmor(i) || isWeapon(i)
+      (i) =>
+        isSizeModifier(i) || isSpecialMaterial(i) || isArmor(i) || isWeapon(i)
     );
   }
 
   // If there is an enhancement then you can only choose:
-  //  materials, armor, armor qualities, weapons or weapon quailities
+  //  size-modifiers, materials, armor, armor qualities, weapons or weapon quailities
   return items.filter(
     (i) =>
+      isSizeModifier(i) ||
       isSpecialMaterial(i) ||
       isArmor(i) ||
       isArmorQuality(i) ||
@@ -85,10 +90,11 @@ const specialMaterialFilter = (selected: Item[], items: Item[]): Item[] => {
   }
 
   // If the special material is specific then you can only choose:
-  //  enhancements, applicable armors, armor qualities, applicable weapons and weapon qualities
+  //  size-modifiers, enhancements, applicable armors, armor qualities, applicable weapons and weapon qualities
   if (!!specialMaterial.isApplicable) {
     const applicableItems = items.filter(
       (i) =>
+        isSizeModifier(i) ||
         isEnhancement(i) ||
         ((isArmor(i) || isWeapon(i)) && specialMaterial.isApplicable(i)) ||
         isArmorQuality(i) ||
@@ -106,9 +112,10 @@ const specialMaterialFilter = (selected: Item[], items: Item[]): Item[] => {
   }
 
   // If there is a special material (that is not specific) then you can only choose:
-  //  enhancements, armors, armor qualities, weapons and weapon qualities
+  //  size modifiers, enhancements, armors, armor qualities, weapons and weapon qualities
   return items.filter(
     (i) =>
+      isSizeModifier(i) ||
       isEnhancement(i) ||
       isArmor(i) ||
       isArmorQuality(i) ||
@@ -124,9 +131,10 @@ const weaponFilter = (selected: Item[], items: Item[]): Item[] => {
   }
 
   // If there is a weapon then you can only choose:
-  //  enhancements, weapon qualities and special materials that are applicable
+  //  size-modifiers, enhancements, weapon qualities and special materials that are applicable
   return items.filter(
     (i) =>
+      isSizeModifier(i) ||
       isEnhancement(i) ||
       isWeaponQuality(i) ||
       (isSpecialMaterial(i) && i.isApplicable(weapon))
@@ -139,14 +147,22 @@ const weaponQuailityFilter = (selected: Item[], items: Item[]): Item[] => {
   }
 
   // If there is a weapon quality then you can only choose:
-  //  enhancements, weapons and special materials that are applicable to any remaining weapons
+  //  size-modifiers, enhancements, weapons and special materials that are applicable to any remaining weapons
   const remainingItems = items.filter(
-    (i) => isEnhancement(i) || isWeapon(i) || isSpecialMaterial(i)
+    (i) =>
+      isSizeModifier(i) ||
+      isEnhancement(i) ||
+      isWeapon(i) ||
+      isSpecialMaterial(i)
   );
+
+  const remainingWeapons = remainingItems.filter(isWeapon);
+
   return remainingItems.filter(
     (i) =>
       !isSpecialMaterial(i) ||
-      remainingItems.filter(isWeapon).some((w) => i.isApplicable(w))
+      remainingWeapons.length === 0 ||
+      remainingWeapons.some((w) => i.isApplicable(w))
   );
 };
 
@@ -157,9 +173,10 @@ const armorFilter = (selected: Item[], items: Item[]): Item[] => {
   }
 
   // If there is an armor then you can only choose:
-  //  enhancements, armor qualities and special materials that are applicable
+  //  size-modifiers, enhancements, armor qualities and special materials that are applicable
   return items.filter(
     (i) =>
+      isSizeModifier(i) ||
       isEnhancement(i) ||
       isArmorQuality(i) ||
       (isSpecialMaterial(i) && i.isApplicable(armor))
@@ -172,9 +189,13 @@ const armorQualityFilter = (selected: Item[], items: Item[]): Item[] => {
   }
 
   // If there is an armor quality then you can only choose:
-  //  enhancements, armors and special materials that are applicable to any remaining armors
+  //  size-modifiers, enhancements, armors and special materials that are applicable to any remaining armors
   const remainingItems = items.filter(
-    (i) => isEnhancement(i) || isArmor(i) || isSpecialMaterial(i)
+    (i) =>
+      isSizeModifier(i) ||
+      isEnhancement(i) ||
+      isArmor(i) ||
+      isSpecialMaterial(i)
   );
   return remainingItems.filter(
     (i) =>
@@ -218,8 +239,28 @@ const specificItemFilter = (selected: Item[], items: Item[]): Item[] => {
   return [];
 };
 
+const sizeModifierFilter = (selected: Item[], items: Item[]): Item[] => {
+  const sizeModifier = selected.find(isSizeModifier);
+  if (!sizeModifier) {
+    return items;
+  }
+
+  // If a size modifier is specified then you can only choose:
+  //  special materials, enhancements, armors, armor qualities, weapons and weapon qualities
+  return items.filter(
+    (i) =>
+      isSpecialMaterial(i) ||
+      isEnhancement(i) ||
+      isArmor(i) ||
+      isArmorQuality(i) ||
+      isWeapon(i) ||
+      isWeaponQuality(i)
+  );
+};
+
 export const getOptions = (selectedItems: Item[]) => {
   let items = specificItemFilter(selectedItems, allItems);
+  items = sizeModifierFilter(selectedItems, items);
   items = enchancementFilter(selectedItems, items);
   items = specialMaterialFilter(selectedItems, items);
   items = weaponFilter(selectedItems, items);
@@ -263,6 +304,10 @@ export const selectedItemsAreInvalid = (
       (i) => !isSpecificItem(i) && !isWeapon(i) && !isArmor(i) && !isSpell(i)
     )
   ) {
+    if (selectedItems.some((i) => isSizeModifier(i))) {
+      return "You must select a weapon or an armour";
+    }
+
     if (selectedItems.some((i) => isWeaponQuality(i))) {
       return "You must select a weapon";
     }

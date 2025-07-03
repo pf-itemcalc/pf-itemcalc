@@ -49,12 +49,14 @@ import {
   IounStone,
   getUrl as getIounStoneUrl,
 } from "./ioun-stone/ioun-stone-types";
+import { SizeModifier } from "./generic/size-modifier-types";
 
 export type Item =
   | Armor
   | ArmorQaulity
   | Weapon
   | WeaponQaulity
+  | SizeModifier
   | SpecialMaterial
   | Enhancement
   | SpellVessel
@@ -83,6 +85,8 @@ export const isWeaponQuality = (item: Item): item is WeaponQaulity =>
   item.type === "weapon-quality";
 export const isSpecialMaterial = (item: Item): item is SpecialMaterial =>
   item.type === "special-material";
+export const isSizeModifier = (item: Item): item is SizeModifier =>
+  item.type === "size-modifier";
 export const isEnhancement = (item: Item): item is Enhancement =>
   item.type === "enhancement";
 export const isSpellVessel = (item: Item): item is SpellVessel =>
@@ -127,6 +131,7 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   "armor-quality": "Armor / Shield Quality",
   weapon: "Weapon",
   "weapon-quality": "Weapon Quality",
+  "size-modifier": "Size Modifier",
   "special-material": "Special Material",
   enhancement: "Enhancement",
   "spell-vessel": "Spell Vessel",
@@ -147,22 +152,23 @@ export const getItemTypeDisplayName = (item: Item): string =>
 
 const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
   enhancement: 0,
-  "weapon-quality": 1,
-  "armor-quality": 2,
-  "special-material": 3,
-  weapon: 4,
-  armor: 5,
-  "spell-vessel": 6,
-  spell: 7,
-  wondrous: 8,
-  "special-armor": 9,
-  "special-shield": 10,
-  "special-weapon": 11,
-  "special-ammo": 12,
-  ring: 13,
-  rod: 14,
-  staff: 15,
-  "ioun-stone": 16,
+  "size-modifier": 1,
+  "weapon-quality": 2,
+  "armor-quality": 3,
+  "special-material": 4,
+  weapon: 5,
+  armor: 6,
+  "spell-vessel": 7,
+  spell: 8,
+  wondrous: 9,
+  "special-armor": 10,
+  "special-shield": 11,
+  "special-weapon": 12,
+  "special-ammo": 13,
+  ring: 14,
+  rod: 15,
+  staff: 16,
+  "ioun-stone": 17,
 };
 
 const itemComparater = (item1: Item, item2: Item) => {
@@ -185,6 +191,7 @@ const itemTypeUrlMap: {
   armor: (item) => getArmorUrl(item as Armor),
   "armor-quality": (item) => getArmorQualityUrl(item as ArmorQaulity),
   weapon: (item) => getWeaponUrl(item as Weapon),
+  "size-modifier": () => undefined,
   "weapon-quality": (item) => getWeaponQualityUrl(item as WeaponQaulity),
   "special-material": (item) => getMaterialUrl(item as SpecialMaterial),
   spell: (item) => getSpellUrl(item as Spell),
@@ -212,6 +219,7 @@ const itemTypeIsMagicMap: {
   armor: notMagic,
   "armor-quality": magic,
   weapon: notMagic,
+  "size-modifier": notMagic,
   "weapon-quality": magic,
   "special-material": notMagic,
   spell: magic,
@@ -281,6 +289,9 @@ export const getItemValue = (
     ? 100
     : 75;
 
+  const sizeModifier = items.find(isSizeModifier);
+  const sizeCostMultiplier = sizeModifier?.priceMultiplier ?? 1;
+
   const totalModifier = [
     ...items.filter(isEnhancement).map((i) => i.modifier),
     ...items.filter(isArmorQuality).map((i) => getArmorQaulityModifier(i)),
@@ -305,10 +316,9 @@ export const getItemValue = (
   const materialExtraCost =
     specialMaterial?.addedCost(baseItem, isMagic(items)) ?? 0;
   return (
-    baseItem.cost +
+    (baseItem.cost + materialExtraCost) * sizeCostMultiplier +
     mwkCost +
     magicCost +
-    materialExtraCost +
     (compositeRating !== undefined ? compositeCost * compositeRating : 0)
   );
 };
@@ -368,9 +378,15 @@ export const getItemWeight = (items: Item[]): number => {
     return 0;
   }
 
+  const sizeModifier = items.find(isSizeModifier);
+  const sizeWeightMultiplier = sizeModifier?.weightMultiplier ?? 1;
+
   const specialMaterial = items.find(isSpecialMaterial);
 
-  return specialMaterial?.alteredWeight(baseItem) || baseItem.weight;
+  return (
+    (specialMaterial?.alteredWeight(baseItem) || baseItem.weight) *
+    sizeWeightMultiplier
+  );
 };
 
 export const getIdentifyMethod = (

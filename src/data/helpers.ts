@@ -332,7 +332,7 @@ export const getSpellValue = (items: Item[]): number => {
 
   const casterLevel = getMinimumCasterLevel(spell.spellLevel, spell.spellList);
 
-  const spellMultiplier = spell.spellLevel * casterLevel;
+  const spellMultiplier = Math.max(0.5, spell.spellLevel) * casterLevel;
 
   if (items.some((i) => isSpecificSpellVessel(i, "Potion"))) {
     return spellMultiplier * 50 + spell.materialCost;

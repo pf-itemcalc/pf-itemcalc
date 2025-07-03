@@ -173,15 +173,25 @@ const SpellSummary = ({ items }: SummaryProps) => {
   const casterLevel = getSpellCasterLevel(items);
   const spellLevel = getSpellLevel(items);
   const spellList = getSpellList(items);
-  const identifyMethod = getIdentifyMethod(casterLevel, items);
-  const value = getSpellValue(items);
 
   const isWand = items.some((i) => isSpecificSpellVessel(i, "Wand"));
 
   const [charges, setCharges] = useState(50);
+  const [overrideCasterLevel, setOverrideCasterLevel] = useState(casterLevel);
+
+  const identifyMethod = getIdentifyMethod(overrideCasterLevel, items);
+  const value = getSpellValue(items, overrideCasterLevel);
 
   return (
     <>
+      <Autocomplete
+        sx={{ width: "50%", margin: 1 }}
+        options={range(1, 21)}
+        renderInput={(params) => <TextField {...params} label="Caster level" />}
+        value={overrideCasterLevel}
+        getOptionLabel={(o) => o.toString()}
+        onChange={(e, value) => setOverrideCasterLevel(value ?? casterLevel)}
+      />
       {isWand && (
         <Autocomplete
           sx={{ width: "50%", margin: 1 }}
@@ -194,6 +204,7 @@ const SpellSummary = ({ items }: SummaryProps) => {
           onChange={(e, value) => setCharges(value ?? 50)}
         />
       )}
+
       <Typography
         sx={{ width: "50%", border: "1px solid black", margin: 1, padding: 1 }}
         fontFamily="Calibri"
@@ -202,13 +213,13 @@ const SpellSummary = ({ items }: SummaryProps) => {
         <ul>
           <ItemTitle items={items}>
             <ul>
-              {casterLevel && (
+              {overrideCasterLevel && (
                 <>
                   <li>
                     <b>SL</b>: {casterLevelDisplay(spellLevel)} ({spellList})
                   </li>
                   <li>
-                    <b>CL</b>: {casterLevelDisplay(casterLevel)}
+                    <b>CL</b>: {casterLevelDisplay(overrideCasterLevel)}
                   </li>
                   <li>
                     <b>Identify Method</b>: {identifyMethod}

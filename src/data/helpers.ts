@@ -323,14 +323,12 @@ export const getItemValue = (
   );
 };
 
-export const getSpellValue = (items: Item[]): number => {
+export const getSpellValue = (items: Item[], casterLevel: number): number => {
   const spell = items.find(isSpell);
 
   if (!spell) {
     return 0;
   }
-
-  const casterLevel = getMinimumCasterLevel(spell.spellLevel, spell.spellList);
 
   const spellMultiplier = Math.max(0.5, spell.spellLevel) * casterLevel;
 

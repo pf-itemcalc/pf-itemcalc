@@ -99,11 +99,24 @@ const casterLevelDisplay = (casterLevel: number) => {
 
 type ItemValueTextProps = {
   value: number;
+  count: number;
+  unit: string;
 };
-const ItemValueText = ({ value }: ItemValueTextProps) => {
+const ItemValueText = ({ value, count, unit }: ItemValueTextProps) => {
+  if (count <= 1) {
+    return (
+      <>
+        <b>Value</b>: {value.toLocaleString()}
+        {unit}
+      </>
+    );
+  }
+
   return (
     <>
-      <b>Value</b>: {value.toLocaleString()}gp
+      <b>Value</b>: {value.toLocaleString()}
+      {unit} each ({value * count}
+      {unit} total)
     </>
   );
 };
@@ -122,8 +135,21 @@ const ItemSummary = ({ items }: SummaryProps) => {
   const specificItem = items.find(isSpecificItem);
   const slot = specificItem ? specificItem.slot : undefined;
 
+  const [count, setCount] = useState(1);
+
   return (
     <>
+      <TextField
+        sx={{ width: "50%", margin: 1 }}
+        label="Count"
+        type="number"
+        inputMode="numeric"
+        inputProps={{ min: 1 }}
+        value={count}
+        onChange={(e) => {
+          setCount(Math.max(Number(e.target.value) ?? 1, 1));
+        }}
+      />
       {isCompositeBow && (
         <TextField
           sx={{ width: "50%", margin: 1 }}
@@ -164,13 +190,14 @@ const ItemSummary = ({ items }: SummaryProps) => {
                 </li>
               )}
               <li>
-                <ItemValueText value={value} />
+                <ItemValueText value={value} count={count} unit={"gp"} />
               </li>
               {weight > 0 && (
-                <li>
-                  <b>Weight</b>: {weight.toLocaleString()}lb
-                  {weight === 1 ? "" : "s"}
-                </li>
+                <ItemValueText
+                  value={weight}
+                  count={count}
+                  unit={weight === 1 ? "lb" : "lbs"}
+                />
               )}
             </ul>
           </ItemTitle>
@@ -209,8 +236,23 @@ const SpellSummary = ({ items }: SummaryProps) => {
   const identifyMethod = getIdentifyMethod(overrideCasterLevel, items);
   const value = getSpellValue(items, overrideCasterLevel);
 
+  const [count, setCount] = useState(1);
+
   return (
     <>
+      {!isWand && (
+        <TextField
+          sx={{ width: "50%", margin: 1 }}
+          label="Count"
+          type="number"
+          inputMode="numeric"
+          inputProps={{ min: 1 }}
+          value={count}
+          onChange={(e) => {
+            setCount(Math.max(Number(e.target.value) ?? 1, 1));
+          }}
+        />
+      )}
       <Autocomplete
         sx={{ width: "50%", margin: 1 }}
         options={range(1, 21)}
@@ -262,7 +304,7 @@ const SpellSummary = ({ items }: SummaryProps) => {
                 {isWand ? (
                   <WandValueText value={value} charges={charges} />
                 ) : (
-                  <ItemValueText value={value} />
+                  <ItemValueText value={value} count={count} unit="gp" />
                 )}
               </li>
             </ul>

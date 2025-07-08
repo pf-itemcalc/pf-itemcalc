@@ -1,7 +1,7 @@
 {
   "name": "pf-itemcalc",
   "homepage": "https://pf-itemcalc.github.io/pf-itemcalc",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",

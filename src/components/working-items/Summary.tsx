@@ -98,15 +98,16 @@ const casterLevelDisplay = (casterLevel: number) => {
 };
 
 type ItemValueTextProps = {
+  title: string;
   value: number;
   count: number;
   unit: string;
 };
-const ItemValueText = ({ value, count, unit }: ItemValueTextProps) => {
+const ItemValueText = ({ title, value, count, unit }: ItemValueTextProps) => {
   if (count <= 1) {
     return (
       <>
-        <b>Value</b>: {value.toLocaleString()}
+        <b>{title}</b>: {value.toLocaleString()}
         {unit}
       </>
     );
@@ -114,7 +115,7 @@ const ItemValueText = ({ value, count, unit }: ItemValueTextProps) => {
 
   return (
     <>
-      <b>Value</b>: {value.toLocaleString()}
+      <b>{title}</b>: {value.toLocaleString()}
       {unit} each ({value * count}
       {unit} total)
     </>
@@ -190,15 +191,23 @@ const ItemSummary = ({ items }: SummaryProps) => {
                 </li>
               )}
               <li>
-                <ItemValueText value={value} count={count} unit={"gp"} />
-              </li>
-              {weight > 0 && (
                 <ItemValueText
-                  value={weight}
+                  title="Value"
+                  value={value}
                   count={count}
-                  unit={weight === 1 ? "lb" : "lbs"}
+                  unit={"gp"}
                 />
-              )}
+              </li>
+              <li>
+                {weight > 0 && (
+                  <ItemValueText
+                    title="Weight"
+                    value={weight}
+                    count={count}
+                    unit={weight === 1 ? "lb" : "lbs"}
+                  />
+                )}
+              </li>
             </ul>
           </ItemTitle>
         </ul>
@@ -304,7 +313,12 @@ const SpellSummary = ({ items }: SummaryProps) => {
                 {isWand ? (
                   <WandValueText value={value} charges={charges} />
                 ) : (
-                  <ItemValueText value={value} count={count} unit="gp" />
+                  <ItemValueText
+                    title="Value"
+                    value={value}
+                    count={count}
+                    unit="gp"
+                  />
                 )}
               </li>
             </ul>

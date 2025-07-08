@@ -19,4 +19,10 @@ export const spellVessels: SpellVessel[] = [
     maxSpellLevel: 3,
     type: "spell-vessel",
   },
+  {
+    name: "Oil of",
+    vesselType: "Oil",
+    maxSpellLevel: 3,
+    type: "spell-vessel",
+  },
 ];

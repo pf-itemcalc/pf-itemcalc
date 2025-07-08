@@ -1,4 +1,4 @@
-export type SpellVesselType = "Scroll" | "Wand" | "Potion";
+export type SpellVesselType = "Scroll" | "Wand" | "Potion" | "Oil";
 
 export type SpellVessel = {
   name: string;

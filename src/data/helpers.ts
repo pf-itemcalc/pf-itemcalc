@@ -92,8 +92,10 @@ export const isEnhancement = (item: Item): item is Enhancement =>
 export const isSpellVessel = (item: Item): item is SpellVessel =>
   item.type === "spell-vessel";
 export const isSpell = (item: Item): item is Spell => item.type === "spell";
-export const isSpecificSpellVessel = (item: Item, type: SpellVesselType) =>
-  isSpellVessel(item) && item.vesselType === type;
+export const isSpecificSpellVessel = (
+  item: Item,
+  ...types: SpellVesselType[]
+) => isSpellVessel(item) && types.includes(item.vesselType);
 export const isWondrous = (item: Item): item is Wondrous =>
   item.type === "wondrous";
 export const isSpecialAmmo = (item: Item): item is SpecialAmmo =>
@@ -332,7 +334,7 @@ export const getSpellValue = (items: Item[], casterLevel: number): number => {
 
   const spellMultiplier = Math.max(0.5, spell.spellLevel) * casterLevel;
 
-  if (items.some((i) => isSpecificSpellVessel(i, "Potion"))) {
+  if (items.some((i) => isSpecificSpellVessel(i, "Potion", "Oil"))) {
     return spellMultiplier * 50 + spell.materialCost;
   }
 
@@ -395,7 +397,7 @@ export const getIdentifyMethod = (
     return undefined;
   }
 
-  if (items.some((i) => isSpecificSpellVessel(i, "Potion"))) {
+  if (items.some((i) => isSpecificSpellVessel(i, "Potion", "Oil"))) {
     return `DC ${15 + casterLevel} Perception or Spellcraft Check`;
   }
 

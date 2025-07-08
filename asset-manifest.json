@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/pf-itemcalc/static/js/main.17423a50.js",
+    "main.js": "/pf-itemcalc/static/js/main.fda55751.js",
     "static/js/787.e0278b4b.chunk.js": "/pf-itemcalc/static/js/787.e0278b4b.chunk.js",
     "index.html": "/pf-itemcalc/index.html",
-    "main.17423a50.js.map": "/pf-itemcalc/static/js/main.17423a50.js.map",
+    "main.fda55751.js.map": "/pf-itemcalc/static/js/main.fda55751.js.map",
     "787.e0278b4b.chunk.js.map": "/pf-itemcalc/static/js/787.e0278b4b.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.17423a50.js"
+    "static/js/main.fda55751.js"
   ]
 }

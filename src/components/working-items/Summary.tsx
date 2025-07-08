@@ -58,9 +58,10 @@ type SummaryProps = {
 type TitleProps = SummaryProps & {
   children?: React.ReactNode;
   compositeRating?: number;
+  count: number;
 };
 
-const ItemTitle = ({ items, children, compositeRating }: TitleProps) => {
+const ItemTitle = ({ items, children, compositeRating, count }: TitleProps) => {
   const magical = isMagic(items);
 
   const Wrapper = ({ children }: { children: React.ReactNode }) =>
@@ -68,6 +69,7 @@ const ItemTitle = ({ items, children, compositeRating }: TitleProps) => {
 
   return (
     <li>
+      {count > 1 ? `${count}x ` : ""}
       <Wrapper>
         {items.map((i) => (
           <React.Fragment key={i.name}>
@@ -168,7 +170,11 @@ const ItemSummary = ({ items }: SummaryProps) => {
         fontSize={15}
       >
         <ul>
-          <ItemTitle items={items} compositeRating={compositeRating}>
+          <ItemTitle
+            items={items}
+            compositeRating={compositeRating}
+            count={count}
+          >
             <ul>
               {casterLevel !== undefined && (
                 <>
@@ -289,7 +295,7 @@ const SpellSummary = ({ items }: SummaryProps) => {
         fontSize={15}
       >
         <ul>
-          <ItemTitle items={items}>
+          <ItemTitle items={items} count={count}>
             <ul>
               {overrideCasterLevel && (
                 <>

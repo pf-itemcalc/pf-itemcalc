@@ -4,7 +4,10 @@ const About = () => {
   return (
     <>
       <Typography sx={{ paddingBottom: 1 }}>
-        <b>Welcome to my Pathfinder 1st edition item calculator.</b>
+        <b>
+          Welcome to my Pathfinder 1st edition item calculator (version{" "}
+          {process.env.REACT_APP_VERSION})
+        </b>
       </Typography>
       <Typography sx={{ paddingBottom: 1 }}>
         <b>The purpose of this tool</b> is to quickly find an item, calculate

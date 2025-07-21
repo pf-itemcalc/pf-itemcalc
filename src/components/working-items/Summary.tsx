@@ -204,16 +204,16 @@ const ItemSummary = ({ items }: SummaryProps) => {
                   unit={"gp"}
                 />
               </li>
-              <li>
-                {weight > 0 && (
+              {weight > 0 && (
+                <li>
                   <ItemValueText
                     title="Weight"
                     value={weight}
                     count={count}
                     unit={weight === 1 ? "lb" : "lbs"}
                   />
-                )}
-              </li>
+                </li>
+              )}
             </ul>
           </ItemTitle>
         </ul>

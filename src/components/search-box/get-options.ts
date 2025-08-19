@@ -5,6 +5,7 @@ import enhancements, { Masterwork } from "../../data/generic/enhancements";
 import sizeModifiers from "../../data/generic/size-modifiers";
 import specialMaterials from "../../data/generic/special-materials";
 import {
+  getItemDisplayName,
   isArmor,
   isArmorQuality,
   isEnhancement,
@@ -33,7 +34,7 @@ import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types
 import weapons from "../../data/weapon/weapons";
 import { wondrousItems } from "../../data/wondrous/wondrous";
 
-const allItems: Item[] = orderItems([
+export const allItems: Item[] = orderItems([
   ...enhancements,
   ...sizeModifiers,
   ...specialMaterials,

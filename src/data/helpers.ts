@@ -456,3 +456,7 @@ export const getItemDisplayName = (
 
   return item.name;
 };
+
+const itemIdDelimiter = "::";
+export const getUniqueItemIdentifier = (item: Item): string =>
+  window.btoa(getItemDisplayName(item) + itemIdDelimiter + item.type);

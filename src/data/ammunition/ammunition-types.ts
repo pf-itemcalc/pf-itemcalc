@@ -12,3 +12,9 @@ export const getUrl = (ammunition: Ammunition) =>
   `https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=${encodeURIComponent(
     ammunition.name + " (" + ammunition.countInBundle + ")"
   )}`;
+
+export const getIndividualAmmoCost = (ammunition: Ammunition): number =>
+  ammunition.cost / ammunition.countInBundle;
+
+export const getIndividualAmmoWeight = (ammunition: Ammunition): number =>
+  ammunition.weight / ammunition.countInBundle;

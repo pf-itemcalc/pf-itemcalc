@@ -53,6 +53,8 @@ import { SizeModifier } from "./generic/size-modifier-types";
 import {
   getUrl as getAmmunitionUrl,
   Ammunition,
+  getIndividualAmmoCost,
+  getIndividualAmmoWeight,
 } from "./ammunition/ammunition-types";
 
 export type Item =
@@ -292,11 +294,16 @@ export const getItemValue = (
     return specificItem.cost;
   }
 
-  const baseItem = items.find(isWeapon) || items.find(isArmor);
+  const baseItem =
+    items.find(isWeapon) || items.find(isArmor) || items.find(isAmmunition);
 
   if (!baseItem) {
     return 0;
   }
+
+  const baseCost = isAmmunition(baseItem)
+    ? getIndividualAmmoCost(baseItem)
+    : baseItem.cost;
 
   const compositeCost = baseItem.name.toLowerCase().includes("longbow")
     ? 100
@@ -327,9 +334,11 @@ export const getItemValue = (
   const magicCost =
     Math.pow(totalModifier, 2) * 2000 * halfIfArmor + totalAddedCost;
   const materialExtraCost =
-    specialMaterial?.addedCost(baseItem, isMagic(items)) ?? 0;
+    !isAmmunition(baseItem) && specialMaterial
+      ? specialMaterial.addedCost(baseItem, isMagic(items))
+      : 0;
   return (
-    (baseItem.cost + materialExtraCost) * sizeCostMultiplier +
+    (baseCost + materialExtraCost) * sizeCostMultiplier +
     mwkCost +
     magicCost +
     (compositeRating !== undefined ? compositeCost * compositeRating : 0)
@@ -383,11 +392,16 @@ export const getItemWeight = (items: Item[]): number => {
     return specificItem.weight;
   }
 
-  const baseItem = items.find(isWeapon) || items.find(isArmor);
+  const baseItem =
+    items.find(isWeapon) || items.find(isArmor) || items.find(isAmmunition);
 
   if (!baseItem) {
     return 0;
   }
+
+  const baseWeight = isAmmunition(baseItem)
+    ? getIndividualAmmoWeight(baseItem)
+    : baseItem.weight;
 
   const sizeModifier = items.find(isSizeModifier);
   const sizeWeightMultiplier = sizeModifier?.weightMultiplier ?? 1;
@@ -395,8 +409,9 @@ export const getItemWeight = (items: Item[]): number => {
   const specialMaterial = items.find(isSpecialMaterial);
 
   return (
-    (specialMaterial?.alteredWeight(baseItem) || baseItem.weight) *
-    sizeWeightMultiplier
+    (!isAmmunition(baseItem) && specialMaterial
+      ? specialMaterial.alteredWeight(baseItem)
+      : baseWeight) * sizeWeightMultiplier
   );
 };
 

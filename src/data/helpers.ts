@@ -50,12 +50,17 @@ import {
   getUrl as getIounStoneUrl,
 } from "./ioun-stone/ioun-stone-types";
 import { SizeModifier } from "./generic/size-modifier-types";
+import {
+  getUrl as getAmmunitionUrl,
+  Ammunition,
+} from "./ammunition/ammunition-types";
 
 export type Item =
   | Armor
   | ArmorQaulity
   | Weapon
   | WeaponQaulity
+  | Ammunition
   | SizeModifier
   | SpecialMaterial
   | Enhancement
@@ -83,6 +88,8 @@ export const isComposite = (item: Item): item is Weapon =>
   isWeapon(item) && item.name.toLowerCase().includes("composite");
 export const isWeaponQuality = (item: Item): item is WeaponQaulity =>
   item.type === "weapon-quality";
+export const isAmmunition = (item: Item): item is Ammunition =>
+  item.type === "ammunition";
 export const isSpecialMaterial = (item: Item): item is SpecialMaterial =>
   item.type === "special-material";
 export const isSizeModifier = (item: Item): item is SizeModifier =>
@@ -133,6 +140,7 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   "armor-quality": "Armor / Shield Quality",
   weapon: "Weapon",
   "weapon-quality": "Weapon Quality",
+  ammunition: "Ammunition",
   "size-modifier": "Size Modifier",
   "special-material": "Special Material",
   enhancement: "Enhancement",
@@ -160,17 +168,18 @@ const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
   "special-material": 4,
   weapon: 5,
   armor: 6,
-  "spell-vessel": 7,
-  spell: 8,
-  wondrous: 9,
-  "special-armor": 10,
-  "special-shield": 11,
-  "special-weapon": 12,
-  "special-ammo": 13,
-  ring: 14,
-  rod: 15,
-  staff: 16,
-  "ioun-stone": 17,
+  ammunition: 7,
+  "spell-vessel": 8,
+  spell: 9,
+  wondrous: 10,
+  "special-armor": 11,
+  "special-shield": 12,
+  "special-weapon": 13,
+  "special-ammo": 14,
+  ring: 15,
+  rod: 16,
+  staff: 17,
+  "ioun-stone": 18,
 };
 
 const itemComparater = (item1: Item, item2: Item) => {
@@ -193,6 +202,7 @@ const itemTypeUrlMap: {
   armor: (item) => getArmorUrl(item as Armor),
   "armor-quality": (item) => getArmorQualityUrl(item as ArmorQaulity),
   weapon: (item) => getWeaponUrl(item as Weapon),
+  ammunition: (item) => getAmmunitionUrl(item as Ammunition),
   "size-modifier": () => undefined,
   "weapon-quality": (item) => getWeaponQualityUrl(item as WeaponQaulity),
   "special-material": (item) => getMaterialUrl(item as SpecialMaterial),
@@ -221,6 +231,7 @@ const itemTypeIsMagicMap: {
   armor: notMagic,
   "armor-quality": magic,
   weapon: notMagic,
+  ammunition: notMagic,
   "size-modifier": notMagic,
   "weapon-quality": magic,
   "special-material": notMagic,

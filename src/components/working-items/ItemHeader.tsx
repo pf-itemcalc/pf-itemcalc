@@ -3,6 +3,7 @@ import Clear from "@mui/icons-material/Clear";
 import { Box, Chip, IconButton } from "@mui/material";
 import {
   getItemDisplayName,
+  isAmmunition,
   isArmor,
   isArmorQuality,
   isEnhancement,
@@ -23,6 +24,7 @@ type ItemHeaderProps = {
 
 const isDeletable = (item: Item, items: Item[]) =>
   (!isWeapon(item) &&
+    !isAmmunition(item) &&
     !isArmor(item) &&
     !isSpellVessel(item) &&
     !isSpell(item) &&

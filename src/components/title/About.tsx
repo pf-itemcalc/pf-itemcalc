@@ -40,7 +40,6 @@ const About = () => {
       <Typography>
         <b>This tool currently cannot:</b>
         <ul>
-          <li>Calculate ammunition with special materials</li>
           <li>Calculate unusual ammunition like firearm bullets</li>
           <li>Calculate double-headed weapons (treated only single headed)</li>
           <li>Allow you to apply any metamagic feats to spells</li>

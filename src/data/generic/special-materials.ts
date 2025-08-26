@@ -1,4 +1,4 @@
-import { isWeapon } from "../helpers";
+import { isAmmunition, isArmor, isWeapon } from "../helpers";
 import { MasterworkArmorCost } from "./enhancement-types";
 import {
   baseSpecialMaterial,
@@ -13,8 +13,13 @@ const Abysium: SpecialMaterial = { ...baseSpecialMaterial, name: "Abysium" };
 const Adamantine: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Adamantine",
-  isApplicable: (item) => isWeapon(item) || item.category !== "Shield",
+  isApplicable: (item) =>
+    isWeapon(item) || isAmmunition(item) || item.category !== "Shield",
   addedCost: (item) => {
+    if (isAmmunition(item)) {
+      return 60;
+    }
+
     if (isWeapon(item)) {
       return 3000;
     }
@@ -28,22 +33,27 @@ const Adamantine: SpecialMaterial = {
 const AlchemicalSilver: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Alchemical Silver",
-  isApplicable: (item) => isWeapon(item),
+  isApplicable: (item) => isWeapon(item) || isAmmunition(item),
   addedCost: (item) => {
-    if (!isWeapon(item)) {
-      return 0;
+    if (isAmmunition(item)) {
+      return 2;
     }
 
-    return valueFromWeaponSize(item, 20, 90, 180);
+    if (isWeapon(item)) {
+      return valueFromWeaponSize(item, 20, 90, 180);
+    }
+
+    return 0;
   },
 };
 
 const Angelskin: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Angelskin",
-  isApplicable: (item) => !isWeapon(item) && item.category !== "Heavy",
+  isApplicable: (item) =>
+    !isWeapon(item) && !isAmmunition(item) && item.category !== "Heavy",
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -56,9 +66,9 @@ const Angelskin: SpecialMaterial = {
 const Aszite: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Aszite",
-  isApplicable: (item) => !isWeapon(item),
+  isApplicable: (item) => !isWeapon(item) && !isAmmunition(item),
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -76,6 +86,23 @@ const Blackwood: SpecialMaterial = {
   alreadyMasterwork: true,
 };
 
+const BlightQuartz: SpecialMaterial = {
+  ...baseSpecialMaterial,
+  name: "Blight Quartz",
+  addedCost: (item) => {
+    if (isAmmunition(item)) {
+      return 200;
+    }
+
+    // Armor cost is not listed on the page, assume costs same as weapon
+    if (isWeapon(item) || isArmor(item)) {
+      return 2500;
+    }
+
+    return 0;
+  },
+};
+
 const Blightburn: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Blightburn",
@@ -84,8 +111,17 @@ const Blightburn: SpecialMaterial = {
 const BloodCrystal: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Blood Crystal",
-  isApplicable: (item) => isWeapon(item),
-  addedCost: () => 1500,
+  isApplicable: (item) => isWeapon(item) || isAmmunition(item),
+  addedCost: (item) => {
+    if (isWeapon(item)) {
+      return 1500;
+    }
+
+    if (isAmmunition(item)) {
+      return 30;
+    }
+    return 0;
+  },
 };
 
 const BuletteArmor: SpecialMaterial = {
@@ -93,9 +129,11 @@ const BuletteArmor: SpecialMaterial = {
   name: "Bulette Armor",
   // Full plate and leather armor only
   isApplicable: (item) =>
-    !isWeapon(item) && (item.category === "Heavy" || item.category === "Light"),
+    !isWeapon(item) &&
+    !isAmmunition(item) &&
+    (item.category === "Heavy" || item.category === "Light"),
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -103,7 +141,7 @@ const BuletteArmor: SpecialMaterial = {
     return valueFromArmorCategory(item, 50 - item.cost, 0, item.cost * 9);
   },
   alteredWeight: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return item.weight;
     }
 
@@ -115,27 +153,30 @@ const BuletteArmor: SpecialMaterial = {
 const Caphorite: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Caphorite",
+  addedCost: (item) => (isAmmunition(item) ? 10 : 0),
 };
 
 const ColdIron: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Cold Iron",
-  isApplicable: (item) => isWeapon(item),
+  isApplicable: (item) => isWeapon(item) || isAmmunition(item),
   addedCost: (item, willBeMadeMagical) => {
-    if (!isWeapon(item)) {
+    if (!isWeapon(item) && !isAmmunition(item)) {
       return 0;
     }
 
+    const oneFiftiethIfAmmunition = isAmmunition(item) ? 0.02 : 1;
+
     // costs twice as much and an extra 2k if magical
-    return item.cost + (willBeMadeMagical ? 2000 : 0);
+    return item.cost + (willBeMadeMagical ? 2000 * oneFiftiethIfAmmunition : 0);
   },
 };
 
 const Cryptstone: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Cryptstone",
-  isApplicable: (item) => isWeapon(item),
-  addedCost: () => 500,
+  isApplicable: (item) => isWeapon(item) || isAmmunition(item),
+  addedCost: (item) => (isAmmunition(item) ? 10 : 500),
   alreadyMasterwork: true,
   masterworkCostIncluded: true,
 };
@@ -143,9 +184,10 @@ const Cryptstone: SpecialMaterial = {
 const DarkleafCloth: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Darkleaf Cloth",
-  isApplicable: (item) => !isWeapon(item) && item.category !== "Shield",
+  isApplicable: (item) =>
+    !isWeapon(item) && !isAmmunition(item) && item.category !== "Shield",
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -168,9 +210,9 @@ const Darkwood: SpecialMaterial = {
 const Dragonhide: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Dragonhide",
-  isApplicable: (item) => !isWeapon(item),
+  isApplicable: (item) => !isWeapon(item) && !isAmmunition(item),
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -189,6 +231,10 @@ const Druchite: SpecialMaterial = {
       return 1200;
     }
 
+    if (isAmmunition(item)) {
+      return 12;
+    }
+
     return valueFromArmorCategory(item, 1000, 1500, 2000);
   },
 };
@@ -196,9 +242,10 @@ const Druchite: SpecialMaterial = {
 const EelHide: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "EelHide",
-  isApplicable: (item) => !isWeapon(item) && item.category !== "Heavy",
+  isApplicable: (item) =>
+    !isWeapon(item) && !isAmmunition(item) && item.category !== "Heavy",
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -216,6 +263,10 @@ const ElysianBronze: SpecialMaterial = {
       return 1000;
     }
 
+    if (isAmmunition(item)) {
+      return 20;
+    }
+
     return valueFromArmorCategory(item, 1000, 2000, 3000);
   },
 };
@@ -223,10 +274,14 @@ const ElysianBronze: SpecialMaterial = {
 const FireForgedSteel: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Fire-Forged Steel",
-  isApplicable: (item) => item.category !== "Shield",
+  isApplicable: (item) => isAmmunition(item) || item.category !== "Shield",
   addedCost: (item) => {
     if (isWeapon(item)) {
       return 600;
+    }
+
+    if (isAmmunition(item)) {
+      return 15;
     }
 
     return valueFromArmorCategory(item, 1000, 2500, 3000);
@@ -238,10 +293,14 @@ const FireForgedSteel: SpecialMaterial = {
 const FrostForgedSteel: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Frost-Forged Steel",
-  isApplicable: (item) => item.category !== "Shield",
+  isApplicable: (item) => isAmmunition(item) || item.category !== "Shield",
   addedCost: (item) => {
     if (isWeapon(item)) {
       return 600;
+    }
+
+    if (isAmmunition(item)) {
+      return 15;
     }
 
     return valueFromArmorCategory(item, 1000, 2500, 3000);
@@ -268,9 +327,10 @@ const Greenwood: SpecialMaterial = {
 const GriffonMane: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Griffon Mane",
-  isApplicable: (item) => !isWeapon(item) && item.category !== "Shield",
+  isApplicable: (item) =>
+    !isWeapon(item) && !isAmmunition(item) && item.category !== "Shield",
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -289,9 +349,12 @@ const HeatstonePlating: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Heatstone Plating",
   isApplicable: (item) =>
-    !isWeapon(item) && item.category !== "Shield" && item.category !== "Heavy",
+    !isWeapon(item) &&
+    !isAmmunition(item) &&
+    item.category !== "Shield" &&
+    item.category !== "Heavy",
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -302,8 +365,12 @@ const HeatstonePlating: SpecialMaterial = {
 const Horacalcum: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Horacalcum",
-  isApplicable: (item) => item.category !== "Shield",
+  isApplicable: (item) => isAmmunition(item) || item.category !== "Shield",
   addedCost: (item) => {
+    if (isAmmunition(item)) {
+      return 0;
+    }
+
     if (isWeapon(item)) {
       return 6000;
     }
@@ -317,7 +384,7 @@ const Horacalcum: SpecialMaterial = {
 const Inubrix: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Inubrix",
-  isApplicable: (item) => !isWeapon(item),
+  isApplicable: (item) => isWeapon(item),
   addedCost: (item) => (isWeapon(item) ? 5000 : 0),
   alreadyMasterwork: true,
   masterworkCostIncluded: true,
@@ -331,9 +398,10 @@ const IrespanBasalt: SpecialMaterial = {
 const Lazurite: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Lazurite",
-  isApplicable: (item) => !isWeapon(item) && item.category !== "Shield",
+  isApplicable: (item) =>
+    !isWeapon(item) && !isAmmunition(item) && item.category !== "Shield",
   addedCost: (item) => {
-    if (isWeapon(item)) {
+    if (isWeapon(item) || isAmmunition(item)) {
       return 0;
     }
 
@@ -357,7 +425,7 @@ const LivingSteel: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Living Steel",
   addedCost: (item) =>
-    valueForAnyType(item, 500, 100, 500, 1000, 1500, item.weight * 250),
+    valueForAnyType(item, 10, 500, 100, 500, 1000, 1500, item.weight * 250),
 };
 
 const Mithral: SpecialMaterial = {
@@ -366,6 +434,7 @@ const Mithral: SpecialMaterial = {
   addedCost: (item) =>
     valueForAnyType(
       item,
+      500 * item.weight,
       500 * item.weight,
       1000,
       1000,
@@ -396,9 +465,20 @@ const Noqual: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Noqual",
   isApplicable: (item) => isWeapon(item),
-  addedCost: (item, willBeMadeMagical) =>
-    valueForAnyType(item, 500, 2000, 4000, 8000, 12000) +
-    (willBeMadeMagical ? 5000 : 0),
+  addedCost: (item, willBeMadeMagical) => {
+    const oneFiftiethIfAmmunition = isAmmunition(item) ? 0.02 : 1;
+    return (
+      valueForAnyType(
+        item,
+        500 * oneFiftiethIfAmmunition, // Assumed "or other item +500 gp" means a bundle of 50 arrows, same as enchanting
+        500,
+        2000,
+        4000,
+        8000,
+        12000
+      ) + (willBeMadeMagical ? 5000 * oneFiftiethIfAmmunition : 0)
+    );
+  },
   alteredWeight: (item) => item.weight * 0.5,
 };
 
@@ -418,7 +498,7 @@ const PyreSteel: SpecialMaterial = {
 const Siccatite: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Siccatite",
-  isApplicable: (item) => item.category !== "Shield",
+  isApplicable: (item) => !isAmmunition(item) && item.category !== "Shield",
   addedCost: (item) => (isWeapon(item) ? 1000 : 6000),
 };
 
@@ -435,7 +515,16 @@ const SingingSteel: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Singing Steel",
   addedCost: (item) =>
-    valueForAnyType(item, 6000, 7000, 750, 9000, 12000, item.weight * 600),
+    valueForAnyType(
+      item,
+      item.weight * 600,
+      6000,
+      7000,
+      750,
+      9000,
+      12000,
+      item.weight * 600
+    ),
   alreadyMasterwork: true,
   masterworkCostIncluded: true,
 };
@@ -443,10 +532,17 @@ const SingingSteel: SpecialMaterial = {
 const SpireSteel: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Spire Steel",
-  isApplicable: (item) => item.category !== "Shield",
-  addedCost: (item) => valueForAnyType(item, 6000, 0, 750, 9000, 12000),
+  isApplicable: (item) => isAmmunition(item) || item.category !== "Shield",
+  addedCost: (item) => valueForAnyType(item, 10, 6000, 0, 750, 9000, 12000),
   alreadyMasterwork: true,
   masterworkCostIncluded: true,
+};
+
+const Sunsilk: SpecialMaterial = {
+  ...baseSpecialMaterial,
+  name: "Sunsilk",
+  isApplicable: (item) => isArmor(item) && item.category !== "Shield",
+  addedCost: () => 6000,
 };
 
 const Sunsilver: SpecialMaterial = {
@@ -467,21 +563,24 @@ const Throneglass: SpecialMaterial = {
 const Viridium: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Viridium",
-  isApplicable: (item) => isWeapon(item),
-  addedCost: (item) => (isWeapon(item) ? 200 : 0),
+  isApplicable: (item) => isWeapon(item) || isAmmunition(item),
+  addedCost: (item) => (isWeapon(item) ? 200 : 20),
 };
 
 const ViridiumStrengthened: SpecialMaterial = {
   ...Viridium,
   name: "Viridium (Strengthened)",
   addedCost: (item, ...args) =>
-    isWeapon(item) ? Viridium.addedCost(item, ...args) + 1000 : 0,
+    isWeapon(item)
+      ? Viridium.addedCost(item, ...args) + 1000
+      : Viridium.addedCost(item, ...args) + 20,
 };
 
 const Voidglass: SpecialMaterial = {
   ...baseSpecialMaterial,
   name: "Voidglass",
-  addedCost: (item) => valueForAnyType(item, 1000, 3000, 1000, 2000, 4500),
+  isApplicable: (item) => !isAmmunition(item),
+  addedCost: (item) => valueForAnyType(item, 0, 1000, 3000, 1000, 2000, 4500),
 };
 
 const Whipwood: SpecialMaterial = {
@@ -505,6 +604,7 @@ const specialMaterials: SpecialMaterial[] = [
   Angelskin,
   Aszite,
   Blackwood,
+  BlightQuartz,
   Blightburn,
   BloodCrystal,
   BuletteArmor,
@@ -538,6 +638,7 @@ const specialMaterials: SpecialMaterial[] = [
   Silversheen,
   SingingSteel,
   SpireSteel,
+  Sunsilk,
   Sunsilver,
   Throneglass,
   Viridium,

@@ -1,8 +1,9 @@
+import { Ammunition } from "../ammunition/ammunition-types";
 import { Armor } from "../armor/armor-types";
-import { isWeapon } from "../helpers";
+import { isAmmunition, isWeapon } from "../helpers";
 import { Weapon } from "../weapon/weapon-types";
 
-type Item = Weapon | Armor;
+type Item = Weapon | Ammunition | Armor;
 
 export type SpecialMaterialOptionals = {
   isApplicable: (item: Item) => boolean; // true for any item if not defined
@@ -75,6 +76,7 @@ export const valueFromWeaponSize = (
 
 export const valueForAnyType = (
   item: Item,
+  ammo: number,
   weapon: number,
   shield: number,
   lightArmor: number,
@@ -82,6 +84,10 @@ export const valueForAnyType = (
   heavyArmor: number,
   defaultCost: number = 0
 ) => {
+  if (isAmmunition(item)) {
+    return ammo;
+  }
+
   if (isWeapon(item)) {
     return weapon;
   }

@@ -215,12 +215,13 @@ const armorQualityFilter: ItemFilterFunction = (selected, items) => {
   }
 
   // If there is an armor quality then you can only choose:
-  //  size-modifiers, enhancements, armors and special materials that are applicable to any remaining armors
+  //  size-modifiers, enhancements, armors, other armor qualities, and special materials that are applicable to any remaining armors
   const remainingItems = items.filter(
     (i) =>
       isSizeModifier(i) ||
       isEnhancement(i) ||
       isArmor(i) ||
+      isArmorQuality(i) ||
       isSpecialMaterial(i)
   );
   return remainingItems.filter(

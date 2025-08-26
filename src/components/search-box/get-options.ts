@@ -101,13 +101,14 @@ const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
   }
 
   // If the special material is specific then you can only choose:
-  //  size-modifiers, enhancements, applicable armors, armor qualities, applicable weapons and weapon qualities
+  //  size-modifiers, enhancements, applicable armors, armor qualities, applicable weapons, weapon qualities and applicable ammunition
   if (!!specialMaterial.isApplicable) {
     const applicableItems = items.filter(
       (i) =>
         isSizeModifier(i) ||
         isEnhancement(i) ||
-        ((isArmor(i) || isWeapon(i)) && specialMaterial.isApplicable(i)) ||
+        ((isArmor(i) || isWeapon(i) || isAmmunition(i)) &&
+          specialMaterial.isApplicable(i)) ||
         isArmorQuality(i) ||
         isWeaponQuality(i)
     );
@@ -117,13 +118,13 @@ const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
     if (applicableItems.every((i) => !isArmor(i))) {
       return applicableItems.filter((i) => !isArmorQuality(i));
     }
-    if (applicableItems.every((i) => !isWeapon(i))) {
+    if (applicableItems.every((i) => !isWeapon(i) && !isAmmunition(i))) {
       return applicableItems.filter((i) => !isWeaponQuality(i));
     }
   }
 
   // If there is a special material (that is not specific) then you can only choose:
-  //  size modifiers, enhancements, armors, armor qualities, weapons and weapon qualities
+  //  size modifiers, enhancements, armors, armor qualities, weapons, weapon qualities and ammunition
   return items.filter(
     (i) =>
       isSizeModifier(i) ||
@@ -131,7 +132,8 @@ const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
       isArmor(i) ||
       isArmorQuality(i) ||
       isWeapon(i) ||
-      isWeaponQuality(i)
+      isWeaponQuality(i) ||
+      isAmmunition(i)
   );
 };
 
@@ -186,9 +188,13 @@ const ammunitionFilter: ItemFilterFunction = (selected, items) => {
   }
 
   // If there is an ammunition then you can only choose:
-  //  size-modifiers, enhancements and weapon qualities
+  //  size-modifiers, enhancements, weapon qualities and special materials that are applicable
   return items.filter(
-    (i) => isSizeModifier(i) || isEnhancement(i) || isWeaponQuality(i)
+    (i) =>
+      isSizeModifier(i) ||
+      isEnhancement(i) ||
+      isWeaponQuality(i) ||
+      (isSpecialMaterial(i) && i.isApplicable(ammo))
   );
 };
 

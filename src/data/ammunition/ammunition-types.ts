@@ -1,3 +1,4 @@
+// Ammunition cannot have special materials applied to it, yet...
 export type Ammunition = {
   name: string;
   pluralisedName?: string; // If undefined, name is already plural

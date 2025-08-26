@@ -41,12 +41,13 @@ const NewTabLink = ({ url, children }: NewTabLinkProps) => {
 type ItemProps = {
   item: Item;
   compositeRating?: number;
+  plural: boolean;
 };
 
-const ItemDisplay = ({ item, compositeRating }: ItemProps) => {
+const ItemDisplay = ({ item, compositeRating, plural }: ItemProps) => {
   const url = getItemUrl(item);
 
-  const name = getItemDisplayName(item, compositeRating);
+  const name = getItemDisplayName(item, { compositeRating, plural });
 
   return url ? <NewTabLink url={url}>{name}</NewTabLink> : <>{name}</>;
 };
@@ -73,7 +74,11 @@ const ItemTitle = ({ items, children, compositeRating, count }: TitleProps) => {
       <Wrapper>
         {items.map((i) => (
           <React.Fragment key={i.name}>
-            <ItemDisplay item={i} compositeRating={compositeRating} />{" "}
+            <ItemDisplay
+              item={i}
+              compositeRating={compositeRating}
+              plural={count === 0 || count > 1}
+            />{" "}
           </React.Fragment>
         ))}
       </Wrapper>

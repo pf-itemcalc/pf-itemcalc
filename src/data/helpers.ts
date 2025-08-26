@@ -466,9 +466,22 @@ const getItemDisplayNameModifiedSubtitle = (
   return capitalize(item.subtitle);
 };
 
+export const getItemName = (item: Item, plural: boolean): string => {
+  if (!isAmmunition(item)) {
+    return item.name;
+  }
+
+  return (plural ? item.pluralisedName : item.singularName) ?? item.name;
+};
+
+type ItemDisplayNameOptions = {
+  compositeRating?: number;
+  plural?: boolean;
+};
+
 export const getItemDisplayName = (
   item: Item,
-  compositeRating?: number
+  options: ItemDisplayNameOptions = {}
 ): string => {
   if (isSpecificItem(item) && item.subtitle) {
     const formattedSubtitle = getItemDisplayNameModifiedSubtitle(item);
@@ -476,13 +489,20 @@ export const getItemDisplayName = (
     return `${item.name}${subtitle}`;
   }
 
-  if (isComposite(item) && compositeRating !== undefined) {
-    return item.name.replace("Composite", `Composite (${compositeRating})`);
+  if (isComposite(item) && options.compositeRating !== undefined) {
+    return item.name.replace(
+      "Composite",
+      `Composite (${options.compositeRating})`
+    );
   }
 
-  return item.name;
+  return getItemName(item, options.plural ?? false);
 };
 
+// TODO: The intention of this was to allow for unique IDs in the URL so we can
+//  share links to items...
+// TODO: Probably don't want to use item display name here though, some better way to generate
+//  a unique identifier
 const itemIdDelimiter = "::";
 export const getUniqueItemIdentifier = (item: Item): string =>
   window.btoa(getItemDisplayName(item) + itemIdDelimiter + item.type);

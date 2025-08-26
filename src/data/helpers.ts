@@ -330,9 +330,14 @@ export const getItemValue = (
   const mwkCostIncluded = !!specialMaterial?.masterworkCostIncluded;
 
   const halfIfArmor = isArmor(baseItem) ? 0.5 : 1;
-  const mwkCost = (isMwk && !mwkCostIncluded ? 300 : 0) * halfIfArmor;
+  const oneFiftiethIfAmmunition = isAmmunition(baseItem) ? 0.02 : 1;
+  const mwkCost =
+    (isMwk && !mwkCostIncluded ? 300 : 0) *
+    halfIfArmor *
+    oneFiftiethIfAmmunition;
   const magicCost =
-    Math.pow(totalModifier, 2) * 2000 * halfIfArmor + totalAddedCost;
+    Math.pow(totalModifier, 2) * 2000 * halfIfArmor * oneFiftiethIfAmmunition +
+    totalAddedCost * oneFiftiethIfAmmunition;
   const materialExtraCost =
     !isAmmunition(baseItem) && specialMaterial
       ? specialMaterial.addedCost(baseItem, isMagic(items))

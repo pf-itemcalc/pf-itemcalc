@@ -58,7 +58,9 @@ export const allItems: Item[] = orderItems([
   ...iounStones,
 ]);
 
-const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {
+type ItemFilterFunction = (selected: Item[], items: Item[]) => Item[];
+
+const enchancementFilter: ItemFilterFunction = (selected, items) => {
   const enhancement = selected.find(isEnhancement);
 
   if (!enhancement) {
@@ -67,15 +69,19 @@ const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {
 
   if (enhancement === Masterwork) {
     // If the enhancement is masterwork you can then only choose:
-    //  size-modifiers, materials, armor or weapons
+    //  size-modifiers, materials, armor, weapons or ammo
     return items.filter(
       (i) =>
-        isSizeModifier(i) || isSpecialMaterial(i) || isArmor(i) || isWeapon(i)
+        isSizeModifier(i) ||
+        isSpecialMaterial(i) ||
+        isArmor(i) ||
+        isWeapon(i) ||
+        isAmmunition(i)
     );
   }
 
   // If there is an enhancement then you can only choose:
-  //  size-modifiers, materials, armor, armor qualities, weapons or weapon quailities
+  //  size-modifiers, materials, armor, armor qualities, weapons, weapon quailities or ammo
   return items.filter(
     (i) =>
       isSizeModifier(i) ||
@@ -83,11 +89,12 @@ const enchancementFilter = (selected: Item[], items: Item[]): Item[] => {
       isArmor(i) ||
       isArmorQuality(i) ||
       isWeapon(i) ||
-      isWeaponQuality(i)
+      isWeaponQuality(i) ||
+      isAmmunition(i)
   );
 };
 
-const specialMaterialFilter = (selected: Item[], items: Item[]): Item[] => {
+const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
   const specialMaterial = selected.find(isSpecialMaterial);
   if (!specialMaterial) {
     return items;
@@ -128,7 +135,7 @@ const specialMaterialFilter = (selected: Item[], items: Item[]): Item[] => {
   );
 };
 
-const weaponFilter = (selected: Item[], items: Item[]): Item[] => {
+const weaponFilter: ItemFilterFunction = (selected, items) => {
   const weapon = selected.find(isWeapon);
   if (!weapon) {
     return items;
@@ -145,20 +152,21 @@ const weaponFilter = (selected: Item[], items: Item[]): Item[] => {
   );
 };
 
-const weaponQuailityFilter = (selected: Item[], items: Item[]): Item[] => {
+const weaponQuailityFilter: ItemFilterFunction = (selected, items) => {
   if (!selected.some(isWeaponQuality)) {
     return items;
   }
 
   // If there is a weapon quality then you can only choose:
-  //  size-modifiers, enhancements, weapons, other weapon qualities, and special materials that are applicable to any remaining weapons
+  //  size-modifiers, enhancements, weapons, other weapon qualities, ammunition, and special materials that are applicable to any remaining weapons
   const remainingItems = items.filter(
     (i) =>
       isSizeModifier(i) ||
       isEnhancement(i) ||
       isWeapon(i) ||
       isWeaponQuality(i) ||
-      isSpecialMaterial(i)
+      isSpecialMaterial(i) ||
+      isAmmunition(i)
   );
 
   const remainingWeapons = remainingItems.filter(isWeapon);
@@ -171,7 +179,20 @@ const weaponQuailityFilter = (selected: Item[], items: Item[]): Item[] => {
   );
 };
 
-const armorFilter = (selected: Item[], items: Item[]): Item[] => {
+const ammunitionFilter: ItemFilterFunction = (selected, items) => {
+  const ammo = selected.find(isAmmunition);
+  if (!ammo) {
+    return items;
+  }
+
+  // If there is an ammunition then you can only choose:
+  //  size-modifiers, enhancements and weapon qualities
+  return items.filter(
+    (i) => isSizeModifier(i) || isEnhancement(i) || isWeaponQuality(i)
+  );
+};
+
+const armorFilter: ItemFilterFunction = (selected, items) => {
   const armor = selected.find(isArmor);
   if (!armor) {
     return items;
@@ -188,7 +209,7 @@ const armorFilter = (selected: Item[], items: Item[]): Item[] => {
   );
 };
 
-const armorQualityFilter = (selected: Item[], items: Item[]): Item[] => {
+const armorQualityFilter: ItemFilterFunction = (selected, items) => {
   if (!selected.some(isArmorQuality)) {
     return items;
   }
@@ -209,7 +230,7 @@ const armorQualityFilter = (selected: Item[], items: Item[]): Item[] => {
   );
 };
 
-const spellFilter = (selected: Item[], items: Item[]): Item[] => {
+const spellFilter: ItemFilterFunction = (selected, items) => {
   const spell = selected.find(isSpell);
   if (!spell) {
     return items;
@@ -221,7 +242,7 @@ const spellFilter = (selected: Item[], items: Item[]): Item[] => {
   );
 };
 
-const spellVesselFilter = (selected: Item[], items: Item[]): Item[] => {
+const spellVesselFilter: ItemFilterFunction = (selected, items) => {
   const spellVessel = selected.find(isSpellVessel);
   if (!spellVessel) {
     return items;
@@ -233,7 +254,7 @@ const spellVesselFilter = (selected: Item[], items: Item[]): Item[] => {
   );
 };
 
-const specificItemFilter = (selected: Item[], items: Item[]): Item[] => {
+const specificItemFilter: ItemFilterFunction = (selected, items) => {
   const specificItem = selected.find(isSpecificItem);
 
   if (!specificItem) {
@@ -244,7 +265,7 @@ const specificItemFilter = (selected: Item[], items: Item[]): Item[] => {
   return [];
 };
 
-const sizeModifierFilter = (selected: Item[], items: Item[]): Item[] => {
+const sizeModifierFilter: ItemFilterFunction = (selected, items) => {
   const sizeModifier = selected.find(isSizeModifier);
   if (!sizeModifier) {
     return items;
@@ -259,22 +280,31 @@ const sizeModifierFilter = (selected: Item[], items: Item[]): Item[] => {
       isArmor(i) ||
       isArmorQuality(i) ||
       isWeapon(i) ||
-      isWeaponQuality(i)
+      isWeaponQuality(i) ||
+      isAmmunition(i)
   );
 };
 
-export const getOptions = (selectedItems: Item[]) => {
-  let items = specificItemFilter(selectedItems, allItems);
-  items = sizeModifierFilter(selectedItems, items);
-  items = enchancementFilter(selectedItems, items);
-  items = specialMaterialFilter(selectedItems, items);
-  items = weaponFilter(selectedItems, items);
-  items = weaponQuailityFilter(selectedItems, items);
-  items = armorFilter(selectedItems, items);
-  items = spellVesselFilter(selectedItems, items);
-  items = spellFilter(selectedItems, items);
-  return armorQualityFilter(selectedItems, items);
-};
+const itemFilters: ItemFilterFunction[] = [
+  specificItemFilter,
+  sizeModifierFilter,
+  enchancementFilter,
+  specialMaterialFilter,
+  weaponFilter,
+  weaponQuailityFilter,
+  ammunitionFilter,
+  armorFilter,
+  spellVesselFilter,
+  spellFilter,
+  armorQualityFilter,
+];
+
+export const getOptions = (selectedItems: Item[]) =>
+  itemFilters.reduce(
+    (itemsRemaining, filterFunction) =>
+      filterFunction(selectedItems, itemsRemaining),
+    allItems
+  );
 
 const getEnhancementModifier = (item: Item): number => {
   if (isEnhancement(item)) {

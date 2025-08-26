@@ -1,3 +1,4 @@
+import { ammunition } from "../../data/ammunition/ammunition";
 import armorQaulities from "../../data/armor/armor-qualities";
 import { getArmorQaulityModifier } from "../../data/armor/armor-quality-types";
 import armors from "../../data/armor/armors";
@@ -6,6 +7,7 @@ import sizeModifiers from "../../data/generic/size-modifiers";
 import specialMaterials from "../../data/generic/special-materials";
 import {
   getItemDisplayName,
+  isAmmunition,
   isArmor,
   isArmorQuality,
   isEnhancement,
@@ -40,6 +42,7 @@ export const allItems: Item[] = orderItems([
   ...specialMaterials,
   ...weaponQaulities,
   ...weapons,
+  ...ammunition,
   ...armorQaulities,
   ...armors,
   ...spellVessels,
@@ -303,15 +306,20 @@ export const selectedItemsAreInvalid = (
 
   if (
     selectedItems.every(
-      (i) => !isSpecificItem(i) && !isWeapon(i) && !isArmor(i) && !isSpell(i)
+      (i) =>
+        !isSpecificItem(i) &&
+        !isWeapon(i) &&
+        !isArmor(i) &&
+        !isSpell(i) &&
+        !isAmmunition(i)
     )
   ) {
     if (selectedItems.some((i) => isSizeModifier(i))) {
-      return "You must select a weapon or an armour";
+      return "You must select a weapon, armour or ammunition";
     }
 
     if (selectedItems.some((i) => isWeaponQuality(i))) {
-      return "You must select a weapon";
+      return "You must select a weapon or ammunition";
     }
 
     if (selectedItems.some((i) => isArmorQuality(i))) {
@@ -326,7 +334,7 @@ export const selectedItemsAreInvalid = (
       return "You must select either a weapon or an armor";
     }
 
-    return "You must select either a weapon, armor, spell or specific item";
+    return "You must select either a weapon, armor, spell, ammunition or specific item";
   }
 
   if (

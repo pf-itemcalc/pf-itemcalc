@@ -17,8 +17,10 @@ import {
   isComposite,
   getItemDisplayName,
   isSpecificItem,
+  isAmmunition,
 } from "../../data/helpers";
 import { range } from "lodash";
+import { Ammunition } from "../../data/ammunition/ammunition-types";
 
 type NewTabLinkProps = {
   url: string;
@@ -77,7 +79,7 @@ const ItemTitle = ({ items, children, compositeRating, count }: TitleProps) => {
             <ItemDisplay
               item={i}
               compositeRating={compositeRating}
-              plural={count === 0 || count > 1}
+              plural={count > 1}
             />{" "}
           </React.Fragment>
         ))}
@@ -129,6 +131,21 @@ const ItemValueText = ({ title, value, count, unit }: ItemValueTextProps) => {
   );
 };
 
+const getInitialCount = (
+  ammunition: Ammunition | undefined,
+  casterLevel: number | undefined
+): number => {
+  if (ammunition && (casterLevel ?? 0) > 0) {
+    return 50; // Enchanting magical ammo enchants 50 items in one go
+  }
+
+  if (ammunition) {
+    return ammunition.countInBundle; // otherwise start with the number in the bundle selected
+  }
+
+  return 1;
+};
+
 const ItemSummary = ({ items }: SummaryProps) => {
   const casterLevel = getItemCasterLevel(items);
   const identifyMethod = getIdentifyMethod(casterLevel, items);
@@ -143,7 +160,9 @@ const ItemSummary = ({ items }: SummaryProps) => {
   const specificItem = items.find(isSpecificItem);
   const slot = specificItem ? specificItem.slot : undefined;
 
-  const [count, setCount] = useState(1);
+  const ammunition = items.find(isAmmunition);
+
+  const [count, setCount] = useState(getInitialCount(ammunition, casterLevel));
 
   return (
     <>

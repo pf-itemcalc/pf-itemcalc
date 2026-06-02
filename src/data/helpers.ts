@@ -98,6 +98,8 @@ export const isSizeModifier = (item: Item): item is SizeModifier =>
   item.type === "size-modifier";
 export const isEnhancement = (item: Item): item is Enhancement =>
   item.type === "enhancement";
+export const isMagicEnhancement = (item: Item): item is Enhancement =>
+  isEnhancement(item) && item.modifier > 0;
 export const isSpellVessel = (item: Item): item is SpellVessel =>
   item.type === "spell-vessel";
 export const isSpell = (item: Item): item is Spell => item.type === "spell";
@@ -270,7 +272,7 @@ export const getItemCasterLevel = (items: Item[]): number | undefined => {
 
   return Math.max(
     enhancement.modifier * 3,
-    Math.max(...qualities.map((q) => q.casterLevel))
+    Math.max(...qualities.map((q) => q.casterLevel)),
   );
 };
 
@@ -286,7 +288,7 @@ export const getSpellCasterLevel = (items: Item[]): number => {
 
 export const getItemValue = (
   items: Item[],
-  compositeRating?: number
+  compositeRating?: number,
 ): number => {
   const specificItem = items.find(isSpecificItem);
 
@@ -421,7 +423,7 @@ export const getItemWeight = (items: Item[]): number => {
 
 export const getIdentifyMethod = (
   casterLevel: number | undefined,
-  items: Item[]
+  items: Item[],
 ): string | undefined => {
   if (!casterLevel) {
     return undefined;
@@ -439,7 +441,7 @@ export const getIdentifyMethod = (
 };
 
 const getItemDisplayNameModifiedSubtitle = (
-  item: SpecificItem
+  item: SpecificItem,
 ): string | undefined => {
   if (!item.subtitle) {
     return undefined;
@@ -485,7 +487,7 @@ type ItemDisplayNameOptions = {
 
 export const getItemDisplayName = (
   item: Item,
-  options: ItemDisplayNameOptions = {}
+  options: ItemDisplayNameOptions = {},
 ): string => {
   if (isSpecificItem(item) && item.subtitle) {
     const formattedSubtitle = getItemDisplayNameModifiedSubtitle(item);
@@ -496,7 +498,7 @@ export const getItemDisplayName = (
   if (isComposite(item) && options.compositeRating !== undefined) {
     return item.name.replace(
       "Composite",
-      `Composite (${options.compositeRating})`
+      `Composite (${options.compositeRating})`,
     );
   }
 

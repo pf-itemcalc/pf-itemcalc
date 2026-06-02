@@ -6,11 +6,11 @@ import enhancements, { Masterwork } from "../../data/generic/enhancements";
 import sizeModifiers from "../../data/generic/size-modifiers";
 import specialMaterials from "../../data/generic/special-materials";
 import {
-  getItemDisplayName,
   isAmmunition,
   isArmor,
   isArmorQuality,
   isEnhancement,
+  isMagicEnhancement,
   isSizeModifier,
   isSpecialMaterial,
   isSpecificItem,
@@ -76,7 +76,7 @@ const enchancementFilter: ItemFilterFunction = (selected, items) => {
         isSpecialMaterial(i) ||
         isArmor(i) ||
         isWeapon(i) ||
-        isAmmunition(i)
+        isAmmunition(i),
     );
   }
 
@@ -90,7 +90,7 @@ const enchancementFilter: ItemFilterFunction = (selected, items) => {
       isArmorQuality(i) ||
       isWeapon(i) ||
       isWeaponQuality(i) ||
-      isAmmunition(i)
+      isAmmunition(i),
   );
 };
 
@@ -110,7 +110,7 @@ const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
         ((isArmor(i) || isWeapon(i) || isAmmunition(i)) &&
           specialMaterial.isApplicable(i)) ||
         isArmorQuality(i) ||
-        isWeaponQuality(i)
+        isWeaponQuality(i),
     );
 
     // Furthermore if the applicable items only contains enhancements or armors
@@ -133,7 +133,7 @@ const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
       isArmorQuality(i) ||
       isWeapon(i) ||
       isWeaponQuality(i) ||
-      isAmmunition(i)
+      isAmmunition(i),
   );
 };
 
@@ -150,7 +150,7 @@ const weaponFilter: ItemFilterFunction = (selected, items) => {
       isSizeModifier(i) ||
       isEnhancement(i) ||
       isWeaponQuality(i) ||
-      (isSpecialMaterial(i) && i.isApplicable(weapon))
+      (isSpecialMaterial(i) && i.isApplicable(weapon)),
   );
 };
 
@@ -164,11 +164,11 @@ const weaponQuailityFilter: ItemFilterFunction = (selected, items) => {
   const remainingItems = items.filter(
     (i) =>
       isSizeModifier(i) ||
-      isEnhancement(i) ||
+      isMagicEnhancement(i) ||
       isWeapon(i) ||
       isWeaponQuality(i) ||
       isSpecialMaterial(i) ||
-      isAmmunition(i)
+      isAmmunition(i),
   );
 
   const remainingWeapons = remainingItems.filter(isWeapon);
@@ -177,7 +177,7 @@ const weaponQuailityFilter: ItemFilterFunction = (selected, items) => {
     (i) =>
       !isSpecialMaterial(i) ||
       remainingWeapons.length === 0 ||
-      remainingWeapons.some((w) => i.isApplicable(w))
+      remainingWeapons.some((w) => i.isApplicable(w)),
   );
 };
 
@@ -194,7 +194,7 @@ const ammunitionFilter: ItemFilterFunction = (selected, items) => {
       isSizeModifier(i) ||
       isEnhancement(i) ||
       isWeaponQuality(i) ||
-      (isSpecialMaterial(i) && i.isApplicable(ammo))
+      (isSpecialMaterial(i) && i.isApplicable(ammo)),
   );
 };
 
@@ -211,7 +211,7 @@ const armorFilter: ItemFilterFunction = (selected, items) => {
       isSizeModifier(i) ||
       isEnhancement(i) ||
       isArmorQuality(i) ||
-      (isSpecialMaterial(i) && i.isApplicable(armor))
+      (isSpecialMaterial(i) && i.isApplicable(armor)),
   );
 };
 
@@ -225,15 +225,15 @@ const armorQualityFilter: ItemFilterFunction = (selected, items) => {
   const remainingItems = items.filter(
     (i) =>
       isSizeModifier(i) ||
-      isEnhancement(i) ||
+      isMagicEnhancement(i) ||
       isArmor(i) ||
       isArmorQuality(i) ||
-      isSpecialMaterial(i)
+      isSpecialMaterial(i),
   );
   return remainingItems.filter(
     (i) =>
       !isSpecialMaterial(i) ||
-      remainingItems.filter(isArmor).some((a) => i.isApplicable(a))
+      remainingItems.filter(isArmor).some((a) => i.isApplicable(a)),
   );
 };
 
@@ -245,7 +245,7 @@ const spellFilter: ItemFilterFunction = (selected, items) => {
 
   // If a spell is selected, you can only choose a spell vessel that is applicable
   return items.filter(
-    (i) => isSpellVessel(i) && i.maxSpellLevel >= spell.spellLevel
+    (i) => isSpellVessel(i) && i.maxSpellLevel >= spell.spellLevel,
   );
 };
 
@@ -257,7 +257,7 @@ const spellVesselFilter: ItemFilterFunction = (selected, items) => {
 
   // If a spell vessel is selected, you can only choose a spell that is applicable
   return items.filter(
-    (i) => isSpell(i) && spellVessel.maxSpellLevel >= i.spellLevel
+    (i) => isSpell(i) && spellVessel.maxSpellLevel >= i.spellLevel,
   );
 };
 
@@ -288,7 +288,7 @@ const sizeModifierFilter: ItemFilterFunction = (selected, items) => {
       isArmorQuality(i) ||
       isWeapon(i) ||
       isWeaponQuality(i) ||
-      isAmmunition(i)
+      isAmmunition(i),
   );
 };
 
@@ -310,7 +310,7 @@ export const getOptions = (selectedItems: Item[]) =>
   itemFilters.reduce(
     (itemsRemaining, filterFunction) =>
       filterFunction(selectedItems, itemsRemaining),
-    allItems
+    allItems,
   );
 
 const getEnhancementModifier = (item: Item): number => {
@@ -330,11 +330,11 @@ const getEnhancementModifier = (item: Item): number => {
 };
 
 export const selectedItemsAreInvalid = (
-  selectedItems: Item[]
+  selectedItems: Item[],
 ): string | undefined => {
   const totalModifier = selectedItems.reduce(
     (val, item) => getEnhancementModifier(item) + val,
-    0
+    0,
   );
 
   if (totalModifier > 10) {
@@ -348,7 +348,7 @@ export const selectedItemsAreInvalid = (
         !isWeapon(i) &&
         !isArmor(i) &&
         !isSpell(i) &&
-        !isAmmunition(i)
+        !isAmmunition(i),
     )
   ) {
     if (selectedItems.some((i) => isSizeModifier(i))) {
@@ -383,7 +383,7 @@ export const selectedItemsAreInvalid = (
 
   if (
     selectedItems.some((i) => isWeaponQuality(i) || isArmorQuality(i)) &&
-    selectedItems.every((i) => !isEnhancement(i))
+    selectedItems.every((i) => !isMagicEnhancement(i))
   ) {
     return "You must choose an enchancement modifier to prefix your quality";
   }

@@ -473,11 +473,15 @@ const getItemDisplayNameModifiedSubtitle = (
 };
 
 export const getItemName = (item: Item, plural: boolean): string => {
-  if (!isAmmunition(item)) {
-    return item.name;
+  if (isAmmunition(item)) {
+    return (plural ? item.pluralisedName : item.singularName) ?? item.name;
   }
 
-  return (plural ? item.pluralisedName : item.singularName) ?? item.name;
+  if (isArmor(item) && item.suffix !== undefined) {
+    return `${item.name} ${item.suffix}`;
+  }
+
+  return item.name;
 };
 
 type ItemDisplayNameOptions = {

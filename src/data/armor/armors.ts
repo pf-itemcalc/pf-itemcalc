@@ -301,6 +301,7 @@ const armors: Armor[] = [
   { name: "Klar", cost: 12, weight: 6, category: "Shield", type: "armor" },
   {
     name: "Light steel",
+    suffix: "shield",
     cost: 9,
     weight: 6,
     category: "Shield",
@@ -308,6 +309,7 @@ const armors: Armor[] = [
   },
   {
     name: "Light steel quickdraw",
+    suffix: "shield",
     cost: 59,
     weight: 7,
     category: "Shield",
@@ -315,6 +317,7 @@ const armors: Armor[] = [
   },
   {
     name: "Light wooden",
+    suffix: "shield",
     cost: 3,
     weight: 5,
     category: "Shield",
@@ -322,6 +325,7 @@ const armors: Armor[] = [
   },
   {
     name: "Light wooden quickdraw",
+    suffix: "shield",
     cost: 53,
     weight: 6,
     category: "Shield",
@@ -357,6 +361,7 @@ const armors: Armor[] = [
   },
   {
     name: "Heavy steel",
+    suffix: "shield",
     cost: 20,
     weight: 15,
     category: "Shield",
@@ -364,6 +369,7 @@ const armors: Armor[] = [
   },
   {
     name: "Heavy wooden",
+    suffix: "shield",
     cost: 7,
     weight: 10,
     category: "Shield",
@@ -383,7 +389,14 @@ const armors: Armor[] = [
     category: "Shield",
     type: "armor",
   },
-  { name: "Tower", cost: 30, weight: 45, category: "Shield", type: "armor" },
+  {
+    name: "Tower",
+    suffix: "shield",
+    cost: 30,
+    weight: 45,
+    category: "Shield",
+    type: "armor",
+  },
 ];
 
 export default armors;

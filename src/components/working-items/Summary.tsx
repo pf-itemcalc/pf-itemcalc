@@ -22,6 +22,7 @@ import {
 import { range } from "lodash";
 import { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";
+import TurndownService from "turndown";
 
 type NewTabLinkProps = {
   url: string;
@@ -381,8 +382,14 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
 
 const copyToClipboard = async (element: HTMLElement) => {
   const htmlContent = element.innerHTML;
+
+  // Turndown is used to convert html into markdown as a
+  //  fallback for when the consumer cannot use html
+  const service = new TurndownService();
+  const markdownContent = service.turndown(htmlContent);
+
   const clipboardItem = new ClipboardItem({
-    ["text/plain"]: "WIP NOT READY YET!", // Always need to supply plain text, in case the consumer cannot handle html
+    ["text/plain"]: markdownContent, // Always need to supply plain text, in case the consumer cannot handle html
     ["text/html"]: htmlContent,
   });
 

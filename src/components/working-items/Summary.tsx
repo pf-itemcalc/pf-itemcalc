@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Autocomplete, TextField, Typography } from "@mui/material";
+import { Autocomplete, IconButton, TextField, Typography } from "@mui/material";
 import {
   getItemCasterLevel,
   getIdentifyMethod,
@@ -21,6 +21,7 @@ import {
 } from "../../data/helpers";
 import { range } from "lodash";
 import { Ammunition } from "../../data/ammunition/ammunition-types";
+import ContentCopy from "@mui/icons-material/ContentCopy";
 
 type NewTabLinkProps = {
   url: string;
@@ -58,6 +59,10 @@ type SummaryProps = {
   items: Item[];
 };
 
+type InnerSummaryProps = SummaryProps & {
+  onCopy: () => void;
+};
+
 type TitleProps = SummaryProps & {
   children?: React.ReactNode;
   compositeRating?: number;
@@ -88,6 +93,19 @@ const ItemTitle = ({ items, children, compositeRating, count }: TitleProps) => {
     </li>
   );
 };
+
+type CopyButtonProps = {
+  onCopy: () => void;
+};
+const CopyButton = ({ onCopy }: CopyButtonProps) => (
+  <IconButton
+    title="Copy to clipboard"
+    onClick={onCopy}
+    sx={{ float: "right" }}
+  >
+    <ContentCopy fontSize="small" />
+  </IconButton>
+);
 
 const casterLevelDisplay = (casterLevel: number) => {
   if (casterLevel > 3 && casterLevel < 21) {
@@ -133,7 +151,7 @@ const ItemValueText = ({ title, value, count, unit }: ItemValueTextProps) => {
 
 const getInitialCount = (
   ammunition: Ammunition | undefined,
-  casterLevel: number | undefined
+  casterLevel: number | undefined,
 ): number => {
   if (ammunition && (casterLevel ?? 0) > 0) {
     return 50; // Enchanting magical ammo enchants 50 items in one go
@@ -146,7 +164,7 @@ const getInitialCount = (
   return 1;
 };
 
-const ItemSummary = ({ items }: SummaryProps) => {
+const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
   const casterLevel = getItemCasterLevel(items);
   const identifyMethod = getIdentifyMethod(casterLevel, items);
 
@@ -158,7 +176,7 @@ const ItemSummary = ({ items }: SummaryProps) => {
   const weight = getItemWeight(items);
 
   const specificItem = items.find(isSpecificItem);
-  const slot = specificItem ? specificItem.slot : undefined;
+  const slot = specificItem ? specificItem.slot.toString() : undefined;
 
   const ammunition = items.find(isAmmunition);
 
@@ -193,7 +211,8 @@ const ItemSummary = ({ items }: SummaryProps) => {
         fontFamily="Calibri"
         fontSize={15}
       >
-        <ul>
+        <CopyButton onCopy={onCopy} />
+        <ul id="SummaryItemList">
           <ItemTitle
             items={items}
             compositeRating={compositeRating}
@@ -217,7 +236,7 @@ const ItemSummary = ({ items }: SummaryProps) => {
               )}
               {slot !== undefined && (
                 <li>
-                  <b>Slot</b>: {slot.toLocaleString()}
+                  <b>Slot</b>: {slot}
                 </li>
               )}
               <li>
@@ -262,7 +281,7 @@ const WandValueText = ({ value, charges }: WandValueTextProps) => {
   );
 };
 
-const SpellSummary = ({ items }: SummaryProps) => {
+const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
   const casterLevel = getSpellCasterLevel(items);
   const spellLevel = getSpellLevel(items);
   const spellList = getSpellList(items);
@@ -318,7 +337,8 @@ const SpellSummary = ({ items }: SummaryProps) => {
         fontFamily="Calibri"
         fontSize={15}
       >
-        <ul>
+        <CopyButton onCopy={onCopy} />
+        <ul id="SummaryItemList">
           <ItemTitle items={items} count={count}>
             <ul>
               {overrideCasterLevel && (
@@ -359,13 +379,33 @@ const SpellSummary = ({ items }: SummaryProps) => {
   );
 };
 
+const copyToClipboard = async (element: HTMLElement) => {
+  const htmlContent = element.innerHTML;
+  const clipboardItem = new ClipboardItem({
+    ["text/plain"]: "WIP NOT READY YET!", // Always need to supply plain text, in case the consumer cannot handle html
+    ["text/html"]: htmlContent,
+  });
+
+  await navigator.clipboard.write([clipboardItem]);
+  const items = await navigator.clipboard.readText();
+  console.log("Copied", items);
+};
+
 const Summary = ({ items }: SummaryProps) => {
   const summaryForSpell = items.some((i) => isSpell(i));
 
+  const onCopy = () => {
+    const element = document.getElementById("SummaryItemList");
+    if (!element) {
+      return;
+    }
+    copyToClipboard(element);
+  };
+
   return summaryForSpell ? (
-    <SpellSummary items={items} />
+    <SpellSummary items={items} onCopy={onCopy} />
   ) : (
-    <ItemSummary items={items} />
+    <ItemSummary items={items} onCopy={onCopy} />
   );
 };
 

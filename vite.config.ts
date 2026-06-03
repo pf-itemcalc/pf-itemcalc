@@ -19,8 +19,7 @@ export default defineConfig(({ mode }) => {
       react(),
       tsconfigPaths(),
       basePlugin(),
-      importPrefixPlugin(),
-      htmlPlugin(mode),
+      // htmlPlugin(mode)
     ],
   };
 });
@@ -41,10 +40,6 @@ function setEnv(mode: string) {
     : "";
 }
 
-// TODO: Assess whether the rest is needed here
-
-// Migration guide: Follow the guide below and remove homepage field in package.json
-// https://vitejs.dev/config/shared-options.html#base
 function basePlugin(): Plugin {
   return {
     name: "base-plugin",
@@ -57,36 +52,26 @@ function basePlugin(): Plugin {
   };
 }
 
-// To resolve modules from node_modules, you can prefix paths with ~
-// https://create-react-app.dev/docs/adding-a-sass-stylesheet
-// Migration guide: Follow the guide below
-// https://vitejs.dev/config/shared-options.html#resolve-alias
-function importPrefixPlugin(): Plugin {
-  return {
-    name: "import-prefix-plugin",
-    config() {
-      return {
-        resolve: {
-          alias: [{ find: /^~([^/])/, replacement: "$1" }],
-        },
-      };
-    },
-  };
-}
+// TODO: Assess whether the below is needed
 
 // Replace %ENV_VARIABLES% in index.html
 // https://vitejs.dev/guide/api-plugin.html#transformindexhtml
 // Migration guide: Follow the guide below, you may need to rename your environment variable to a name that begins with VITE_ instead of REACT_APP_
 // https://vitejs.dev/guide/env-and-mode.html#html-env-replacement
-function htmlPlugin(mode: string): Plugin {
-  const env = loadEnv(mode, ".", ["REACT_APP_", "NODE_ENV", "PUBLIC_URL"]);
-  return {
-    name: "html-plugin",
-    transformIndexHtml: {
-      order: "pre",
-      handler(html) {
-        return html.replace(/%(.*?)%/g, (match, p1) => env[p1] ?? match);
-      },
-    },
-  };
-}
+// function htmlPlugin(mode: string): Plugin {
+//   const env = loadEnv(mode, ".", ["REACT_APP_", "NODE_ENV", "PUBLIC_URL"]);
+//   console.log("env", env);
+//   return {
+//     name: "html-plugin",
+//     transformIndexHtml: {
+//       order: "pre",
+//       handler(html) {
+//         // console.log("handled", html);
+//         return html.replace(/%(.*?)%/g, (match, p1) => {
+//           console.log("matched", match, p1, env[p1]);
+//           return env[p1] ?? match;
+//         });
+//       },
+//     },
+//   };
+// }

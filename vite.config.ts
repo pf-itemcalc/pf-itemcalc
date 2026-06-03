@@ -12,11 +12,12 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       open: true,
     },
+    build: {
+      outDir: "build",
+    },
     plugins: [
       react(),
       tsconfigPaths(),
-      sourcemapPlugin(),
-      buildPathPlugin(),
       basePlugin(),
       importPrefixPlugin(),
       htmlPlugin(mode),
@@ -41,38 +42,6 @@ function setEnv(mode: string) {
 }
 
 // TODO: Assess whether the rest is needed here
-
-// Migration guide: Follow the guide below
-// https://vitejs.dev/config/build-options.html#build-sourcemap
-function sourcemapPlugin(): Plugin {
-  return {
-    name: "sourcemap-plugin",
-    config(_, { mode }) {
-      const { GENERATE_SOURCEMAP } = loadEnv(mode, ".", ["GENERATE_SOURCEMAP"]);
-      return {
-        build: {
-          sourcemap: GENERATE_SOURCEMAP === "true",
-        },
-      };
-    },
-  };
-}
-
-// Migration guide: Follow the guide below
-// https://vitejs.dev/config/build-options.html#build-outdir
-function buildPathPlugin(): Plugin {
-  return {
-    name: "build-path-plugin",
-    config(_, { mode }) {
-      const { BUILD_PATH } = loadEnv(mode, ".", ["BUILD_PATH"]);
-      return {
-        build: {
-          outDir: BUILD_PATH || "build",
-        },
-      };
-    },
-  };
-}
 
 // Migration guide: Follow the guide below and remove homepage field in package.json
 // https://vitejs.dev/config/shared-options.html#base

@@ -15,6 +15,10 @@ export default defineConfig(({ mode }) => {
       outDir: "build",
     },
     plugins: [react(), tsconfigPaths(), basePlugin()],
+    test: {
+      globals: true,
+      environment: "jsdom",
+    },
   };
 });
 

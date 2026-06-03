@@ -29,7 +29,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "test": "react-scripts test",
+    "test": "vitest",
     "eject": "react-scripts eject",
     "predeploy": "npm version minor && npm run build",
     "deploy": "gh-pages -d build",
@@ -55,11 +55,12 @@
     ]
   },
   "devDependencies": {
-    "@types/react-window": "^1.8.8",
-    "gh-pages": "^5.0.0",
     "@types/node": "^22.15.19",
+    "@types/react-window": "^1.8.8",
     "@vitejs/plugin-react": "^4.4.1",
+    "gh-pages": "^5.0.0",
     "vite": "^6.3.5",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^4.1.8"
   }
 }

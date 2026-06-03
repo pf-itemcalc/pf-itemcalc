@@ -6,7 +6,7 @@ const About = () => {
       <Typography sx={{ paddingBottom: 1 }}>
         <b>
           Welcome to my Pathfinder 1st edition item calculator (version{" "}
-          {process.env.REACT_APP_VERSION})
+          {import.meta.env.VITE_APP_VERSION})
         </b>
       </Typography>
       <Typography sx={{ paddingBottom: 1 }}>

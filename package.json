@@ -27,13 +27,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "vite",
+    "build": "vite build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm version minor && npm run build",
     "deploy": "gh-pages -d build",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "dev": "vite"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +56,10 @@
   },
   "devDependencies": {
     "@types/react-window": "^1.8.8",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "@types/node": "^22.15.19",
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.3.5",
+    "vite-tsconfig-paths": "^4.3.2"
   }
 }

@@ -3,6 +3,7 @@
   "homepage": "https://pf-itemcalc.github.io/pf-itemcalc",
   "version": "2.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -11,7 +12,8 @@
     "predeploy": "npm version minor && npm run build",
     "deploy": "gh-pages -d build",
     "tsc": "tsc -b",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

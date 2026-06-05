@@ -65,6 +65,14 @@ type InnerSummaryProps = SummaryProps & {
   onCopy: () => void;
 };
 
+const Wrapper = ({
+  children,
+  magical,
+}: {
+  children: React.ReactNode;
+  magical: boolean;
+}) => (magical ? <i>{children}</i> : <>{children}</>);
+
 type TitleProps = SummaryProps & {
   children?: React.ReactNode;
   compositeRating?: number;
@@ -74,13 +82,10 @@ type TitleProps = SummaryProps & {
 const ItemTitle = ({ items, children, compositeRating, count }: TitleProps) => {
   const magical = isMagic(items);
 
-  const Wrapper = ({ children }: { children: React.ReactNode }) =>
-    magical ? <i>{children}</i> : <>{children}</>;
-
   return (
     <li>
       {count > 1 ? `${count}x ` : ""}
-      <Wrapper>
+      <Wrapper magical={magical}>
         {items.map((i) => (
           <React.Fragment key={i.name}>
             <ItemDisplay
@@ -194,7 +199,7 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
         min={1}
         value={count}
         onValueChange={(value) => {
-          setCount(Math.max(Number(value) ?? 1, 1));
+          setCount(Math.max(value ?? 1, 1));
         }}
       />
       {isCompositeBow && (
@@ -205,7 +210,7 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
           inputMode="numeric"
           min={0}
           value={rating}
-          onValueChange={(value) => setRating(Number(value) ?? 0)}
+          onValueChange={(value) => setRating(value ?? 0)}
         />
       )}
       <div
@@ -314,7 +319,7 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
           min={1}
           value={count}
           onValueChange={(value) => {
-            setCount(Math.max(Number(value) ?? 1, 1));
+            setCount(Math.max(value ?? 1, 1));
           }}
         />
       )}

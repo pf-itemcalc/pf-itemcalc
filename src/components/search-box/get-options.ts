@@ -102,7 +102,7 @@ const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
 
   // If the special material is specific then you can only choose:
   //  size-modifiers, enhancements, applicable armors, armor qualities, applicable weapons, weapon qualities and applicable ammunition
-  if (!!specialMaterial.isApplicable) {
+  if (specialMaterial.isApplicable) {
     const applicableItems = items.filter(
       (i) =>
         isSizeModifier(i) ||

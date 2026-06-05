@@ -83,6 +83,7 @@ const ListboxComponent = React.forwardRef<
   // Map option values to their indices in the flattened array
   itemData.forEach((item, index) => {
     if (Array.isArray(item) && item[1]) {
+      // eslint-disable-next-line react-hooks/immutability
       optionIndexMap.set(item[1], index);
     }
   });
@@ -101,7 +102,7 @@ const ListboxComponent = React.forwardRef<
   const itemSize = smUp ? 36 : 48;
 
   const getChildSize = (child: ItemData[number]) => {
-    if (child.hasOwnProperty("group")) {
+    if (Object.prototype.hasOwnProperty.call(child, "group")) {
       return 48;
     }
     return itemSize;
@@ -115,7 +116,7 @@ const ListboxComponent = React.forwardRef<
   };
 
   // Separate className for List, other props for wrapper div (ARIA, handlers)
-  const { className, style, ...otherProps } = other;
+  const { className, style: _, ...otherProps } = other;
 
   return (
     <div ref={ref} {...otherProps}>
@@ -211,6 +212,7 @@ export const VirtualizeSearchBox = ({
       renderOption={(props, option, state) =>
         [props, option, state.index] as React.ReactNode
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       renderGroup={(params) => params as any}
       onChange={onChange}
       noOptionsText={noOptionsText}

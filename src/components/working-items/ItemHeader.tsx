@@ -50,6 +50,7 @@ const ItemHeader = ({ items, setItems, onBack, onReset }: ItemHeaderProps) => {
       <Box sx={{ maxWidth: "50%" }}>
         {items.map((i) => (
           <Chip
+            key={i.name}
             sx={{ margin: 1, padding: 1 }}
             label={getItemDisplayName(i)}
             onDelete={isDeletable(i, items) ? deleteItem(i) : undefined}

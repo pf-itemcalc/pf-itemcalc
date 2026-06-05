@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Autocomplete, IconButton, TextField } from "@mui/material";
+import type {
+  Item} from "../../data/helpers";
 import {
   getItemCasterLevel,
   getIdentifyMethod,
@@ -7,7 +9,6 @@ import {
   getItemValue,
   getItemWeight,
   isMagic,
-  Item,
   isSpell,
   getSpellCasterLevel,
   getSpellValue,
@@ -20,7 +21,7 @@ import {
   isAmmunition,
 } from "../../data/helpers";
 import { range } from "lodash";
-import { Ammunition } from "../../data/ammunition/ammunition-types";
+import type { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import TurndownService from "turndown";
 import NumberField from "../number-field/NumberField";

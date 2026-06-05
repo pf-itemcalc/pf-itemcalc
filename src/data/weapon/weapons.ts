@@ -1,4 +1,4 @@
-import { Weapon } from "./weapon-types";
+import type { Weapon } from "./weapon-types";
 
 const weapons: Weapon[] = [
   {

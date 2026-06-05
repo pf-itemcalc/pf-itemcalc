@@ -1,4 +1,4 @@
-import { IounStone } from "./ioun-stone-types";
+import type { IounStone } from "./ioun-stone-types";
 
 export const iounStones: IounStone[] = [
   {

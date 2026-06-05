@@ -1,4 +1,4 @@
-import { WeaponQaulity } from "./weapon-quality-types";
+import type { WeaponQaulity } from "./weapon-quality-types";
 
 const weaponQaulities: WeaponQaulity[] = [
   { name: "Shrinking", cost: 1000, casterLevel: 5, type: "weapon-quality" },

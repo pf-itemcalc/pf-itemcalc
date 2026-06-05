@@ -1,4 +1,4 @@
-import { Wondrous } from "./wondrous-types";
+import type { Wondrous } from "./wondrous-types";
 
 export const wondrousItems: Wondrous[] = [
   {

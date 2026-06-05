@@ -28,6 +28,7 @@ export default defineConfig([
           caughtErrorsIgnorePattern: "^_",
         },
       ],
+      "@typescript-eslint/consistent-type-imports": "error",
     },
   },
 ]);

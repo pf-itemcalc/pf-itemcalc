@@ -1,4 +1,5 @@
-import { getMinimumCasterLevel, SpellList } from "./spell-types";
+import type { SpellList } from "./spell-types";
+import { getMinimumCasterLevel } from "./spell-types";
 
 type CasterLevelTestCase = [SpellList, number, number];
 

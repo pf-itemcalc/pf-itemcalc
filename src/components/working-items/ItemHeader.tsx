@@ -1,6 +1,8 @@
 import Reply from "@mui/icons-material/Reply";
 import Clear from "@mui/icons-material/Clear";
 import { Box, Chip, IconButton } from "@mui/material";
+import type {
+  Item} from "../../data/helpers";
 import {
   getItemDisplayName,
   isAmmunition,
@@ -11,8 +13,7 @@ import {
   isSpell,
   isSpellVessel,
   isWeapon,
-  isWeaponQuality,
-  Item,
+  isWeaponQuality
 } from "../../data/helpers";
 
 type ItemHeaderProps = {

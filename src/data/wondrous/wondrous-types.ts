@@ -1,4 +1,4 @@
-import { Slot } from "../generic/slot-types";
+import type { Slot } from "../generic/slot-types";
 
 export type Wondrous = {
   type: "wondrous";

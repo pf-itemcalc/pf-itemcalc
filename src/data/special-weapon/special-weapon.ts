@@ -1,4 +1,4 @@
-import { SpecialWeapon } from "./special-weapon-types";
+import type { SpecialWeapon } from "./special-weapon-types";
 
 export const specialWeaponItems: SpecialWeapon[] = [
   {

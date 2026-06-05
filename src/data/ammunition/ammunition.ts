@@ -1,4 +1,4 @@
-import { Ammunition } from "./ammunition-types";
+import type { Ammunition } from "./ammunition-types";
 
 // Note this list is incomplete.
 // I intentionally only did arrows, bolts and sling bullets because

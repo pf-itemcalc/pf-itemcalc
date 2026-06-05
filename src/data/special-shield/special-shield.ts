@@ -1,4 +1,4 @@
-import { SpecialShield } from "./special-shield-types";
+import type { SpecialShield } from "./special-shield-types";
 
 export const specialShieldItems: SpecialShield[] = [
   {

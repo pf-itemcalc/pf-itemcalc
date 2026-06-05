@@ -1,10 +1,11 @@
 import { isAmmunition, isArmor, isWeapon } from "../helpers";
 import { MasterworkArmorCost } from "./enhancement-types";
+import type {
+  SpecialMaterial} from "./special-material-types";
 import {
   baseSpecialMaterial,
   valueFromArmorCategory,
   valueFromWeaponSize,
-  SpecialMaterial,
   valueForAnyType,
 } from "./special-material-types";
 

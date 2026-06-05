@@ -1,4 +1,4 @@
-import { Spell } from "./spell-types";
+import type { Spell } from "./spell-types";
 
 const spells: Spell[] = [
   {

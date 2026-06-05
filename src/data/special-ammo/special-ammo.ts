@@ -1,4 +1,4 @@
-import { SpecialAmmo } from "./special-ammo-types";
+import type { SpecialAmmo } from "./special-ammo-types";
 
 export const specialAmmoItems: SpecialAmmo[] = [
   {

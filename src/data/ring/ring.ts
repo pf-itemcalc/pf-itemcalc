@@ -1,4 +1,4 @@
-import { Ring } from "./ring-types";
+import type { Ring } from "./ring-types";
 
 export const rings: Ring[] = [
   {

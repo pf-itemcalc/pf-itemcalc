@@ -7,7 +7,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { SxProps } from "@mui/material";
+import type { SxProps } from "@mui/material";
 
 // MUI no longer recommends using `type=number` for a TextField, and recommends this instead
 

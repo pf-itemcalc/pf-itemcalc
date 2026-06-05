@@ -1,18 +1,21 @@
 import * as React from "react";
-import Autocomplete, {
+import type {
   AutocompleteChangeDetails,
   AutocompleteChangeReason,
   AutocompleteCloseReason,
-  AutocompleteRenderInputParams,
+  AutocompleteRenderInputParams} from "@mui/material/Autocomplete";
+import Autocomplete, {
   autocompleteClasses,
 } from "@mui/material/Autocomplete";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ListSubheader from "@mui/material/ListSubheader";
 import Popper from "@mui/material/Popper";
-import { useTheme, styled, SxProps, Theme } from "@mui/material/styles";
-import { List, ListImperativeAPI, RowComponentProps } from "react-window";
+import type { SxProps, Theme } from "@mui/material/styles";
+import { useTheme, styled } from "@mui/material/styles";
+import type { ListImperativeAPI, RowComponentProps } from "react-window";
+import { List } from "react-window";
 import Typography from "@mui/material/Typography";
-import { Item } from "../../data/helpers";
+import type { Item } from "../../data/helpers";
 
 const LISTBOX_PADDING = 8; // px
 

@@ -1,4 +1,4 @@
-import { SpellVessel } from "./spell-vessel-types";
+import type { SpellVessel } from "./spell-vessel-types";
 
 export const spellVessels: SpellVessel[] = [
   {

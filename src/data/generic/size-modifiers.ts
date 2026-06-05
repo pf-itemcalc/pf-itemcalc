@@ -1,4 +1,4 @@
-import { SizeModifier } from "./size-modifier-types";
+import type { SizeModifier } from "./size-modifier-types";
 
 const sizeModifiers: SizeModifier[] = [
   {

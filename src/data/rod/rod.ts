@@ -1,4 +1,4 @@
-import { Rod } from "./rod-types";
+import type { Rod } from "./rod-types";
 
 export const rods: Rod[] = [
   {

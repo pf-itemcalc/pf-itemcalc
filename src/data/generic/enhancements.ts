@@ -1,4 +1,4 @@
-import { Enhancement } from "./enhancement-types";
+import type { Enhancement } from "./enhancement-types";
 
 export const Masterwork: Enhancement = {
   name: "Masterwork",

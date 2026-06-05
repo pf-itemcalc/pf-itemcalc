@@ -1,4 +1,4 @@
-import { ArmorQaulity } from "./armor-quality-types";
+import type { ArmorQaulity } from "./armor-quality-types";
 
 const armorQaulities: ArmorQaulity[] = [
   { name: "Advancing", modifier: 1, casterLevel: 5, type: "armor-quality" },

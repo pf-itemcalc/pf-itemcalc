@@ -1,4 +1,4 @@
-import { Item } from "../../data/helpers";
+import type { Item } from "../../data/helpers";
 import ItemHeader from "./ItemHeader";
 import Summary from "./Summary";
 

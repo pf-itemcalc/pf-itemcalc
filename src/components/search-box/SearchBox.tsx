@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button, TextField } from "@mui/material";
+import type {
+  Item} from "../../data/helpers";
 import {
   getItemDisplayName,
-  getItemTypeDisplayName,
-  Item,
+  getItemTypeDisplayName
 } from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
 import { Box } from "@mui/system";

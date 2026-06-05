@@ -1,4 +1,4 @@
-import { Staff } from "./staff-types";
+import type { Staff } from "./staff-types";
 
 export const staves: Staff[] = [
   {

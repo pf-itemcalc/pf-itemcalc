@@ -8,7 +8,7 @@ import Title from "./components/title/Title";
 const App = () => {
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
   const [workingItems, setWorkingItems] = useState<Item[] | undefined>(
-    undefined
+    undefined,
   );
 
   const moveFromSelectionToWorking = () => {

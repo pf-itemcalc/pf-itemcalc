@@ -35,7 +35,7 @@ const SearchBox = ({
   useEffect(() => {
     const interval = setInterval(
       () => setHintIndex((v) => (v + 1 === hints.length ? 0 : v + 1)),
-      5000
+      5000,
     );
     return () => {
       clearInterval(interval);
@@ -84,8 +84,13 @@ const SearchBox = ({
             {...params}
             label="Search"
             helperText={hintText}
-            FormHelperTextProps={{
-              sx: { color: displayError ? "red" : "inherit" },
+            slotProps={{
+              ...params.slotProps,
+              formHelperText: {
+                sx: {
+                  color: displayError ? "red" : "inherit",
+                },
+              },
             }}
             onKeyDown={(event) => {
               if (event.key === "Enter" && !open) {
@@ -96,7 +101,7 @@ const SearchBox = ({
         )}
         sx={{ width: "50%" }}
         value={selectedItems}
-        onChange={(e, values) => setSelectedItems(values)}
+        onChange={(_, values) => setSelectedItems(values)}
         noOptionsText="No more options, press Go! or the Enter key"
       />
       <Button

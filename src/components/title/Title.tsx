@@ -9,7 +9,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { useState } from "react";
 import About from "./About";
 
@@ -28,7 +28,7 @@ const Title = ({ small }: TitleProps) => {
             size="small"
             onClick={() => setHelpOpen(true)}
           >
-            <HelpOutlineIcon fontSize={small ? "small" : "large"} />
+            <HelpOutlineOutlinedIcon fontSize={small ? "small" : "large"} />
           </IconButton>
         }
       >

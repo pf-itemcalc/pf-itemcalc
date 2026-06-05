@@ -10,21 +10,35 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import ListSubheader from "@mui/material/ListSubheader";
 import Popper from "@mui/material/Popper";
 import { useTheme, styled, SxProps, Theme } from "@mui/material/styles";
-import { VariableSizeList, ListChildComponentProps } from "react-window";
+import { List, ListImperativeAPI, RowComponentProps } from "react-window";
 import Typography from "@mui/material/Typography";
 import { Item } from "../../data/helpers";
 
 const LISTBOX_PADDING = 8; // px
 
-const renderRow = (props: ListChildComponentProps) => {
-  const { data, index, style } = props;
-  const dataSet = data[index];
+type ItemData = Array<
+  | {
+      key: number;
+      group: string;
+      children: React.ReactNode;
+    }
+  | [React.ReactElement, string, number]
+>;
+
+function RowComponent({
+  index,
+  itemData,
+  style,
+}: RowComponentProps & {
+  itemData: ItemData;
+}) {
+  const dataSet = itemData[index];
   const inlineStyle = {
     ...style,
-    top: (style.top as number) + LISTBOX_PADDING,
+    top: ((style.top as number) ?? 0) + LISTBOX_PADDING,
   };
 
-  if (dataSet.hasOwnProperty("group")) {
+  if ("group" in dataSet) {
     return (
       <ListSubheader key={dataSet.key} component="div" style={inlineStyle}>
         {dataSet.group}
@@ -32,45 +46,52 @@ const renderRow = (props: ListChildComponentProps) => {
     );
   }
 
-  const { key } = dataSet[0];
+  const { key, ...optionProps } = dataSet[0];
 
   return (
-    <Typography component="li" {...dataSet[0]} noWrap style={inlineStyle}>
+    <Typography
+      key={key}
+      component="li"
+      {...optionProps}
+      noWrap
+      style={inlineStyle}
+    >
       {key}
     </Typography>
   );
-};
+}
 
-const OuterElementContext = React.createContext({});
-
-const OuterElementType = React.forwardRef<HTMLDivElement>((props, ref) => {
-  const outerProps = React.useContext(OuterElementContext);
-  return <div ref={ref} {...props} {...outerProps} />;
-});
-
-const useResetCache = (data: any) => {
-  const ref = React.useRef<VariableSizeList>(null);
-  React.useEffect(() => {
-    if (ref.current != null) {
-      ref.current.resetAfterIndex(0, true);
-    }
-  }, [data]);
-  return ref;
-};
-
-// Adapter for react-window
+// Adapter for react-window v2
 const ListboxComponent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLElement>
+  React.HTMLAttributes<HTMLElement> & {
+    internalListRef: React.Ref<ListImperativeAPI>;
+    onItemsBuilt: (optionIndexMap: Map<string, number>) => void;
+  }
 >(function ListboxComponent(props, ref) {
-  const { children, ...other } = props;
-  const itemData: React.ReactElement[] = [];
-  (children as React.ReactElement[]).forEach(
-    (item: React.ReactElement & { children?: React.ReactElement[] }) => {
-      itemData.push(item);
-      itemData.push(...(item.children || []));
+  const { children, internalListRef, onItemsBuilt, ...other } = props;
+  const itemData: ItemData = [];
+  const optionIndexMap = React.useMemo(() => new Map<string, number>(), []);
+
+  (children as ItemData).forEach((item) => {
+    itemData.push(item);
+    if ("children" in item && Array.isArray(item.children)) {
+      itemData.push(...item.children);
     }
-  );
+  });
+
+  // Map option values to their indices in the flattened array
+  itemData.forEach((item, index) => {
+    if (Array.isArray(item) && item[1]) {
+      optionIndexMap.set(item[1], index);
+    }
+  });
+
+  React.useEffect(() => {
+    if (onItemsBuilt) {
+      onItemsBuilt(optionIndexMap);
+    }
+  }, [onItemsBuilt, optionIndexMap]);
 
   const theme = useTheme();
   const smUp = useMediaQuery(theme.breakpoints.up("sm"), {
@@ -79,11 +100,10 @@ const ListboxComponent = React.forwardRef<
   const itemCount = itemData.length;
   const itemSize = smUp ? 36 : 48;
 
-  const getChildSize = (child: React.ReactElement) => {
+  const getChildSize = (child: ItemData[number]) => {
     if (child.hasOwnProperty("group")) {
       return 48;
     }
-
     return itemSize;
   };
 
@@ -94,25 +114,26 @@ const ListboxComponent = React.forwardRef<
     return itemData.map(getChildSize).reduce((a, b) => a + b, 0);
   };
 
-  const gridRef = useResetCache(itemCount);
+  // Separate className for List, other props for wrapper div (ARIA, handlers)
+  const { className, style, ...otherProps } = other;
 
   return (
-    <div ref={ref}>
-      <OuterElementContext.Provider value={other}>
-        <VariableSizeList
-          itemData={itemData}
-          height={getHeight() + 2 * LISTBOX_PADDING}
-          width="100%"
-          ref={gridRef}
-          outerElementType={OuterElementType}
-          innerElementType="ul"
-          itemSize={(index) => getChildSize(itemData[index])}
-          overscanCount={5}
-          itemCount={itemCount}
-        >
-          {renderRow}
-        </VariableSizeList>
-      </OuterElementContext.Provider>
+    <div ref={ref} {...otherProps}>
+      <List
+        className={className}
+        listRef={internalListRef}
+        key={itemCount}
+        rowCount={itemCount}
+        rowHeight={(index) => getChildSize(itemData[index])}
+        rowComponent={RowComponent}
+        rowProps={{ itemData }}
+        style={{
+          height: getHeight() + 2 * LISTBOX_PADDING,
+          width: "100%",
+        }}
+        overscanCount={5}
+        tagName="ul"
+      />
     </div>
   );
 });
@@ -136,7 +157,7 @@ type VirtualizeSearchBoxProps = {
   onClose:
     | ((
         event: React.SyntheticEvent<Element, Event>,
-        reason: AutocompleteCloseReason
+        reason: AutocompleteCloseReason,
       ) => void)
     | undefined;
   renderInput: (params: AutocompleteRenderInputParams) => React.ReactNode;
@@ -147,7 +168,7 @@ type VirtualizeSearchBoxProps = {
         event: React.SyntheticEvent<Element, Event>,
         value: Item[],
         reason: AutocompleteChangeReason,
-        details?: AutocompleteChangeDetails<Item> | undefined
+        details?: AutocompleteChangeDetails<Item> | undefined,
       ) => void)
     | undefined;
   noOptionsText?: string;
@@ -171,8 +192,14 @@ export const VirtualizeSearchBox = ({
       multiple
       disableListWrap
       filterSelectedOptions
-      PopperComponent={StyledPopper}
-      ListboxComponent={ListboxComponent}
+      slots={{
+        popper: StyledPopper,
+      }}
+      slotProps={{
+        listbox: {
+          component: ListboxComponent,
+        },
+      }}
       options={options}
       groupBy={groupBy}
       getOptionLabel={getOptionLabel}

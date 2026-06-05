@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Autocomplete, IconButton, TextField, Typography } from "@mui/material";
+import { Autocomplete, IconButton, TextField } from "@mui/material";
 import {
   getItemCasterLevel,
   getIdentifyMethod,
@@ -23,6 +23,7 @@ import { range } from "lodash";
 import { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import TurndownService from "turndown";
+import NumberField from "../number-field/NumberField";
 
 type NewTabLinkProps = {
   url: string;
@@ -185,32 +186,37 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
 
   return (
     <>
-      <TextField
+      <NumberField
+        size="small"
         sx={{ width: "50%", margin: 1 }}
         label="Count"
-        type="number"
         inputMode="numeric"
-        inputProps={{ min: 1 }}
+        min={1}
         value={count}
-        onChange={(e) => {
-          setCount(Math.max(Number(e.target.value) ?? 1, 1));
+        onValueChange={(value) => {
+          setCount(Math.max(Number(value) ?? 1, 1));
         }}
       />
       {isCompositeBow && (
-        <TextField
+        <NumberField
+          size="small"
           sx={{ width: "50%", margin: 1 }}
           label="Composite Rating"
-          type="number"
           inputMode="numeric"
-          inputProps={{ min: 0 }}
+          min={0}
           value={rating}
-          onChange={(e) => setRating(Number(e.target.value) ?? 0)}
+          onValueChange={(value) => setRating(Number(value) ?? 0)}
         />
       )}
-      <Typography
-        sx={{ width: "50%", border: "1px solid black", margin: 1, padding: 1 }}
-        fontFamily="Calibri"
-        fontSize={15}
+      <div
+        style={{
+          width: "50%",
+          border: "1px solid black",
+          margin: 1,
+          padding: 1,
+          fontFamily: "Calibri",
+          fontSize: 15,
+        }}
       >
         <CopyButton onCopy={onCopy} />
         <ul id="SummaryItemList">
@@ -261,7 +267,7 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
             </ul>
           </ItemTitle>
         </ul>
-      </Typography>
+      </div>
     </>
   );
 };
@@ -300,28 +306,30 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
   return (
     <>
       {!isWand && (
-        <TextField
+        <NumberField
+          size="small"
           sx={{ width: "50%", margin: 1 }}
           label="Count"
-          type="number"
           inputMode="numeric"
-          inputProps={{ min: 1 }}
+          min={1}
           value={count}
-          onChange={(e) => {
-            setCount(Math.max(Number(e.target.value) ?? 1, 1));
+          onValueChange={(value) => {
+            setCount(Math.max(Number(value) ?? 1, 1));
           }}
         />
       )}
       <Autocomplete
+        size="small"
         sx={{ width: "50%", margin: 1 }}
         options={range(1, 21)}
         renderInput={(params) => <TextField {...params} label="Caster level" />}
         value={overrideCasterLevel}
         getOptionLabel={(o) => o.toString()}
-        onChange={(e, value) => setOverrideCasterLevel(value ?? casterLevel)}
+        onChange={(_, value) => setOverrideCasterLevel(value ?? casterLevel)}
       />
       {isWand && (
         <Autocomplete
+          size="small"
           sx={{ width: "50%", margin: 1 }}
           options={range(1, 51)}
           renderInput={(params) => (
@@ -329,14 +337,19 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
           )}
           value={charges}
           getOptionLabel={(o) => o.toString()}
-          onChange={(e, value) => setCharges(value ?? 50)}
+          onChange={(_, value) => setCharges(value ?? 50)}
         />
       )}
 
-      <Typography
-        sx={{ width: "50%", border: "1px solid black", margin: 1, padding: 1 }}
-        fontFamily="Calibri"
-        fontSize={15}
+      <div
+        style={{
+          width: "50%",
+          border: "1px solid black",
+          margin: 1,
+          padding: 1,
+          fontFamily: "Calibri",
+          fontSize: 15,
+        }}
       >
         <CopyButton onCopy={onCopy} />
         <ul id="SummaryItemList">
@@ -375,7 +388,7 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
             </ul>
           </ItemTitle>
         </ul>
-      </Typography>
+      </div>
     </>
   );
 };

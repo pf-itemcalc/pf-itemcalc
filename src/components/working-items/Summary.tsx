@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Autocomplete, IconButton, TextField } from "@mui/material";
-import type {
-  Item} from "../../data/helpers";
+import type { Item } from "../../data/helpers";
 import {
   getItemCasterLevel,
   getIdentifyMethod,

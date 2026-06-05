@@ -38,7 +38,7 @@ export type Spell = {
 
 export const getMinimumCasterLevel = (
   spellLevel: number,
-  spellList: SpellList
+  spellList: SpellList,
 ) => {
   switch (spellList) {
     // Full caster (2nd level spells at 3rd level)
@@ -86,5 +86,5 @@ export const getMinimumCasterLevel = (
 
 export const getUrl = (spell: Spell) =>
   `https://aonprd.com/SpellDisplay.aspx?ItemName=${encodeURIComponent(
-    spell.name
+    spell.name,
   )}`;

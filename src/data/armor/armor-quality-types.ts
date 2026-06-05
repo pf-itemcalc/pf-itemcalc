@@ -15,7 +15,7 @@ export type ArmorQaulityFlatPrice = BaseArmorQaulity & {
 export type ArmorQaulity = ArmorQaulityBonus | ArmorQaulityFlatPrice;
 
 const isBonus = (
-  armorQaulity: ArmorQaulity
+  armorQaulity: ArmorQaulity,
 ): armorQaulity is ArmorQaulityBonus =>
   (armorQaulity as ArmorQaulityBonus).modifier !== undefined;
 
@@ -37,5 +37,5 @@ export const getArmorQaulityCost = (armorQuality: ArmorQaulity) => {
 
 export const getUrl = (armorQuality: ArmorQaulity) =>
   `https://www.aonprd.com/MagicArmorDisplay.aspx?ItemName=${encodeURIComponent(
-    armorQuality.name
+    armorQuality.name,
   )}`;

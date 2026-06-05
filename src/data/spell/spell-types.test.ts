@@ -46,7 +46,7 @@ describe(getMinimumCasterLevel.name, () => {
     "given spell list %s and spell level %s returns minimum caster level %s",
     (spellList, spellLevel, expectedCasterLevel) =>
       expect(getMinimumCasterLevel(spellLevel, spellList)).toBe(
-        expectedCasterLevel
-      )
+        expectedCasterLevel,
+      ),
   );
 });

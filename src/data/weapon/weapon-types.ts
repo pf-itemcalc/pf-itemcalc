@@ -12,5 +12,5 @@ export type Weapon = {
 
 export const getUrl = (weapon: Weapon) =>
   `https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=${encodeURIComponent(
-    weapon.name
+    weapon.name,
   )}`;

@@ -11,7 +11,7 @@ export type Ammunition = {
 
 export const getUrl = (ammunition: Ammunition) =>
   `https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=${encodeURIComponent(
-    ammunition.name + " (" + ammunition.countInBundle + ")"
+    ammunition.name + " (" + ammunition.countInBundle + ")",
   )}`;
 
 export const getIndividualAmmoCost = (ammunition: Ammunition): number =>

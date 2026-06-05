@@ -13,7 +13,7 @@ describe("all items", () => {
         }
         return dictionary;
       },
-      {}
+      {},
     );
 
     Object.entries(countsDictonary).forEach(([id, count]) => {
@@ -22,7 +22,7 @@ describe("all items", () => {
       }
 
       const duplicates = allItems.filter(
-        (item) => getUniqueItemIdentifier(item) === id
+        (item) => getUniqueItemIdentifier(item) === id,
       );
       expect(duplicates).toHaveLength(0);
     });

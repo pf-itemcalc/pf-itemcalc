@@ -15,7 +15,7 @@ export type WeaponQaulityFlatPrice = BaseWeaponQaulity & {
 export type WeaponQaulity = WeaponQaulityBonus | WeaponQaulityFlatPrice;
 
 const isBonus = (
-  weaponQaulity: WeaponQaulity
+  weaponQaulity: WeaponQaulity,
 ): weaponQaulity is WeaponQaulityBonus =>
   (weaponQaulity as WeaponQaulityBonus).modifier !== undefined;
 
@@ -37,5 +37,5 @@ export const getWeaponQaulityCost = (weaponQuality: WeaponQaulity) => {
 
 export const getUrl = (weaponQuality: WeaponQaulity) =>
   `https://www.aonprd.com/MagicWeaponsDisplay.aspx?ItemName=${encodeURIComponent(
-    weaponQuality.name
+    weaponQuality.name,
   )}`;

@@ -5,7 +5,7 @@ describe("rings", () => {
     const counts = rings.map((item) => ({
       name: item.name + item.subtitle,
       count: rings.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle
+        (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));
 

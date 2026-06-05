@@ -5,7 +5,7 @@ describe("iounStones", () => {
     const counts = iounStones.map((item) => ({
       name: item.name + item.subtitle,
       count: iounStones.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle
+        (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));
 

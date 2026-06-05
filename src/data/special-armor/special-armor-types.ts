@@ -12,7 +12,7 @@ export type SpecialArmor = {
 
 export const getUrl = (item: SpecialArmor): string => {
   const baseUrl = `https://www.aonprd.com/MagicArmorDisplay.aspx?ItemName=${encodeURIComponent(
-    item.name
+    item.name,
   )}`;
 
   if (item.subtitle === undefined) {

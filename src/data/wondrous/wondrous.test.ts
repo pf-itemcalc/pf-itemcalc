@@ -5,7 +5,7 @@ describe("wondrousItems", () => {
     const counts = wondrousItems.map((item) => ({
       name: item.name + item.subtitle,
       count: wondrousItems.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle
+        (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));
 

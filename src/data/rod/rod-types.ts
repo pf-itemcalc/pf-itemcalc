@@ -12,7 +12,7 @@ export type Rod = {
 
 export const getUrl = (item: Rod): string => {
   const baseUrl = `https://www.aonprd.com/MagicRodsDisplay.aspx?FinalName=${encodeURIComponent(
-    item.name
+    item.name,
   )}`;
 
   if (item.subtitle === undefined) {

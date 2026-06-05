@@ -1,72 +1,50 @@
 import { capitalize } from "lodash";
-import type {
-  ArmorQaulity} from "./armor/armor-quality-types";
+import type { ArmorQaulity } from "./armor/armor-quality-types";
 import {
   getArmorQaulityCost,
   getArmorQaulityModifier,
   getUrl as getArmorQualityUrl,
 } from "./armor/armor-quality-types";
-import type { Armor} from "./armor/armor-types";
+import type { Armor } from "./armor/armor-types";
 import { getUrl as getArmorUrl } from "./armor/armor-types";
 import type { Enhancement } from "./generic/enhancement-types";
 import { Masterwork } from "./generic/enhancements";
-import type {
-  SpecialMaterial} from "./generic/special-material-types";
-import {
-  getUrl as getMaterialUrl
-} from "./generic/special-material-types";
-import type {
-  Spell} from "./spell/spell-types";
+import type { SpecialMaterial } from "./generic/special-material-types";
+import { getUrl as getMaterialUrl } from "./generic/special-material-types";
+import type { Spell } from "./spell/spell-types";
 import {
   getMinimumCasterLevel,
-  getUrl as getSpellUrl
+  getUrl as getSpellUrl,
 } from "./spell/spell-types";
 import type { SpellVessel, SpellVesselType } from "./spell/spell-vessel-types";
-import type {
-  WeaponQaulity} from "./weapon/weapon-quality-types";
+import type { WeaponQaulity } from "./weapon/weapon-quality-types";
 import {
   getUrl as getWeaponQualityUrl,
   getWeaponQaulityCost,
-  getWeaponQaulityModifier
+  getWeaponQaulityModifier,
 } from "./weapon/weapon-quality-types";
 import type { Weapon } from "./weapon/weapon-types";
 import { getUrl as getWeaponUrl } from "./weapon/weapon-types";
-import type { Wondrous} from "./wondrous/wondrous-types";
+import type { Wondrous } from "./wondrous/wondrous-types";
 import { getUrl as getWondrousUrl } from "./wondrous/wondrous-types";
-import type {
-  SpecialAmmo} from "./special-ammo/special-ammo-types";
-import {
-  getUrl as getSpecialAmmoUrl,
-} from "./special-ammo/special-ammo-types";
-import type {
-  SpecialArmor} from "./special-armor/special-armor-types";
-import {
-  getUrl as getSpecialArmorUrl,
-} from "./special-armor/special-armor-types";
-import type {
-  SpecialShield} from "./special-shield/special-shield-types";
-import {
-  getUrl as getSpecialShieldUrl,
-} from "./special-shield/special-shield-types";
-import type {
-  SpecialWeapon} from "./special-weapon/special-weapon-types";
-import {
-  getUrl as getSpecialWeaponUrl,
-} from "./special-weapon/special-weapon-types";
-import type { Ring} from "./ring/ring-types";
+import type { SpecialAmmo } from "./special-ammo/special-ammo-types";
+import { getUrl as getSpecialAmmoUrl } from "./special-ammo/special-ammo-types";
+import type { SpecialArmor } from "./special-armor/special-armor-types";
+import { getUrl as getSpecialArmorUrl } from "./special-armor/special-armor-types";
+import type { SpecialShield } from "./special-shield/special-shield-types";
+import { getUrl as getSpecialShieldUrl } from "./special-shield/special-shield-types";
+import type { SpecialWeapon } from "./special-weapon/special-weapon-types";
+import { getUrl as getSpecialWeaponUrl } from "./special-weapon/special-weapon-types";
+import type { Ring } from "./ring/ring-types";
 import { getUrl as getRingUrl } from "./ring/ring-types";
-import type { Rod} from "./rod/rod-types";
+import type { Rod } from "./rod/rod-types";
 import { getUrl as getRodUrl } from "./rod/rod-types";
-import type { Staff} from "./staff/staff-types";
+import type { Staff } from "./staff/staff-types";
 import { getUrl as getStaffUrl } from "./staff/staff-types";
-import type {
-  IounStone} from "./ioun-stone/ioun-stone-types";
-import {
-  getUrl as getIounStoneUrl,
-} from "./ioun-stone/ioun-stone-types";
+import type { IounStone } from "./ioun-stone/ioun-stone-types";
+import { getUrl as getIounStoneUrl } from "./ioun-stone/ioun-stone-types";
 import type { SizeModifier } from "./generic/size-modifier-types";
-import type {
-  Ammunition} from "./ammunition/ammunition-types";
+import type { Ammunition } from "./ammunition/ammunition-types";
 import {
   getUrl as getAmmunitionUrl,
   getIndividualAmmoCost,

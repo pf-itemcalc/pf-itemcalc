@@ -5,7 +5,7 @@ describe("staves", () => {
     const counts = staves.map((item) => ({
       name: item.name + item.subtitle,
       count: staves.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle
+        (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));
 

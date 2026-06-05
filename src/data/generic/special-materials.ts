@@ -1,7 +1,6 @@
 import { isAmmunition, isArmor, isWeapon } from "../helpers";
 import { MasterworkArmorCost } from "./enhancement-types";
-import type {
-  SpecialMaterial} from "./special-material-types";
+import type { SpecialMaterial } from "./special-material-types";
 import {
   baseSpecialMaterial,
   valueFromArmorCategory,
@@ -339,7 +338,7 @@ const GriffonMane: SpecialMaterial = {
       item,
       200,
       item.weight * 50,
-      item.weight * 50
+      item.weight * 50,
     );
   },
   alreadyMasterwork: true,
@@ -441,7 +440,7 @@ const Mithral: SpecialMaterial = {
       1000,
       4000,
       9000,
-      item.weight * 500
+      item.weight * 500,
     ),
   alteredWeight: (item) => item.weight * 0.5,
   alreadyMasterwork: true,
@@ -476,7 +475,7 @@ const Noqual: SpecialMaterial = {
         2000,
         4000,
         8000,
-        12000
+        12000,
       ) + (willBeMadeMagical ? 5000 * oneFiftiethIfAmmunition : 0)
     );
   },
@@ -524,7 +523,7 @@ const SingingSteel: SpecialMaterial = {
       750,
       9000,
       12000,
-      item.weight * 600
+      item.weight * 600,
     ),
   alreadyMasterwork: true,
   masterworkCostIncluded: true,

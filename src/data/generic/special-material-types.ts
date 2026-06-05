@@ -33,7 +33,7 @@ export const baseSpecialMaterial: SpecialMaterialOptionals & {
 //  they don't have individual pages
 export const getUrl = (specialMaterial: SpecialMaterial) =>
   `https://www.aonprd.com/SpecialMaterials.aspx#:~:text=${encodeURIComponent(
-    specialMaterial.name
+    specialMaterial.name,
   ).replaceAll("-", "%2D")},-Source`;
 
 export const valueFromArmorCategory = (
@@ -41,7 +41,7 @@ export const valueFromArmorCategory = (
   light: number,
   medium: number,
   heavy: number,
-  defaultCost: number = 0
+  defaultCost: number = 0,
 ) => {
   switch (armor.category) {
     case "Light":
@@ -60,7 +60,7 @@ export const valueFromWeaponSize = (
   light: number,
   oneHanded: number,
   twoHanded: number,
-  defaultCost: number = 0
+  defaultCost: number = 0,
 ) => {
   switch (weapon.size) {
     case "Light":
@@ -82,7 +82,7 @@ export const valueForAnyType = (
   lightArmor: number,
   mediumArmor: number,
   heavyArmor: number,
-  defaultCost: number = 0
+  defaultCost: number = 0,
 ) => {
   if (isAmmunition(item)) {
     return ammo;
@@ -101,6 +101,6 @@ export const valueForAnyType = (
     lightArmor,
     mediumArmor,
     heavyArmor,
-    defaultCost
+    defaultCost,
   );
 };

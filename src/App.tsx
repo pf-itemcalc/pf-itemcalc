@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
-import type { Item} from "./data/helpers";
+import type { Item } from "./data/helpers";
 import { orderItems } from "./data/helpers";
 import WorkingItems from "./components/working-items/WorkingItems";
 import Title from "./components/title/Title";

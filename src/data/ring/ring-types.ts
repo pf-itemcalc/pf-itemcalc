@@ -12,7 +12,7 @@ export type Ring = {
 
 export const getUrl = (item: Ring): string => {
   const baseUrl = `https://www.aonprd.com/MagicRingsDisplay.aspx?FinalName=${encodeURIComponent(
-    item.name
+    item.name,
   )}`;
 
   if (item.subtitle === undefined) {

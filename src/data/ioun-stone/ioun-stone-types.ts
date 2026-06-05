@@ -13,5 +13,5 @@ export type IounStone = {
 
 export const getUrl = (item: IounStone): string =>
   `https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=${encodeURIComponent(
-    item.linkName
+    item.linkName,
   )}`;

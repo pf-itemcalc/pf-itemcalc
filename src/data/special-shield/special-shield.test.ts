@@ -5,7 +5,7 @@ describe("specialShieldItems", () => {
     const counts = specialShieldItems.map((item) => ({
       name: item.name + item.subtitle,
       count: specialShieldItems.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle
+        (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));
 

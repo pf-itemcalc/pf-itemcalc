@@ -12,7 +12,7 @@ export type Staff = {
 
 export const getUrl = (item: Staff): string => {
   const baseUrl = `https://aonprd.com/MagicStavesDisplay.aspx?ItemName=${encodeURIComponent(
-    item.name
+    item.name,
   )}`;
 
   if (item.subtitle === undefined) {

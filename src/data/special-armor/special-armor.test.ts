@@ -5,7 +5,7 @@ describe("specialArmorItems", () => {
     const counts = specialArmorItems.map((item) => ({
       name: item.name + item.subtitle,
       count: specialArmorItems.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle
+        (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));
 

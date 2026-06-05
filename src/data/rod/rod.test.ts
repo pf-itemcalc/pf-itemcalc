@@ -5,7 +5,7 @@ describe("rods", () => {
     const counts = rods.map((item) => ({
       name: item.name + item.subtitle,
       count: rods.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle
+        (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));
 

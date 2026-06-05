@@ -12,7 +12,7 @@ export type Wondrous = {
 
 export const getUrl = (item: Wondrous): string => {
   const baseUrl = `https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=${encodeURIComponent(
-    item.name
+    item.name,
   )}`;
 
   if (item.subtitle === undefined) {

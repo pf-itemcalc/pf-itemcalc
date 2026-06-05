@@ -12,7 +12,7 @@ export type SpecialAmmo = {
 
 export const getUrl = (item: SpecialAmmo): string => {
   const baseUrl = `https://www.aonprd.com/MagicWeaponsDisplay.aspx?ItemName=${encodeURIComponent(
-    item.name
+    item.name,
   )}`;
 
   if (item.subtitle === undefined) {

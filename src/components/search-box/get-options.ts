@@ -5,8 +5,7 @@ import armors from "../../data/armor/armors";
 import enhancements, { Masterwork } from "../../data/generic/enhancements";
 import sizeModifiers from "../../data/generic/size-modifiers";
 import specialMaterials from "../../data/generic/special-materials";
-import type {
-  Item} from "../../data/helpers";
+import type { Item } from "../../data/helpers";
 import {
   isAmmunition,
   isArmor,

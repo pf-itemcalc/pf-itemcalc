@@ -9,7 +9,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest",
-    "predeploy": "npm version minor && npm run build",
+    "predeploy": "npm version patch && npm run build",
     "deploy": "gh-pages -d build",
     "tsc": "tsc -b",
     "lint": "eslint .",

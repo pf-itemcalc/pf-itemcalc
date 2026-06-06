@@ -90,7 +90,7 @@ const SearchBox = ({
               }}
             />
           )}
-          sx={{ width: "50%" }}
+          sx={{ width: "100%" }}
           value={selectedItems}
           onChange={(_, values) => setSelectedItems(values)}
           noOptionsText="No more options, press Go! or the Enter key"
@@ -108,8 +108,7 @@ const SearchBox = ({
           Go!
         </Button>
       </CenterBox>
-      {/* TODO: Handle width properly when we make this responsive */}
-      <FormHelperText sx={{ width: "62%" }} error={!!displayError}>
+      <FormHelperText sx={{ width: "100%" }} error={!!displayError}>
         {hintText}
       </FormHelperText>
     </CenterBox>

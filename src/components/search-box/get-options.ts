@@ -10,11 +10,13 @@ import {
   isAmmunition,
   isArmor,
   isArmorQuality,
+  isCount,
   isEnhancement,
   isMagicEnhancement,
   isSizeModifier,
   isSpecialMaterial,
   isSpecificItem,
+  isSpecificSpellVessel,
   isSpell,
   isSpellVessel,
   isWeapon,
@@ -292,6 +294,17 @@ const sizeModifierFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
+const countFilter: ItemFilterFunction = (selected, items) => {
+  const countItem = selected.find(isCount);
+  if (!countItem) {
+    return items;
+  }
+
+  // We currently do not allow you to calculate the cost for multiple wands
+  // Typically the charges is used for that (makes the text too long!)
+  return items.filter((i) => !isSpecificSpellVessel(i, "Wand"));
+};
+
 const itemFilters: ItemFilterFunction[] = [
   specificItemFilter,
   sizeModifierFilter,
@@ -304,6 +317,7 @@ const itemFilters: ItemFilterFunction[] = [
   spellVesselFilter,
   spellFilter,
   armorQualityFilter,
+  countFilter,
 ];
 
 export const getOptions = (selectedItems: Item[]) =>

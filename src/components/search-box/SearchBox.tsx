@@ -62,12 +62,12 @@ const SearchBox = ({
 
   const options = getOptions(selectedItems);
 
-  const hintText =
+  const itemsInDropDownText =
     options.length === 0
       ? "Now press Go! or the Enter key"
-      : `${options.length} option(s) in drop down -- ${
-          displayError ? error : hints[hintIndex]
-        }`;
+      : `${options.length} option${options.length > 1 ? "(s)" : ""} in drop down`;
+  const hintText =
+    options.length === 0 ? "" : `${displayError ? error : hints[hintIndex]}`;
 
   return (
     <CenterBox flexDirection="column">
@@ -108,7 +108,12 @@ const SearchBox = ({
           Go!
         </Button>
       </CenterBox>
-      <FormHelperText sx={{ width: "100%" }} error={!!displayError}>
+      <FormHelperText
+        sx={{ width: "100%", textAlign: "center" }}
+        error={!!displayError}
+      >
+        {itemsInDropDownText}
+        <br />
         {hintText}
       </FormHelperText>
     </CenterBox>

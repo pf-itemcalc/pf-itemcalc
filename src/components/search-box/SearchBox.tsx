@@ -9,7 +9,7 @@ import {
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
-import type { Count } from "../../data/special/count-types";
+import { newCountItem } from "../../data/special/count";
 
 const getOptionsWithCount = (
   selectedItems: Item[],
@@ -20,14 +20,7 @@ const getOptionsWithCount = (
   const countAlreadyUsed = selectedItems.some(isCount);
 
   if (parsedValue > 0 && !countAlreadyUsed) {
-    return [
-      ...options,
-      {
-        name: parsedValue + "x",
-        count: parsedValue,
-        type: "count",
-      } as Count,
-    ];
+    return [...options, newCountItem(parsedValue)];
   }
 
   return options;

@@ -16,6 +16,7 @@ import {
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { useState } from "react";
 import About from "./About";
+import { mainBreakpoint } from "../responsive";
 
 type TitleProps = {
   small: boolean;
@@ -23,10 +24,10 @@ type TitleProps = {
 
 const ResponsiveBadgeButton = styled(IconButton)<TitleProps>(
   ({ small, theme }) => ({
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down(mainBreakpoint)]: {
       marginTop: theme.spacing(small ? 1 : 2),
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up(mainBreakpoint)]: {
       marginTop: theme.spacing(small ? 1 : 3),
     },
   }),
@@ -34,10 +35,10 @@ const ResponsiveBadgeButton = styled(IconButton)<TitleProps>(
 
 const ResponsiveHelpIcon = styled(HelpOutlineOutlinedIcon)<TitleProps>(
   ({ small, theme }) => ({
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down(mainBreakpoint)]: {
       fontSize: small ? 16 : 20,
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up(mainBreakpoint)]: {
       fontSize: small ? 20 : 32,
     },
   }),
@@ -45,10 +46,10 @@ const ResponsiveHelpIcon = styled(HelpOutlineOutlinedIcon)<TitleProps>(
 
 const ResponsiveTitleText = styled(Typography)<TitleProps>(
   ({ small, theme }) => ({
-    [theme.breakpoints.down("md")]: theme.unstable_sx({
+    [theme.breakpoints.down(mainBreakpoint)]: theme.unstable_sx({
       typography: small ? "h5" : "h3",
     }),
-    [theme.breakpoints.up("md")]: theme.unstable_sx({
+    [theme.breakpoints.up(mainBreakpoint)]: theme.unstable_sx({
       typography: small ? "h3" : "h1",
     }),
   }),
@@ -56,7 +57,7 @@ const ResponsiveTitleText = styled(Typography)<TitleProps>(
 
 const ResponsiveDialog = (props: Omit<DialogProps, "fullScreen">) => {
   const theme = useTheme();
-  const screenIsSmall = useMediaQuery(theme.breakpoints.down("md"));
+  const screenIsSmall = useMediaQuery(theme.breakpoints.down(mainBreakpoint));
   return <Dialog {...props} fullScreen={screenIsSmall} />;
 };
 

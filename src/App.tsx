@@ -21,7 +21,10 @@ const ResponsiveAppContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down(mainBreakpoint)]: theme.unstable_sx({
     width: `calc(100vw - ${theme.spacing(4)})`,
   }),
-  [theme.breakpoints.up(mainBreakpoint)]: { width: "70vw" },
+  [theme.breakpoints.up(mainBreakpoint)]: {
+    width: "50vw",
+    minWidth: mainBreakpoint,
+  },
 }));
 
 const App = () => {

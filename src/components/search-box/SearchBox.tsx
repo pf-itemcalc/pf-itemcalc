@@ -1,10 +1,37 @@
 import { useState, useEffect } from "react";
 import { Button, FormHelperText, TextField } from "@mui/material";
 import type { Item } from "../../data/helpers";
-import { getItemDisplayName, getItemTypeDisplayName } from "../../data/helpers";
+import {
+  getItemDisplayName,
+  getItemTypeDisplayName,
+  isCount,
+} from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
+import type { Count } from "../../data/special/count-types";
+
+const getOptionsWithCount = (
+  selectedItems: Item[],
+  searchValue: string,
+): Item[] => {
+  const options = getOptions(selectedItems);
+  const parsedValue = parseInt(searchValue);
+  const countAlreadyUsed = selectedItems.some(isCount);
+
+  if (parsedValue > 0 && !countAlreadyUsed) {
+    return [
+      ...options,
+      {
+        name: parsedValue + "x",
+        count: parsedValue,
+        type: "count",
+      } as Count,
+    ];
+  }
+
+  return options;
+};
 
 const hints = [
   'Try searching for and selecting "+1", "Distance", "Darkwood", "Longbow"',
@@ -27,6 +54,7 @@ const SearchBox = ({
   setSelectedItems,
   onConfirm,
 }: SearchBoxProps) => {
+  const [searchValue, setSearchValue] = useState("");
   const [hintIndex, setHintIndex] = useState(0);
 
   useEffect(() => {
@@ -50,7 +78,7 @@ const SearchBox = ({
     }
   };
 
-  const options = getOptions(selectedItems);
+  const options = getOptionsWithCount(selectedItems, searchValue);
 
   const itemsInDropDownText =
     options.length === 0
@@ -65,7 +93,7 @@ const SearchBox = ({
         <VirtualisedSearchBox
           groupBy={getItemTypeDisplayName}
           options={options}
-          getOptionLabel={(item) => getItemDisplayName(item)}
+          getOptionLabel={getItemDisplayName}
           open={open}
           onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}
@@ -77,6 +105,11 @@ const SearchBox = ({
                 if (event.key === "Enter" && !open) {
                   onGo();
                 }
+              }}
+              value={searchValue}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setSearchValue(e.target.value);
               }}
             />
           )}

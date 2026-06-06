@@ -101,7 +101,6 @@ const SearchBox = ({
               }}
               value={searchValue}
               onChange={(e) => {
-                console.log(e.target.value);
                 setSearchValue(e.target.value);
               }}
             />

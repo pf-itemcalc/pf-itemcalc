@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Autocomplete, IconButton, styled, TextField } from "@mui/material";
 import type { Item } from "../../data/helpers";
 import {
@@ -18,12 +18,14 @@ import {
   getItemDisplayName,
   isSpecificItem,
   isAmmunition,
+  isCount,
 } from "../../data/helpers";
 import { range } from "lodash";
 import type { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import TurndownService from "turndown";
 import NumberField from "../number-field/NumberField";
+import { newCountItem } from "../../data/special/count";
 
 const SurroundingBox = styled("div")({
   width: "100%",
@@ -66,8 +68,10 @@ const ItemDisplay = ({ item, compositeRating, plural }: ItemProps) => {
   return url ? <NewTabLink url={url}>{name}</NewTabLink> : <>{name}</>;
 };
 
+type SetItemsFunction = (newItems: Item[]) => void;
 type SummaryProps = {
   items: Item[];
+  setItems: SetItemsFunction;
 };
 
 type InnerSummaryProps = SummaryProps & {
@@ -82,7 +86,8 @@ const Wrapper = ({
   magical: boolean;
 }) => (magical ? <i>{children}</i> : <>{children}</>);
 
-type TitleProps = SummaryProps & {
+type TitleProps = {
+  items: Item[];
   children?: React.ReactNode;
   compositeRating?: number;
   count: number;
@@ -95,15 +100,17 @@ const ItemTitle = ({ items, children, compositeRating, count }: TitleProps) => {
     <li>
       {count > 1 ? `${count}x ` : ""}
       <Wrapper magical={magical}>
-        {items.map((i) => (
-          <React.Fragment key={i.name}>
-            <ItemDisplay
-              item={i}
-              compositeRating={compositeRating}
-              plural={count > 1}
-            />{" "}
-          </React.Fragment>
-        ))}
+        {items
+          .filter((i) => !isCount(i))
+          .map((i) => (
+            <React.Fragment key={i.name}>
+              <ItemDisplay
+                item={i}
+                compositeRating={compositeRating}
+                plural={count > 1}
+              />{" "}
+            </React.Fragment>
+          ))}
       </Wrapper>
       {children}
     </li>
@@ -180,7 +187,31 @@ const getInitialCount = (
   return 1;
 };
 
-const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
+const useCount = (
+  casterLevel: number | undefined,
+  items: Item[],
+  setItems: SetItemsFunction,
+): [number, (newCount: number) => void] => {
+  const countItem = items.find(isCount);
+  const ammunition = items.find(isAmmunition);
+  const [innerCount, setInnerCount] = useState(
+    countItem?.count ?? getInitialCount(ammunition, casterLevel),
+  );
+
+  const setCount = useCallback(
+    (newCount: number) => {
+      setInnerCount(newCount);
+      if (countItem) {
+        setItems([...items.filter((i) => !isCount(i)), newCountItem(newCount)]);
+      }
+    },
+    [countItem, setInnerCount, setItems],
+  );
+
+  return [innerCount, setCount];
+};
+
+const ItemSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
   const casterLevel = getItemCasterLevel(items);
   const identifyMethod = getIdentifyMethod(casterLevel, items);
 
@@ -194,9 +225,7 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
   const specificItem = items.find(isSpecificItem);
   const slot = specificItem ? specificItem.slot.toString() : undefined;
 
-  const ammunition = items.find(isAmmunition);
-
-  const [count, setCount] = useState(getInitialCount(ammunition, casterLevel));
+  const [count, setCount] = useCount(casterLevel, items, setItems);
 
   return (
     <>
@@ -293,7 +322,7 @@ const WandValueText = ({ value, charges }: WandValueTextProps) => {
   );
 };
 
-const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
+const SpellSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
   const casterLevel = getSpellCasterLevel(items);
   const spellLevel = getSpellLevel(items);
   const spellList = getSpellList(items);
@@ -306,7 +335,7 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
   const identifyMethod = getIdentifyMethod(overrideCasterLevel, items);
   const value = getSpellValue(items, overrideCasterLevel);
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useCount(casterLevel, items, setItems);
 
   return (
     <>
@@ -403,11 +432,9 @@ const copyToClipboard = async (element: HTMLElement) => {
   });
 
   await navigator.clipboard.write([clipboardItem]);
-  const items = await navigator.clipboard.readText();
-  console.log("Copied", items);
 };
 
-const Summary = ({ items }: SummaryProps) => {
+const Summary = ({ items, setItems }: SummaryProps) => {
   const summaryForSpell = items.some((i) => isSpell(i));
 
   const onCopy = () => {
@@ -419,9 +446,9 @@ const Summary = ({ items }: SummaryProps) => {
   };
 
   return summaryForSpell ? (
-    <SpellSummary items={items} onCopy={onCopy} />
+    <SpellSummary items={items} setItems={setItems} onCopy={onCopy} />
   ) : (
-    <ItemSummary items={items} onCopy={onCopy} />
+    <ItemSummary items={items} setItems={setItems} onCopy={onCopy} />
   );
 };
 

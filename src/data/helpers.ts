@@ -50,6 +50,7 @@ import {
   getIndividualAmmoCost,
   getIndividualAmmoWeight,
 } from "./ammunition/ammunition-types";
+import type { Count } from "./special/count-types";
 
 export type Item =
   | Armor
@@ -62,7 +63,8 @@ export type Item =
   | Enhancement
   | SpellVessel
   | Spell
-  | SpecificItem;
+  | SpecificItem
+  | Count;
 
 export type SpecificItem =
   | Wondrous
@@ -116,6 +118,7 @@ export const isRod = (item: Item): item is Rod => item.type === "rod";
 export const isStaff = (item: Item): item is Staff => item.type === "staff";
 export const isIounStone = (item: Item): item is IounStone =>
   item.type === "ioun-stone";
+export const isCount = (item: Item): item is Count => item.type === "count";
 
 export const isSpecificItem = (item: Item): item is SpecificItem => {
   return (
@@ -153,12 +156,14 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   rod: "Rod",
   staff: "Staff",
   "ioun-stone": "Ioun Stone",
+  count: "Count",
 };
 
 export const getItemTypeDisplayName = (item: Item): string =>
   itemTypeDisplayNames[item.type];
 
 const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
+  count: -1,
   enhancement: 0,
   "size-modifier": 1,
   "weapon-quality": 2,
@@ -215,6 +220,7 @@ const itemTypeUrlMap: {
   rod: (item) => getRodUrl(item as Rod),
   staff: (item) => getStaffUrl(item as Staff),
   "ioun-stone": (item) => getIounStoneUrl(item as IounStone),
+  count: () => undefined,
 };
 export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
 
@@ -244,6 +250,7 @@ const itemTypeIsMagicMap: {
   rod: magic,
   staff: magic,
   "ioun-stone": magic,
+  count: notMagic,
 };
 export const isMagic = (items: Item[]): boolean =>
   items.some((i) => itemTypeIsMagicMap[i.type](i));

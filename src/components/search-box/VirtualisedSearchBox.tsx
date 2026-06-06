@@ -145,14 +145,14 @@ const StyledPopper = styled(Popper)({
   },
 });
 
-type VirtualizeSearchBoxProps = AutocompleteProps<
+type VirtualisedSearchBoxProps = AutocompleteProps<
   Item, // Value type
   true, // Multiple
   false, // Disable-Clearable
   false // Free-Solo
 >;
 
-export const VirtualizeSearchBox = ({
+export const VirtualisedSearchBox = ({
   groupBy,
   options,
   getOptionLabel,
@@ -164,7 +164,7 @@ export const VirtualizeSearchBox = ({
   value,
   onChange,
   noOptionsText,
-}: VirtualizeSearchBoxProps) => {
+}: VirtualisedSearchBoxProps) => {
   return (
     <Autocomplete
       sx={sx}

@@ -23,7 +23,7 @@ const WorkingItems = ({
         onBack={onBack}
         onReset={onReset}
       />
-      <Summary items={items} />
+      <Summary items={items} setItems={setItems} />
     </>
   );
 };

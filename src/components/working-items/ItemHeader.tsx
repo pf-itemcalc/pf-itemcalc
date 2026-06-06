@@ -1,6 +1,6 @@
 import Reply from "@mui/icons-material/Reply";
 import Clear from "@mui/icons-material/Clear";
-import { Box, Chip, IconButton } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import type { Item } from "../../data/helpers";
 import {
   getItemDisplayName,
@@ -14,6 +14,7 @@ import {
   isWeapon,
   isWeaponQuality,
 } from "../../data/helpers";
+import { CenterBox } from "../containers/CenterBox";
 
 type ItemHeaderProps = {
   items: Item[];
@@ -38,31 +39,35 @@ const ItemHeader = ({ items, setItems, onBack, onReset }: ItemHeaderProps) => {
     setItems(items.filter((i) => i !== item));
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Box sx={{ maxWidth: "50%" }}>
+    <CenterBox flexDirection="column">
+      <CenterBox flexDirection="row" sx={{ gap: 1 }}>
+        <Button
+          size="small"
+          endIcon={<Reply />}
+          onClick={onBack}
+          title="Go back to search box with current selection."
+        >
+          Go back
+        </Button>
+        <Button
+          size="small"
+          endIcon={<Clear />}
+          onClick={onReset}
+          title="Clear current selection and go back to search box."
+        >
+          Clear search
+        </Button>
+      </CenterBox>
+      <CenterBox flexDirection="row" sx={{ flexWrap: "wrap", gap: 0.5 }}>
         {items.map((i) => (
           <Chip
-            sx={{ margin: 1, padding: 1 }}
+            key={i.name}
             label={getItemDisplayName(i)}
             onDelete={isDeletable(i, items) ? deleteItem(i) : undefined}
           />
         ))}
-      </Box>
-      <IconButton onClick={onBack} title="Continue searching...">
-        <Reply />
-      </IconButton>
-      <IconButton onClick={onReset} title="Clear all and return...">
-        <Clear />
-      </IconButton>
-    </Box>
+      </CenterBox>
+    </CenterBox>
   );
 };
 

@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button, FormHelperText, TextField } from "@mui/material";
 import type { Item } from "../../data/helpers";
 import { getItemDisplayName, getItemTypeDisplayName } from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
-import { Box } from "@mui/system";
 import { VirtualizeSearchBox } from "./VirtualisedSearchBox";
+import { CenterBox } from "../containers/CenterBox";
 
 const hints = [
-  'Try searching for "+1, Distance, Darkwood, Longbow"',
-  'Try searching for "+3, Flaming, Cold-Iron, Longsword"',
-  'Try searching for "+1, Fortification (light), Adamantine, Breastplate"',
-  'Try searching for "Potion of, Cure Light Wounds"',
-  'Try searching for "+1, Bashing, Living Steel, Buckler',
-  'Try searching for "Cloak of quickened reflexes (+3/+4)',
-  'Try searching for "Apparatus of the Crab',
+  'Try searching for and selecting "+1", "Distance", "Darkwood", "Longbow"',
+  'Try searching for and selecting "+3", "Flaming", "Cold-Iron", "Longsword"',
+  'Try searching for and selecting "+1", "Fortification (light)", "Adamantine", "Breastplate"',
+  'Try searching for and selecting "Potion of", "Cure Light Wounds"',
+  'Try searching for and selecting "+1", "Bashing", "Living Steel", "Buckler',
+  'Try searching for and selecting "Cloak of quickened reflexes (+3/+4)',
+  'Try searching for and selecting "Apparatus of the Crab',
 ];
 
 type SearchBoxProps = {
@@ -52,69 +52,61 @@ const SearchBox = ({
 
   const options = getOptions(selectedItems);
 
-  const hintText =
+  const itemsInDropDownText =
     options.length === 0
       ? "Now press Go! or the Enter key"
-      : `${options.length} option(s) in drop down -- ${
-          displayError ? error : hints[hintIndex]
-        }`;
+      : `${options.length} option${options.length > 1 ? "(s)" : ""} in drop down`;
+  const hintText =
+    options.length === 0 ? "" : `${displayError ? error : hints[hintIndex]}`;
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <VirtualizeSearchBox
-        groupBy={getItemTypeDisplayName}
-        options={options}
-        getOptionLabel={(item) => getItemDisplayName(item)}
-        open={open}
-        onOpen={() => setOpen(true)}
-        onClose={() => setOpen(false)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search"
-            helperText={hintText}
-            slotProps={{
-              ...params.slotProps,
-              formHelperText: {
-                sx: {
-                  color: displayError ? "red" : "inherit",
-                },
-              },
-            }}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !open) {
-                onGo();
-              }
-            }}
-          />
-        )}
-        sx={{ width: "50%" }}
-        value={selectedItems}
-        onChange={(_, values) => setSelectedItems(values)}
-        noOptionsText="No more options, press Go! or the Enter key"
-      />
-      <Button
-        sx={{
-          marginBottom: 3,
-          marginLeft: 1,
-          paddingTop: 1.9,
-          paddingBottom: 1.9,
-        }}
-        variant="outlined"
-        disabled={!!error}
-        onClick={onGo}
+    <CenterBox flexDirection="column">
+      <CenterBox flexDirection="row">
+        <VirtualizeSearchBox
+          groupBy={getItemTypeDisplayName}
+          options={options}
+          getOptionLabel={(item) => getItemDisplayName(item)}
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search"
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !open) {
+                  onGo();
+                }
+              }}
+            />
+          )}
+          sx={{ width: "100%" }}
+          value={selectedItems}
+          onChange={(_, values) => setSelectedItems(values)}
+          noOptionsText="No more options, press Go! or the Enter key"
+        />
+        <Button
+          sx={{
+            marginLeft: 1,
+            paddingTop: 1.9,
+            paddingBottom: 1.9,
+          }}
+          variant="outlined"
+          disabled={!!error}
+          onClick={onGo}
+        >
+          Go!
+        </Button>
+      </CenterBox>
+      <FormHelperText
+        sx={{ width: "100%", textAlign: "center" }}
+        error={!!displayError}
       >
-        Go!
-      </Button>
-    </Box>
+        {itemsInDropDownText}
+        <br />
+        {hintText}
+      </FormHelperText>
+    </CenterBox>
   );
 };
 

@@ -1,7 +1,7 @@
 {
   "name": "pf-itemcalc",
   "homepage": "https://pf-itemcalc.github.io/pf-itemcalc",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,13 +9,15 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest",
-    "predeploy": "npm version minor && npm run build",
+    "predeploy": "npm version patch && npm run build",
     "deploy": "gh-pages -d build",
     "tsc": "tsc -b",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prettier": "prettier .",
-    "prettier:fix": "prettier . --write"
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --check --write",
+    "check": "tsc -b && eslint . && prettier . --check",
+    "fix": "tsc -b && eslint . --fix && prettier . --check --write"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

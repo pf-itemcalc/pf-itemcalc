@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Autocomplete, IconButton, TextField } from "@mui/material";
+import { Autocomplete, IconButton, styled, TextField } from "@mui/material";
 import type { Item } from "../../data/helpers";
 import {
   getItemCasterLevel,
@@ -24,6 +24,15 @@ import type { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import TurndownService from "turndown";
 import NumberField from "../number-field/NumberField";
+
+const SurroundingBox = styled("div")({
+  width: "100%",
+  border: "1px solid black",
+  margin: 1,
+  padding: 1,
+  fontFamily: "Calibri",
+  fontSize: 15,
+});
 
 type NewTabLinkProps = {
   url: string;
@@ -193,7 +202,7 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
     <>
       <NumberField
         size="small"
-        sx={{ width: "50%", margin: 1 }}
+        sx={{ width: "100%", margin: 1 }}
         label="Count"
         inputMode="numeric"
         min={1}
@@ -205,7 +214,7 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
       {isCompositeBow && (
         <NumberField
           size="small"
-          sx={{ width: "50%", margin: 1 }}
+          sx={{ width: "100%", margin: 1 }}
           label="Composite Rating"
           inputMode="numeric"
           min={0}
@@ -213,16 +222,7 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
           onValueChange={(value) => setRating(value ?? 0)}
         />
       )}
-      <div
-        style={{
-          width: "50%",
-          border: "1px solid black",
-          margin: 1,
-          padding: 1,
-          fontFamily: "Calibri",
-          fontSize: 15,
-        }}
-      >
+      <SurroundingBox>
         <CopyButton onCopy={onCopy} />
         <ul id="SummaryItemList">
           <ItemTitle
@@ -272,7 +272,7 @@ const ItemSummary = ({ items, onCopy }: InnerSummaryProps) => {
             </ul>
           </ItemTitle>
         </ul>
-      </div>
+      </SurroundingBox>
     </>
   );
 };
@@ -313,7 +313,7 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
       {!isWand && (
         <NumberField
           size="small"
-          sx={{ width: "50%", margin: 1 }}
+          sx={{ width: "100%", margin: 1 }}
           label="Count"
           inputMode="numeric"
           min={1}
@@ -325,7 +325,7 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
       )}
       <Autocomplete
         size="small"
-        sx={{ width: "50%", margin: 1 }}
+        sx={{ width: "100%", margin: 1 }}
         options={range(1, 21)}
         renderInput={(params) => <TextField {...params} label="Caster level" />}
         value={overrideCasterLevel}
@@ -335,7 +335,7 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
       {isWand && (
         <Autocomplete
           size="small"
-          sx={{ width: "50%", margin: 1 }}
+          sx={{ width: "100%", margin: 1 }}
           options={range(1, 51)}
           renderInput={(params) => (
             <TextField {...params} label="Number of charges" />
@@ -346,16 +346,7 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
         />
       )}
 
-      <div
-        style={{
-          width: "50%",
-          border: "1px solid black",
-          margin: 1,
-          padding: 1,
-          fontFamily: "Calibri",
-          fontSize: 15,
-        }}
-      >
+      <SurroundingBox>
         <CopyButton onCopy={onCopy} />
         <ul id="SummaryItemList">
           <ItemTitle items={items} count={count}>
@@ -393,7 +384,7 @@ const SpellSummary = ({ items, onCopy }: InnerSummaryProps) => {
             </ul>
           </ItemTitle>
         </ul>
-      </div>
+      </SurroundingBox>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import Reply from "@mui/icons-material/Reply";
 import Clear from "@mui/icons-material/Clear";
-import { Box, Button, Chip } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import type { Item } from "../../data/helpers";
 import {
   getItemDisplayName,
@@ -58,17 +58,14 @@ const ItemHeader = ({ items, setItems, onBack, onReset }: ItemHeaderProps) => {
           Clear search
         </Button>
       </CenterBox>
-      <CenterBox flexDirection="row">
-        <Box sx={{ maxWidth: "100%" }}>
-          {items.map((i) => (
-            <Chip
-              key={i.name}
-              sx={{ margin: 1, padding: 1 }}
-              label={getItemDisplayName(i)}
-              onDelete={isDeletable(i, items) ? deleteItem(i) : undefined}
-            />
-          ))}
-        </Box>
+      <CenterBox flexDirection="row" sx={{ flexWrap: "wrap", gap: 0.5 }}>
+        {items.map((i) => (
+          <Chip
+            key={i.name}
+            label={getItemDisplayName(i)}
+            onDelete={isDeletable(i, items) ? deleteItem(i) : undefined}
+          />
+        ))}
       </CenterBox>
     </CenterBox>
   );

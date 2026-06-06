@@ -7,7 +7,11 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
+  styled,
   Typography,
+  useMediaQuery,
+  useTheme,
+  type DialogProps,
 } from "@mui/material";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { useState } from "react";
@@ -17,26 +21,67 @@ type TitleProps = {
   small: boolean;
 };
 
+const ResponsiveBadgeButton = styled(IconButton)<TitleProps>(
+  ({ small, theme }) => ({
+    [theme.breakpoints.down("md")]: {
+      marginTop: theme.spacing(small ? 1 : 2),
+    },
+    [theme.breakpoints.up("md")]: {
+      marginTop: theme.spacing(small ? 1 : 3),
+    },
+  }),
+);
+
+const ResponsiveHelpIcon = styled(HelpOutlineOutlinedIcon)<TitleProps>(
+  ({ small, theme }) => ({
+    [theme.breakpoints.down("md")]: {
+      fontSize: small ? 16 : 20,
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: small ? 20 : 32,
+    },
+  }),
+);
+
+const ResponsiveTitleText = styled(Typography)<TitleProps>(
+  ({ small, theme }) => ({
+    [theme.breakpoints.down("md")]: theme.unstable_sx({
+      typography: small ? "h5" : "h3",
+    }),
+    [theme.breakpoints.up("md")]: theme.unstable_sx({
+      typography: small ? "h3" : "h1",
+    }),
+  }),
+);
+
+const ResponsiveDialog = (props: Omit<DialogProps, "fullScreen">) => {
+  const theme = useTheme();
+  const screenIsSmall = useMediaQuery(theme.breakpoints.down("md"));
+  return <Dialog {...props} fullScreen={screenIsSmall} />;
+};
+
 const Title = ({ small }: TitleProps) => {
   const [helpOpen, setHelpOpen] = useState(false);
   return (
     <Box>
       <Badge
         badgeContent={
-          <IconButton
-            sx={{ marginTop: small ? 2 : 3 }}
+          <ResponsiveBadgeButton
             size="small"
+            small={small}
             onClick={() => setHelpOpen(true)}
           >
-            <HelpOutlineOutlinedIcon fontSize={small ? "small" : "large"} />
-          </IconButton>
+            <ResponsiveHelpIcon small={small} />
+          </ResponsiveBadgeButton>
         }
       >
-        <Typography variant={small ? "h3" : "h1"}>PF 1e Item Calc</Typography>
+        <ResponsiveTitleText small={small}>PF 1e Item Calc</ResponsiveTitleText>
       </Badge>
-      <Dialog open={helpOpen} onClose={() => setHelpOpen(false)}>
+      <ResponsiveDialog open={helpOpen} onClose={() => setHelpOpen(false)}>
         <DialogTitle>
-          <Typography variant="h4">Pathfinder 1e Item Calculator</Typography>
+          <ResponsiveTitleText small={true} sx={{ textAlign: "center" }}>
+            <b>Pathfinder 1e Item Calculator</b>
+          </ResponsiveTitleText>
         </DialogTitle>
         <DialogContent>
           <About />
@@ -44,7 +89,7 @@ const Title = ({ small }: TitleProps) => {
         <DialogActions sx={{ justifyContent: "center" }}>
           <Button onClick={() => setHelpOpen(false)}>Ok</Button>
         </DialogActions>
-      </Dialog>
+      </ResponsiveDialog>
     </Box>
   );
 };

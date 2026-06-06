@@ -3,8 +3,8 @@ import { Button, FormHelperText, TextField } from "@mui/material";
 import type { Item } from "../../data/helpers";
 import { getItemDisplayName, getItemTypeDisplayName } from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
-import { Box, styled } from "@mui/system";
 import { VirtualizeSearchBox } from "./VirtualisedSearchBox";
+import { CenterBox } from "../containers/CenterBox";
 
 const hints = [
   'Try searching for and selecting "+1", "Distance", "Darkwood", "Longbow"',
@@ -15,16 +15,6 @@ const hints = [
   'Try searching for and selecting "Cloak of quickened reflexes (+3/+4)',
   'Try searching for and selecting "Apparatus of the Crab',
 ];
-
-const CenterBox = styled(Box)<{ flexDirection: "row" | "column" }>(
-  ({ flexDirection }) => ({
-    width: "100%",
-    display: "flex",
-    flexDirection,
-    alignItems: "stretch",
-    justifyContent: "center",
-  }),
-);
 
 type SearchBoxProps = {
   selectedItems: Item[];

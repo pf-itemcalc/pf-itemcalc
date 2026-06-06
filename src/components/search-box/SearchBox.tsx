@@ -7,13 +7,13 @@ import { Box, styled } from "@mui/system";
 import { VirtualizeSearchBox } from "./VirtualisedSearchBox";
 
 const hints = [
-  'Try searching for "+1, Distance, Darkwood, Longbow"',
-  'Try searching for "+3, Flaming, Cold-Iron, Longsword"',
-  'Try searching for "+1, Fortification (light), Adamantine, Breastplate"',
-  'Try searching for "Potion of, Cure Light Wounds"',
-  'Try searching for "+1, Bashing, Living Steel, Buckler',
-  'Try searching for "Cloak of quickened reflexes (+3/+4)',
-  'Try searching for "Apparatus of the Crab',
+  'Try searching for and selecting "+1", "Distance", "Darkwood", "Longbow"',
+  'Try searching for and selecting "+3", "Flaming", "Cold-Iron", "Longsword"',
+  'Try searching for and selecting "+1", "Fortification (light)", "Adamantine", "Breastplate"',
+  'Try searching for and selecting "Potion of", "Cure Light Wounds"',
+  'Try searching for and selecting "+1", "Bashing", "Living Steel", "Buckler',
+  'Try searching for and selecting "Cloak of quickened reflexes (+3/+4)',
+  'Try searching for and selecting "Apparatus of the Crab',
 ];
 
 const CenterBox = styled(Box)<{ flexDirection: "row" | "column" }>(
@@ -21,7 +21,7 @@ const CenterBox = styled(Box)<{ flexDirection: "row" | "column" }>(
     width: "100%",
     display: "flex",
     flexDirection,
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "center",
   }),
 );

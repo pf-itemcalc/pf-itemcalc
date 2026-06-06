@@ -1,15 +1,9 @@
 import * as React from "react";
-import type {
-  AutocompleteChangeDetails,
-  AutocompleteChangeReason,
-  AutocompleteCloseReason,
-  AutocompleteRenderInputParams,
-} from "@mui/material/Autocomplete";
+import type { AutocompleteProps } from "@mui/material/Autocomplete";
 import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ListSubheader from "@mui/material/ListSubheader";
 import Popper from "@mui/material/Popper";
-import type { SxProps, Theme } from "@mui/material/styles";
 import { useTheme, styled } from "@mui/material/styles";
 import type { ListImperativeAPI, RowComponentProps } from "react-window";
 import { List } from "react-window";
@@ -151,31 +145,13 @@ const StyledPopper = styled(Popper)({
   },
 });
 
-type VirtualizeSearchBoxProps = {
-  groupBy: ((option: Item) => string) | undefined;
-  options: Item[];
-  getOptionLabel: ((option: Item) => string) | undefined;
-  open: boolean;
-  onOpen: ((event: React.SyntheticEvent<Element, Event>) => void) | undefined;
-  onClose:
-    | ((
-        event: React.SyntheticEvent<Element, Event>,
-        reason: AutocompleteCloseReason,
-      ) => void)
-    | undefined;
-  renderInput: (params: AutocompleteRenderInputParams) => React.ReactNode;
-  sx: SxProps<Theme> | undefined;
-  value: Item[] | undefined;
-  onChange:
-    | ((
-        event: React.SyntheticEvent<Element, Event>,
-        value: Item[],
-        reason: AutocompleteChangeReason,
-        details?: AutocompleteChangeDetails<Item> | undefined,
-      ) => void)
-    | undefined;
-  noOptionsText?: string;
-};
+type VirtualizeSearchBoxProps = AutocompleteProps<
+  Item, // Value type
+  true, // Multiple
+  false, // Disable-Clearable
+  false // Free-Solo
+>;
+
 export const VirtualizeSearchBox = ({
   groupBy,
   options,

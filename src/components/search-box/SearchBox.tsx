@@ -3,7 +3,7 @@ import { Button, FormHelperText, TextField } from "@mui/material";
 import type { Item } from "../../data/helpers";
 import { getItemDisplayName, getItemTypeDisplayName } from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
-import { VirtualizeSearchBox } from "./VirtualisedSearchBox";
+import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
 
 const hints = [
@@ -62,7 +62,7 @@ const SearchBox = ({
   return (
     <CenterBox flexDirection="column">
       <CenterBox flexDirection="row">
-        <VirtualizeSearchBox
+        <VirtualisedSearchBox
           groupBy={getItemTypeDisplayName}
           options={options}
           getOptionLabel={(item) => getItemDisplayName(item)}

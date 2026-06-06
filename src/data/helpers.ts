@@ -220,7 +220,7 @@ const itemTypeUrlMap: {
   rod: (item) => getRodUrl(item as Rod),
   staff: (item) => getStaffUrl(item as Staff),
   "ioun-stone": (item) => getIounStoneUrl(item as IounStone),
-  count: () => "",
+  count: () => undefined,
 };
 export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
 

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button, FormHelperText, TextField } from "@mui/material";
 import type { Item } from "../../data/helpers";
 import { getItemDisplayName, getItemTypeDisplayName } from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
-import { Box } from "@mui/system";
+import { Box, styled } from "@mui/system";
 import { VirtualizeSearchBox } from "./VirtualisedSearchBox";
 
 const hints = [
@@ -15,6 +15,16 @@ const hints = [
   'Try searching for "Cloak of quickened reflexes (+3/+4)',
   'Try searching for "Apparatus of the Crab',
 ];
+
+const CenterBox = styled(Box)<{ flexDirection: "row" | "column" }>(
+  ({ flexDirection }) => ({
+    width: "100%",
+    display: "flex",
+    flexDirection,
+    alignItems: "center",
+    justifyContent: "center",
+  }),
+);
 
 type SearchBoxProps = {
   selectedItems: Item[];
@@ -60,61 +70,49 @@ const SearchBox = ({
         }`;
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <VirtualizeSearchBox
-        groupBy={getItemTypeDisplayName}
-        options={options}
-        getOptionLabel={(item) => getItemDisplayName(item)}
-        open={open}
-        onOpen={() => setOpen(true)}
-        onClose={() => setOpen(false)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search"
-            helperText={hintText}
-            slotProps={{
-              ...params.slotProps,
-              formHelperText: {
-                sx: {
-                  color: displayError ? "red" : "inherit",
-                },
-              },
-            }}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !open) {
-                onGo();
-              }
-            }}
-          />
-        )}
-        sx={{ width: "50%" }}
-        value={selectedItems}
-        onChange={(_, values) => setSelectedItems(values)}
-        noOptionsText="No more options, press Go! or the Enter key"
-      />
-      <Button
-        sx={{
-          marginBottom: 3,
-          marginLeft: 1,
-          paddingTop: 1.9,
-          paddingBottom: 1.9,
-        }}
-        variant="outlined"
-        disabled={!!error}
-        onClick={onGo}
-      >
-        Go!
-      </Button>
-    </Box>
+    <CenterBox flexDirection="column">
+      <CenterBox flexDirection="row">
+        <VirtualizeSearchBox
+          groupBy={getItemTypeDisplayName}
+          options={options}
+          getOptionLabel={(item) => getItemDisplayName(item)}
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search"
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !open) {
+                  onGo();
+                }
+              }}
+            />
+          )}
+          sx={{ width: "50%" }}
+          value={selectedItems}
+          onChange={(_, values) => setSelectedItems(values)}
+          noOptionsText="No more options, press Go! or the Enter key"
+        />
+        <Button
+          sx={{
+            marginLeft: 1,
+            paddingTop: 1.9,
+            paddingBottom: 1.9,
+          }}
+          variant="outlined"
+          disabled={!!error}
+          onClick={onGo}
+        >
+          Go!
+        </Button>
+      </CenterBox>
+      {/* TODO: Handle width properly when we make this responsive */}
+      <FormHelperText sx={{ width: "62%" }} error={!!displayError}>
+        {hintText}
+      </FormHelperText>
+    </CenterBox>
   );
 };
 

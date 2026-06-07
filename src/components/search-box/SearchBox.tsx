@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Button, FormHelperText, TextField } from "@mui/material";
-import type { Component } from "../../engine/helpers";
 import {
   getComponentDisplayName,
   getComponentTypeDisplayName,
@@ -12,6 +11,7 @@ import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
 import { newCountComponent } from "../../data/special/count";
 import { selectedComponentsAreInvalid } from "../../engine/validation/validate-selected-components";
+import type { Component } from "../../data/component-types";
 
 const getOptionsWithCount = (
   selectedComponents: Component[],

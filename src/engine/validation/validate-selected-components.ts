@@ -1,4 +1,3 @@
-import type { Component } from "../helpers";
 import {
   isAmmunition,
   isArmor,
@@ -14,6 +13,7 @@ import {
   isEnhancement,
 } from "../helpers";
 import { getComponentEnhancementModifier } from "../component-properties/component-enhancement";
+import type { Component } from "../../data/component-types";
 
 export const selectedComponentsAreInvalid = (
   selectedComponents: Component[],

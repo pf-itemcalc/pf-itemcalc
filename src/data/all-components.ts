@@ -4,7 +4,6 @@ import armors from "./armor/armors";
 import enhancements from "./generic/enhancements";
 import sizeModifiers from "./generic/size-modifiers";
 import specialMaterials from "./generic/special-materials";
-import type { Component } from "../engine/helpers";
 import { orderComponents } from "../engine/helpers";
 import { iounStones } from "./ioun-stone/ioun-stone";
 import { rings } from "./ring/ring";
@@ -19,6 +18,7 @@ import { staves } from "./staff/staff";
 import weaponQaulities from "./weapon/weapon-qualities";
 import weapons from "./weapon/weapons";
 import { wondrousItemComponents } from "./wondrous/wondrous";
+import type { Component } from "./component-types";
 
 export const allComponents: Component[] = orderComponents([
   ...enhancements,

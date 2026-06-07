@@ -8,7 +8,7 @@ import { useTheme, styled } from "@mui/material/styles";
 import type { ListImperativeAPI, RowComponentProps } from "react-window";
 import { List } from "react-window";
 import Typography from "@mui/material/Typography";
-import type { Component } from "../../engine/helpers";
+import type { Component } from "../../data/component-types";
 
 const LISTBOX_PADDING = 8; // px
 

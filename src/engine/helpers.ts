@@ -54,31 +54,7 @@ import {
   getIndividualAmmoWeight,
 } from "../data/ammunition/ammunition-types";
 import type { Count } from "../data/special/count-types";
-
-export type Component =
-  | Armor
-  | ArmorQaulity
-  | Weapon
-  | WeaponQaulity
-  | Ammunition
-  | SizeModifier
-  | SpecialMaterial
-  | Enhancement
-  | SpellVessel
-  | Spell
-  | SingularItemComponent
-  | Count;
-
-export type SingularItemComponent =
-  | Wondrous
-  | SpecialAmmo
-  | SpecialArmor
-  | SpecialShield
-  | SpecialWeapon
-  | Ring
-  | Rod
-  | Staff
-  | IounStone;
+import type { Component, SingularItemComponent } from "../data/component-types";
 
 export const isArmor = (component: Component): component is Armor =>
   component.type === "armor";

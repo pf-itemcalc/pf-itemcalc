@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import { Autocomplete, IconButton, styled, TextField } from "@mui/material";
-import type { Component } from "../../engine/helpers";
 import {
   getItemCasterLevel,
   getIdentifyMethod,
@@ -26,6 +25,7 @@ import ContentCopy from "@mui/icons-material/ContentCopy";
 import TurndownService from "turndown";
 import NumberField from "../number-field/NumberField";
 import { newCountComponent } from "../../data/special/count";
+import type { Component } from "../../data/component-types";
 
 const SurroundingBox = styled("div")({
   width: "100%",

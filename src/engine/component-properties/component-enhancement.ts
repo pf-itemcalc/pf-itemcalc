@@ -1,7 +1,7 @@
 import { getArmorQaulityModifier } from "../../data/armor/armor-quality-types";
-import type { Component } from "../helpers";
 import { isArmorQuality, isEnhancement, isWeaponQuality } from "../helpers";
 import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types";
+import type { Component } from "../../data/component-types";
 
 export const getComponentEnhancementModifier = (
   component: Component,

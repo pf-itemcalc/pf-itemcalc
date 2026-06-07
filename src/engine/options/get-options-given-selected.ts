@@ -1,5 +1,5 @@
 import { allComponents } from "../../data/all-components";
-import type { Component } from "../helpers";
+import type { Component } from "../../data/component-types";
 import { filterComponentsWhenAmmunitionIsPresent } from "../option-filtering/ammunition-filtering";
 import { filterComponentsWhenArmorIsPresent } from "../option-filtering/armor-filtering";
 import { filterComponentsWhenArmorQualityIsPresent } from "../option-filtering/armor-quality-filtering";

@@ -25,7 +25,7 @@ import type { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import TurndownService from "turndown";
 import NumberField from "../number-field/NumberField";
-import { newCountItem } from "../../data/special/count";
+import { newCountComponent } from "../../data/special/count";
 
 const SurroundingBox = styled("div")({
   width: "100%",
@@ -202,7 +202,10 @@ const useCount = (
     (newCount: number) => {
       setInnerCount(newCount);
       if (countItem) {
-        setItems([...items.filter((i) => !isCount(i)), newCountItem(newCount)]);
+        setItems([
+          ...items.filter((i) => !isCount(i)),
+          newCountComponent(newCount),
+        ]);
       }
     },
     [items, countItem, setInnerCount, setItems],

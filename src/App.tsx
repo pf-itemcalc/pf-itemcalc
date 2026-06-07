@@ -54,8 +54,8 @@ const App = () => {
       <ResponsiveAppContainer>
         {!workingComponents && (
           <SearchBox
-            selectedItems={orderComponents(selectedComponents)}
-            setSelectedItems={setSelectedComponents}
+            selectedComponents={orderComponents(selectedComponents)}
+            setSelectedComponents={setSelectedComponents}
             onConfirm={moveFromSelectionToWorking}
           />
         )}

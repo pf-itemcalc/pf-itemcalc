@@ -10,22 +10,22 @@ import {
 import { getComponentOptionsGivenCurrentSelected } from "../../engine/options/get-options-given-selected";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
-import { newCountItem } from "../../data/special/count";
+import { newCountComponent } from "../../data/special/count";
 import { selectedComponentsAreInvalid } from "../../engine/validation/selected-components-valid";
 
 const getOptionsWithCount = (
-  selectedItems: Component[],
+  selectedComponents: Component[],
   searchValue: string,
 ): Component[] => {
-  const options = getComponentOptionsGivenCurrentSelected(selectedItems);
+  const options = getComponentOptionsGivenCurrentSelected(selectedComponents);
   const parsedValue = parseInt(searchValue);
-  const countAlreadyUsed = selectedItems.some(isCount);
-  const wandPresent = !!selectedItems.find((i) =>
+  const countAlreadyUsed = selectedComponents.some(isCount);
+  const wandPresent = !!selectedComponents.find((i) =>
     isSpellVesselOfType(i, "Wand"),
   );
 
   if (parsedValue > 0 && !countAlreadyUsed && !wandPresent) {
-    return [...options, newCountItem(parsedValue)];
+    return [...options, newCountComponent(parsedValue)];
   }
 
   return options;
@@ -42,14 +42,14 @@ const hints = [
 ];
 
 type SearchBoxProps = {
-  selectedItems: Component[];
-  setSelectedItems: React.Dispatch<React.SetStateAction<Component[]>>;
+  selectedComponents: Component[];
+  setSelectedComponents: React.Dispatch<React.SetStateAction<Component[]>>;
   onConfirm: () => void;
 };
 
 const SearchBox = ({
-  selectedItems,
-  setSelectedItems,
+  selectedComponents,
+  setSelectedComponents,
   onConfirm,
 }: SearchBoxProps) => {
   const [searchValue, setSearchValue] = useState("");
@@ -65,8 +65,8 @@ const SearchBox = ({
     };
   }, []);
 
-  const error = selectedComponentsAreInvalid(selectedItems);
-  const displayError = selectedItems.length > 0 && error;
+  const error = selectedComponentsAreInvalid(selectedComponents);
+  const displayError = selectedComponents.length > 0 && error;
 
   const [open, setOpen] = useState(false);
 
@@ -76,9 +76,9 @@ const SearchBox = ({
     }
   };
 
-  const options = getOptionsWithCount(selectedItems, searchValue);
+  const options = getOptionsWithCount(selectedComponents, searchValue);
 
-  const itemsInDropDownText =
+  const optionsInDropDownText =
     options.length === 0
       ? "Now press Go! or the Enter key"
       : `${options.length} option${options.length > 1 ? "(s)" : ""} in drop down`;
@@ -111,8 +111,8 @@ const SearchBox = ({
             />
           )}
           sx={{ width: "100%" }}
-          value={selectedItems}
-          onChange={(_, values) => setSelectedItems(values)}
+          value={selectedComponents}
+          onChange={(_, values) => setSelectedComponents(values)}
           noOptionsText="No more options, press Go! or the Enter key"
         />
         <Button
@@ -132,7 +132,7 @@ const SearchBox = ({
         sx={{ width: "100%", textAlign: "center" }}
         error={!!displayError}
       >
-        {itemsInDropDownText}
+        {optionsInDropDownText}
         <br />
         {hintText}
       </FormHelperText>

@@ -1,6 +1,4 @@
 import {
-  isAmmunition,
-  isArmor,
   isArmorQuality,
   isMagicEnhancement,
   isSizeModifier,
@@ -12,8 +10,10 @@ import {
   isWeaponQuality,
   isEnhancement,
 } from "../helpers";
+import { isArmor } from "../../data/armor/armor-utilities";
 import { getComponentEnhancementModifier } from "../component-properties/component-enhancement";
 import type { Component } from "../../data/component-types";
+import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
 
 export const selectedComponentsAreInvalid = (
   selectedComponents: Component[],

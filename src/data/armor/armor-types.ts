@@ -8,8 +8,3 @@ export type Armor = {
   suffix?: string; // used to add a suffix, most useful for shields; e.g. "Light Steel" becomes "Light Steel Shield"
   type: "armor";
 };
-
-export const getUrl = (armor: Armor) =>
-  `https://aonprd.com/EquipmentArmorDisplay.aspx?ItemName=${encodeURIComponent(
-    armor.name,
-  )}`;

@@ -6,7 +6,6 @@ import {
   getUrl as getArmorQualityUrl,
 } from "../data/armor/armor-quality-types";
 import type { Armor } from "../data/armor/armor-types";
-import { getUrl as getArmorUrl } from "../data/armor/armor-types";
 import type { Enhancement } from "../data/generic/enhancement-types";
 import { Masterwork } from "../data/generic/enhancements";
 import type { SpecialMaterial } from "../data/generic/special-material-types";
@@ -56,9 +55,8 @@ import {
   getIndividualAmmoWeight,
   isAmmunition,
 } from "../data/ammunition/ammunition-utilities";
+import { getArmorUrl, isArmor } from "../data/armor/armor-utilities";
 
-export const isArmor = (component: Component): component is Armor =>
-  component.type === "armor";
 export const isArmorQuality = (
   component: Component,
 ): component is ArmorQaulity => component.type === "armor-quality";

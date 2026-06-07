@@ -1,5 +1,5 @@
+import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
 import {
-  isAmmunition,
   isEnhancement,
   isSizeModifier,
   isSpecialMaterial,

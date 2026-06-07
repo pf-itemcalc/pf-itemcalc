@@ -1,6 +1,5 @@
+import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
 import {
-  isAmmunition,
-  isArmor,
   isArmorQuality,
   isEnhancement,
   isSizeModifier,
@@ -8,6 +7,7 @@ import {
   isWeapon,
   isWeaponQuality,
 } from "../helpers";
+import { isArmor } from "../../data/armor/armor-utilities";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 export const filterComponentsWhenSpecialMaterialIsPresent: ComponentFilterFunction =

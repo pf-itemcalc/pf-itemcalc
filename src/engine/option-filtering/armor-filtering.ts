@@ -1,10 +1,10 @@
 import {
-  isArmor,
   isArmorQuality,
   isEnhancement,
   isSizeModifier,
   isSpecialMaterial,
 } from "../helpers";
+import { isArmor } from "../../data/armor/armor-utilities";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 export const filterComponentsWhenArmorIsPresent: ComponentFilterFunction = (

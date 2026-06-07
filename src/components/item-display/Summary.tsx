@@ -16,7 +16,6 @@ import {
   isComposite,
   getComponentDisplayName,
   componentIsSingularItem,
-  isAmmunition,
   isCount,
 } from "../../engine/helpers";
 import { range } from "lodash";
@@ -26,6 +25,7 @@ import TurndownService from "turndown";
 import NumberField from "../number-field/NumberField";
 import { newCountComponent } from "../../data/special/count";
 import type { Component } from "../../data/component-types";
+import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
 
 const SurroundingBox = styled("div")({
   width: "100%",

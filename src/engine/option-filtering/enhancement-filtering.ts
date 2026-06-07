@@ -1,7 +1,6 @@
+import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
 import { Masterwork } from "../../data/generic/enhancements";
 import {
-  isAmmunition,
-  isArmor,
   isArmorQuality,
   isEnhancement,
   isSizeModifier,
@@ -9,6 +8,7 @@ import {
   isWeapon,
   isWeaponQuality,
 } from "../helpers";
+import { isArmor } from "../../data/armor/armor-utilities";
 import type { ComponentFilterFunction } from "./option-filtering-types";
 
 export const filterComponentsWhenEnhancementIsPresent: ComponentFilterFunction =

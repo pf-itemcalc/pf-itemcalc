@@ -28,41 +28,41 @@ const ResponsiveAppContainer = styled(Box)(({ theme }) => ({
 }));
 
 const App = () => {
-  const [selectedItems, setSelectedItems] = useState<Component[]>([]);
-  const [workingItems, setWorkingItems] = useState<Component[] | undefined>(
-    undefined,
-  );
+  const [selectedComponents, setSelectedComponents] = useState<Component[]>([]);
+  const [workingComponents, setWorkingComponents] = useState<
+    Component[] | undefined
+  >(undefined);
 
   const moveFromSelectionToWorking = () => {
-    setWorkingItems(selectedItems);
-    setSelectedItems([]);
+    setWorkingComponents(selectedComponents);
+    setSelectedComponents([]);
   };
 
   const moveBackToSearch = () => {
-    setSelectedItems(workingItems ?? []);
-    setWorkingItems(undefined);
+    setSelectedComponents(workingComponents ?? []);
+    setWorkingComponents(undefined);
   };
 
   const reset = () => {
-    setSelectedItems([]);
-    setWorkingItems(undefined);
+    setSelectedComponents([]);
+    setWorkingComponents(undefined);
   };
 
   return (
     <FullSizeContainer>
-      <Title small={!!workingItems} />
+      <Title small={!!workingComponents} />
       <ResponsiveAppContainer>
-        {!workingItems && (
+        {!workingComponents && (
           <SearchBox
-            selectedItems={orderComponents(selectedItems)}
-            setSelectedItems={setSelectedItems}
+            selectedItems={orderComponents(selectedComponents)}
+            setSelectedItems={setSelectedComponents}
             onConfirm={moveFromSelectionToWorking}
           />
         )}
-        {workingItems && (
+        {workingComponents && (
           <WorkingItems
-            items={orderComponents(workingItems)}
-            setItems={setWorkingItems}
+            items={orderComponents(workingComponents)}
+            setItems={setWorkingComponents}
             onBack={moveBackToSearch}
             onReset={reset}
           />

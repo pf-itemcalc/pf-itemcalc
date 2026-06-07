@@ -23,7 +23,7 @@ const ItemDisplay = ({
         onBack={onBack}
         onReset={onReset}
       />
-      <Summary items={components} setItems={setComponents} />
+      <Summary components={components} setComponents={setComponents} />
     </>
   );
 };

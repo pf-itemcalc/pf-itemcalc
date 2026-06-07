@@ -54,24 +54,28 @@ const NewTabLink = ({ url, children }: NewTabLinkProps) => {
   );
 };
 
-type ItemProps = {
-  item: Component;
+type ComponentDisplayProps = {
+  component: Component;
   compositeRating?: number;
   plural: boolean;
 };
 
-const ItemDisplay = ({ item, compositeRating, plural }: ItemProps) => {
-  const url = getComponentUrl(item);
+const ComponentDisplay = ({
+  component,
+  compositeRating,
+  plural,
+}: ComponentDisplayProps) => {
+  const url = getComponentUrl(component);
 
-  const name = getComponentDisplayName(item, { compositeRating, plural });
+  const name = getComponentDisplayName(component, { compositeRating, plural });
 
   return url ? <NewTabLink url={url}>{name}</NewTabLink> : <>{name}</>;
 };
 
-type SetItemsFunction = (newItems: Component[]) => void;
+type SetComponentsFunction = (newComponents: Component[]) => void;
 type SummaryProps = {
-  items: Component[];
-  setItems: SetItemsFunction;
+  components: Component[];
+  setComponents: SetComponentsFunction;
 };
 
 type InnerSummaryProps = SummaryProps & {
@@ -87,25 +91,30 @@ const Wrapper = ({
 }) => (magical ? <i>{children}</i> : <>{children}</>);
 
 type TitleProps = {
-  items: Component[];
+  components: Component[];
   children?: React.ReactNode;
   compositeRating?: number;
   count: number;
 };
 
-const ItemTitle = ({ items, children, compositeRating, count }: TitleProps) => {
-  const magical = isMagic(items);
+const ItemTitle = ({
+  components,
+  children,
+  compositeRating,
+  count,
+}: TitleProps) => {
+  const magical = isMagic(components);
 
   return (
     <li>
       {count > 1 ? `${count}x ` : ""}
       <Wrapper magical={magical}>
-        {items
+        {components
           .filter((i) => !isCount(i))
           .map((i) => (
             <React.Fragment key={i.name}>
-              <ItemDisplay
-                item={i}
+              <ComponentDisplay
+                component={i}
                 compositeRating={compositeRating}
                 plural={count > 1}
               />{" "}
@@ -147,13 +156,13 @@ const casterLevelDisplay = (casterLevel: number) => {
   }
 };
 
-type ItemValueTextProps = {
+type ValueTextProps = {
   title: string;
   value: number;
   count: number;
   unit: string;
 };
-const ItemValueText = ({ title, value, count, unit }: ItemValueTextProps) => {
+const ValueText = ({ title, value, count, unit }: ValueTextProps) => {
   if (count <= 1) {
     return (
       <>
@@ -189,46 +198,50 @@ const getInitialCount = (
 
 const useCount = (
   casterLevel: number | undefined,
-  items: Component[],
-  setItems: SetItemsFunction,
+  components: Component[],
+  setComponents: SetComponentsFunction,
 ): [number, (newCount: number) => void] => {
-  const countItem = items.find(isCount);
-  const ammunition = items.find(isAmmunition);
+  const countComponent = components.find(isCount);
+  const ammunition = components.find(isAmmunition);
   const [innerCount, setInnerCount] = useState(
-    countItem?.count ?? getInitialCount(ammunition, casterLevel),
+    countComponent?.count ?? getInitialCount(ammunition, casterLevel),
   );
 
   const setCount = useCallback(
     (newCount: number) => {
       setInnerCount(newCount);
-      if (countItem) {
-        setItems([
-          ...items.filter((i) => !isCount(i)),
+      if (countComponent) {
+        setComponents([
+          ...components.filter((i) => !isCount(i)),
           newCountComponent(newCount),
         ]);
       }
     },
-    [items, countItem, setInnerCount, setItems],
+    [components, countComponent, setInnerCount, setComponents],
   );
 
   return [innerCount, setCount];
 };
 
-const ItemSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
-  const casterLevel = getItemCasterLevel(items);
-  const identifyMethod = getIdentifyMethod(casterLevel, items);
+const ItemSummary = ({
+  components,
+  onCopy,
+  setComponents,
+}: InnerSummaryProps) => {
+  const casterLevel = getItemCasterLevel(components);
+  const identifyMethod = getIdentifyMethod(casterLevel, components);
 
-  const isCompositeBow = items.some(isComposite);
+  const isCompositeBow = components.some(isComposite);
   const [rating, setRating] = useState(0);
   const compositeRating = isCompositeBow ? rating : undefined;
 
-  const value = getItemValue(items, compositeRating);
-  const weight = getItemWeight(items);
+  const value = getItemValue(components, compositeRating);
+  const weight = getItemWeight(components);
 
-  const specificItem = items.find(componentIsSpecificItem);
+  const specificItem = components.find(componentIsSpecificItem);
   const slot = specificItem ? specificItem.slot.toString() : undefined;
 
-  const [count, setCount] = useCount(casterLevel, items, setItems);
+  const [count, setCount] = useCount(casterLevel, components, setComponents);
 
   return (
     <>
@@ -256,9 +269,9 @@ const ItemSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
       )}
       <SurroundingBox>
         <CopyButton onCopy={onCopy} />
-        <ul id="SummaryItemList">
+        <ul id={elementToCopyIdentifier}>
           <ItemTitle
-            items={items}
+            components={components}
             compositeRating={compositeRating}
             count={count}
           >
@@ -284,7 +297,7 @@ const ItemSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
                 </li>
               )}
               <li>
-                <ItemValueText
+                <ValueText
                   title="Value"
                   value={value}
                   count={count}
@@ -293,7 +306,7 @@ const ItemSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
               </li>
               {weight > 0 && (
                 <li>
-                  <ItemValueText
+                  <ValueText
                     title="Weight"
                     value={weight}
                     count={count}
@@ -325,20 +338,24 @@ const WandValueText = ({ value, charges }: WandValueTextProps) => {
   );
 };
 
-const SpellSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
-  const casterLevel = getSpellCasterLevel(items);
-  const spellLevel = getSpellLevel(items);
-  const spellList = getSpellList(items);
+const SpellSummary = ({
+  components,
+  onCopy,
+  setComponents,
+}: InnerSummaryProps) => {
+  const casterLevel = getSpellCasterLevel(components);
+  const spellLevel = getSpellLevel(components);
+  const spellList = getSpellList(components);
 
-  const isWand = items.some((i) => isSpellVesselOfType(i, "Wand"));
+  const isWand = components.some((i) => isSpellVesselOfType(i, "Wand"));
 
   const [charges, setCharges] = useState(50);
   const [overrideCasterLevel, setOverrideCasterLevel] = useState(casterLevel);
 
-  const identifyMethod = getIdentifyMethod(overrideCasterLevel, items);
-  const value = getSpellValue(items, overrideCasterLevel);
+  const identifyMethod = getIdentifyMethod(overrideCasterLevel, components);
+  const value = getSpellValue(components, overrideCasterLevel);
 
-  const [count, setCount] = useCount(casterLevel, items, setItems);
+  const [count, setCount] = useCount(casterLevel, components, setComponents);
 
   return (
     <>
@@ -380,8 +397,8 @@ const SpellSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
 
       <SurroundingBox>
         <CopyButton onCopy={onCopy} />
-        <ul id="SummaryItemList">
-          <ItemTitle items={items} count={count}>
+        <ul id={elementToCopyIdentifier}>
+          <ItemTitle components={components} count={count}>
             <ul>
               {overrideCasterLevel && (
                 <>
@@ -405,7 +422,7 @@ const SpellSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
                 {isWand ? (
                   <WandValueText value={value} charges={charges} />
                 ) : (
-                  <ItemValueText
+                  <ValueText
                     title="Value"
                     value={value}
                     count={count}
@@ -420,6 +437,8 @@ const SpellSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
     </>
   );
 };
+
+const elementToCopyIdentifier = "ItemSummaryCopyableSection";
 
 const copyToClipboard = async (element: HTMLElement) => {
   const htmlContent = element.innerHTML;
@@ -437,11 +456,11 @@ const copyToClipboard = async (element: HTMLElement) => {
   await navigator.clipboard.write([clipboardItem]);
 };
 
-const Summary = ({ items, setItems }: SummaryProps) => {
-  const summaryForSpell = items.some((i) => isSpell(i));
+const Summary = ({ components, setComponents }: SummaryProps) => {
+  const summaryForSpell = components.some((i) => isSpell(i));
 
   const onCopy = () => {
-    const element = document.getElementById("SummaryItemList");
+    const element = document.getElementById(elementToCopyIdentifier);
     if (!element) {
       return;
     }
@@ -449,9 +468,17 @@ const Summary = ({ items, setItems }: SummaryProps) => {
   };
 
   return summaryForSpell ? (
-    <SpellSummary items={items} setItems={setItems} onCopy={onCopy} />
+    <SpellSummary
+      components={components}
+      setComponents={setComponents}
+      onCopy={onCopy}
+    />
   ) : (
-    <ItemSummary items={items} setItems={setItems} onCopy={onCopy} />
+    <ItemSummary
+      components={components}
+      setComponents={setComponents}
+      onCopy={onCopy}
+    />
   );
 };
 

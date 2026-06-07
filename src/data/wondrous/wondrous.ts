@@ -1,6 +1,6 @@
 import type { Wondrous } from "./wondrous-types";
 
-export const wondrousItems: Wondrous[] = [
+export const wondrousItemComponents: Wondrous[] = [
   {
     type: "wondrous",
     name: "Abjurant Salt",

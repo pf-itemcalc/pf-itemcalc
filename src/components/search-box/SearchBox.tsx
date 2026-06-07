@@ -8,8 +8,8 @@ import {
   isSpellVesselOfType,
 } from "../../data/helpers";
 import {
-  getOptions,
-  selectedItemsAreInvalid,
+  getComponentOptionsGivenCurrentSelected,
+  selectedComponentsAreInvalid,
 } from "../../engine/options/get-options";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
@@ -19,7 +19,7 @@ const getOptionsWithCount = (
   selectedItems: Component[],
   searchValue: string,
 ): Component[] => {
-  const options = getOptions(selectedItems);
+  const options = getComponentOptionsGivenCurrentSelected(selectedItems);
   const parsedValue = parseInt(searchValue);
   const countAlreadyUsed = selectedItems.some(isCount);
   const wandPresent = !!selectedItems.find((i) =>
@@ -67,7 +67,7 @@ const SearchBox = ({
     };
   }, []);
 
-  const error = selectedItemsAreInvalid(selectedItems);
+  const error = selectedComponentsAreInvalid(selectedItems);
   const displayError = selectedItems.length > 0 && error;
 
   const [open, setOpen] = useState(false);

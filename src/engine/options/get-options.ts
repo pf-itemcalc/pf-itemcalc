@@ -36,9 +36,9 @@ import { staves } from "../../data/staff/staff";
 import weaponQaulities from "../../data/weapon/weapon-qualities";
 import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types";
 import weapons from "../../data/weapon/weapons";
-import { wondrousItems } from "../../data/wondrous/wondrous";
+import { wondrousItemComponents } from "../../data/wondrous/wondrous";
 
-export const allItems: Component[] = orderComponents([
+export const allComponents: Component[] = orderComponents([
   ...enhancements,
   ...sizeModifiers,
   ...specialMaterials,
@@ -49,7 +49,7 @@ export const allItems: Component[] = orderComponents([
   ...armors,
   ...spellVessels,
   ...spells,
-  ...wondrousItems,
+  ...wondrousItemComponents,
   ...specialAmmoComponents,
   ...specialArmorComponents,
   ...specialShieldComponents,
@@ -60,22 +60,25 @@ export const allItems: Component[] = orderComponents([
   ...iounStones,
 ]);
 
-type ItemFilterFunction = (
+type ComponentFilterFunction = (
   selected: Component[],
-  items: Component[],
+  otherComponents: Component[],
 ) => Component[];
 
-const enchancementFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenEnhancementIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const enhancement = selected.find(isEnhancement);
 
   if (!enhancement) {
-    return items;
+    return otherComponents;
   }
 
   if (enhancement === Masterwork) {
     // If the enhancement is masterwork you can then only choose:
     //  size-modifiers, materials, armor, weapons or ammo
-    return items.filter(
+    return otherComponents.filter(
       (i) =>
         isSizeModifier(i) ||
         isSpecialMaterial(i) ||
@@ -87,7 +90,7 @@ const enchancementFilter: ItemFilterFunction = (selected, items) => {
 
   // If there is an enhancement then you can only choose:
   //  size-modifiers, materials, armor, armor qualities, weapons, weapon quailities or ammo
-  return items.filter(
+  return otherComponents.filter(
     (i) =>
       isSizeModifier(i) ||
       isSpecialMaterial(i) ||
@@ -99,16 +102,19 @@ const enchancementFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
-const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenSpecialMaterialIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const specialMaterial = selected.find(isSpecialMaterial);
   if (!specialMaterial) {
-    return items;
+    return otherComponents;
   }
 
   // If the special material is specific then you can only choose:
   //  size-modifiers, enhancements, applicable armors, armor qualities, applicable weapons, weapon qualities and applicable ammunition
   if (specialMaterial.isApplicable) {
-    const applicableItems = items.filter(
+    const applicableItems = otherComponents.filter(
       (i) =>
         isSizeModifier(i) ||
         isEnhancement(i) ||
@@ -130,7 +136,7 @@ const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
 
   // If there is a special material (that is not specific) then you can only choose:
   //  size modifiers, enhancements, armors, armor qualities, weapons, weapon qualities and ammunition
-  return items.filter(
+  return otherComponents.filter(
     (i) =>
       isSizeModifier(i) ||
       isEnhancement(i) ||
@@ -142,15 +148,18 @@ const specialMaterialFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
-const weaponFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenWeaponIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const weapon = selected.find(isWeapon);
   if (!weapon) {
-    return items;
+    return otherComponents;
   }
 
   // If there is a weapon then you can only choose:
   //  size-modifiers, enhancements, weapon qualities and special materials that are applicable
-  return items.filter(
+  return otherComponents.filter(
     (i) =>
       isSizeModifier(i) ||
       isEnhancement(i) ||
@@ -159,14 +168,17 @@ const weaponFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
-const weaponQuailityFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenWeaponQualityIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   if (!selected.some(isWeaponQuality)) {
-    return items;
+    return otherComponents;
   }
 
   // If there is a weapon quality then you can only choose:
   //  size-modifiers, enhancements, weapons, other weapon qualities, ammunition, and special materials that are applicable to any remaining weapons
-  const remainingItems = items.filter(
+  const remainingItems = otherComponents.filter(
     (i) =>
       isSizeModifier(i) ||
       isMagicEnhancement(i) ||
@@ -186,15 +198,18 @@ const weaponQuailityFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
-const ammunitionFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenAmmunitionIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const ammo = selected.find(isAmmunition);
   if (!ammo) {
-    return items;
+    return otherComponents;
   }
 
   // If there is an ammunition then you can only choose:
   //  size-modifiers, enhancements, weapon qualities and special materials that are applicable
-  return items.filter(
+  return otherComponents.filter(
     (i) =>
       isSizeModifier(i) ||
       isEnhancement(i) ||
@@ -203,15 +218,18 @@ const ammunitionFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
-const armorFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenArmorIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const armor = selected.find(isArmor);
   if (!armor) {
-    return items;
+    return otherComponents;
   }
 
   // If there is an armor then you can only choose:
   //  size-modifiers, enhancements, armor qualities and special materials that are applicable
-  return items.filter(
+  return otherComponents.filter(
     (i) =>
       isSizeModifier(i) ||
       isEnhancement(i) ||
@@ -220,14 +238,17 @@ const armorFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
-const armorQualityFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenArmorQualityIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   if (!selected.some(isArmorQuality)) {
-    return items;
+    return otherComponents;
   }
 
   // If there is an armor quality then you can only choose:
   //  size-modifiers, enhancements, armors, other armor qualities, and special materials that are applicable to any remaining armors
-  const remainingItems = items.filter(
+  const remainingItems = otherComponents.filter(
     (i) =>
       isSizeModifier(i) ||
       isMagicEnhancement(i) ||
@@ -242,50 +263,62 @@ const armorQualityFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
-const spellFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenSpellIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const spell = selected.find(isSpell);
   if (!spell) {
-    return items;
+    return otherComponents;
   }
 
   // If a spell is selected, you can only choose a spell vessel that is applicable
-  return items.filter(
+  return otherComponents.filter(
     (i) => isSpellVessel(i) && i.maxSpellLevel >= spell.spellLevel,
   );
 };
 
-const spellVesselFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenSpellVesselIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const spellVessel = selected.find(isSpellVessel);
   if (!spellVessel) {
-    return items;
+    return otherComponents;
   }
 
   // If a spell vessel is selected, you can only choose a spell that is applicable
-  return items.filter(
+  return otherComponents.filter(
     (i) => isSpell(i) && spellVessel.maxSpellLevel >= i.spellLevel,
   );
 };
 
-const specificItemFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenSingularItemIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const specificItem = selected.find(componentIsSingularItem);
 
   if (!specificItem) {
-    return items;
+    return otherComponents;
   }
 
   // If a specific item is selected, then you cannot choose any other items
   return [];
 };
 
-const sizeModifierFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenSizeModifierIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const sizeModifier = selected.find(isSizeModifier);
   if (!sizeModifier) {
-    return items;
+    return otherComponents;
   }
 
   // If a size modifier is specified then you can only choose:
   //  special materials, enhancements, armors, armor qualities, weapons and weapon qualities
-  return items.filter(
+  return otherComponents.filter(
     (i) =>
       isSpecialMaterial(i) ||
       isEnhancement(i) ||
@@ -297,60 +330,65 @@ const sizeModifierFilter: ItemFilterFunction = (selected, items) => {
   );
 };
 
-const countFilter: ItemFilterFunction = (selected, items) => {
+const filterComponentsWhenCountIsPresent: ComponentFilterFunction = (
+  selected,
+  otherComponents,
+) => {
   const countItem = selected.find(isCount);
   if (!countItem) {
-    return items;
+    return otherComponents;
   }
 
   // We currently do not allow you to calculate the cost for multiple wands
   // Typically the charges is used for that (makes the text too long!)
-  return items.filter((i) => !isSpellVesselOfType(i, "Wand"));
+  return otherComponents.filter((i) => !isSpellVesselOfType(i, "Wand"));
 };
 
-const itemFilters: ItemFilterFunction[] = [
-  specificItemFilter,
-  sizeModifierFilter,
-  enchancementFilter,
-  specialMaterialFilter,
-  weaponFilter,
-  weaponQuailityFilter,
-  ammunitionFilter,
-  armorFilter,
-  spellVesselFilter,
-  spellFilter,
-  armorQualityFilter,
-  countFilter,
+const componentFilters: ComponentFilterFunction[] = [
+  filterComponentsWhenSingularItemIsPresent,
+  filterComponentsWhenSizeModifierIsPresent,
+  filterComponentsWhenEnhancementIsPresent,
+  filterComponentsWhenSpecialMaterialIsPresent,
+  filterComponentsWhenWeaponIsPresent,
+  filterComponentsWhenWeaponQualityIsPresent,
+  filterComponentsWhenAmmunitionIsPresent,
+  filterComponentsWhenArmorIsPresent,
+  filterComponentsWhenSpellVesselIsPresent,
+  filterComponentsWhenSpellIsPresent,
+  filterComponentsWhenArmorQualityIsPresent,
+  filterComponentsWhenCountIsPresent,
 ];
 
-export const getOptions = (selectedItems: Component[]) =>
-  itemFilters.reduce(
-    (itemsRemaining, filterFunction) =>
-      filterFunction(selectedItems, itemsRemaining),
-    allItems,
+export const getComponentOptionsGivenCurrentSelected = (
+  selectedComponents: Component[],
+) =>
+  componentFilters.reduce(
+    (componentsRemaining, filterFunction) =>
+      filterFunction(selectedComponents, componentsRemaining),
+    allComponents,
   );
 
-const getEnhancementModifier = (item: Component): number => {
-  if (isEnhancement(item)) {
-    return item.modifier;
+const getEnhancementModifier = (component: Component): number => {
+  if (isEnhancement(component)) {
+    return component.modifier;
   }
 
-  if (isWeaponQuality(item)) {
-    return getWeaponQaulityModifier(item);
+  if (isWeaponQuality(component)) {
+    return getWeaponQaulityModifier(component);
   }
 
-  if (isArmorQuality(item)) {
-    return getArmorQaulityModifier(item);
+  if (isArmorQuality(component)) {
+    return getArmorQaulityModifier(component);
   }
 
   return 0;
 };
 
-export const selectedItemsAreInvalid = (
-  selectedItems: Component[],
+export const selectedComponentsAreInvalid = (
+  selectedComponents: Component[],
 ): string | undefined => {
-  const totalModifier = selectedItems.reduce(
-    (val, item) => getEnhancementModifier(item) + val,
+  const totalModifier = selectedComponents.reduce(
+    (val, component) => getEnhancementModifier(component) + val,
     0,
   );
 
@@ -359,7 +397,7 @@ export const selectedItemsAreInvalid = (
   }
 
   if (
-    selectedItems.every(
+    selectedComponents.every(
       (i) =>
         !componentIsSingularItem(i) &&
         !isWeapon(i) &&
@@ -368,39 +406,39 @@ export const selectedItemsAreInvalid = (
         !isAmmunition(i),
     )
   ) {
-    if (selectedItems.some((i) => isSizeModifier(i))) {
+    if (selectedComponents.some((i) => isSizeModifier(i))) {
       return "You must select a weapon, armour or ammunition";
     }
 
-    if (selectedItems.some((i) => isWeaponQuality(i))) {
+    if (selectedComponents.some((i) => isWeaponQuality(i))) {
       return "You must select a weapon or ammunition";
     }
 
-    if (selectedItems.some((i) => isArmorQuality(i))) {
+    if (selectedComponents.some((i) => isArmorQuality(i))) {
       return "You must select an armor";
     }
 
-    if (selectedItems.some((i) => isSpellVessel(i))) {
+    if (selectedComponents.some((i) => isSpellVessel(i))) {
       return "You must select a spell";
     }
 
-    if (selectedItems.some((i) => isSpecialMaterial(i))) {
+    if (selectedComponents.some((i) => isSpecialMaterial(i))) {
       return "You must select either a weapon or an armor";
     }
 
-    return "You must select either a weapon, armor, spell, ammunition or specific item";
+    return "You must select either a weapon, armor, spell, ammunition or a specific item";
   }
 
   if (
-    selectedItems.some((i) => isSpell(i)) &&
-    selectedItems.every((i) => !isSpellVessel(i))
+    selectedComponents.some((i) => isSpell(i)) &&
+    selectedComponents.every((i) => !isSpellVessel(i))
   ) {
     return "You must select a potion, wand or scroll (i.e. a spell vessel)";
   }
 
   if (
-    selectedItems.some((i) => isWeaponQuality(i) || isArmorQuality(i)) &&
-    selectedItems.every((i) => !isMagicEnhancement(i))
+    selectedComponents.some((i) => isWeaponQuality(i) || isArmorQuality(i)) &&
+    selectedComponents.every((i) => !isMagicEnhancement(i))
   ) {
     return "You must choose an enchancement modifier to prefix your quality";
   }

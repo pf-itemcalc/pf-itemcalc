@@ -1,10 +1,10 @@
-import { wondrousItems } from "./wondrous";
+import { wondrousItemComponents } from "./wondrous";
 
 describe("wondrousItems", () => {
   it("contains no duplicate names, including subtitle", () => {
-    const counts = wondrousItems.map((item) => ({
+    const counts = wondrousItemComponents.map((item) => ({
       name: item.name + item.subtitle,
-      count: wondrousItems.filter(
+      count: wondrousItemComponents.filter(
         (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));

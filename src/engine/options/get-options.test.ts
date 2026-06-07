@@ -1,9 +1,9 @@
 import { getUniqueComponentIdentifier } from "../../data/helpers";
-import { allItems } from "../../engine/options/get-options";
+import { allComponents } from "../../engine/options/get-options";
 
 describe("all items", () => {
   it("contains no duplicate unique IDs", () => {
-    const countsDictonary = allItems.reduce<{ [id: string]: number }>(
+    const countsDictonary = allComponents.reduce<{ [id: string]: number }>(
       (dictionary, item) => {
         const id = getUniqueComponentIdentifier(item);
         if (id in dictionary) {
@@ -21,7 +21,7 @@ describe("all items", () => {
         return;
       }
 
-      const duplicates = allItems.filter(
+      const duplicates = allComponents.filter(
         (item) => getUniqueComponentIdentifier(item) === id,
       );
       expect(duplicates).toHaveLength(0);

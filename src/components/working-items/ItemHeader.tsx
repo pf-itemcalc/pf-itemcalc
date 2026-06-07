@@ -1,14 +1,14 @@
 import Reply from "@mui/icons-material/Reply";
 import Clear from "@mui/icons-material/Clear";
 import { Button, Chip } from "@mui/material";
-import type { Item } from "../../data/helpers";
+import type { Component } from "../../data/helpers";
 import {
-  getItemDisplayName,
+  getComponentDisplayName,
   isAmmunition,
   isArmor,
   isArmorQuality,
   isEnhancement,
-  isSpecificItem,
+  componentIsSingularItem,
   isSpell,
   isSpellVessel,
   isWeapon,
@@ -17,25 +17,25 @@ import {
 import { CenterBox } from "../containers/CenterBox";
 
 type ItemHeaderProps = {
-  items: Item[];
-  setItems: (newItems: Item[]) => void;
+  items: Component[];
+  setItems: (newItems: Component[]) => void;
   onBack: () => void;
   onReset: () => void;
 };
 
-const isDeletable = (item: Item, items: Item[]) =>
+const isDeletable = (item: Component, items: Component[]) =>
   (!isWeapon(item) &&
     !isAmmunition(item) &&
     !isArmor(item) &&
     !isSpellVessel(item) &&
     !isSpell(item) &&
     !isEnhancement(item) &&
-    !isSpecificItem(item)) ||
+    !componentIsSingularItem(item)) ||
   (isEnhancement(item) &&
     items.every((i) => !isArmorQuality(i) && !isWeaponQuality(i)));
 
 const ItemHeader = ({ items, setItems, onBack, onReset }: ItemHeaderProps) => {
-  const deleteItem = (item: Item) => () =>
+  const deleteItem = (item: Component) => () =>
     setItems(items.filter((i) => i !== item));
 
   return (
@@ -62,7 +62,7 @@ const ItemHeader = ({ items, setItems, onBack, onReset }: ItemHeaderProps) => {
         {items.map((i) => (
           <Chip
             key={i.name}
-            label={getItemDisplayName(i)}
+            label={getComponentDisplayName(i)}
             onDelete={isDeletable(i, items) ? deleteItem(i) : undefined}
           />
         ))}

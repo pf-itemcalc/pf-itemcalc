@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { Autocomplete, IconButton, styled, TextField } from "@mui/material";
-import type { Item } from "../../data/helpers";
+import type { Component } from "../../data/helpers";
 import {
   getItemCasterLevel,
   getIdentifyMethod,
-  getItemUrl,
+  getComponentUrl,
   getItemValue,
   getItemWeight,
   isMagic,
@@ -15,8 +15,8 @@ import {
   getSpellLevel,
   getSpellList,
   isComposite,
-  getItemDisplayName,
-  isSpecificItem,
+  getComponentDisplayName,
+  componentIsSingularItem,
   isAmmunition,
   isCount,
 } from "../../data/helpers";
@@ -55,22 +55,22 @@ const NewTabLink = ({ url, children }: NewTabLinkProps) => {
 };
 
 type ItemProps = {
-  item: Item;
+  item: Component;
   compositeRating?: number;
   plural: boolean;
 };
 
 const ItemDisplay = ({ item, compositeRating, plural }: ItemProps) => {
-  const url = getItemUrl(item);
+  const url = getComponentUrl(item);
 
-  const name = getItemDisplayName(item, { compositeRating, plural });
+  const name = getComponentDisplayName(item, { compositeRating, plural });
 
   return url ? <NewTabLink url={url}>{name}</NewTabLink> : <>{name}</>;
 };
 
-type SetItemsFunction = (newItems: Item[]) => void;
+type SetItemsFunction = (newItems: Component[]) => void;
 type SummaryProps = {
-  items: Item[];
+  items: Component[];
   setItems: SetItemsFunction;
 };
 
@@ -87,7 +87,7 @@ const Wrapper = ({
 }) => (magical ? <i>{children}</i> : <>{children}</>);
 
 type TitleProps = {
-  items: Item[];
+  items: Component[];
   children?: React.ReactNode;
   compositeRating?: number;
   count: number;
@@ -189,7 +189,7 @@ const getInitialCount = (
 
 const useCount = (
   casterLevel: number | undefined,
-  items: Item[],
+  items: Component[],
   setItems: SetItemsFunction,
 ): [number, (newCount: number) => void] => {
   const countItem = items.find(isCount);
@@ -222,7 +222,7 @@ const ItemSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
   const value = getItemValue(items, compositeRating);
   const weight = getItemWeight(items);
 
-  const specificItem = items.find(isSpecificItem);
+  const specificItem = items.find(componentIsSingularItem);
   const slot = specificItem ? specificItem.slot.toString() : undefined;
 
   const [count, setCount] = useCount(casterLevel, items, setItems);

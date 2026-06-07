@@ -1,11 +1,11 @@
-import { getUniqueItemIdentifier } from "../../data/helpers";
+import { getUniqueComponentIdentifier } from "../../data/helpers";
 import { allItems } from "./get-options";
 
 describe("all items", () => {
   it("contains no duplicate unique IDs", () => {
     const countsDictonary = allItems.reduce<{ [id: string]: number }>(
       (dictionary, item) => {
-        const id = getUniqueItemIdentifier(item);
+        const id = getUniqueComponentIdentifier(item);
         if (id in dictionary) {
           dictionary[id] = dictionary[id] + 1;
         } else {
@@ -22,7 +22,7 @@ describe("all items", () => {
       }
 
       const duplicates = allItems.filter(
-        (item) => getUniqueItemIdentifier(item) === id,
+        (item) => getUniqueComponentIdentifier(item) === id,
       );
       expect(duplicates).toHaveLength(0);
     });

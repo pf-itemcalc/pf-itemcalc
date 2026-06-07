@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Box, styled } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
-import type { Item } from "./data/helpers";
-import { orderItems } from "./data/helpers";
+import type { Component } from "./data/helpers";
+import { orderComponents } from "./data/helpers";
 import WorkingItems from "./components/working-items/WorkingItems";
 import Title from "./components/title/Title";
 import { mainBreakpoint } from "./components/responsive";
@@ -28,8 +28,8 @@ const ResponsiveAppContainer = styled(Box)(({ theme }) => ({
 }));
 
 const App = () => {
-  const [selectedItems, setSelectedItems] = useState<Item[]>([]);
-  const [workingItems, setWorkingItems] = useState<Item[] | undefined>(
+  const [selectedItems, setSelectedItems] = useState<Component[]>([]);
+  const [workingItems, setWorkingItems] = useState<Component[] | undefined>(
     undefined,
   );
 
@@ -54,14 +54,14 @@ const App = () => {
       <ResponsiveAppContainer>
         {!workingItems && (
           <SearchBox
-            selectedItems={orderItems(selectedItems)}
+            selectedItems={orderComponents(selectedItems)}
             setSelectedItems={setSelectedItems}
             onConfirm={moveFromSelectionToWorking}
           />
         )}
         {workingItems && (
           <WorkingItems
-            items={orderItems(workingItems)}
+            items={orderComponents(workingItems)}
             setItems={setWorkingItems}
             onBack={moveBackToSearch}
             onReset={reset}

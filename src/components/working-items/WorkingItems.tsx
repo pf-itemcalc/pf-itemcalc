@@ -1,10 +1,10 @@
-import type { Item } from "../../data/helpers";
+import type { Component } from "../../data/helpers";
 import ItemHeader from "./ItemHeader";
 import Summary from "./Summary";
 
 type WorkingItemsProps = {
-  items: Item[];
-  setItems: (newItems: Item[]) => void;
+  items: Component[];
+  setItems: (newItems: Component[]) => void;
   onBack: () => void;
   onReset: () => void;
 };

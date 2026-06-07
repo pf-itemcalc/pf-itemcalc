@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button, FormHelperText, TextField } from "@mui/material";
-import type { Item } from "../../data/helpers";
+import type { Component } from "../../data/helpers";
 import {
-  getItemDisplayName,
-  getItemTypeDisplayName,
+  getComponentDisplayName,
+  getComponentTypeDisplayName,
   isCount,
   isSpellVesselOfType,
 } from "../../data/helpers";
@@ -13,9 +13,9 @@ import { CenterBox } from "../containers/CenterBox";
 import { newCountItem } from "../../data/special/count";
 
 const getOptionsWithCount = (
-  selectedItems: Item[],
+  selectedItems: Component[],
   searchValue: string,
-): Item[] => {
+): Component[] => {
   const options = getOptions(selectedItems);
   const parsedValue = parseInt(searchValue);
   const countAlreadyUsed = selectedItems.some(isCount);
@@ -41,8 +41,8 @@ const hints = [
 ];
 
 type SearchBoxProps = {
-  selectedItems: Item[];
-  setSelectedItems: React.Dispatch<React.SetStateAction<Item[]>>;
+  selectedItems: Component[];
+  setSelectedItems: React.Dispatch<React.SetStateAction<Component[]>>;
   onConfirm: () => void;
 };
 
@@ -88,9 +88,9 @@ const SearchBox = ({
     <CenterBox flexDirection="column">
       <CenterBox flexDirection="row">
         <VirtualisedSearchBox
-          groupBy={getItemTypeDisplayName}
+          groupBy={getComponentTypeDisplayName}
           options={options}
-          getOptionLabel={getItemDisplayName}
+          getOptionLabel={getComponentDisplayName}
           open={open}
           onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}

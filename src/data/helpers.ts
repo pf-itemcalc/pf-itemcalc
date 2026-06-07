@@ -52,7 +52,7 @@ import {
 } from "./ammunition/ammunition-types";
 import type { Count } from "./special/count-types";
 
-export type Item =
+export type Component =
   | Armor
   | ArmorQaulity
   | Weapon
@@ -63,10 +63,10 @@ export type Item =
   | Enhancement
   | SpellVessel
   | Spell
-  | SpecificItem
+  | SingularItemComponent
   | Count;
 
-export type SpecificItem =
+export type SingularItemComponent =
   | Wondrous
   | SpecialAmmo
   | SpecialArmor
@@ -77,70 +77,90 @@ export type SpecificItem =
   | Staff
   | IounStone;
 
-export const isArmor = (item: Item): item is Armor => item.type === "armor";
-export const isArmorQuality = (item: Item): item is ArmorQaulity =>
-  item.type === "armor-quality";
-export const isSpecialArmor = (item: Item): item is SpecialArmor =>
-  item.type === "special-armor";
-export const isSpecialShield = (item: Item): item is SpecialShield =>
-  item.type === "special-shield";
+export const isArmor = (component: Component): component is Armor =>
+  component.type === "armor";
+export const isArmorQuality = (
+  component: Component,
+): component is ArmorQaulity => component.type === "armor-quality";
+export const isSpecialArmor = (
+  component: Component,
+): component is SpecialArmor => component.type === "special-armor";
+export const isSpecialShield = (
+  component: Component,
+): component is SpecialShield => component.type === "special-shield";
 
-export const isWeapon = (item: Item): item is Weapon => item.type === "weapon";
-export const isComposite = (item: Item): item is Weapon =>
-  isWeapon(item) && item.name.toLowerCase().includes("composite");
-export const isWeaponQuality = (item: Item): item is WeaponQaulity =>
-  item.type === "weapon-quality";
-export const isSpecialWeapon = (item: Item): item is SpecialWeapon =>
-  item.type === "special-weapon";
+export const isWeapon = (component: Component): component is Weapon =>
+  component.type === "weapon";
+export const isComposite = (component: Component): component is Weapon =>
+  isWeapon(component) && component.name.toLowerCase().includes("composite");
+export const isWeaponQuality = (
+  component: Component,
+): component is WeaponQaulity => component.type === "weapon-quality";
+export const isSpecialWeapon = (
+  component: Component,
+): component is SpecialWeapon => component.type === "special-weapon";
 
-export const isAmmunition = (item: Item): item is Ammunition =>
-  item.type === "ammunition";
-export const isSpecialAmmo = (item: Item): item is SpecialAmmo =>
-  item.type === "special-ammo";
+export const isAmmunition = (component: Component): component is Ammunition =>
+  component.type === "ammunition";
+export const isSpecialAmmo = (component: Component): component is SpecialAmmo =>
+  component.type === "special-ammo";
 
-export const isSpecialMaterial = (item: Item): item is SpecialMaterial =>
-  item.type === "special-material";
-export const isSizeModifier = (item: Item): item is SizeModifier =>
-  item.type === "size-modifier";
+export const isSpecialMaterial = (
+  component: Component,
+): component is SpecialMaterial => component.type === "special-material";
+export const isSizeModifier = (
+  component: Component,
+): component is SizeModifier => component.type === "size-modifier";
 
-export const isEnhancement = (item: Item): item is Enhancement =>
-  item.type === "enhancement";
-export const isMagicEnhancement = (item: Item): item is Enhancement =>
-  isEnhancement(item) && item.modifier > 0;
+export const isEnhancement = (component: Component): component is Enhancement =>
+  component.type === "enhancement";
+export const isMagicEnhancement = (
+  component: Component,
+): component is Enhancement =>
+  isEnhancement(component) && component.modifier > 0;
 
-export const isSpellVessel = (item: Item): item is SpellVessel =>
-  item.type === "spell-vessel";
-export const isSpellVesselOfType = (item: Item, ...types: SpellVesselType[]) =>
-  isSpellVessel(item) && types.includes(item.vesselType);
-export const isSpell = (item: Item): item is Spell => item.type === "spell";
+export const isSpellVessel = (component: Component): component is SpellVessel =>
+  component.type === "spell-vessel";
+export const isSpellVesselOfType = (
+  component: Component,
+  ...types: SpellVesselType[]
+) => isSpellVessel(component) && types.includes(component.vesselType);
+export const isSpell = (component: Component): component is Spell =>
+  component.type === "spell";
 
-export const isWondrous = (item: Item): item is Wondrous =>
-  item.type === "wondrous";
-export const isRing = (item: Item): item is Ring => item.type === "ring";
-export const isRod = (item: Item): item is Rod => item.type === "rod";
-export const isStaff = (item: Item): item is Staff => item.type === "staff";
-export const isIounStone = (item: Item): item is IounStone =>
-  item.type === "ioun-stone";
+export const isWondrous = (component: Component): component is Wondrous =>
+  component.type === "wondrous";
+export const isRing = (component: Component): component is Ring =>
+  component.type === "ring";
+export const isRod = (component: Component): component is Rod =>
+  component.type === "rod";
+export const isStaff = (component: Component): component is Staff =>
+  component.type === "staff";
+export const isIounStone = (component: Component): component is IounStone =>
+  component.type === "ioun-stone";
 
-export const isSpecificItem = (item: Item): item is SpecificItem => {
+export const componentIsSingularItem = (
+  component: Component,
+): component is SingularItemComponent => {
   return (
-    isWondrous(item) ||
-    isSpecialAmmo(item) ||
-    isSpecialArmor(item) ||
-    isSpecialShield(item) ||
-    isSpecialWeapon(item) ||
-    isRing(item) ||
-    isRod(item) ||
-    isStaff(item) ||
-    isIounStone(item)
+    isWondrous(component) ||
+    isSpecialAmmo(component) ||
+    isSpecialArmor(component) ||
+    isSpecialShield(component) ||
+    isSpecialWeapon(component) ||
+    isRing(component) ||
+    isRod(component) ||
+    isStaff(component) ||
+    isIounStone(component)
   );
 };
 
-export const isCount = (item: Item): item is Count => item.type === "count";
+export const isCount = (component: Component): component is Count =>
+  component.type === "count";
 
-type ItemType = Item["type"];
+type ComponentType = Component["type"];
 
-const itemTypeDisplayNames: { [key in ItemType]: string } = {
+const componentTypeDisplayNames: { [key in ComponentType]: string } = {
   armor: "Armor / Shield",
   "armor-quality": "Armor / Shield Quality",
   weapon: "Weapon",
@@ -163,10 +183,10 @@ const itemTypeDisplayNames: { [key in ItemType]: string } = {
   count: "Count",
 };
 
-export const getItemTypeDisplayName = (item: Item): string =>
-  itemTypeDisplayNames[item.type];
+export const getComponentTypeDisplayName = (component: Component): string =>
+  componentTypeDisplayNames[component.type];
 
-const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
+const componentTypeOrderingDictionary: { [key in ComponentType]: number } = {
   count: -1,
   enhancement: 0,
   "size-modifier": 1,
@@ -189,53 +209,61 @@ const itemTypeOrderingDictionary: { [key in ItemType]: number } = {
   "ioun-stone": 18,
 };
 
-const itemComparater = (item1: Item, item2: Item) => {
-  if (item1.type === item2.type) {
-    return getItemDisplayName(item1).localeCompare(getItemDisplayName(item2));
+const componentComparater = (component1: Component, component2: Component) => {
+  if (component1.type === component2.type) {
+    return getComponentDisplayName(component1).localeCompare(
+      getComponentDisplayName(component2),
+    );
   }
 
   return (
-    itemTypeOrderingDictionary[item1.type] -
-    itemTypeOrderingDictionary[item2.type]
+    componentTypeOrderingDictionary[component1.type] -
+    componentTypeOrderingDictionary[component2.type]
   );
 };
 
-export const orderItems = (items: Item[]): Item[] => items.sort(itemComparater);
+export const orderComponents = (components: Component[]): Component[] =>
+  components.sort(componentComparater);
 
-const itemTypeUrlMap: {
-  [key in ItemType]: (item: Item) => string | undefined;
+const componentTypeUrlMap: {
+  [key in ComponentType]: (component: Component) => string | undefined;
 } = {
   enhancement: () => undefined,
-  armor: (item) => getArmorUrl(item as Armor),
-  "armor-quality": (item) => getArmorQualityUrl(item as ArmorQaulity),
-  weapon: (item) => getWeaponUrl(item as Weapon),
-  ammunition: (item) => getAmmunitionUrl(item as Ammunition),
+  armor: (component) => getArmorUrl(component as Armor),
+  "armor-quality": (component) => getArmorQualityUrl(component as ArmorQaulity),
+  weapon: (component) => getWeaponUrl(component as Weapon),
+  ammunition: (component) => getAmmunitionUrl(component as Ammunition),
   "size-modifier": () => undefined,
-  "weapon-quality": (item) => getWeaponQualityUrl(item as WeaponQaulity),
-  "special-material": (item) => getMaterialUrl(item as SpecialMaterial),
-  spell: (item) => getSpellUrl(item as Spell),
+  "weapon-quality": (component) =>
+    getWeaponQualityUrl(component as WeaponQaulity),
+  "special-material": (component) =>
+    getMaterialUrl(component as SpecialMaterial),
+  spell: (component) => getSpellUrl(component as Spell),
   "spell-vessel": () => undefined,
-  wondrous: (item) => getWondrousUrl(item as Wondrous),
-  "special-ammo": (item) => getSpecialAmmoUrl(item as SpecialAmmo),
-  "special-armor": (item) => getSpecialArmorUrl(item as SpecialArmor),
-  "special-shield": (item) => getSpecialShieldUrl(item as SpecialShield),
-  "special-weapon": (item) => getSpecialWeaponUrl(item as SpecialWeapon),
-  ring: (item) => getRingUrl(item as Ring),
-  rod: (item) => getRodUrl(item as Rod),
-  staff: (item) => getStaffUrl(item as Staff),
-  "ioun-stone": (item) => getIounStoneUrl(item as IounStone),
+  wondrous: (component) => getWondrousUrl(component as Wondrous),
+  "special-ammo": (component) => getSpecialAmmoUrl(component as SpecialAmmo),
+  "special-armor": (component) => getSpecialArmorUrl(component as SpecialArmor),
+  "special-shield": (component) =>
+    getSpecialShieldUrl(component as SpecialShield),
+  "special-weapon": (component) =>
+    getSpecialWeaponUrl(component as SpecialWeapon),
+  ring: (component) => getRingUrl(component as Ring),
+  rod: (component) => getRodUrl(component as Rod),
+  staff: (component) => getStaffUrl(component as Staff),
+  "ioun-stone": (component) => getIounStoneUrl(component as IounStone),
   count: () => undefined,
 };
-export const getItemUrl = (item: Item) => itemTypeUrlMap[item.type](item);
+export const getComponentUrl = (component: Component) =>
+  componentTypeUrlMap[component.type](component);
 
 const notMagic = () => false;
 const magic = () => true;
-const magicIfHasCasterLevel = (item: Item) =>
-  isSpecificItem(item) && item.casterLevel > 0;
-const itemTypeIsMagicMap: {
-  [key in ItemType]: (item: Item) => boolean;
+const magicIfHasCasterLevel = (component: Component) =>
+  componentIsSingularItem(component) && component.casterLevel > 0;
+const componentTypeIsMagicMap: {
+  [key in ComponentType]: (component: Component) => boolean;
 } = {
-  enhancement: (item) => item !== Masterwork,
+  enhancement: (component) => component !== Masterwork,
   armor: notMagic,
   "armor-quality": magic,
   weapon: notMagic,
@@ -256,19 +284,23 @@ const itemTypeIsMagicMap: {
   "ioun-stone": magic,
   count: notMagic,
 };
-export const isMagic = (items: Item[]): boolean =>
-  items.some((i) => itemTypeIsMagicMap[i.type](i));
+export const isMagic = (components: Component[]): boolean =>
+  components.some((component) =>
+    componentTypeIsMagicMap[component.type](component),
+  );
 
-export const getItemCasterLevel = (items: Item[]): number | undefined => {
-  const specificItem = items.find(isSpecificItem);
-  if (specificItem && specificItem.casterLevel > 0) {
-    return specificItem.casterLevel;
+export const getItemCasterLevel = (
+  components: Component[],
+): number | undefined => {
+  const singularItem = components.find(componentIsSingularItem);
+  if (singularItem && singularItem.casterLevel > 0) {
+    return singularItem.casterLevel;
   }
 
-  const enhancement = items.find(isEnhancement);
+  const enhancement = components.find(isEnhancement);
   const qualities = [
-    ...items.filter(isArmorQuality),
-    ...items.filter(isWeaponQuality),
+    ...components.filter(isArmorQuality),
+    ...components.filter(isWeaponQuality),
   ];
 
   if (!enhancement || enhancement === Masterwork) {
@@ -281,8 +313,8 @@ export const getItemCasterLevel = (items: Item[]): number | undefined => {
   );
 };
 
-export const getSpellCasterLevel = (items: Item[]): number => {
-  const spell = items.find(isSpell);
+export const getSpellCasterLevel = (components: Component[]): number => {
+  const spell = components.find(isSpell);
 
   if (!spell) {
     return 0;
@@ -292,72 +324,85 @@ export const getSpellCasterLevel = (items: Item[]): number => {
 };
 
 export const getItemValue = (
-  items: Item[],
+  components: Component[],
   compositeRating?: number,
 ): number => {
-  const specificItem = items.find(isSpecificItem);
+  const singularItem = components.find(componentIsSingularItem);
 
-  if (specificItem) {
-    return specificItem.cost;
+  if (singularItem) {
+    return singularItem.cost;
   }
 
-  const baseItem =
-    items.find(isWeapon) || items.find(isArmor) || items.find(isAmmunition);
+  const baseComponent =
+    components.find(isWeapon) ||
+    components.find(isArmor) ||
+    components.find(isAmmunition);
 
-  if (!baseItem) {
+  if (!baseComponent) {
     return 0;
   }
 
-  const baseCost = isAmmunition(baseItem)
-    ? getIndividualAmmoCost(baseItem)
-    : baseItem.cost;
+  const baseCost = isAmmunition(baseComponent)
+    ? getIndividualAmmoCost(baseComponent)
+    : baseComponent.cost;
 
-  const compositeCost = baseItem.name.toLowerCase().includes("longbow")
+  const compositeCost = baseComponent.name.toLowerCase().includes("longbow")
     ? 100
     : 75;
 
-  const sizeModifier = items.find(isSizeModifier);
+  const sizeModifier = components.find(isSizeModifier);
   const sizeCostMultiplier = sizeModifier?.priceMultiplier ?? 1;
 
   const totalModifier = [
-    ...items.filter(isEnhancement).map((i) => i.modifier),
-    ...items.filter(isArmorQuality).map((i) => getArmorQaulityModifier(i)),
-    ...items.filter(isWeaponQuality).map((i) => getWeaponQaulityModifier(i)),
+    ...components.filter(isEnhancement).map((component) => component.modifier),
+    ...components
+      .filter(isArmorQuality)
+      .map((component) => getArmorQaulityModifier(component)),
+    ...components
+      .filter(isWeaponQuality)
+      .map((component) => getWeaponQaulityModifier(component)),
   ].reduce((current, val) => current + val, 0);
 
   const totalAddedCost = [
-    ...items.filter(isArmorQuality).map((i) => getArmorQaulityCost(i)),
-    ...items.filter(isWeaponQuality).map((i) => getWeaponQaulityCost(i)),
+    ...components
+      .filter(isArmorQuality)
+      .map((component) => getArmorQaulityCost(component)),
+    ...components
+      .filter(isWeaponQuality)
+      .map((component) => getWeaponQaulityCost(component)),
   ].reduce((current, val) => current + val, 0);
 
-  const specialMaterial = items.find(isSpecialMaterial);
+  const specialMaterial = components.find(isSpecialMaterial);
 
-  const isMwk =
-    items.some(isEnhancement) || !!specialMaterial?.alreadyMasterwork;
-  const mwkCostIncluded = !!specialMaterial?.masterworkCostIncluded;
+  const isMasterwork =
+    components.some(isEnhancement) || !!specialMaterial?.alreadyMasterwork;
+  const masterworkCostIncluded = !!specialMaterial?.masterworkCostIncluded;
 
-  const halfIfArmor = isArmor(baseItem) ? 0.5 : 1;
-  const oneFiftiethIfAmmunition = isAmmunition(baseItem) ? 0.02 : 1;
-  const mwkCost =
-    (isMwk && !mwkCostIncluded ? 300 : 0) *
+  const halfIfArmor = isArmor(baseComponent) ? 0.5 : 1;
+  const oneFiftiethIfAmmunition = isAmmunition(baseComponent) ? 0.02 : 1;
+  const masterworkCost =
+    (isMasterwork && !masterworkCostIncluded ? 300 : 0) *
     halfIfArmor *
     oneFiftiethIfAmmunition;
   const magicCost =
     Math.pow(totalModifier, 2) * 2000 * halfIfArmor * oneFiftiethIfAmmunition +
     totalAddedCost * oneFiftiethIfAmmunition;
   const materialExtraCost = specialMaterial
-    ? specialMaterial.addedCost(baseItem, isMagic(items))
+    ? specialMaterial.addedCost(baseComponent, isMagic(components))
     : 0;
   return (
     (baseCost + materialExtraCost) * sizeCostMultiplier +
-    mwkCost +
+    masterworkCost +
     magicCost +
     (compositeRating !== undefined ? compositeCost * compositeRating : 0)
   );
 };
 
-export const getSpellValue = (items: Item[], casterLevel: number): number => {
-  const spell = items.find(isSpell);
+export const getSpellValue = (
+  components: Component[],
+  casterLevel: number,
+): number => {
+  const spell = components.find(isSpell);
 
   if (!spell) {
     return 0;
@@ -365,19 +410,19 @@ export const getSpellValue = (items: Item[], casterLevel: number): number => {
 
   const spellMultiplier = Math.max(0.5, spell.spellLevel) * casterLevel;
 
-  if (items.some((i) => isSpellVesselOfType(i, "Potion", "Oil"))) {
+  if (components.some((i) => isSpellVesselOfType(i, "Potion", "Oil"))) {
     return spellMultiplier * 50 + spell.materialCost;
   }
 
-  if (items.some((i) => isSpellVesselOfType(i, "Wand"))) {
+  if (components.some((i) => isSpellVesselOfType(i, "Wand"))) {
     return spellMultiplier * 750 + spell.materialCost;
   }
 
   return spellMultiplier * 25 + spell.materialCost;
 };
 
-export const getSpellLevel = (items: Item[]): number => {
-  const spell = items.find(isSpell);
+export const getSpellLevel = (components: Component[]): number => {
+  const spell = components.find(isSpell);
 
   if (!spell) {
     return 0;
@@ -386,8 +431,8 @@ export const getSpellLevel = (items: Item[]): number => {
   return spell.spellLevel;
 };
 
-export const getSpellList = (items: Item[]): string => {
-  const spell = items.find(isSpell);
+export const getSpellList = (components: Component[]): string => {
+  const spell = components.find(isSpell);
 
   if (!spell) {
     return "";
@@ -396,49 +441,51 @@ export const getSpellList = (items: Item[]): string => {
   return spell.spellList;
 };
 
-export const getItemWeight = (items: Item[]): number => {
-  const specificItem = items.find(isSpecificItem);
+export const getItemWeight = (components: Component[]): number => {
+  const singularItem = components.find(componentIsSingularItem);
 
-  if (specificItem) {
-    return specificItem.weight;
+  if (singularItem) {
+    return singularItem.weight;
   }
 
-  const baseItem =
-    items.find(isWeapon) || items.find(isArmor) || items.find(isAmmunition);
+  const baseComponent =
+    components.find(isWeapon) ||
+    components.find(isArmor) ||
+    components.find(isAmmunition);
 
-  if (!baseItem) {
+  if (!baseComponent) {
     return 0;
   }
 
-  const baseWeight = isAmmunition(baseItem)
-    ? getIndividualAmmoWeight(baseItem)
-    : baseItem.weight;
+  const baseWeight = isAmmunition(baseComponent)
+    ? getIndividualAmmoWeight(baseComponent)
+    : baseComponent.weight;
 
-  const sizeModifier = items.find(isSizeModifier);
+  const sizeModifier = components.find(isSizeModifier);
   const sizeWeightMultiplier = sizeModifier?.weightMultiplier ?? 1;
 
-  const specialMaterial = items.find(isSpecialMaterial);
+  const specialMaterial = components.find(isSpecialMaterial);
 
   return (
-    (!isAmmunition(baseItem) && specialMaterial
-      ? specialMaterial.alteredWeight(baseItem)
+    (!isAmmunition(baseComponent) && specialMaterial
+      ? specialMaterial.alteredWeight(baseComponent)
       : baseWeight) * sizeWeightMultiplier
   );
 };
 
 export const getIdentifyMethod = (
   casterLevel: number | undefined,
-  items: Item[],
+  components: Component[],
 ): string | undefined => {
   if (!casterLevel) {
     return undefined;
   }
 
-  if (items.some((i) => isSpellVesselOfType(i, "Potion", "Oil"))) {
+  if (components.some((i) => isSpellVesselOfType(i, "Potion", "Oil"))) {
     return `DC ${15 + casterLevel} Perception or Spellcraft Check`;
   }
 
-  if (items.some((i) => isSpellVesselOfType(i, "Scroll"))) {
+  if (components.some((i) => isSpellVesselOfType(i, "Scroll"))) {
     return `Read Magic or DC ${15 + casterLevel} Spellcraft Check`;
   }
 
@@ -446,78 +493,88 @@ export const getIdentifyMethod = (
 };
 
 const getItemDisplayNameModifiedSubtitle = (
-  item: SpecificItem,
+  singularItem: SingularItemComponent,
 ): string | undefined => {
-  if (!item.subtitle) {
+  if (!singularItem.subtitle) {
     return undefined;
   }
 
-  if (typeof item.subtitle === "number") {
-    return `+${item.subtitle}`;
+  if (typeof singularItem.subtitle === "number") {
+    return `+${singularItem.subtitle}`;
   }
 
   // matches: "1", "1 bonus"
   // does not match: "1/2 Will", "1st", "2nd", "3rd", "10 HD", "Type I", "3 tricks", "6th-level", "15-ft.-by-30ft."
   const matchNumberOrNumberBonus = /\d+($| bonus)/g;
   if (
-    typeof item.subtitle === "number" ||
-    item.subtitle.match(matchNumberOrNumberBonus)
+    typeof singularItem.subtitle === "number" ||
+    singularItem.subtitle.match(matchNumberOrNumberBonus)
   ) {
-    return `+${item.subtitle.replace(" bonus", "")}`;
+    return `+${singularItem.subtitle.replace(" bonus", "")}`;
   }
 
   // matches: "1/2 Will"
   // does not match: "1", "1 bonus", "1st", "2nd", "3rd", "10 HD", "Type I", "3 tricks", "6th-level", "15-ft.-by-30ft."
   const matchMultiNumberBonus = /(\d+)\/(\d+).*/;
-  const multiNumberBonusMatch = item.subtitle.match(matchMultiNumberBonus);
+  const multiNumberBonusMatch = singularItem.subtitle.match(
+    matchMultiNumberBonus,
+  );
   if (multiNumberBonusMatch) {
     return `+${multiNumberBonusMatch[1]}/+${multiNumberBonusMatch[2]}`;
   }
 
-  return capitalize(item.subtitle);
+  return capitalize(singularItem.subtitle);
 };
 
-export const getItemName = (item: Item, plural: boolean): string => {
-  if (isAmmunition(item)) {
-    return (plural ? item.pluralisedName : item.singularName) ?? item.name;
+export const getComponentName = (
+  component: Component,
+  plural: boolean,
+): string => {
+  if (isAmmunition(component)) {
+    return (
+      (plural ? component.pluralisedName : component.singularName) ??
+      component.name
+    );
   }
 
-  if (isArmor(item) && item.suffix !== undefined) {
-    return `${item.name} ${item.suffix}`;
+  if (isArmor(component) && component.suffix !== undefined) {
+    return `${component.name} ${component.suffix}`;
   }
 
-  return item.name;
+  return component.name;
 };
 
-type ItemDisplayNameOptions = {
+type ComponentDisplayNameOptions = {
   compositeRating?: number;
   plural?: boolean;
 };
 
-export const getItemDisplayName = (
-  item: Item,
-  options: ItemDisplayNameOptions = {},
+export const getComponentDisplayName = (
+  component: Component,
+  options: ComponentDisplayNameOptions = {},
 ): string => {
-  if (isSpecificItem(item) && item.subtitle) {
-    const formattedSubtitle = getItemDisplayNameModifiedSubtitle(item);
+  if (componentIsSingularItem(component) && component.subtitle) {
+    const formattedSubtitle = getItemDisplayNameModifiedSubtitle(component);
     const subtitle = formattedSubtitle ? ` (${formattedSubtitle})` : "";
-    return `${item.name}${subtitle}`;
+    return `${component.name}${subtitle}`;
   }
 
-  if (isComposite(item) && options.compositeRating !== undefined) {
-    return item.name.replace(
+  if (isComposite(component) && options.compositeRating !== undefined) {
+    return component.name.replace(
       "Composite",
       `Composite (${options.compositeRating})`,
     );
   }
 
-  return getItemName(item, options.plural ?? false);
+  return getComponentName(component, options.plural ?? false);
 };
 
 // TODO: The intention of this was to allow for unique IDs in the URL so we can
 //  share links to items...
-// TODO: Probably don't want to use item display name here though, some better way to generate
+// TODO: Probably don't want to use component display name here though, some better way to generate
 //  a unique identifier
-const itemIdDelimiter = "::";
-export const getUniqueItemIdentifier = (item: Item): string =>
-  window.btoa(getItemDisplayName(item) + itemIdDelimiter + item.type);
+const componentIdDelimiter = "::";
+export const getUniqueComponentIdentifier = (component: Component): string =>
+  window.btoa(
+    getComponentDisplayName(component) + componentIdDelimiter + component.type,
+  );

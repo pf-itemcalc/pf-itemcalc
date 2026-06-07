@@ -5,7 +5,7 @@ import armors from "../../data/armor/armors";
 import enhancements, { Masterwork } from "../../data/generic/enhancements";
 import sizeModifiers from "../../data/generic/size-modifiers";
 import specialMaterials from "../../data/generic/special-materials";
-import type { Item } from "../../data/helpers";
+import type { Component } from "../../data/helpers";
 import {
   isAmmunition,
   isArmor,
@@ -15,13 +15,13 @@ import {
   isMagicEnhancement,
   isSizeModifier,
   isSpecialMaterial,
-  isSpecificItem,
+  componentIsSingularItem,
   isSpellVesselOfType,
   isSpell,
   isSpellVessel,
   isWeapon,
   isWeaponQuality,
-  orderItems,
+  orderComponents,
 } from "../../data/helpers";
 import { iounStones } from "../../data/ioun-stone/ioun-stone";
 import { rings } from "../../data/ring/ring";
@@ -38,7 +38,7 @@ import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types
 import weapons from "../../data/weapon/weapons";
 import { wondrousItems } from "../../data/wondrous/wondrous";
 
-export const allItems: Item[] = orderItems([
+export const allItems: Component[] = orderComponents([
   ...enhancements,
   ...sizeModifiers,
   ...specialMaterials,
@@ -60,7 +60,10 @@ export const allItems: Item[] = orderItems([
   ...iounStones,
 ]);
 
-type ItemFilterFunction = (selected: Item[], items: Item[]) => Item[];
+type ItemFilterFunction = (
+  selected: Component[],
+  items: Component[],
+) => Component[];
 
 const enchancementFilter: ItemFilterFunction = (selected, items) => {
   const enhancement = selected.find(isEnhancement);
@@ -264,7 +267,7 @@ const spellVesselFilter: ItemFilterFunction = (selected, items) => {
 };
 
 const specificItemFilter: ItemFilterFunction = (selected, items) => {
-  const specificItem = selected.find(isSpecificItem);
+  const specificItem = selected.find(componentIsSingularItem);
 
   if (!specificItem) {
     return items;
@@ -320,14 +323,14 @@ const itemFilters: ItemFilterFunction[] = [
   countFilter,
 ];
 
-export const getOptions = (selectedItems: Item[]) =>
+export const getOptions = (selectedItems: Component[]) =>
   itemFilters.reduce(
     (itemsRemaining, filterFunction) =>
       filterFunction(selectedItems, itemsRemaining),
     allItems,
   );
 
-const getEnhancementModifier = (item: Item): number => {
+const getEnhancementModifier = (item: Component): number => {
   if (isEnhancement(item)) {
     return item.modifier;
   }
@@ -344,7 +347,7 @@ const getEnhancementModifier = (item: Item): number => {
 };
 
 export const selectedItemsAreInvalid = (
-  selectedItems: Item[],
+  selectedItems: Component[],
 ): string | undefined => {
   const totalModifier = selectedItems.reduce(
     (val, item) => getEnhancementModifier(item) + val,
@@ -358,7 +361,7 @@ export const selectedItemsAreInvalid = (
   if (
     selectedItems.every(
       (i) =>
-        !isSpecificItem(i) &&
+        !componentIsSingularItem(i) &&
         !isWeapon(i) &&
         !isArmor(i) &&
         !isSpell(i) &&

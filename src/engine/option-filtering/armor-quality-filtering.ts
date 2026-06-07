@@ -13,7 +13,7 @@ export const filterComponentsWhenArmorQualityIsPresent: ComponentFilterFunction 
 
     // If there is an armor quality then you can only choose:
     //  size-modifiers, enhancements, armors, other armor qualities, and special materials that are applicable to any remaining armors
-    const remainingItems = otherComponents.filter(
+    const remainingComponents = otherComponents.filter(
       (i) =>
         isSizeModifier(i) ||
         isMagicEnhancement(i) ||
@@ -21,9 +21,9 @@ export const filterComponentsWhenArmorQualityIsPresent: ComponentFilterFunction 
         isArmorQuality(i) ||
         isSpecialMaterial(i),
     );
-    return remainingItems.filter(
+    return remainingComponents.filter(
       (i) =>
         !isSpecialMaterial(i) ||
-        remainingItems.filter(isArmor).some((a) => i.isApplicable(a)),
+        remainingComponents.filter(isArmor).some((a) => i.isApplicable(a)),
     );
   };

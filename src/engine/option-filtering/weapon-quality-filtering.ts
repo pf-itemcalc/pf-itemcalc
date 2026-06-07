@@ -14,7 +14,7 @@ export const filterComponentsWhenWeaponQualityIsPresent: ComponentFilterFunction
 
     // If there is a weapon quality then you can only choose:
     //  size-modifiers, enhancements, weapons, other weapon qualities, ammunition, and special materials that are applicable to any remaining weapons
-    const remainingItems = otherComponents.filter(
+    const remainingComponents = otherComponents.filter(
       (i) =>
         isSizeModifier(i) ||
         isMagicEnhancement(i) ||
@@ -24,9 +24,9 @@ export const filterComponentsWhenWeaponQualityIsPresent: ComponentFilterFunction
         isAmmunition(i),
     );
 
-    const remainingWeapons = remainingItems.filter(isWeapon);
+    const remainingWeapons = remainingComponents.filter(isWeapon);
 
-    return remainingItems.filter(
+    return remainingComponents.filter(
       (i) =>
         !isSpecialMaterial(i) ||
         remainingWeapons.length === 0 ||

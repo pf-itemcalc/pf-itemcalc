@@ -6,8 +6,8 @@ export const filterComponentsWhenCountIsPresent: ComponentFilterFunction = (
   selected,
   otherComponents,
 ) => {
-  const countItem = selected.find(isCount);
-  if (!countItem) {
+  const countComponent = selected.find(isCount);
+  if (!countComponent) {
     return otherComponents;
   }
 

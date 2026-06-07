@@ -18,7 +18,7 @@ export const filterComponentsWhenSpecialMaterialIsPresent: ComponentFilterFuncti
     // If the special material is specific then you can only choose:
     //  size-modifiers, enhancements, applicable armors, armor qualities, applicable weapons, weapon qualities and applicable ammunition
     if (specialMaterial.isApplicable) {
-      const applicableItems = otherComponents.filter(
+      const applicableComponents = otherComponents.filter(
         (i) =>
           isSizeModifier(i) ||
           isEnhancement(i) ||
@@ -28,13 +28,13 @@ export const filterComponentsWhenSpecialMaterialIsPresent: ComponentFilterFuncti
           isWeaponQuality(i),
       );
 
-      // Furthermore if the applicable items only contains enhancements or armors
+      // Furthermore if the applicable components only contains enhancements or armors
       //  and qualities then weapons and weapon qualities cannot be chosen
-      if (applicableItems.every((i) => !isArmor(i))) {
-        return applicableItems.filter((i) => !isArmorQuality(i));
+      if (applicableComponents.every((i) => !isArmor(i))) {
+        return applicableComponents.filter((i) => !isArmorQuality(i));
       }
-      if (applicableItems.every((i) => !isWeapon(i) && !isAmmunition(i))) {
-        return applicableItems.filter((i) => !isWeaponQuality(i));
+      if (applicableComponents.every((i) => !isWeapon(i) && !isAmmunition(i))) {
+        return applicableComponents.filter((i) => !isWeaponQuality(i));
       }
     }
 

@@ -1,5 +1,5 @@
 import { capitalize } from "lodash";
-import type { ArmorQaulity } from "../data/armor-quality/armor-quality-types";
+import type { ArmorQuality } from "../data/armor-quality/armor-quality-types";
 import {
   getArmorQualityUrl,
   getArmorQaulityCost,
@@ -159,7 +159,7 @@ const componentTypeUrlMap: {
 } = {
   enhancement: () => undefined,
   armor: (component) => getArmorUrl(component as Armor),
-  "armor-quality": (component) => getArmorQualityUrl(component as ArmorQaulity),
+  "armor-quality": (component) => getArmorQualityUrl(component as ArmorQuality),
   weapon: (component) => getWeaponUrl(component as Weapon),
   ammunition: (component) => getAmmunitionUrl(component as Ammunition),
   "size-modifier": () => undefined,

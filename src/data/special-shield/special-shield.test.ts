@@ -1,11 +1,11 @@
 import { specialShieldComponents } from "./special-shield";
 
-describe("specialShieldItems", () => {
+describe("specialShieldComponents", () => {
   it("contains no duplicate names, including subtitle", () => {
-    const counts = specialShieldComponents.map((item) => ({
-      name: item.name + item.subtitle,
+    const counts = specialShieldComponents.map((shield) => ({
+      name: shield.name + shield.subtitle,
       count: specialShieldComponents.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle,
+        (w) => w.name + w.subtitle === shield.name + shield.subtitle,
       ).length,
     }));
 

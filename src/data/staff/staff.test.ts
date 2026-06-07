@@ -2,10 +2,10 @@ import { staves } from "./staff";
 
 describe("staves", () => {
   it("contains no duplicate names, including subtitle", () => {
-    const counts = staves.map((item) => ({
-      name: item.name + item.subtitle,
+    const counts = staves.map((staff) => ({
+      name: staff.name + staff.subtitle,
       count: staves.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle,
+        (w) => w.name + w.subtitle === staff.name + staff.subtitle,
       ).length,
     }));
 

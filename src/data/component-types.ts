@@ -1,4 +1,4 @@
-import type { ArmorQaulity } from "./armor-quality/armor-quality-types";
+import type { ArmorQuality } from "./armor-quality/armor-quality-types";
 import type { Armor } from "../data/armor/armor-types";
 import type { Enhancement } from "../data/enhancement/enhancement-types";
 import type { SpecialMaterial } from "../data/special-material/special-material-types";
@@ -21,7 +21,7 @@ import type { Count } from "./generic/count-types";
 
 export type Component =
   | Armor
-  | ArmorQaulity
+  | ArmorQuality
   | Weapon
   | WeaponQaulity
   | Ammunition

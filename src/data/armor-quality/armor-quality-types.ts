@@ -12,4 +12,4 @@ export type ArmorQaulityFlatPrice = BaseArmorQaulity & {
   cost: number;
 };
 
-export type ArmorQaulity = ArmorQaulityBonus | ArmorQaulityFlatPrice;
+export type ArmorQuality = ArmorQaulityBonus | ArmorQaulityFlatPrice;

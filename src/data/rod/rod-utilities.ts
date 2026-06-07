@@ -3,14 +3,15 @@ import type { Rod } from "./rod-types";
 
 export const isRod = (component: Component): component is Rod =>
   component.type === "rod";
-export const getRodUrl = (item: Rod): string => {
+
+export const getRodUrl = (rod: Rod): string => {
   const baseUrl = `https://www.aonprd.com/MagicRodsDisplay.aspx?FinalName=${encodeURIComponent(
-    item.name,
+    rod.name,
   )}`;
 
-  if (item.subtitle === undefined) {
+  if (rod.subtitle === undefined) {
     return baseUrl;
   }
 
-  return `${baseUrl}${item.subtitle}`;
+  return `${baseUrl}${rod.subtitle}`;
 };

@@ -1,16 +1,16 @@
-import type { ArmorQaulityBonus, ArmorQaulity } from "./armor-quality-types";
+import type { ArmorQaulityBonus, ArmorQuality } from "./armor-quality-types";
 import type { Component } from "../component-types";
 
 export const isArmorQuality = (
   component: Component,
-): component is ArmorQaulity => component.type === "armor-quality";
+): component is ArmorQuality => component.type === "armor-quality";
 
 const isBonus = (
-  armorQaulity: ArmorQaulity,
+  armorQaulity: ArmorQuality,
 ): armorQaulity is ArmorQaulityBonus =>
   (armorQaulity as ArmorQaulityBonus).modifier !== undefined;
 
-export const getArmorQaulityModifier = (armorQaulity: ArmorQaulity) => {
+export const getArmorQaulityModifier = (armorQaulity: ArmorQuality) => {
   if (!isBonus(armorQaulity)) {
     return 0;
   }
@@ -18,7 +18,7 @@ export const getArmorQaulityModifier = (armorQaulity: ArmorQaulity) => {
   return armorQaulity.modifier;
 };
 
-export const getArmorQaulityCost = (armorQuality: ArmorQaulity) => {
+export const getArmorQaulityCost = (armorQuality: ArmorQuality) => {
   if (isBonus(armorQuality)) {
     return 0;
   }
@@ -26,7 +26,7 @@ export const getArmorQaulityCost = (armorQuality: ArmorQaulity) => {
   return armorQuality.cost;
 };
 
-export const getArmorQualityUrl = (armorQuality: ArmorQaulity) =>
+export const getArmorQualityUrl = (armorQuality: ArmorQuality) =>
   `https://www.aonprd.com/MagicArmorDisplay.aspx?ItemName=${encodeURIComponent(
     armorQuality.name,
   )}`;

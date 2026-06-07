@@ -2,10 +2,10 @@ import { iounStones } from "./ioun-stone";
 
 describe("iounStones", () => {
   it("contains no duplicate names, including subtitle", () => {
-    const counts = iounStones.map((item) => ({
-      name: item.name + item.subtitle,
+    const counts = iounStones.map((iounStone) => ({
+      name: iounStone.name + iounStone.subtitle,
       count: iounStones.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle,
+        (w) => w.name + w.subtitle === iounStone.name + iounStone.subtitle,
       ).length,
     }));
 

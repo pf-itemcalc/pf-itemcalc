@@ -3,7 +3,8 @@ import type { IounStone } from "./ioun-stone-types";
 
 export const isIounStone = (component: Component): component is IounStone =>
   component.type === "ioun-stone";
-export const getIounStoneUrl = (item: IounStone): string =>
+
+export const getIounStoneUrl = (iounStone: IounStone): string =>
   `https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=${encodeURIComponent(
-    item.linkName,
+    iounStone.linkName,
   )}`;

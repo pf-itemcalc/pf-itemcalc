@@ -1,11 +1,11 @@
 import { specialWeaponComponents } from "./special-weapon";
 
-describe("specialWeaponItems", () => {
+describe("specialWeaponComponents", () => {
   it("contains no duplicate names, including subtitle", () => {
-    const counts = specialWeaponComponents.map((item) => ({
-      name: item.name + item.subtitle,
+    const counts = specialWeaponComponents.map((weapon) => ({
+      name: weapon.name + weapon.subtitle,
       count: specialWeaponComponents.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle,
+        (w) => w.name + w.subtitle === weapon.name + weapon.subtitle,
       ).length,
     }));
 

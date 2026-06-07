@@ -4,8 +4,8 @@ import { getUniqueComponentIdentifier } from "../engine/helpers";
 describe("all components", () => {
   it("contains no duplicate unique IDs", () => {
     const countsDictonary = allComponents.reduce<{ [id: string]: number }>(
-      (dictionary, item) => {
-        const id = getUniqueComponentIdentifier(item);
+      (dictionary, component) => {
+        const id = getUniqueComponentIdentifier(component);
         if (id in dictionary) {
           dictionary[id] = dictionary[id] + 1;
         } else {
@@ -22,7 +22,7 @@ describe("all components", () => {
       }
 
       const duplicates = allComponents.filter(
-        (item) => getUniqueComponentIdentifier(item) === id,
+        (component) => getUniqueComponentIdentifier(component) === id,
       );
       expect(duplicates).toHaveLength(0);
     });

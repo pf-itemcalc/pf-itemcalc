@@ -1,11 +1,11 @@
 import { specialArmorComponents } from "./special-armor";
 
-describe("specialArmorItems", () => {
+describe("specialArmorComponents", () => {
   it("contains no duplicate names, including subtitle", () => {
-    const counts = specialArmorComponents.map((item) => ({
-      name: item.name + item.subtitle,
+    const counts = specialArmorComponents.map((armor) => ({
+      name: armor.name + armor.subtitle,
       count: specialArmorComponents.filter(
-        (w) => w.name + w.subtitle === item.name + item.subtitle,
+        (w) => w.name + w.subtitle === armor.name + armor.subtitle,
       ).length,
     }));
 

@@ -4,14 +4,14 @@ import type { Wondrous } from "./wondrous-types";
 export const isWondrous = (component: Component): component is Wondrous =>
   component.type === "wondrous";
 
-export const getWondrousItemUrl = (item: Wondrous): string => {
+export const getWondrousItemUrl = (wondrousItem: Wondrous): string => {
   const baseUrl = `https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=${encodeURIComponent(
-    item.name,
+    wondrousItem.name,
   )}`;
 
-  if (item.subtitle === undefined) {
+  if (wondrousItem.subtitle === undefined) {
     return baseUrl;
   }
 
-  return `${baseUrl}${item.subtitle}`;
+  return `${baseUrl}${wondrousItem.subtitle}`;
 };

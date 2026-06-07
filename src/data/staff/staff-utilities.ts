@@ -4,14 +4,14 @@ import type { Staff } from "./staff-types";
 export const isStaff = (component: Component): component is Staff =>
   component.type === "staff";
 
-export const getStaffUrl = (item: Staff): string => {
+export const getStaffUrl = (staff: Staff): string => {
   const baseUrl = `https://aonprd.com/MagicStavesDisplay.aspx?ItemName=${encodeURIComponent(
-    item.name,
+    staff.name,
   )}`;
 
-  if (item.subtitle === undefined) {
+  if (staff.subtitle === undefined) {
     return baseUrl;
   }
 
-  return `${baseUrl}${item.subtitle}`;
+  return `${baseUrl}${staff.subtitle}`;
 };

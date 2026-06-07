@@ -5,14 +5,14 @@ export const isSpecialWeapon = (
   component: Component,
 ): component is SpecialWeapon => component.type === "special-weapon";
 
-export const getSpecialWeaponUrl = (item: SpecialWeapon): string => {
+export const getSpecialWeaponUrl = (weapon: SpecialWeapon): string => {
   const baseUrl = `https://www.aonprd.com/MagicWeaponsDisplay.aspx?ItemName=${encodeURIComponent(
-    item.name,
+    weapon.name,
   )}`;
 
-  if (item.subtitle === undefined) {
+  if (weapon.subtitle === undefined) {
     return baseUrl;
   }
 
-  return `${baseUrl}${item.subtitle}`;
+  return `${baseUrl}${weapon.subtitle}`;
 };

@@ -1,6 +1,6 @@
-import type { ArmorQaulity } from "./armor-quality-types";
+import type { ArmorQuality } from "./armor-quality-types";
 
-const armorQaulities: ArmorQaulity[] = [
+const armorQaulities: ArmorQuality[] = [
   { name: "Advancing", modifier: 1, casterLevel: 5, type: "armor-quality" },
   { name: "Balanced", modifier: 1, casterLevel: 3, type: "armor-quality" },
   { name: "Benevolent", modifier: 1, casterLevel: 5, type: "armor-quality" },

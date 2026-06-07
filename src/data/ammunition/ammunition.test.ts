@@ -8,20 +8,20 @@ describe("ammunition", () => {
     //  either pluralised if the name is singular, or singular if the
     //  name is pluralised.
     // This test ensures that every name provides both plural and singular
-    ammunition.forEach((item) => {
-      if (item.singularName === undefined) {
-        expect(item.pluralisedName).toBeDefined();
+    ammunition.forEach((ammo) => {
+      if (ammo.singularName === undefined) {
+        expect(ammo.pluralisedName).toBeDefined();
       }
-      if (item.pluralisedName === undefined) {
-        expect(item.singularName).toBeDefined();
+      if (ammo.pluralisedName === undefined) {
+        expect(ammo.singularName).toBeDefined();
       }
     });
   });
 
   it("contains no duplicate names", () => {
-    const counts = ammunition.map((item) => ({
-      name: item.name,
-      count: ammunition.filter((i) => i.name === item.name).length,
+    const counts = ammunition.map((ammo) => ({
+      name: ammo.name,
+      count: ammunition.filter((i) => i.name === ammo.name).length,
     }));
 
     const countsMoreThanOne = counts.filter((c) => c.count > 1);

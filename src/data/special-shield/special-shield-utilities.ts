@@ -5,14 +5,14 @@ export const isSpecialShield = (
   component: Component,
 ): component is SpecialShield => component.type === "special-shield";
 
-export const getSpecialShieldUrl = (item: SpecialShield): string => {
+export const getSpecialShieldUrl = (shield: SpecialShield): string => {
   const baseUrl = `https://www.aonprd.com/MagicArmorDisplay.aspx?ItemName=${encodeURIComponent(
-    item.name,
+    shield.name,
   )}`;
 
-  if (item.subtitle === undefined) {
+  if (shield.subtitle === undefined) {
     return baseUrl;
   }
 
-  return `${baseUrl}${item.subtitle}`;
+  return `${baseUrl}${shield.subtitle}`;
 };

@@ -7,13 +7,11 @@ import {
   isCount,
   isSpellVesselOfType,
 } from "../../data/helpers";
-import {
-  getComponentOptionsGivenCurrentSelected,
-  selectedComponentsAreInvalid,
-} from "../../engine/options/get-options";
+import { getComponentOptionsGivenCurrentSelected } from "../../engine/options/get-options-given-selected";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
 import { newCountItem } from "../../data/special/count";
+import { selectedComponentsAreInvalid } from "../../engine/validation/selected-components-valid";
 
 const getOptionsWithCount = (
   selectedItems: Component[],

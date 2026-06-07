@@ -1,5 +1,5 @@
 import { getUniqueComponentIdentifier } from "../../data/helpers";
-import { allItems } from "./get-options";
+import { allItems } from "../../engine/options/get-options";
 
 describe("all items", () => {
   it("contains no duplicate unique IDs", () => {

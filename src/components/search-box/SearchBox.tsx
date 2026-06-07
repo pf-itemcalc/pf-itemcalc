@@ -7,7 +7,10 @@ import {
   isCount,
   isSpellVesselOfType,
 } from "../../data/helpers";
-import { getOptions, selectedItemsAreInvalid } from "./get-options";
+import {
+  getOptions,
+  selectedItemsAreInvalid,
+} from "../../engine/options/get-options";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
 import { newCountItem } from "../../data/special/count";

@@ -1,7 +1,7 @@
-import { isMagicEnhancement } from "../../data/generic/enhancement-utilities";
-import { isSizeModifier } from "../../data/generic/size-modifier-utilities";
-import { isSpecialMaterial } from "../../data/generic/special-material-utilities";
-import { isArmorQuality } from "../../data/armor/armor-quality-utilities";
+import { isMagicEnhancement } from "../../data/enhancement/enhancement-utilities";
+import { isSizeModifier } from "../../data/size-modifier/size-modifier-utilities";
+import { isSpecialMaterial } from "../../data/special-material/special-material-utilities";
+import { isArmorQuality } from "../../data/armor-quality/armor-quality-utilities";
 import { isArmor } from "../../data/armor/armor-utilities";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 

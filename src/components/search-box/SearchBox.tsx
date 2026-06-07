@@ -5,11 +5,11 @@ import {
   getComponentTypeDisplayName,
   isCount,
 } from "../../engine/helpers";
-import { isSpellVesselOfType } from "../../data/spell/spell-vessel-utilities";
+import { isSpellVesselOfType } from "../../data/spell-vessel/spell-vessel-utilities";
 import { getComponentOptionsGivenCurrentSelected } from "../../engine/options/get-options-given-selected";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
-import { newCountComponent } from "../../data/special/count";
+import { newCountComponent } from "../../data/generic/count";
 import { selectedComponentsAreInvalid } from "../../engine/validation/validate-selected-components";
 import type { Component } from "../../data/component-types";
 

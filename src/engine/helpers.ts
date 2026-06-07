@@ -1,25 +1,25 @@
 import { capitalize } from "lodash";
-import type { ArmorQaulity } from "../data/armor/armor-quality-types";
+import type { ArmorQaulity } from "../data/armor-quality/armor-quality-types";
 import {
   getArmorQualityUrl,
   getArmorQaulityCost,
   getArmorQaulityModifier,
-} from "../data/armor/armor-quality-utilities";
+} from "../data/armor-quality/armor-quality-utilities";
 import type { Armor } from "../data/armor/armor-types";
-import { Masterwork } from "../data/generic/enhancements";
-import type { SpecialMaterial } from "../data/generic/special-material-types";
-import { getSpecialMaterialUrl } from "../data/generic/special-material-utilities";
+import { Masterwork } from "../data/enhancement/enhancements";
+import type { SpecialMaterial } from "../data/special-material/special-material-types";
+import { getSpecialMaterialUrl } from "../data/special-material/special-material-utilities";
 import type { Spell } from "../data/spell/spell-types";
 import {
   getSpellMinimumCasterLevel,
   getSpellUrl,
 } from "../data/spell/spell-utilities";
-import type { WeaponQaulity } from "../data/weapon/weapon-quality-types";
+import type { WeaponQaulity } from "../data/weapon-quality/weapon-quality-types";
 import {
   getWeaponQualityUrl,
   getWeaponQaulityCost,
   getWeaponQaulityModifier,
-} from "../data/weapon/weapon-quaility-utilities";
+} from "../data/weapon-quality/weapon-quality-utilities";
 import type { Weapon } from "../data/weapon/weapon-types";
 import { getWeaponUrl, isComposite } from "../data/weapon/weapon-utilities";
 import type { Wondrous } from "../data/wondrous/wondrous-types";
@@ -41,7 +41,7 @@ import { getStaffUrl } from "../data/staff/staff-utilities";
 import type { IounStone } from "../data/ioun-stone/ioun-stone-types";
 import { getIounStoneUrl } from "../data/ioun-stone/ioun-stone-utilities";
 import type { Ammunition } from "../data/ammunition/ammunition-types";
-import type { Count } from "../data/special/count-types";
+import type { Count } from "../data/generic/count-types";
 import type { Component, SingularItemComponent } from "../data/component-types";
 import {
   getAmmunitionUrl,
@@ -50,17 +50,17 @@ import {
   isAmmunition,
 } from "../data/ammunition/ammunition-utilities";
 import { getArmorUrl, isArmor } from "../data/armor/armor-utilities";
-import { isArmorQuality } from "../data/armor/armor-quality-utilities";
+import { isArmorQuality } from "../data/armor-quality/armor-quality-utilities";
 import { isSpecialArmor } from "../data/special-armor/special-armor-utilities";
 import { isSpecialShield } from "../data/special-shield/special-shield-utilities";
 import { isWeapon } from "../data/weapon/weapon-utilities";
-import { isWeaponQuality } from "../data/weapon/weapon-quaility-utilities";
+import { isWeaponQuality } from "../data/weapon-quality/weapon-quality-utilities";
 import { isSpecialWeapon } from "../data/special-weapon/special-weapon-utilities";
 import { isSpecialAmmo } from "../data/special-ammo/special-ammo-utilities";
-import { isSpecialMaterial } from "../data/generic/special-material-utilities";
-import { isSizeModifier } from "../data/generic/size-modifier-utilities";
-import { isEnhancement } from "../data/generic/enhancement-utilities";
-import { isSpellVesselOfType } from "../data/spell/spell-vessel-utilities";
+import { isSpecialMaterial } from "../data/special-material/special-material-utilities";
+import { isSizeModifier } from "../data/size-modifier/size-modifier-utilities";
+import { isEnhancement } from "../data/enhancement/enhancement-utilities";
+import { isSpellVesselOfType } from "../data/spell-vessel/spell-vessel-utilities";
 import { isSpell } from "../data/spell/spell-utilities";
 import { isWondrous } from "../data/wondrous/wondrous-utilities";
 import { isRing } from "../data/ring/ring-utilities";

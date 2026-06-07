@@ -1,7 +1,7 @@
 import { isWeapon } from "../weapon/weapon-utilities";
 import { isArmor } from "../armor/armor-utilities";
 import { isAmmunition } from "../ammunition/ammunition-utilities";
-import { MasterworkArmorCost } from "./enhancement-types";
+import { MasterworkArmorCost } from "../enhancement/enhancement-types";
 import type {
   SpecialMaterial,
   SpecialMaterialOptionals,

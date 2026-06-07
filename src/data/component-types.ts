@@ -1,10 +1,10 @@
-import type { ArmorQaulity } from "../data/armor/armor-quality-types";
+import type { ArmorQaulity } from "./armor-quality/armor-quality-types";
 import type { Armor } from "../data/armor/armor-types";
-import type { Enhancement } from "../data/generic/enhancement-types";
-import type { SpecialMaterial } from "../data/generic/special-material-types";
+import type { Enhancement } from "../data/enhancement/enhancement-types";
+import type { SpecialMaterial } from "../data/special-material/special-material-types";
 import type { Spell } from "../data/spell/spell-types";
-import type { SpellVessel } from "../data/spell/spell-vessel-types";
-import type { WeaponQaulity } from "../data/weapon/weapon-quality-types";
+import type { SpellVessel } from "../data/spell-vessel/spell-vessel-types";
+import type { WeaponQaulity } from "../data/weapon-quality/weapon-quality-types";
 import type { Weapon } from "../data/weapon/weapon-types";
 import type { Wondrous } from "../data/wondrous/wondrous-types";
 import type { SpecialAmmo } from "../data/special-ammo/special-ammo-types";
@@ -15,9 +15,9 @@ import type { Ring } from "../data/ring/ring-types";
 import type { Rod } from "../data/rod/rod-types";
 import type { Staff } from "../data/staff/staff-types";
 import type { IounStone } from "../data/ioun-stone/ioun-stone-types";
-import type { SizeModifier } from "../data/generic/size-modifier-types";
+import type { SizeModifier } from "./size-modifier/size-modifier-types";
 import type { Ammunition } from "../data/ammunition/ammunition-types";
-import type { Count } from "../data/special/count-types";
+import type { Count } from "./generic/count-types";
 
 export type Component =
   | Armor

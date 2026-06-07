@@ -1,5 +1,5 @@
 import { isCount } from "../helpers";
-import { isSpellVesselOfType } from "../../data/spell/spell-vessel-utilities";
+import { isSpellVesselOfType } from "../../data/spell-vessel/spell-vessel-utilities";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 export const filterComponentsWhenCountIsPresent: ComponentFilterFunction = (

@@ -16,14 +16,14 @@ import {
   isCount,
 } from "../../engine/helpers";
 import { isSpell } from "../../data/spell/spell-utilities";
-import { isSpellVesselOfType } from "../../data/spell/spell-vessel-utilities";
+import { isSpellVesselOfType } from "../../data/spell-vessel/spell-vessel-utilities";
 import { isComposite } from "../../data/weapon/weapon-utilities";
 import { range } from "lodash";
 import type { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import TurndownService from "turndown";
 import NumberField from "../number-field/NumberField";
-import { newCountComponent } from "../../data/special/count";
+import { newCountComponent } from "../../data/generic/count";
 import type { Component } from "../../data/component-types";
 import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
 

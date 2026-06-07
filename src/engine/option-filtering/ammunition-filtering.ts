@@ -1,8 +1,8 @@
 import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
-import { isEnhancement } from "../../data/generic/enhancement-utilities";
-import { isSizeModifier } from "../../data/generic/size-modifier-utilities";
-import { isSpecialMaterial } from "../../data/generic/special-material-utilities";
-import { isWeaponQuality } from "../../data/weapon/weapon-quaility-utilities";
+import { isEnhancement } from "../../data/enhancement/enhancement-utilities";
+import { isSizeModifier } from "../../data/size-modifier/size-modifier-utilities";
+import { isSpecialMaterial } from "../../data/special-material/special-material-utilities";
+import { isWeaponQuality } from "../../data/weapon-quality/weapon-quality-utilities";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 export const filterComponentsWhenAmmunitionIsPresent: ComponentFilterFunction =

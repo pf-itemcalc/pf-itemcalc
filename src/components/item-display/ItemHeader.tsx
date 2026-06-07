@@ -2,19 +2,9 @@ import Reply from "@mui/icons-material/Reply";
 import Clear from "@mui/icons-material/Clear";
 import { Button, Chip } from "@mui/material";
 import type { Component } from "../../data/helpers";
-import {
-  getComponentDisplayName,
-  isAmmunition,
-  isArmor,
-  isArmorQuality,
-  isEnhancement,
-  componentIsSingularItem,
-  isSpell,
-  isSpellVessel,
-  isWeapon,
-  isWeaponQuality,
-} from "../../data/helpers";
+import { getComponentDisplayName } from "../../data/helpers";
 import { CenterBox } from "../containers/CenterBox";
+import { canRemoveComponentAndRemainValid } from "../../engine/validation/selected-components-valid";
 
 type ItemHeaderProps = {
   components: Component[];
@@ -23,24 +13,13 @@ type ItemHeaderProps = {
   onReset: () => void;
 };
 
-const isDeletable = (component: Component, components: Component[]) =>
-  (!isWeapon(component) &&
-    !isAmmunition(component) &&
-    !isArmor(component) &&
-    !isSpellVessel(component) &&
-    !isSpell(component) &&
-    !isEnhancement(component) &&
-    !componentIsSingularItem(component)) ||
-  (isEnhancement(component) &&
-    components.every((c) => !isArmorQuality(c) && !isWeaponQuality(c)));
-
 const ItemHeader = ({
   components,
   setComponents,
   onBack,
   onReset,
 }: ItemHeaderProps) => {
-  const deleteComponent = (component: Component) => () =>
+  const removeSelectedComponent = (component: Component) => () =>
     setComponents(components.filter((c) => c !== component));
 
   return (
@@ -64,12 +43,14 @@ const ItemHeader = ({
         </Button>
       </CenterBox>
       <CenterBox flexDirection="row" sx={{ flexWrap: "wrap", gap: 0.5 }}>
-        {components.map((i) => (
+        {components.map((component) => (
           <Chip
-            key={i.name}
-            label={getComponentDisplayName(i)}
+            key={component.name}
+            label={getComponentDisplayName(component)}
             onDelete={
-              isDeletable(i, components) ? deleteComponent(i) : undefined
+              canRemoveComponentAndRemainValid(component, components)
+                ? removeSelectedComponent(component)
+                : undefined
             }
           />
         ))}

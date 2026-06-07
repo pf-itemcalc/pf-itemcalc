@@ -11,6 +11,7 @@ import {
   isSpellVessel,
   isWeapon,
   isWeaponQuality,
+  isEnhancement,
 } from "../../data/helpers";
 import { getComponentEnhancementModifier } from "../component-properties/component-enhancement";
 
@@ -75,3 +76,17 @@ export const selectedComponentsAreInvalid = (
 
   return undefined;
 };
+
+export const canRemoveComponentAndRemainValid = (
+  componentToRemove: Component,
+  components: Component[],
+) =>
+  (!isWeapon(componentToRemove) &&
+    !isAmmunition(componentToRemove) &&
+    !isArmor(componentToRemove) &&
+    !isSpellVessel(componentToRemove) &&
+    !isSpell(componentToRemove) &&
+    !isEnhancement(componentToRemove) &&
+    !componentIsSingularItem(componentToRemove)) ||
+  (isEnhancement(componentToRemove) &&
+    components.every((c) => !isArmorQuality(c) && !isWeaponQuality(c)));

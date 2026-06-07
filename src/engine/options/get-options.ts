@@ -1,10 +1,5 @@
-import { ammunition } from "../../data/ammunition/ammunition";
-import armorQaulities from "../../data/armor/armor-qualities";
+import { allComponents } from "../../data/all-components";
 import { getArmorQaulityModifier } from "../../data/armor/armor-quality-types";
-import armors from "../../data/armor/armors";
-import enhancements, { Masterwork } from "../../data/generic/enhancements";
-import sizeModifiers from "../../data/generic/size-modifiers";
-import specialMaterials from "../../data/generic/special-materials";
 import type { Component } from "../../data/helpers";
 import {
   isAmmunition,
@@ -21,86 +16,10 @@ import {
   isSpellVessel,
   isWeapon,
   isWeaponQuality,
-  orderComponents,
 } from "../../data/helpers";
-import { iounStones } from "../../data/ioun-stone/ioun-stone";
-import { rings } from "../../data/ring/ring";
-import { rods } from "../../data/rod/rod";
-import { specialAmmoComponents } from "../../data/special-ammo/special-ammo";
-import { specialArmorComponents } from "../../data/special-armor/special-armor";
-import { specialShieldComponents } from "../../data/special-shield/special-shield";
-import { specialWeaponComponents } from "../../data/special-weapon/special-weapon";
-import { spellVessels } from "../../data/spell/spell-vessels";
-import spells from "../../data/spell/spells";
-import { staves } from "../../data/staff/staff";
-import weaponQaulities from "../../data/weapon/weapon-qualities";
 import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types";
-import weapons from "../../data/weapon/weapons";
-import { wondrousItemComponents } from "../../data/wondrous/wondrous";
-
-export const allComponents: Component[] = orderComponents([
-  ...enhancements,
-  ...sizeModifiers,
-  ...specialMaterials,
-  ...weaponQaulities,
-  ...weapons,
-  ...ammunition,
-  ...armorQaulities,
-  ...armors,
-  ...spellVessels,
-  ...spells,
-  ...wondrousItemComponents,
-  ...specialAmmoComponents,
-  ...specialArmorComponents,
-  ...specialShieldComponents,
-  ...specialWeaponComponents,
-  ...rings,
-  ...rods,
-  ...staves,
-  ...iounStones,
-]);
-
-type ComponentFilterFunction = (
-  selected: Component[],
-  otherComponents: Component[],
-) => Component[];
-
-const filterComponentsWhenEnhancementIsPresent: ComponentFilterFunction = (
-  selected,
-  otherComponents,
-) => {
-  const enhancement = selected.find(isEnhancement);
-
-  if (!enhancement) {
-    return otherComponents;
-  }
-
-  if (enhancement === Masterwork) {
-    // If the enhancement is masterwork you can then only choose:
-    //  size-modifiers, materials, armor, weapons or ammo
-    return otherComponents.filter(
-      (i) =>
-        isSizeModifier(i) ||
-        isSpecialMaterial(i) ||
-        isArmor(i) ||
-        isWeapon(i) ||
-        isAmmunition(i),
-    );
-  }
-
-  // If there is an enhancement then you can only choose:
-  //  size-modifiers, materials, armor, armor qualities, weapons, weapon quailities or ammo
-  return otherComponents.filter(
-    (i) =>
-      isSizeModifier(i) ||
-      isSpecialMaterial(i) ||
-      isArmor(i) ||
-      isArmorQuality(i) ||
-      isWeapon(i) ||
-      isWeaponQuality(i) ||
-      isAmmunition(i),
-  );
-};
+import { filterComponentsWhenEnhancementIsPresent } from "../option-filtering/enhancement-filtering";
+import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 const filterComponentsWhenSpecialMaterialIsPresent: ComponentFilterFunction = (
   selected,

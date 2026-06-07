@@ -1,0 +1,32 @@
+import {
+  isAmmunition,
+  isArmor,
+  isArmorQuality,
+  isEnhancement,
+  isSizeModifier,
+  isSpecialMaterial,
+  isWeapon,
+  isWeaponQuality,
+} from "../../data/helpers";
+import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
+
+export const filterComponentsWhenSizeModifierIsPresent: ComponentFilterFunction =
+  (selected, otherComponents) => {
+    const sizeModifier = selected.find(isSizeModifier);
+    if (!sizeModifier) {
+      return otherComponents;
+    }
+
+    // If a size modifier is specified then you can only choose:
+    //  special materials, enhancements, armors, armor qualities, weapons and weapon qualities
+    return otherComponents.filter(
+      (i) =>
+        isSpecialMaterial(i) ||
+        isEnhancement(i) ||
+        isArmor(i) ||
+        isArmorQuality(i) ||
+        isWeapon(i) ||
+        isWeaponQuality(i) ||
+        isAmmunition(i),
+    );
+  };

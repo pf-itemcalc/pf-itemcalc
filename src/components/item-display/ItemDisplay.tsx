@@ -1,0 +1,31 @@
+import type { Component } from "../../data/component-types";
+import ItemHeader from "./ItemHeader";
+import Summary from "./Summary";
+
+type ItemDisplayProps = {
+  components: Component[];
+  setComponents: (newComponents: Component[]) => void;
+  onBack: () => void;
+  onReset: () => void;
+};
+
+const ItemDisplay = ({
+  components,
+  setComponents,
+  onBack,
+  onReset,
+}: ItemDisplayProps) => {
+  return (
+    <>
+      <ItemHeader
+        components={components}
+        setComponents={setComponents}
+        onBack={onBack}
+        onReset={onReset}
+      />
+      <Summary components={components} setComponents={setComponents} />
+    </>
+  );
+};
+
+export default ItemDisplay;

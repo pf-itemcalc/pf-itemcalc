@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Box, styled } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
-import type { Item } from "./data/helpers";
-import { orderItems } from "./data/helpers";
-import WorkingItems from "./components/working-items/WorkingItems";
+import { orderComponents } from "./engine/helpers";
+import ItemDisplay from "./components/item-display/ItemDisplay";
 import Title from "./components/title/Title";
 import { mainBreakpoint } from "./components/responsive";
+import type { Component } from "./data/component-types";
 
 const FullSizeContainer = styled(Box)({
   display: "flex",
@@ -28,41 +28,41 @@ const ResponsiveAppContainer = styled(Box)(({ theme }) => ({
 }));
 
 const App = () => {
-  const [selectedItems, setSelectedItems] = useState<Item[]>([]);
-  const [workingItems, setWorkingItems] = useState<Item[] | undefined>(
-    undefined,
-  );
+  const [selectedComponents, setSelectedComponents] = useState<Component[]>([]);
+  const [workingComponents, setWorkingComponents] = useState<
+    Component[] | undefined
+  >(undefined);
 
   const moveFromSelectionToWorking = () => {
-    setWorkingItems(selectedItems);
-    setSelectedItems([]);
+    setWorkingComponents(selectedComponents);
+    setSelectedComponents([]);
   };
 
   const moveBackToSearch = () => {
-    setSelectedItems(workingItems ?? []);
-    setWorkingItems(undefined);
+    setSelectedComponents(workingComponents ?? []);
+    setWorkingComponents(undefined);
   };
 
   const reset = () => {
-    setSelectedItems([]);
-    setWorkingItems(undefined);
+    setSelectedComponents([]);
+    setWorkingComponents(undefined);
   };
 
   return (
     <FullSizeContainer>
-      <Title small={!!workingItems} />
+      <Title small={!!workingComponents} />
       <ResponsiveAppContainer>
-        {!workingItems && (
+        {!workingComponents && (
           <SearchBox
-            selectedItems={orderItems(selectedItems)}
-            setSelectedItems={setSelectedItems}
+            selectedComponents={orderComponents(selectedComponents)}
+            setSelectedComponents={setSelectedComponents}
             onConfirm={moveFromSelectionToWorking}
           />
         )}
-        {workingItems && (
-          <WorkingItems
-            items={orderItems(workingItems)}
-            setItems={setWorkingItems}
+        {workingComponents && (
+          <ItemDisplay
+            components={orderComponents(workingComponents)}
+            setComponents={setWorkingComponents}
             onBack={moveBackToSearch}
             onReset={reset}
           />

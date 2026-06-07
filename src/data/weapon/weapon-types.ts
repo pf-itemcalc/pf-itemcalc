@@ -9,8 +9,3 @@ export type Weapon = {
   category: WeaponCategory;
   type: "weapon";
 };
-
-export const getUrl = (weapon: Weapon) =>
-  `https://aonprd.com/EquipmentWeaponsDisplay.aspx?ItemName=${encodeURIComponent(
-    weapon.name,
-  )}`;

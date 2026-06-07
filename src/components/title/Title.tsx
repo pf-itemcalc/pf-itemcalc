@@ -68,6 +68,7 @@ const Title = ({ small }: TitleProps) => {
       <Badge
         badgeContent={
           <ResponsiveBadgeButton
+            title="About this app..."
             size="small"
             small={small}
             onClick={() => setHelpOpen(true)}

@@ -1,5 +1,5 @@
 import type { SpellList } from "./spell-types";
-import { getMinimumCasterLevel } from "./spell-types";
+import { getSpellMinimumCasterLevel } from "./spell-utilities";
 
 type CasterLevelTestCase = [SpellList, number, number];
 
@@ -8,7 +8,7 @@ const generateClassCases = (
   ...expectedMinCasterLevels: number[]
 ) => expectedMinCasterLevels.map((cl, i) => [spellList, i + 1, cl]);
 
-describe(getMinimumCasterLevel.name, () => {
+describe(getSpellMinimumCasterLevel.name, () => {
   it.each([
     ...generateClassCases("Cleric", 1, 3, 5, 7, 9, 11, 13, 15, 17),
     ...generateClassCases("Druid", 1, 3, 5, 7, 9, 11, 13, 15, 17),
@@ -45,7 +45,7 @@ describe(getMinimumCasterLevel.name, () => {
   ] as CasterLevelTestCase[])(
     "given spell list %s and spell level %s returns minimum caster level %s",
     (spellList, spellLevel, expectedCasterLevel) =>
-      expect(getMinimumCasterLevel(spellLevel, spellList)).toBe(
+      expect(getSpellMinimumCasterLevel(spellLevel, spellList)).toBe(
         expectedCasterLevel,
       ),
   );

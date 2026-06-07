@@ -1,4 +1,4 @@
-import type { Component } from "../../data/helpers";
+import type { Component } from "../helpers";
 
 export type ComponentFilterFunction = (
   selected: Component[],

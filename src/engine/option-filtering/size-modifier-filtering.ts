@@ -7,7 +7,7 @@ import {
   isSpecialMaterial,
   isWeapon,
   isWeaponQuality,
-} from "../../data/helpers";
+} from "../helpers";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 export const filterComponentsWhenSizeModifierIsPresent: ComponentFilterFunction =

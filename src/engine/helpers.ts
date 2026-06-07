@@ -1,56 +1,59 @@
 import { capitalize } from "lodash";
-import type { ArmorQaulity } from "./armor/armor-quality-types";
+import type { ArmorQaulity } from "../data/armor/armor-quality-types";
 import {
   getArmorQaulityCost,
   getArmorQaulityModifier,
   getUrl as getArmorQualityUrl,
-} from "./armor/armor-quality-types";
-import type { Armor } from "./armor/armor-types";
-import { getUrl as getArmorUrl } from "./armor/armor-types";
-import type { Enhancement } from "./generic/enhancement-types";
-import { Masterwork } from "./generic/enhancements";
-import type { SpecialMaterial } from "./generic/special-material-types";
-import { getUrl as getMaterialUrl } from "./generic/special-material-types";
-import type { Spell } from "./spell/spell-types";
+} from "../data/armor/armor-quality-types";
+import type { Armor } from "../data/armor/armor-types";
+import { getUrl as getArmorUrl } from "../data/armor/armor-types";
+import type { Enhancement } from "../data/generic/enhancement-types";
+import { Masterwork } from "../data/generic/enhancements";
+import type { SpecialMaterial } from "../data/generic/special-material-types";
+import { getUrl as getMaterialUrl } from "../data/generic/special-material-types";
+import type { Spell } from "../data/spell/spell-types";
 import {
   getMinimumCasterLevel,
   getUrl as getSpellUrl,
-} from "./spell/spell-types";
-import type { SpellVessel, SpellVesselType } from "./spell/spell-vessel-types";
-import type { WeaponQaulity } from "./weapon/weapon-quality-types";
+} from "../data/spell/spell-types";
+import type {
+  SpellVessel,
+  SpellVesselType,
+} from "../data/spell/spell-vessel-types";
+import type { WeaponQaulity } from "../data/weapon/weapon-quality-types";
 import {
   getUrl as getWeaponQualityUrl,
   getWeaponQaulityCost,
   getWeaponQaulityModifier,
-} from "./weapon/weapon-quality-types";
-import type { Weapon } from "./weapon/weapon-types";
-import { getUrl as getWeaponUrl } from "./weapon/weapon-types";
-import type { Wondrous } from "./wondrous/wondrous-types";
-import { getUrl as getWondrousUrl } from "./wondrous/wondrous-types";
-import type { SpecialAmmo } from "./special-ammo/special-ammo-types";
-import { getUrl as getSpecialAmmoUrl } from "./special-ammo/special-ammo-types";
-import type { SpecialArmor } from "./special-armor/special-armor-types";
-import { getUrl as getSpecialArmorUrl } from "./special-armor/special-armor-types";
-import type { SpecialShield } from "./special-shield/special-shield-types";
-import { getUrl as getSpecialShieldUrl } from "./special-shield/special-shield-types";
-import type { SpecialWeapon } from "./special-weapon/special-weapon-types";
-import { getUrl as getSpecialWeaponUrl } from "./special-weapon/special-weapon-types";
-import type { Ring } from "./ring/ring-types";
-import { getUrl as getRingUrl } from "./ring/ring-types";
-import type { Rod } from "./rod/rod-types";
-import { getUrl as getRodUrl } from "./rod/rod-types";
-import type { Staff } from "./staff/staff-types";
-import { getUrl as getStaffUrl } from "./staff/staff-types";
-import type { IounStone } from "./ioun-stone/ioun-stone-types";
-import { getUrl as getIounStoneUrl } from "./ioun-stone/ioun-stone-types";
-import type { SizeModifier } from "./generic/size-modifier-types";
-import type { Ammunition } from "./ammunition/ammunition-types";
+} from "../data/weapon/weapon-quality-types";
+import type { Weapon } from "../data/weapon/weapon-types";
+import { getUrl as getWeaponUrl } from "../data/weapon/weapon-types";
+import type { Wondrous } from "../data/wondrous/wondrous-types";
+import { getUrl as getWondrousUrl } from "../data/wondrous/wondrous-types";
+import type { SpecialAmmo } from "../data/special-ammo/special-ammo-types";
+import { getUrl as getSpecialAmmoUrl } from "../data/special-ammo/special-ammo-types";
+import type { SpecialArmor } from "../data/special-armor/special-armor-types";
+import { getUrl as getSpecialArmorUrl } from "../data/special-armor/special-armor-types";
+import type { SpecialShield } from "../data/special-shield/special-shield-types";
+import { getUrl as getSpecialShieldUrl } from "../data/special-shield/special-shield-types";
+import type { SpecialWeapon } from "../data/special-weapon/special-weapon-types";
+import { getUrl as getSpecialWeaponUrl } from "../data/special-weapon/special-weapon-types";
+import type { Ring } from "../data/ring/ring-types";
+import { getUrl as getRingUrl } from "../data/ring/ring-types";
+import type { Rod } from "../data/rod/rod-types";
+import { getUrl as getRodUrl } from "../data/rod/rod-types";
+import type { Staff } from "../data/staff/staff-types";
+import { getUrl as getStaffUrl } from "../data/staff/staff-types";
+import type { IounStone } from "../data/ioun-stone/ioun-stone-types";
+import { getUrl as getIounStoneUrl } from "../data/ioun-stone/ioun-stone-types";
+import type { SizeModifier } from "../data/generic/size-modifier-types";
+import type { Ammunition } from "../data/ammunition/ammunition-types";
 import {
   getUrl as getAmmunitionUrl,
   getIndividualAmmoCost,
   getIndividualAmmoWeight,
-} from "./ammunition/ammunition-types";
-import type { Count } from "./special/count-types";
+} from "../data/ammunition/ammunition-types";
+import type { Count } from "../data/special/count-types";
 
 export type Component =
   | Armor

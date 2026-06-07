@@ -1,4 +1,4 @@
-import { componentIsSingularItem } from "../../data/helpers";
+import { componentIsSingularItem } from "../helpers";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 export const filterComponentsWhenSingularItemIsPresent: ComponentFilterFunction =

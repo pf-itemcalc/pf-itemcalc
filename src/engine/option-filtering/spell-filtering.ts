@@ -1,4 +1,4 @@
-import { isSpell, isSpellVessel } from "../../data/helpers";
+import { isSpell, isSpellVessel } from "../helpers";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 export const filterComponentsWhenSpellIsPresent: ComponentFilterFunction = (

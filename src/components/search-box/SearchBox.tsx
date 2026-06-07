@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button, FormHelperText, TextField } from "@mui/material";
-import type { Component } from "../../data/helpers";
+import type { Component } from "../../engine/helpers";
 import {
   getComponentDisplayName,
   getComponentTypeDisplayName,
   isCount,
   isSpellVesselOfType,
-} from "../../data/helpers";
+} from "../../engine/helpers";
 import { getComponentOptionsGivenCurrentSelected } from "../../engine/options/get-options-given-selected";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";

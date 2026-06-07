@@ -1,8 +1,8 @@
 import Reply from "@mui/icons-material/Reply";
 import Clear from "@mui/icons-material/Clear";
 import { Button, Chip } from "@mui/material";
-import type { Component } from "../../data/helpers";
-import { getComponentDisplayName } from "../../data/helpers";
+import type { Component } from "../../engine/helpers";
+import { getComponentDisplayName } from "../../engine/helpers";
 import { CenterBox } from "../containers/CenterBox";
 import { canRemoveComponentAndRemainValid } from "../../engine/validation/validate-selected-components";
 

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Autocomplete, IconButton, styled, TextField } from "@mui/material";
-import type { Component } from "../../data/helpers";
+import type { Component } from "../../engine/helpers";
 import {
   getItemCasterLevel,
   getIdentifyMethod,
@@ -19,7 +19,7 @@ import {
   componentIsSingularItem,
   isAmmunition,
   isCount,
-} from "../../data/helpers";
+} from "../../engine/helpers";
 import { range } from "lodash";
 import type { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";

@@ -1,6 +1,6 @@
 import type { Ammunition } from "../ammunition/ammunition-types";
 import type { Armor } from "../armor/armor-types";
-import { isAmmunition, isWeapon } from "../helpers";
+import { isAmmunition, isWeapon } from "../../engine/helpers";
 import type { Weapon } from "../weapon/weapon-types";
 
 type Item = Weapon | Ammunition | Armor;

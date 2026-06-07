@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Box, styled } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
-import type { Component } from "./data/helpers";
-import { orderComponents } from "./data/helpers";
+import type { Component } from "./engine/helpers";
+import { orderComponents } from "./engine/helpers";
 import ItemDisplay from "./components/item-display/ItemDisplay";
 import Title from "./components/title/Title";
 import { mainBreakpoint } from "./components/responsive";

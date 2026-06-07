@@ -1,5 +1,5 @@
 import { allComponents } from "./all-components";
-import { getUniqueComponentIdentifier } from "./helpers";
+import { getUniqueComponentIdentifier } from "../engine/helpers";
 
 describe("all components", () => {
   it("contains no duplicate unique IDs", () => {

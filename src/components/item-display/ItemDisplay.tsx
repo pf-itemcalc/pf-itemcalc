@@ -1,4 +1,4 @@
-import type { Component } from "../../data/helpers";
+import type { Component } from "../../engine/helpers";
 import ItemHeader from "./ItemHeader";
 import Summary from "./Summary";
 

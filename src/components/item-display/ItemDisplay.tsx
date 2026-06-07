@@ -2,7 +2,7 @@ import type { Component } from "../../data/helpers";
 import ItemHeader from "./ItemHeader";
 import Summary from "./Summary";
 
-type WorkingItemsProps = {
+type ItemDisplayProps = {
   components: Component[];
   setComponents: (newComponents: Component[]) => void;
   onBack: () => void;
@@ -14,12 +14,12 @@ const ItemDisplay = ({
   setComponents,
   onBack,
   onReset,
-}: WorkingItemsProps) => {
+}: ItemDisplayProps) => {
   return (
     <>
       <ItemHeader
-        items={components}
-        setItems={setComponents}
+        components={components}
+        setComponents={setComponents}
         onBack={onBack}
         onReset={onReset}
       />

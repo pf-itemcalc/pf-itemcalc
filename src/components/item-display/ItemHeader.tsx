@@ -17,26 +17,31 @@ import {
 import { CenterBox } from "../containers/CenterBox";
 
 type ItemHeaderProps = {
-  items: Component[];
-  setItems: (newItems: Component[]) => void;
+  components: Component[];
+  setComponents: (newComponents: Component[]) => void;
   onBack: () => void;
   onReset: () => void;
 };
 
-const isDeletable = (item: Component, items: Component[]) =>
-  (!isWeapon(item) &&
-    !isAmmunition(item) &&
-    !isArmor(item) &&
-    !isSpellVessel(item) &&
-    !isSpell(item) &&
-    !isEnhancement(item) &&
-    !componentIsSingularItem(item)) ||
-  (isEnhancement(item) &&
-    items.every((i) => !isArmorQuality(i) && !isWeaponQuality(i)));
+const isDeletable = (component: Component, components: Component[]) =>
+  (!isWeapon(component) &&
+    !isAmmunition(component) &&
+    !isArmor(component) &&
+    !isSpellVessel(component) &&
+    !isSpell(component) &&
+    !isEnhancement(component) &&
+    !componentIsSingularItem(component)) ||
+  (isEnhancement(component) &&
+    components.every((c) => !isArmorQuality(c) && !isWeaponQuality(c)));
 
-const ItemHeader = ({ items, setItems, onBack, onReset }: ItemHeaderProps) => {
-  const deleteItem = (item: Component) => () =>
-    setItems(items.filter((i) => i !== item));
+const ItemHeader = ({
+  components,
+  setComponents,
+  onBack,
+  onReset,
+}: ItemHeaderProps) => {
+  const deleteComponent = (component: Component) => () =>
+    setComponents(components.filter((c) => c !== component));
 
   return (
     <CenterBox flexDirection="column">
@@ -59,11 +64,13 @@ const ItemHeader = ({ items, setItems, onBack, onReset }: ItemHeaderProps) => {
         </Button>
       </CenterBox>
       <CenterBox flexDirection="row" sx={{ flexWrap: "wrap", gap: 0.5 }}>
-        {items.map((i) => (
+        {components.map((i) => (
           <Chip
             key={i.name}
             label={getComponentDisplayName(i)}
-            onDelete={isDeletable(i, items) ? deleteItem(i) : undefined}
+            onDelete={
+              isDeletable(i, components) ? deleteComponent(i) : undefined
+            }
           />
         ))}
       </CenterBox>

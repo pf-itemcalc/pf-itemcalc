@@ -4,7 +4,7 @@ import { Button, Chip } from "@mui/material";
 import type { Component } from "../../data/helpers";
 import { getComponentDisplayName } from "../../data/helpers";
 import { CenterBox } from "../containers/CenterBox";
-import { canRemoveComponentAndRemainValid } from "../../engine/validation/selected-components-valid";
+import { canRemoveComponentAndRemainValid } from "../../engine/validation/validate-selected-components";
 
 type ItemHeaderProps = {
   components: Component[];

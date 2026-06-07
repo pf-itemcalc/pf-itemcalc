@@ -11,7 +11,7 @@ import { getComponentOptionsGivenCurrentSelected } from "../../engine/options/ge
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";
 import { newCountComponent } from "../../data/special/count";
-import { selectedComponentsAreInvalid } from "../../engine/validation/selected-components-valid";
+import { selectedComponentsAreInvalid } from "../../engine/validation/validate-selected-components";
 
 const getOptionsWithCount = (
   selectedComponents: Component[],

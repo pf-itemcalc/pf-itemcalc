@@ -5,7 +5,7 @@ import {
   getItemDisplayName,
   getItemTypeDisplayName,
   isCount,
-  isSpecificSpellVessel,
+  isSpellVesselOfType,
 } from "../../data/helpers";
 import { getOptions, selectedItemsAreInvalid } from "./get-options";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
@@ -20,7 +20,7 @@ const getOptionsWithCount = (
   const parsedValue = parseInt(searchValue);
   const countAlreadyUsed = selectedItems.some(isCount);
   const wandPresent = !!selectedItems.find((i) =>
-    isSpecificSpellVessel(i, "Wand"),
+    isSpellVesselOfType(i, "Wand"),
   );
 
   if (parsedValue > 0 && !countAlreadyUsed && !wandPresent) {

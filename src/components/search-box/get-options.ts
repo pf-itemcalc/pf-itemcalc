@@ -16,7 +16,7 @@ import {
   isSizeModifier,
   isSpecialMaterial,
   isSpecificItem,
-  isSpecificSpellVessel,
+  isSpellVesselOfType,
   isSpell,
   isSpellVessel,
   isWeapon,
@@ -302,7 +302,7 @@ const countFilter: ItemFilterFunction = (selected, items) => {
 
   // We currently do not allow you to calculate the cost for multiple wands
   // Typically the charges is used for that (makes the text too long!)
-  return items.filter((i) => !isSpecificSpellVessel(i, "Wand"));
+  return items.filter((i) => !isSpellVesselOfType(i, "Wand"));
 };
 
 const itemFilters: ItemFilterFunction[] = [

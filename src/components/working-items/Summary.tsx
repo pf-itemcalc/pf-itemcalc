@@ -11,7 +11,7 @@ import {
   isSpell,
   getSpellCasterLevel,
   getSpellValue,
-  isSpecificSpellVessel,
+  isSpellVesselOfType,
   getSpellLevel,
   getSpellList,
   isComposite,
@@ -327,7 +327,7 @@ const SpellSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
   const spellLevel = getSpellLevel(items);
   const spellList = getSpellList(items);
 
-  const isWand = items.some((i) => isSpecificSpellVessel(i, "Wand"));
+  const isWand = items.some((i) => isSpellVesselOfType(i, "Wand"));
 
   const [charges, setCharges] = useState(50);
   const [overrideCasterLevel, setOverrideCasterLevel] = useState(casterLevel);

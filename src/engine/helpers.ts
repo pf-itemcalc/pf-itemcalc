@@ -1,5 +1,5 @@
 import { capitalize } from "lodash";
-import type { Component, SingularItemComponent } from "../data/component-types";
+import type { Component, SpecificItemComponent } from "../data/component-types";
 import {
   getWondrousItemUrl,
   isWondrous,
@@ -30,7 +30,6 @@ import {
   getIounStoneUrl,
   isIounStone,
 } from "../data/specific-item/ioun-stone/ioun-stone-utilities";
-import type { Count } from "../data/generic/count-types";
 import { getArmorUrl, isArmor } from "../data/armor/armor-utilities";
 import {
   getArmorQaulityCost,
@@ -68,25 +67,7 @@ import { isEnhancement } from "../data/enhancement/enhancement-utilities";
 import { Masterwork } from "../data/enhancement/enhancements";
 import { isSizeModifier } from "../data/size-modifier/size-modifier-utilities";
 import { isSpellVesselOfType } from "../data/spell-vessel/spell-vessel-utilities";
-
-export const componentIsSpecificItem = (
-  component: Component,
-): component is SingularItemComponent => {
-  return (
-    isWondrous(component) ||
-    isSpecificAmmo(component) ||
-    isSpecificArmor(component) ||
-    isSpecificShield(component) ||
-    isSpecificWeapon(component) ||
-    isRing(component) ||
-    isRod(component) ||
-    isStaff(component) ||
-    isIounStone(component)
-  );
-};
-
-export const isCount = (component: Component): component is Count =>
-  component.type === "count";
+import { componentIsSpecificItem } from "../data/specific-item/specific-item-utilities";
 
 type ComponentType = Component["type"];
 
@@ -239,9 +220,9 @@ export const isMagic = (components: Component[]): boolean =>
 export const getItemCasterLevel = (
   components: Component[],
 ): number | undefined => {
-  const singularItem = components.find(componentIsSpecificItem);
-  if (singularItem && singularItem.casterLevel > 0) {
-    return singularItem.casterLevel;
+  const specificItem = components.find(componentIsSpecificItem);
+  if (specificItem && specificItem.casterLevel > 0) {
+    return specificItem.casterLevel;
   }
 
   const enhancement = components.find(isEnhancement);
@@ -274,10 +255,10 @@ export const getItemValue = (
   components: Component[],
   compositeRating?: number,
 ): number => {
-  const singularItem = components.find(componentIsSpecificItem);
+  const specificItem = components.find(componentIsSpecificItem);
 
-  if (singularItem) {
-    return singularItem.cost;
+  if (specificItem) {
+    return specificItem.cost;
   }
 
   const baseComponent =
@@ -389,10 +370,10 @@ export const getSpellList = (components: Component[]): string => {
 };
 
 export const getItemWeight = (components: Component[]): number => {
-  const singularItem = components.find(componentIsSpecificItem);
+  const specificItem = components.find(componentIsSpecificItem);
 
-  if (singularItem) {
-    return singularItem.weight;
+  if (specificItem) {
+    return specificItem.weight;
   }
 
   const baseComponent =
@@ -440,37 +421,37 @@ export const getIdentifyMethod = (
 };
 
 const getItemDisplayNameModifiedSubtitle = (
-  singularItem: SingularItemComponent,
+  specificItemComponent: SpecificItemComponent,
 ): string | undefined => {
-  if (!singularItem.subtitle) {
+  if (!specificItemComponent.subtitle) {
     return undefined;
   }
 
-  if (typeof singularItem.subtitle === "number") {
-    return `+${singularItem.subtitle}`;
+  if (typeof specificItemComponent.subtitle === "number") {
+    return `+${specificItemComponent.subtitle}`;
   }
 
   // matches: "1", "1 bonus"
   // does not match: "1/2 Will", "1st", "2nd", "3rd", "10 HD", "Type I", "3 tricks", "6th-level", "15-ft.-by-30ft."
   const matchNumberOrNumberBonus = /\d+($| bonus)/g;
   if (
-    typeof singularItem.subtitle === "number" ||
-    singularItem.subtitle.match(matchNumberOrNumberBonus)
+    typeof specificItemComponent.subtitle === "number" ||
+    specificItemComponent.subtitle.match(matchNumberOrNumberBonus)
   ) {
-    return `+${singularItem.subtitle.replace(" bonus", "")}`;
+    return `+${specificItemComponent.subtitle.replace(" bonus", "")}`;
   }
 
   // matches: "1/2 Will"
   // does not match: "1", "1 bonus", "1st", "2nd", "3rd", "10 HD", "Type I", "3 tricks", "6th-level", "15-ft.-by-30ft."
   const matchMultiNumberBonus = /(\d+)\/(\d+).*/;
-  const multiNumberBonusMatch = singularItem.subtitle.match(
+  const multiNumberBonusMatch = specificItemComponent.subtitle.match(
     matchMultiNumberBonus,
   );
   if (multiNumberBonusMatch) {
     return `+${multiNumberBonusMatch[1]}/+${multiNumberBonusMatch[2]}`;
   }
 
-  return capitalize(singularItem.subtitle);
+  return capitalize(specificItemComponent.subtitle);
 };
 
 export const getComponentName = (

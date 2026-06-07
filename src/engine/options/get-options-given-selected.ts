@@ -6,7 +6,7 @@ import { filterComponentsWhenArmorQualityIsPresent } from "../option-filtering/a
 import { filterComponentsWhenCountIsPresent } from "../option-filtering/count-filtering";
 import { filterComponentsWhenEnhancementIsPresent } from "../option-filtering/enhancement-filtering";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
-import { filterComponentsWhenSingularItemIsPresent } from "../option-filtering/singular-item-filtering";
+import { filterComponentsWhenSpecificItemIsPresent } from "../option-filtering/specific-item-filtering";
 import { filterComponentsWhenSizeModifierIsPresent } from "../option-filtering/size-modifier-filtering";
 import { filterComponentsWhenSpecialMaterialIsPresent } from "../option-filtering/special-material-filtering";
 import { filterComponentsWhenSpellIsPresent } from "../option-filtering/spell-filtering";
@@ -15,7 +15,7 @@ import { filterComponentsWhenWeaponIsPresent } from "../option-filtering/weapon-
 import { filterComponentsWhenWeaponQualityIsPresent } from "../option-filtering/weapon-quality-filtering";
 
 const componentFilters: ComponentFilterFunction[] = [
-  filterComponentsWhenSingularItemIsPresent,
+  filterComponentsWhenSpecificItemIsPresent,
   filterComponentsWhenSizeModifierIsPresent,
   filterComponentsWhenEnhancementIsPresent,
   filterComponentsWhenSpecialMaterialIsPresent,

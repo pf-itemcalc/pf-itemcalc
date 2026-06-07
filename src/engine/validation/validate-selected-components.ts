@@ -1,4 +1,4 @@
-import { componentIsSpecificItem } from "../helpers";
+import { componentIsSpecificItem } from "../../data/specific-item/specific-item-utilities";
 import { isSpell } from "../../data/spell/spell-utilities";
 import { isSpellVessel } from "../../data/spell-vessel/spell-vessel-utilities";
 import { isMagicEnhancement } from "../../data/enhancement/enhancement-utilities";

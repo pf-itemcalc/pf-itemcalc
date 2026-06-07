@@ -1,7 +1,7 @@
-import { componentIsSpecificItem } from "../helpers";
-import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
+import { componentIsSpecificItem } from "../../data/specific-item/specific-item-utilities";
+import type { ComponentFilterFunction } from "./option-filtering-types";
 
-export const filterComponentsWhenSingularItemIsPresent: ComponentFilterFunction =
+export const filterComponentsWhenSpecificItemIsPresent: ComponentFilterFunction =
   (selected, otherComponents) => {
     const specificItem = selected.find(componentIsSpecificItem);
 

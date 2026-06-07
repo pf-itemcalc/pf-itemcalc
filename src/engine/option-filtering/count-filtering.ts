@@ -1,4 +1,4 @@
-import { isCount } from "../helpers";
+import { isCount } from "../../data/generic/count-utilities";
 import { isSpellVesselOfType } from "../../data/spell-vessel/spell-vessel-utilities";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 

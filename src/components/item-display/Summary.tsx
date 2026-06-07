@@ -12,9 +12,9 @@ import {
   getSpellLevel,
   getSpellList,
   getComponentDisplayName,
-  componentIsSpecificItem,
-  isCount,
 } from "../../engine/helpers";
+import { isCount } from "../../data/generic/count-utilities";
+import { componentIsSpecificItem } from "../../data/specific-item/specific-item-utilities";
 import { isSpell } from "../../data/spell/spell-utilities";
 import { isSpellVesselOfType } from "../../data/spell-vessel/spell-vessel-utilities";
 import { isComposite } from "../../data/weapon/weapon-utilities";

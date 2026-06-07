@@ -3,8 +3,8 @@ import { Button, FormHelperText, TextField } from "@mui/material";
 import {
   getComponentDisplayName,
   getComponentTypeDisplayName,
-  isCount,
 } from "../../engine/helpers";
+import { isCount } from "../../data/generic/count-utilities";
 import { isSpellVesselOfType } from "../../data/spell-vessel/spell-vessel-utilities";
 import { getComponentOptionsGivenCurrentSelected } from "../../engine/options/get-options-given-selected";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";

@@ -30,10 +30,10 @@ export type Component =
   | Enhancement
   | SpellVessel
   | Spell
-  | SingularItemComponent
+  | SpecificItemComponent
   | Count;
 
-export type SingularItemComponent =
+export type SpecificItemComponent =
   | Wondrous
   | SpecificAmmo
   | SpecificArmor

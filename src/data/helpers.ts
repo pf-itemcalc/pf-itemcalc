@@ -80,43 +80,47 @@ export type SpecificItem =
 export const isArmor = (item: Item): item is Armor => item.type === "armor";
 export const isArmorQuality = (item: Item): item is ArmorQaulity =>
   item.type === "armor-quality";
+export const isSpecialArmor = (item: Item): item is SpecialArmor =>
+  item.type === "special-armor";
+export const isSpecialShield = (item: Item): item is SpecialShield =>
+  item.type === "special-shield";
 
 export const isWeapon = (item: Item): item is Weapon => item.type === "weapon";
 export const isComposite = (item: Item): item is Weapon =>
   isWeapon(item) && item.name.toLowerCase().includes("composite");
 export const isWeaponQuality = (item: Item): item is WeaponQaulity =>
   item.type === "weapon-quality";
+export const isSpecialWeapon = (item: Item): item is SpecialWeapon =>
+  item.type === "special-weapon";
+
 export const isAmmunition = (item: Item): item is Ammunition =>
   item.type === "ammunition";
+export const isSpecialAmmo = (item: Item): item is SpecialAmmo =>
+  item.type === "special-ammo";
+
 export const isSpecialMaterial = (item: Item): item is SpecialMaterial =>
   item.type === "special-material";
 export const isSizeModifier = (item: Item): item is SizeModifier =>
   item.type === "size-modifier";
+
 export const isEnhancement = (item: Item): item is Enhancement =>
   item.type === "enhancement";
 export const isMagicEnhancement = (item: Item): item is Enhancement =>
   isEnhancement(item) && item.modifier > 0;
+
 export const isSpellVessel = (item: Item): item is SpellVessel =>
   item.type === "spell-vessel";
-export const isSpell = (item: Item): item is Spell => item.type === "spell";
 export const isSpellVesselOfType = (item: Item, ...types: SpellVesselType[]) =>
   isSpellVessel(item) && types.includes(item.vesselType);
+export const isSpell = (item: Item): item is Spell => item.type === "spell";
+
 export const isWondrous = (item: Item): item is Wondrous =>
   item.type === "wondrous";
-export const isSpecialAmmo = (item: Item): item is SpecialAmmo =>
-  item.type === "special-ammo";
-export const isSpecialArmor = (item: Item): item is SpecialArmor =>
-  item.type === "special-armor";
-export const isSpecialShield = (item: Item): item is SpecialShield =>
-  item.type === "special-shield";
-export const isSpecialWeapon = (item: Item): item is SpecialWeapon =>
-  item.type === "special-weapon";
 export const isRing = (item: Item): item is Ring => item.type === "ring";
 export const isRod = (item: Item): item is Rod => item.type === "rod";
 export const isStaff = (item: Item): item is Staff => item.type === "staff";
 export const isIounStone = (item: Item): item is IounStone =>
   item.type === "ioun-stone";
-export const isCount = (item: Item): item is Count => item.type === "count";
 
 export const isSpecificItem = (item: Item): item is SpecificItem => {
   return (
@@ -131,6 +135,8 @@ export const isSpecificItem = (item: Item): item is SpecificItem => {
     isIounStone(item)
   );
 };
+
+export const isCount = (item: Item): item is Count => item.type === "count";
 
 type ItemType = Item["type"];
 

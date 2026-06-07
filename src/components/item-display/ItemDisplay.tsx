@@ -3,29 +3,29 @@ import ItemHeader from "./ItemHeader";
 import Summary from "./Summary";
 
 type WorkingItemsProps = {
-  items: Component[];
-  setItems: (newItems: Component[]) => void;
+  components: Component[];
+  setComponents: (newComponents: Component[]) => void;
   onBack: () => void;
   onReset: () => void;
 };
 
-const WorkingItems = ({
-  items,
-  setItems,
+const ItemDisplay = ({
+  components,
+  setComponents,
   onBack,
   onReset,
 }: WorkingItemsProps) => {
   return (
     <>
       <ItemHeader
-        items={items}
-        setItems={setItems}
+        items={components}
+        setItems={setComponents}
         onBack={onBack}
         onReset={onReset}
       />
-      <Summary items={items} setItems={setItems} />
+      <Summary items={components} setItems={setComponents} />
     </>
   );
 };
 
-export default WorkingItems;
+export default ItemDisplay;

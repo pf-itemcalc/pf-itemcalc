@@ -3,7 +3,7 @@ import { Box, styled } from "@mui/system";
 import SearchBox from "./components/search-box/SearchBox";
 import type { Component } from "./data/helpers";
 import { orderComponents } from "./data/helpers";
-import WorkingItems from "./components/working-items/WorkingItems";
+import ItemDisplay from "./components/item-display/ItemDisplay";
 import Title from "./components/title/Title";
 import { mainBreakpoint } from "./components/responsive";
 
@@ -60,9 +60,9 @@ const App = () => {
           />
         )}
         {workingComponents && (
-          <WorkingItems
-            items={orderComponents(workingComponents)}
-            setItems={setWorkingComponents}
+          <ItemDisplay
+            components={orderComponents(workingComponents)}
+            setComponents={setWorkingComponents}
             onBack={moveBackToSearch}
             onReset={reset}
           />

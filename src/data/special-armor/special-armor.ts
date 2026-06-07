@@ -1,6 +1,6 @@
 import type { SpecialArmor } from "./special-armor-types";
 
-export const specialArmorItems: SpecialArmor[] = [
+export const specialArmorComponents: SpecialArmor[] = [
   {
     type: "special-armor",
     name: "Abrogalian Corset",

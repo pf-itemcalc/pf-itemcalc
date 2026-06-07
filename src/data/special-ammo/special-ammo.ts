@@ -1,6 +1,6 @@
 import type { SpecialAmmo } from "./special-ammo-types";
 
-export const specialAmmoItems: SpecialAmmo[] = [
+export const specialAmmoComponents: SpecialAmmo[] = [
   {
     type: "special-ammo",
     name: "Alchemist's Bullet",

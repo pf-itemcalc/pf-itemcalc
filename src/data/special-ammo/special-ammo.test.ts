@@ -1,10 +1,10 @@
-import { specialAmmoItems } from "./special-ammo";
+import { specialAmmoComponents } from "./special-ammo";
 
 describe("specialAmmoItems", () => {
   it("contains no duplicate names, including subtitle", () => {
-    const counts = specialAmmoItems.map((item) => ({
+    const counts = specialAmmoComponents.map((item) => ({
       name: item.name + item.subtitle,
-      count: specialAmmoItems.filter(
+      count: specialAmmoComponents.filter(
         (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));

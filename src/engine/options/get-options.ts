@@ -26,10 +26,10 @@ import {
 import { iounStones } from "../../data/ioun-stone/ioun-stone";
 import { rings } from "../../data/ring/ring";
 import { rods } from "../../data/rod/rod";
-import { specialAmmoItems } from "../../data/special-ammo/special-ammo";
-import { specialArmorItems } from "../../data/special-armor/special-armor";
-import { specialShieldItems } from "../../data/special-shield/special-shield";
-import { specialWeaponItems } from "../../data/special-weapon/special-weapon";
+import { specialAmmoComponents } from "../../data/special-ammo/special-ammo";
+import { specialArmorComponents } from "../../data/special-armor/special-armor";
+import { specialShieldComponents } from "../../data/special-shield/special-shield";
+import { specialWeaponComponents } from "../../data/special-weapon/special-weapon";
 import { spellVessels } from "../../data/spell/spell-vessels";
 import spells from "../../data/spell/spells";
 import { staves } from "../../data/staff/staff";
@@ -50,10 +50,10 @@ export const allItems: Component[] = orderComponents([
   ...spellVessels,
   ...spells,
   ...wondrousItems,
-  ...specialAmmoItems,
-  ...specialArmorItems,
-  ...specialShieldItems,
-  ...specialWeaponItems,
+  ...specialAmmoComponents,
+  ...specialArmorComponents,
+  ...specialShieldComponents,
+  ...specialWeaponComponents,
   ...rings,
   ...rods,
   ...staves,

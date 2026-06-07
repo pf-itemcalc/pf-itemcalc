@@ -1,10 +1,10 @@
-import { specialArmorItems } from "./special-armor";
+import { specialArmorComponents } from "./special-armor";
 
 describe("specialArmorItems", () => {
   it("contains no duplicate names, including subtitle", () => {
-    const counts = specialArmorItems.map((item) => ({
+    const counts = specialArmorComponents.map((item) => ({
       name: item.name + item.subtitle,
-      count: specialArmorItems.filter(
+      count: specialArmorComponents.filter(
         (w) => w.name + w.subtitle === item.name + item.subtitle,
       ).length,
     }));

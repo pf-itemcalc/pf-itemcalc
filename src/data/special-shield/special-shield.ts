@@ -1,6 +1,6 @@
 import type { SpecialShield } from "./special-shield-types";
 
-export const specialShieldItems: SpecialShield[] = [
+export const specialShieldComponents: SpecialShield[] = [
   {
     type: "special-shield",
     name: "Mwangi Spirit Shield",

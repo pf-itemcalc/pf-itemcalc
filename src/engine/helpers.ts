@@ -48,13 +48,14 @@ import type { IounStone } from "../data/ioun-stone/ioun-stone-types";
 import { getUrl as getIounStoneUrl } from "../data/ioun-stone/ioun-stone-types";
 import type { SizeModifier } from "../data/generic/size-modifier-types";
 import type { Ammunition } from "../data/ammunition/ammunition-types";
-import {
-  getUrl as getAmmunitionUrl,
-  getIndividualAmmoCost,
-  getIndividualAmmoWeight,
-} from "../data/ammunition/ammunition-types";
 import type { Count } from "../data/special/count-types";
 import type { Component, SingularItemComponent } from "../data/component-types";
+import {
+  getAmmunitionUrl,
+  getIndividualAmmoCost,
+  getIndividualAmmoWeight,
+  isAmmunition,
+} from "../data/ammunition/ammunition-utilities";
 
 export const isArmor = (component: Component): component is Armor =>
   component.type === "armor";
@@ -79,8 +80,6 @@ export const isSpecialWeapon = (
   component: Component,
 ): component is SpecialWeapon => component.type === "special-weapon";
 
-export const isAmmunition = (component: Component): component is Ammunition =>
-  component.type === "ammunition";
 export const isSpecialAmmo = (component: Component): component is SpecialAmmo =>
   component.type === "special-ammo";
 

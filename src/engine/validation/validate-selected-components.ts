@@ -1,4 +1,4 @@
-import { componentIsSingularItem } from "../helpers";
+import { componentIsSpecificItem } from "../helpers";
 import { isSpell } from "../../data/spell/spell-utilities";
 import { isSpellVessel } from "../../data/spell-vessel/spell-vessel-utilities";
 import { isMagicEnhancement } from "../../data/enhancement/enhancement-utilities";
@@ -28,7 +28,7 @@ export const selectedComponentsAreInvalid = (
   if (
     selectedComponents.every(
       (i) =>
-        !componentIsSingularItem(i) &&
+        !componentIsSpecificItem(i) &&
         !isWeapon(i) &&
         !isArmor(i) &&
         !isSpell(i) &&
@@ -85,6 +85,6 @@ export const canRemoveComponentAndRemainValid = (
     !isSpellVessel(componentToRemove) &&
     !isSpell(componentToRemove) &&
     !isEnhancement(componentToRemove) &&
-    !componentIsSingularItem(componentToRemove)) ||
+    !componentIsSpecificItem(componentToRemove)) ||
   (isEnhancement(componentToRemove) &&
     components.every((c) => !isArmorQuality(c) && !isWeaponQuality(c)));

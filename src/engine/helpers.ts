@@ -1,82 +1,83 @@
 import { capitalize } from "lodash";
-import type { ArmorQuality } from "../data/armor-quality/armor-quality-types";
+import type { Component, SingularItemComponent } from "../data/component-types";
 import {
-  getArmorQualityUrl,
+  getWondrousItemUrl,
+  isWondrous,
+} from "../data/specific-item/wondrous/wondrous-utilities";
+import {
+  getSpecificAmmoUrl,
+  isSpecificAmmo,
+} from "../data/specific-item/specific-ammo/specific-ammo-utilities";
+import {
+  getSpecificArmorUrl,
+  isSpecificArmor,
+} from "../data/specific-item/specific-armor/specific-armor-utilities";
+import {
+  getSpecificShieldUrl,
+  isSpecificShield,
+} from "../data/specific-item/specific-shield/specific-shield-utilities";
+import {
+  getSpecificWeaponUrl,
+  isSpecificWeapon,
+} from "../data/specific-item/specific-weapon/specific-weapon-utilities";
+import { getRingUrl, isRing } from "../data/specific-item/ring/ring-utilities";
+import { getRodUrl, isRod } from "../data/specific-item/rod/rod-utilities";
+import {
+  getStaffUrl,
+  isStaff,
+} from "../data/specific-item/staff/staff-utilities";
+import {
+  getIounStoneUrl,
+  isIounStone,
+} from "../data/specific-item/ioun-stone/ioun-stone-utilities";
+import type { Count } from "../data/generic/count-types";
+import { getArmorUrl, isArmor } from "../data/armor/armor-utilities";
+import {
   getArmorQaulityCost,
   getArmorQaulityModifier,
+  getArmorQualityUrl,
+  isArmorQuality,
 } from "../data/armor-quality/armor-quality-utilities";
-import type { Armor } from "../data/armor/armor-types";
-import { Masterwork } from "../data/enhancement/enhancements";
-import type { SpecialMaterial } from "../data/special-material/special-material-types";
-import { getSpecialMaterialUrl } from "../data/special-material/special-material-utilities";
-import type { Spell } from "../data/spell/spell-types";
 import {
-  getSpellMinimumCasterLevel,
-  getSpellUrl,
-} from "../data/spell/spell-utilities";
-import type { WeaponQaulity } from "../data/weapon-quality/weapon-quality-types";
-import {
-  getWeaponQualityUrl,
-  getWeaponQaulityCost,
-  getWeaponQaulityModifier,
-} from "../data/weapon-quality/weapon-quality-utilities";
-import type { Weapon } from "../data/weapon/weapon-types";
-import { getWeaponUrl, isComposite } from "../data/weapon/weapon-utilities";
-import type { Wondrous } from "../data/wondrous/wondrous-types";
-import { getWondrousItemUrl } from "../data/wondrous/wondrous-utilities";
-import type { SpecialAmmo } from "../data/special-ammo/special-ammo-types";
-import { getSpecialAmmoUrl } from "../data/special-ammo/special-ammo-utilities";
-import type { SpecialArmor } from "../data/special-armor/special-armor-types";
-import { getSpecialArmorUrl } from "../data/special-armor/special-armor-utilities";
-import type { SpecialShield } from "../data/special-shield/special-shield-types";
-import { getSpecialShieldUrl } from "../data/special-shield/special-shield-utilities";
-import type { SpecialWeapon } from "../data/special-weapon/special-weapon-types";
-import { getSpecialWeaponUrl } from "../data/special-weapon/special-weapon-utilities";
-import type { Ring } from "../data/ring/ring-types";
-import { getRingUrl } from "../data/ring/ring-utilities";
-import type { Rod } from "../data/rod/rod-types";
-import { getRodUrl } from "../data/rod/rod-utilities";
-import type { Staff } from "../data/staff/staff-types";
-import { getStaffUrl } from "../data/staff/staff-utilities";
-import type { IounStone } from "../data/ioun-stone/ioun-stone-types";
-import { getIounStoneUrl } from "../data/ioun-stone/ioun-stone-utilities";
-import type { Ammunition } from "../data/ammunition/ammunition-types";
-import type { Count } from "../data/generic/count-types";
-import type { Component, SingularItemComponent } from "../data/component-types";
+  getWeaponUrl,
+  isComposite,
+  isWeapon,
+} from "../data/weapon/weapon-utilities";
 import {
   getAmmunitionUrl,
   getIndividualAmmoCost,
   getIndividualAmmoWeight,
   isAmmunition,
 } from "../data/ammunition/ammunition-utilities";
-import { getArmorUrl, isArmor } from "../data/armor/armor-utilities";
-import { isArmorQuality } from "../data/armor-quality/armor-quality-utilities";
-import { isSpecialArmor } from "../data/special-armor/special-armor-utilities";
-import { isSpecialShield } from "../data/special-shield/special-shield-utilities";
-import { isWeapon } from "../data/weapon/weapon-utilities";
-import { isWeaponQuality } from "../data/weapon-quality/weapon-quality-utilities";
-import { isSpecialWeapon } from "../data/special-weapon/special-weapon-utilities";
-import { isSpecialAmmo } from "../data/special-ammo/special-ammo-utilities";
-import { isSpecialMaterial } from "../data/special-material/special-material-utilities";
-import { isSizeModifier } from "../data/size-modifier/size-modifier-utilities";
+import {
+  getWeaponQaulityCost,
+  getWeaponQaulityModifier,
+  getWeaponQualityUrl,
+  isWeaponQuality,
+} from "../data/weapon-quality/weapon-quality-utilities";
+import {
+  getSpecialMaterialUrl,
+  isSpecialMaterial,
+} from "../data/special-material/special-material-utilities";
+import {
+  getSpellMinimumCasterLevel,
+  getSpellUrl,
+  isSpell,
+} from "../data/spell/spell-utilities";
 import { isEnhancement } from "../data/enhancement/enhancement-utilities";
+import { Masterwork } from "../data/enhancement/enhancements";
+import { isSizeModifier } from "../data/size-modifier/size-modifier-utilities";
 import { isSpellVesselOfType } from "../data/spell-vessel/spell-vessel-utilities";
-import { isSpell } from "../data/spell/spell-utilities";
-import { isWondrous } from "../data/wondrous/wondrous-utilities";
-import { isRing } from "../data/ring/ring-utilities";
-import { isRod } from "../data/rod/rod-utilities";
-import { isStaff } from "../data/staff/staff-utilities";
-import { isIounStone } from "../data/ioun-stone/ioun-stone-utilities";
 
-export const componentIsSingularItem = (
+export const componentIsSpecificItem = (
   component: Component,
 ): component is SingularItemComponent => {
   return (
     isWondrous(component) ||
-    isSpecialAmmo(component) ||
-    isSpecialArmor(component) ||
-    isSpecialShield(component) ||
-    isSpecialWeapon(component) ||
+    isSpecificAmmo(component) ||
+    isSpecificArmor(component) ||
+    isSpecificShield(component) ||
+    isSpecificWeapon(component) ||
     isRing(component) ||
     isRod(component) ||
     isStaff(component) ||
@@ -101,10 +102,10 @@ const componentTypeDisplayNames: { [key in ComponentType]: string } = {
   "spell-vessel": "Spell Vessel",
   spell: "Spell",
   wondrous: "Wondrous Item",
-  "special-ammo": "Special Ammo",
-  "special-armor": "Special Armor",
-  "special-shield": "Special Shield",
-  "special-weapon": "Special Weapon",
+  "specific-ammo": "Specific Ammo",
+  "specific-armor": "Specific Armor",
+  "specific-shield": "Specific Shield",
+  "specific-weapon": "Specific Weapon",
   ring: "Ring",
   rod: "Rod",
   staff: "Staff",
@@ -128,10 +129,10 @@ const componentTypeOrderingDictionary: { [key in ComponentType]: number } = {
   "spell-vessel": 8,
   spell: 9,
   wondrous: 10,
-  "special-armor": 11,
-  "special-shield": 12,
-  "special-weapon": 13,
-  "special-ammo": 14,
+  "specific-armor": 11,
+  "specific-shield": 12,
+  "specific-weapon": 13,
+  "specific-ammo": 14,
   ring: 15,
   rod: 16,
   staff: 17,
@@ -154,32 +155,49 @@ const componentComparater = (component1: Component, component2: Component) => {
 export const orderComponents = (components: Component[]): Component[] =>
   components.sort(componentComparater);
 
+const urlGiven = <ComponentType extends Component>(
+  component: Component,
+  isComponent: (component: Component) => component is ComponentType,
+  getUrl: (component: ComponentType) => string,
+) => {
+  if (!isComponent(component)) {
+    return undefined;
+  }
+
+  return getUrl(component);
+};
+
 const componentTypeUrlMap: {
   [key in ComponentType]: (component: Component) => string | undefined;
 } = {
   enhancement: () => undefined,
-  armor: (component) => getArmorUrl(component as Armor),
-  "armor-quality": (component) => getArmorQualityUrl(component as ArmorQuality),
-  weapon: (component) => getWeaponUrl(component as Weapon),
-  ammunition: (component) => getAmmunitionUrl(component as Ammunition),
+  armor: (component) => urlGiven(component, isArmor, getArmorUrl),
+  "armor-quality": (component) =>
+    urlGiven(component, isArmorQuality, getArmorQualityUrl),
+  weapon: (component) => urlGiven(component, isWeapon, getWeaponUrl),
+  ammunition: (component) =>
+    urlGiven(component, isAmmunition, getAmmunitionUrl),
   "size-modifier": () => undefined,
   "weapon-quality": (component) =>
-    getWeaponQualityUrl(component as WeaponQaulity),
+    urlGiven(component, isWeaponQuality, getWeaponQualityUrl),
   "special-material": (component) =>
-    getSpecialMaterialUrl(component as SpecialMaterial),
-  spell: (component) => getSpellUrl(component as Spell),
+    urlGiven(component, isSpecialMaterial, getSpecialMaterialUrl),
+  spell: (component) => urlGiven(component, isSpell, getSpellUrl),
   "spell-vessel": () => undefined,
-  wondrous: (component) => getWondrousItemUrl(component as Wondrous),
-  "special-ammo": (component) => getSpecialAmmoUrl(component as SpecialAmmo),
-  "special-armor": (component) => getSpecialArmorUrl(component as SpecialArmor),
-  "special-shield": (component) =>
-    getSpecialShieldUrl(component as SpecialShield),
-  "special-weapon": (component) =>
-    getSpecialWeaponUrl(component as SpecialWeapon),
-  ring: (component) => getRingUrl(component as Ring),
-  rod: (component) => getRodUrl(component as Rod),
-  staff: (component) => getStaffUrl(component as Staff),
-  "ioun-stone": (component) => getIounStoneUrl(component as IounStone),
+  wondrous: (component) => urlGiven(component, isWondrous, getWondrousItemUrl),
+  "specific-ammo": (component) =>
+    urlGiven(component, isSpecificAmmo, getSpecificAmmoUrl),
+  "specific-armor": (component) =>
+    urlGiven(component, isSpecificArmor, getSpecificArmorUrl),
+  "specific-shield": (component) =>
+    urlGiven(component, isSpecificShield, getSpecificShieldUrl),
+  "specific-weapon": (component) =>
+    urlGiven(component, isSpecificWeapon, getSpecificWeaponUrl),
+  ring: (component) => urlGiven(component, isRing, getRingUrl),
+  rod: (component) => urlGiven(component, isRod, getRodUrl),
+  staff: (component) => urlGiven(component, isStaff, getStaffUrl),
+  "ioun-stone": (component) =>
+    urlGiven(component, isIounStone, getIounStoneUrl),
   count: () => undefined,
 };
 export const getComponentUrl = (component: Component) =>
@@ -188,7 +206,7 @@ export const getComponentUrl = (component: Component) =>
 const notMagic = () => false;
 const magic = () => true;
 const magicIfHasCasterLevel = (component: Component) =>
-  componentIsSingularItem(component) && component.casterLevel > 0;
+  componentIsSpecificItem(component) && component.casterLevel > 0;
 const componentTypeIsMagicMap: {
   [key in ComponentType]: (component: Component) => boolean;
 } = {
@@ -203,10 +221,10 @@ const componentTypeIsMagicMap: {
   spell: magic,
   "spell-vessel": magic,
   wondrous: magicIfHasCasterLevel,
-  "special-ammo": magicIfHasCasterLevel,
-  "special-armor": magicIfHasCasterLevel,
-  "special-shield": magicIfHasCasterLevel,
-  "special-weapon": magicIfHasCasterLevel,
+  "specific-ammo": magicIfHasCasterLevel,
+  "specific-armor": magicIfHasCasterLevel,
+  "specific-shield": magicIfHasCasterLevel,
+  "specific-weapon": magicIfHasCasterLevel,
   ring: magic,
   rod: magic,
   staff: magic,
@@ -221,7 +239,7 @@ export const isMagic = (components: Component[]): boolean =>
 export const getItemCasterLevel = (
   components: Component[],
 ): number | undefined => {
-  const singularItem = components.find(componentIsSingularItem);
+  const singularItem = components.find(componentIsSpecificItem);
   if (singularItem && singularItem.casterLevel > 0) {
     return singularItem.casterLevel;
   }
@@ -256,7 +274,7 @@ export const getItemValue = (
   components: Component[],
   compositeRating?: number,
 ): number => {
-  const singularItem = components.find(componentIsSingularItem);
+  const singularItem = components.find(componentIsSpecificItem);
 
   if (singularItem) {
     return singularItem.cost;
@@ -371,7 +389,7 @@ export const getSpellList = (components: Component[]): string => {
 };
 
 export const getItemWeight = (components: Component[]): number => {
-  const singularItem = components.find(componentIsSingularItem);
+  const singularItem = components.find(componentIsSpecificItem);
 
   if (singularItem) {
     return singularItem.weight;
@@ -482,7 +500,7 @@ export const getComponentDisplayName = (
   component: Component,
   options: ComponentDisplayNameOptions = {},
 ): string => {
-  if (componentIsSingularItem(component) && component.subtitle) {
+  if (componentIsSpecificItem(component) && component.subtitle) {
     const formattedSubtitle = getItemDisplayNameModifiedSubtitle(component);
     const subtitle = formattedSubtitle ? ` (${formattedSubtitle})` : "";
     return `${component.name}${subtitle}`;

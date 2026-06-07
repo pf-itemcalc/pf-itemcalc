@@ -12,7 +12,7 @@ import {
   getSpellLevel,
   getSpellList,
   getComponentDisplayName,
-  componentIsSingularItem,
+  componentIsSpecificItem,
   isCount,
 } from "../../engine/helpers";
 import { isSpell } from "../../data/spell/spell-utilities";
@@ -225,7 +225,7 @@ const ItemSummary = ({ items, onCopy, setItems }: InnerSummaryProps) => {
   const value = getItemValue(items, compositeRating);
   const weight = getItemWeight(items);
 
-  const specificItem = items.find(componentIsSingularItem);
+  const specificItem = items.find(componentIsSpecificItem);
   const slot = specificItem ? specificItem.slot.toString() : undefined;
 
   const [count, setCount] = useCount(casterLevel, items, setItems);

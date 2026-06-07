@@ -205,7 +205,7 @@ const useCount = (
         setItems([...items.filter((i) => !isCount(i)), newCountItem(newCount)]);
       }
     },
-    [countItem, setInnerCount, setItems],
+    [items, countItem, setInnerCount, setItems],
   );
 
   return [innerCount, setCount];

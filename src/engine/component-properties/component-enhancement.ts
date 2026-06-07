@@ -1,5 +1,6 @@
-import { getArmorQaulityModifier } from "../../data/armor/armor-quality-types";
-import { isArmorQuality, isEnhancement, isWeaponQuality } from "../helpers";
+import { getArmorQaulityModifier } from "../../data/armor/armor-quality-utilities";
+import { isEnhancement, isWeaponQuality } from "../helpers";
+import { isArmorQuality } from "../../data/armor/armor-quality-utilities";
 import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types";
 import type { Component } from "../../data/component-types";
 

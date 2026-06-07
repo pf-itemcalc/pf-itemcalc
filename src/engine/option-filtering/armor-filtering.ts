@@ -1,9 +1,5 @@
-import {
-  isArmorQuality,
-  isEnhancement,
-  isSizeModifier,
-  isSpecialMaterial,
-} from "../helpers";
+import { isEnhancement, isSizeModifier, isSpecialMaterial } from "../helpers";
+import { isArmorQuality } from "../../data/armor/armor-quality-utilities";
 import { isArmor } from "../../data/armor/armor-utilities";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 

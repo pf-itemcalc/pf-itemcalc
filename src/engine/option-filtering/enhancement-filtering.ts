@@ -1,13 +1,13 @@
 import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
 import { Masterwork } from "../../data/generic/enhancements";
 import {
-  isArmorQuality,
   isEnhancement,
   isSizeModifier,
   isSpecialMaterial,
   isWeapon,
   isWeaponQuality,
 } from "../helpers";
+import { isArmorQuality } from "../../data/armor/armor-quality-utilities";
 import { isArmor } from "../../data/armor/armor-utilities";
 import type { ComponentFilterFunction } from "./option-filtering-types";
 

@@ -1,5 +1,4 @@
 import {
-  isArmorQuality,
   isMagicEnhancement,
   isSizeModifier,
   isSpecialMaterial,
@@ -10,6 +9,7 @@ import {
   isWeaponQuality,
   isEnhancement,
 } from "../helpers";
+import { isArmorQuality } from "../../data/armor/armor-quality-utilities";
 import { isArmor } from "../../data/armor/armor-utilities";
 import { getComponentEnhancementModifier } from "../component-properties/component-enhancement";
 import type { Component } from "../../data/component-types";

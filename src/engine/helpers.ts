@@ -1,10 +1,8 @@
 import { capitalize } from "lodash";
 import type { ArmorQaulity } from "../data/armor/armor-quality-types";
-import {
-  getArmorQaulityCost,
-  getArmorQaulityModifier,
-  getUrl as getArmorQualityUrl,
-} from "../data/armor/armor-quality-types";
+import { getArmorQualityUrl } from "../data/armor/armor-quality-utilities";
+import { getArmorQaulityCost } from "../data/armor/armor-quality-utilities";
+import { getArmorQaulityModifier } from "../data/armor/armor-quality-utilities";
 import type { Armor } from "../data/armor/armor-types";
 import type { Enhancement } from "../data/generic/enhancement-types";
 import { Masterwork } from "../data/generic/enhancements";
@@ -56,10 +54,8 @@ import {
   isAmmunition,
 } from "../data/ammunition/ammunition-utilities";
 import { getArmorUrl, isArmor } from "../data/armor/armor-utilities";
+import { isArmorQuality } from "../data/armor/armor-quality-utilities";
 
-export const isArmorQuality = (
-  component: Component,
-): component is ArmorQaulity => component.type === "armor-quality";
 export const isSpecialArmor = (
   component: Component,
 ): component is SpecialArmor => component.type === "special-armor";

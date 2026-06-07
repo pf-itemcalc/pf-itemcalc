@@ -4,8 +4,8 @@ import {
   getComponentDisplayName,
   getComponentTypeDisplayName,
   isCount,
-  isSpellVesselOfType,
 } from "../../engine/helpers";
+import { isSpellVesselOfType } from "../../data/spell/spell-vessel-utilities";
 import { getComponentOptionsGivenCurrentSelected } from "../../engine/options/get-options-given-selected";
 import { VirtualisedSearchBox } from "./VirtualisedSearchBox";
 import { CenterBox } from "../containers/CenterBox";

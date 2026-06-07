@@ -1,7 +1,8 @@
 import { getArmorQaulityModifier } from "../../data/armor/armor-quality-utilities";
-import { isEnhancement, isWeaponQuality } from "../helpers";
+import { isEnhancement } from "../../data/generic/enhancement-utilities";
+import { isWeaponQuality } from "../../data/weapon/weapon-quaility-utilities";
 import { isArmorQuality } from "../../data/armor/armor-quality-utilities";
-import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quality-types";
+import { getWeaponQaulityModifier } from "../../data/weapon/weapon-quaility-utilities";
 import type { Component } from "../../data/component-types";
 
 export const getComponentEnhancementModifier = (

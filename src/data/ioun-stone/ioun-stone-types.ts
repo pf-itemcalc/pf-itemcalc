@@ -10,8 +10,3 @@ export type IounStone = {
   cost: number; // in gp
   weight: number; // in lbs
 };
-
-export const getUrl = (item: IounStone): string =>
-  `https://aonprd.com/MagicWondrousDisplay.aspx?FinalName=${encodeURIComponent(
-    item.linkName,
-  )}`;

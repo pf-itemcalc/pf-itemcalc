@@ -7,17 +7,17 @@ import {
   getItemValue,
   getItemWeight,
   isMagic,
-  isSpell,
   getSpellCasterLevel,
   getSpellValue,
-  isSpellVesselOfType,
   getSpellLevel,
   getSpellList,
-  isComposite,
   getComponentDisplayName,
   componentIsSingularItem,
   isCount,
 } from "../../engine/helpers";
+import { isSpell } from "../../data/spell/spell-utilities";
+import { isSpellVesselOfType } from "../../data/spell/spell-vessel-utilities";
+import { isComposite } from "../../data/weapon/weapon-utilities";
 import { range } from "lodash";
 import type { Ammunition } from "../../data/ammunition/ammunition-types";
 import ContentCopy from "@mui/icons-material/ContentCopy";

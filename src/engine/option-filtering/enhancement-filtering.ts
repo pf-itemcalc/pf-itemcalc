@@ -1,12 +1,10 @@
 import { isAmmunition } from "../../data/ammunition/ammunition-utilities";
 import { Masterwork } from "../../data/generic/enhancements";
-import {
-  isEnhancement,
-  isSizeModifier,
-  isSpecialMaterial,
-  isWeapon,
-  isWeaponQuality,
-} from "../helpers";
+import { isEnhancement } from "../../data/generic/enhancement-utilities";
+import { isSizeModifier } from "../../data/generic/size-modifier-utilities";
+import { isSpecialMaterial } from "../../data/generic/special-material-utilities";
+import { isWeaponQuality } from "../../data/weapon/weapon-quaility-utilities";
+import { isWeapon } from "../../data/weapon/weapon-utilities";
 import { isArmorQuality } from "../../data/armor/armor-quality-utilities";
 import { isArmor } from "../../data/armor/armor-utilities";
 import type { ComponentFilterFunction } from "./option-filtering-types";

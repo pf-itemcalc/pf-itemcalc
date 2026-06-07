@@ -1,14 +1,12 @@
-import {
-  isMagicEnhancement,
-  isSizeModifier,
-  isSpecialMaterial,
-  componentIsSingularItem,
-  isSpell,
-  isSpellVessel,
-  isWeapon,
-  isWeaponQuality,
-  isEnhancement,
-} from "../helpers";
+import { componentIsSingularItem } from "../helpers";
+import { isSpell } from "../../data/spell/spell-utilities";
+import { isSpellVessel } from "../../data/spell/spell-vessel-utilities";
+import { isMagicEnhancement } from "../../data/generic/enhancement-utilities";
+import { isEnhancement } from "../../data/generic/enhancement-utilities";
+import { isSizeModifier } from "../../data/generic/size-modifier-utilities";
+import { isSpecialMaterial } from "../../data/generic/special-material-utilities";
+import { isWeaponQuality } from "../../data/weapon/weapon-quaility-utilities";
+import { isWeapon } from "../../data/weapon/weapon-utilities";
 import { isArmorQuality } from "../../data/armor/armor-quality-utilities";
 import { isArmor } from "../../data/armor/armor-utilities";
 import { getComponentEnhancementModifier } from "../component-properties/component-enhancement";

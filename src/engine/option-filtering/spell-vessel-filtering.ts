@@ -1,4 +1,5 @@
-import { isSpell, isSpellVessel } from "../helpers";
+import { isSpell } from "../../data/spell/spell-utilities";
+import { isSpellVessel } from "../../data/spell/spell-vessel-utilities";
 import type { ComponentFilterFunction } from "../option-filtering/option-filtering-types";
 
 export const filterComponentsWhenSpellVesselIsPresent: ComponentFilterFunction =

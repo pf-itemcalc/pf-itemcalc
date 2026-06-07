@@ -1,14 +1,95 @@
-import { isWeapon } from "../../engine/helpers";
+import { isWeapon } from "../weapon/weapon-utilities";
 import { isArmor } from "../armor/armor-utilities";
 import { isAmmunition } from "../ammunition/ammunition-utilities";
 import { MasterworkArmorCost } from "./enhancement-types";
-import type { SpecialMaterial } from "./special-material-types";
-import {
-  baseSpecialMaterial,
-  valueFromArmorCategory,
-  valueFromWeaponSize,
-  valueForAnyType,
+import type {
+  SpecialMaterial,
+  SpecialMaterialOptionals,
 } from "./special-material-types";
+import type { Armor } from "../armor/armor-types";
+import type { Weapon } from "../weapon/weapon-types";
+import type { Ammunition } from "../ammunition/ammunition-types";
+
+export const valueFromArmorCategory = (
+  armor: Armor,
+  light: number,
+  medium: number,
+  heavy: number,
+  defaultCost: number = 0,
+) => {
+  switch (armor.category) {
+    case "Light":
+      return light;
+    case "Medium":
+      return medium;
+    case "Heavy":
+      return heavy;
+    default:
+      return defaultCost;
+  }
+};
+
+export const valueFromWeaponSize = (
+  weapon: Weapon,
+  light: number,
+  oneHanded: number,
+  twoHanded: number,
+  defaultCost: number = 0,
+) => {
+  switch (weapon.size) {
+    case "Light":
+      return light;
+    case "One-Handed":
+      return oneHanded;
+    case "Two-Handed":
+      return twoHanded;
+    default:
+      return defaultCost;
+  }
+};
+
+type PossibleComponent = Weapon | Ammunition | Armor;
+export const valueForAnyType = (
+  component: PossibleComponent,
+  ammo: number,
+  weapon: number,
+  shield: number,
+  lightArmor: number,
+  mediumArmor: number,
+  heavyArmor: number,
+  defaultCost: number = 0,
+) => {
+  if (isAmmunition(component)) {
+    return ammo;
+  }
+
+  if (isWeapon(component)) {
+    return weapon;
+  }
+
+  if (component.category === "Shield") {
+    return shield;
+  }
+
+  return valueFromArmorCategory(
+    component,
+    lightArmor,
+    mediumArmor,
+    heavyArmor,
+    defaultCost,
+  );
+};
+
+export const baseSpecialMaterial: SpecialMaterialOptionals & {
+  type: "special-material";
+} = {
+  isApplicable: () => true,
+  alteredWeight: (item) => item.weight,
+  addedCost: () => 0,
+  alreadyMasterwork: false,
+  masterworkCostIncluded: false,
+  type: "special-material",
+};
 
 const Abysium: SpecialMaterial = { ...baseSpecialMaterial, name: "Abysium" };
 
